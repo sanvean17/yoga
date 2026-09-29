@@ -63,7 +63,7 @@ p1 = [
     ' · <span class="pause">gris = no se lee</span> · <span class="it it-f">MÁS FÁCIL</span> '
     '<span class="it it-t">→ SIGUIENTE</span></div></div>',
     '<div class="pm"><b>Pour moi :</b> lis lentement, 1 respiration de silence entre les phrases. Face à eux, démontre en '
-    'miroir mais <b>dis</b> le côté écrit. En retard ? raccourcis ronde 2, arbre, pont — garde 4 min de Savasana.</div>',
+    'miroir mais <b>dis</b> le côté écrit. En retard ? raccourcis l’arbre ou supprime la ronde 2 — <b>jamais Savasana : 4 min pleines minimum</b>.</div>',
     band(1, "Bienvenida · cómo sentarse · reglas", "0:00 – 0:05"), lo_que_digo(),
     grid([
         card("seated_cross", "Sentarse cómodamente", "",
@@ -73,7 +73,7 @@ p1 = [
              "Manos sobre los muslos, espalda larga, hombros relajados. [F] Si te molesta, cambia de posición.",
              extra_pose="kneeling", mh=14),
         card("child", "Qué es el yoga · reglas", "",
-             "El yoga une el movimiento y la respiración: cuando subimos o abrimos, inhalamos; cuando bajamos o nos doblamos, exhalamos. "
+             "Hoy vamos a intentar coordinar el movimiento con la respiración. Muchas veces inhalaremos para crecer o abrir el cuerpo, y exhalaremos para bajar o entrar suavemente en una postura. "
              "Respiramos por la nariz. No hace falta una postura perfecta: cada cuerpo es diferente. "
              "**Nada debe doler.** Estirar, sí; dolor, no: si algo duele, sal despacio. "
              "Puedes descansar siempre en la **postura del niño**. Si tienes una lesión o estás embarazada, avísame."),
@@ -168,11 +168,21 @@ p2 = [
 ]
 
 # ================================================================ PAGE 3
+r2 = [
+    (1, "Manos al corazón. Esta vez empezamos con el pie izquierdo."), (2, "Inhala, brazos arriba."),
+    (3, "Exhala, flexión. Rodillas dobladas."), (4, "Inhala, espalda larga."),
+    (5, "Exhala, manos al suelo, pie izquierdo atrás."), (6, "Inhala, pie derecho atrás. Rodillas al suelo."),
+    (7, "Exhala, baja al suelo despacio."), (8, "Inhala, cobra."),
+    (9, "Exhala, perro boca abajo. ((3 respiraciones))"), (10, "Camina a las manos. Inhala, espalda larga."),
+    (11, "Exhala, flexión."), (12, "Inhala, sube, brazos arriba."), (13, "Exhala, manos al corazón."),
+]
 r3 = [
     (1, "Exhala, manos al corazón."), (2, "Inhala… brazos arriba."), (3, "Exhala… flexión."),
     (4, "Inhala… espalda larga."), (5, "Exhala… pie derecho atrás."),
     (6, "Inhala… pie izquierdo atrás, plancha."), (7, "Exhala… rodillas al suelo, baja."),
-    (8, "Inhala… cobra, o perro boca arriba."),
+    (8, "Inhala… **cobra** para la mayoría: pelvis y muslos en el suelo, codos doblados. "
+        "Si quieres una opción más intensa, **perro boca arriba**: brazos estirados, solo las manos y los empeines en el suelo, rodillas elevadas. "
+        "[F] Si notas las muñecas o la zona lumbar, cobra."),
     (9, "Exhala… perro boca abajo. Nos quedamos aquí. ((3 resp. → flow))"),
 ]
 cmp = f'''<div class="cmp">
@@ -199,11 +209,10 @@ flow_r = [
 p3 = [
     band("6b", "Saludo al sol · Rondas 2 y 3", "0:26 – 0:31"), lo_que_digo(),
     '<div class="two">'
-    f'<div class="rnd"><div class="rh">Ronda 2 · misma secuencia, menos palabras</div>{steps(B.r2, cols=1)}'
-    f'<div class="rt">{say("[T] Una vez más: un movimiento con cada respiración.")}</div>{cmp}</div>'
-    f'<div class="rnd"><div class="rh">Ronda 3 · un movimiento = una respiración</div>'
-    f'<div class="rt">{say("En el paso 8 puedes elegir: la **cobra**, pelvis y muslos en el suelo, codos doblados — es igual de buena. O el **perro boca arriba**, más fuerte: brazos estirados, empuja los empeines, rodillas y muslos arriba. Si notas muñecas o lumbares, cobra.")}</div>'
-    f'{steps(r3, cols=1)}</div></div>',
+    f'<div class="rnd"><div class="rh">Ronda 2 · menos palabras · <span class="sl">pie izquierdo</span> atrás</div>{steps(r2, cols=1)}'
+    f'<div class="rt">{say("[T] Una vez más: un movimiento con cada respiración.")}</div></div>'
+    f'<div class="rnd"><div class="rh">Ronda 3 · un movimiento = una respiración · <span class="sr">pie derecho</span> atrás</div>'
+    f'{steps(r3, cols=1)}{cmp}</div></div>',
     band(7, "Flow de pie · lado derecho", "0:31 – 0:37"),
     '<div class="pm"><b>Pour moi :</b> face à eux, montre avec ta jambe <b>gauche</b> quand tu dis <b class="sr">derecha</b>.</div>',
     strip(fl_r, scale=0.1),
@@ -234,7 +243,7 @@ p4 = [
                "Más: planta en la pantorrilla, **nunca sobre la rodilla.** Rodilla derecha hacia fuera, manos al pecho, pelvis al frente. "
                "((3–5 resp.)) Exhala, baja; otro lado: peso al pie derecho. [F] Pared o silla; si pierdes el equilibrio, no pasa nada. "
                "[T] Dobla las rodillas, manos al suelo y siéntate despacio.", extra_pose="tree_R", mh=20, row=True)], cols=1),
-    band(10, "En el suelo", "0:46 – 0:53"),
+    band(10, "En el suelo", "0:46 – 0:52"),
     grid([
         card("butterfly", "Mariposa", "3 resp.",
              "Plantas de los pies juntas, rodillas abiertas. Manos en los pies, espalda larga. Exhala, inclínate solo un poco. "
@@ -251,13 +260,13 @@ p4 = [
              "Inhala al centro. Exhala: rodillas a la izquierda, mira a la derecha. [F] Cojín bajo las rodillas. "
              "[T] Inhala al centro, estira las piernas.", mh=15),
     ]),
-    band(11, "Savasana y cierre", "0:53 – 1:00"),
+    band(11, "Savasana y cierre", "0:52 – 1:00"),
     grid([
-        card("savasana", "Savasana", "3–4 min",
+        card("savasana", "Savasana", "4 min mínimo",
              "Túmbate boca arriba, piernas estiradas, pies sueltos. Brazos un poco separados, palmas arriba. "
              "[F] Rodillas dobladas o cojín bajo las rodillas; manta si tienes frío. Cierra los ojos. "
              "Relaja los pies… las piernas… el abdomen… el pecho… los hombros… los brazos… la cara. "
-             "No hay nada que hacer. Solo descansar. ((3–4 min de silencio))", mh=12),
+             "No hay nada que hacer. Solo descansar. ((4 minutos enteros de silencio: no acortar))", mh=12),
         card("seated_cross", "Volver y cerrar", "",
              "Respira un poco más profundo. Mueve los dedos de las manos y de los pies. Dobla las rodillas y gira a la derecha. "
              "Cuando quieras, siéntate despacio; la cabeza sube la última. Manos al pecho. "
