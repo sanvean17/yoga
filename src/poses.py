@@ -464,3 +464,26 @@ ALL.update({
     "half_lift_thighs": half_lift_thighs, "downdog_walk": downdog_walk, "ragdoll": ragdoll,
     "seated_fold": seated_fold, "lie_down": lie_down, "wipers": wipers,
 })
+
+
+def seated_catcow(round_back=False):
+    """Side view seated cross-legged, hands on knees: spine rounds or opens."""
+    if round_back:
+        return side((0, 10), 92, curve=8, head=55, face=-30,
+                    armN=((30, 14), -1), armF=((28, 14), -1),
+                    legN=('A', -6, 188), legF=('A', -2, 186), footN=180, footF=180)
+    return side((0, 10), 88, curve=-5, head=100, face=15,
+                armN=((30, 14), -1), armF=((28, 14), -1),
+                legN=('A', -6, 188), legF=('A', -2, 186), footN=180, footF=180)
+
+
+def leg_stretch():
+    """Lying on the back, one leg up, hands holding behind the thigh,
+    other knee bent with the foot on the floor."""
+    return side((0, 9.5), 180, head=180, face=90,
+                armN=((12, 40), 1), armF=((10, 40), 1),
+                legN=((10, 76), 1), footN=10,
+                legF=((34, 5), 1), footF=-2)
+
+
+ALL.update({"seated_cow": seated_catcow, "seated_cat": lambda: seated_catcow(True), "leg_stretch": leg_stretch})
