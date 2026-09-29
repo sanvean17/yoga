@@ -373,3 +373,94 @@ ALL = {
     "supine_knees": supine_knees, "bridge": bridge, "knees_chest": knees_chest,
     "twist_R": twist, "twist_L": lambda: twist(False), "savasana": savasana,
 }
+
+
+# ------------------------------------------------------------ v2 additions
+def legs_long_bent():
+    return side((0, 10), 92, armN=((24, 22), -1), armF=((22, 22), -1),
+                legN=((64, 6), 1), legF=((63, 6), 1), footN=80, footF=80)
+
+
+def seated_twist():
+    f, _ = back((0, 15), 90, head=90, gaze=0,
+                armR=((36, 5), -1), armL=((30, 16), -1), **_cross_legs())
+    f.arrow([(-20, 44), (20, 50)], bulge=-10)
+    _dl(f, (44, -10), "D", C["R"])
+    _dl(f, (-44, -10), "I", C["L"])
+    return f
+
+
+def wrists():
+    f = side((0, 10), 90, armN=((50, 60), -1), armF=((48, 60), -1),
+             legN=('A', -6, 188), legF=('A', -2, 186), footN=180, footF=180)
+    f.items.append((6, '<circle cx="54" cy="-60" r="9" fill="none" stroke="#6b7785" '
+                       'stroke-width="2.4" stroke-dasharray="40 16"/>'))
+    f.arrow([(46, 67), (47, 70)], bulge=0)
+    f._track((64, 72), (44, 48))
+    return f
+
+
+def step_back_knee(right=True):
+    """Hands on the floor, one foot stepped back WITH THAT KNEE ON THE FLOOR.
+    right=True: right (near) leg back. right=False: left (far) leg back."""
+    back_leg = ('A', -141, 180)
+    front_leg = ((40, 4), 1)
+    if right:
+        return side((4, 30), 22, head=22, face=-10,
+                    armN=((53, 1), -1), armF=((51, 1), -1),
+                    legF=front_leg, footF=-2, legN=back_leg, footN=180, sideN=R, sideF=L)
+    return side((4, 30), 22, head=22, face=-10,
+                armN=((53, 1), -1), armF=((51, 1), -1),
+                legN=front_leg, footN=-2, legF=back_leg, footF=180, sideN=R, sideF=L)
+
+
+def half_lift_thighs(flip=False):
+    return side((-8, 78), 22, head=18, face=-20,
+                armN=((7, 47), -1), armF=((5, 47), -1),
+                legN=((1, 4), 1), legF=((-1, 4), 1), footN=-4, footF=-4, flip=flip)
+
+
+def downdog_walk():
+    return side((0, 70), -52, head=-62, face=-140,
+                armN=((58, 1), -1), armF=((56, 1), -1),
+                legN=((-22, 8), 1), legF=((-26, 8), 1), footN=-45, footF=-45,
+                extra=[("arrow", [(-40, 20), (-14, 20)], 0)])
+
+
+def ragdoll():
+    return side((-2, 78), -70, curve=4, head=-84, face=-170, legs_behind=True, head_top=True,
+                armN=((30, 22), -1), armF=((4, 22), 1),
+                legN=((-4, 4), 1), legF=((-6, 4), 1), footN=-4, footF=-4,
+                extra=[("arrow", [(-18, 40), (-26, 40)], 0), ("arrow", [(38, 40), (46, 40)], 0)])
+
+
+def seated_fold():
+    return side((0, 10), 58, curve=4, head=45, face=10,
+                armN=((44, 26), -1), armF=((42, 26), -1),
+                legN=((62, 6), 1), legF=((61, 6), 1), footN=80, footF=80)
+
+
+def lie_down():
+    """transition: from sitting, hands behind, lowering onto the back."""
+    return side((0, 10), 150, head=160, face=60,
+                armN=((-30, 3), 1), armF=((-32, 3), 1),
+                legN=((50, 5), 1), legF=((48, 5), 1), footN=-2, footF=-2,
+                extra=[("arrow", [(-22, 50), (-44, 26)], 6)])
+
+
+def wipers(to_right=True):
+    """Lying on the back, feet on the floor wide apart; the knees swing
+    from side to side (double arrow over the knees)."""
+    f = supine_knees()
+    f.arrow([(14, 58), (38, 58)], bulge=8)
+    f.arrow([(38, 58), (14, 58)], bulge=8)
+    f._track((10, 70))
+    return f
+
+
+ALL.update({
+    "legs_long_bent": legs_long_bent, "seated_twist": seated_twist, "wrists": wrists,
+    "step_back_R_knee": step_back_knee, "step_back_L_knee": lambda: step_back_knee(False),
+    "half_lift_thighs": half_lift_thighs, "downdog_walk": downdog_walk, "ragdoll": ragdoll,
+    "seated_fold": seated_fold, "lie_down": lie_down, "wipers": wipers,
+})
