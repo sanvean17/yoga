@@ -1,0 +1,191 @@
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-style: normal;
+  src: url({FONTS}/atkinson-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 700; font-style: normal;
+  src: url({FONTS}/atkinson-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible"; font-weight: 400; font-style: italic;
+  src: url({FONTS}/atkinson-400-italic.woff2) format("woff2"); }
+
+:root {
+  --ink: #1d2733;
+  --muted: #5b6776;
+  --line: #d9dee5;
+  --paper: #ffffff;
+  --band: #24594f;
+  --band-soft: #e7f1ee;
+  --right: #d9620f;
+  --left: #2a64c4;
+  --inh-bg: #fff0b3;
+  --exh-bg: #d8f0e0;
+}
+
+@page {
+  size: A4;
+  margin: 11mm 11mm 12mm 11mm;
+  @bottom-center {
+    content: "Página " counter(page) " / " counter(pages);
+    font-family: "Atkinson Hyperlegible", sans-serif; font-size: 9pt; color: #5b6776;
+  }
+  @top-right {
+    content: "Yoga para principiantes · 60 min · guion";
+    font-family: "Atkinson Hyperlegible", sans-serif; font-size: 8.5pt; color: #8a94a1;
+  }
+}
+@page :first { @top-right { content: none; } }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+body {
+  font-family: "Atkinson Hyperlegible", "DejaVu Sans", sans-serif;
+  font-size: 12pt; line-height: 1.27;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+b { font-weight: 700; }
+
+/* --------------------------------------------------------- inline marks */
+.inh, .exh { font-weight: 700; padding: 0 3px 0 2px; border-radius: 3px; white-space: nowrap; }
+.inh { background: var(--inh-bg); }
+.exh { background: var(--exh-bg); }
+.inh i, .exh i { font-style: normal; font-size: 0.72em; margin-right: 2px; position: relative; top: -1px; }
+.sr { color: var(--right); font-weight: 700; }
+.sl { color: var(--left); font-weight: 700; }
+.pause { color: #7b8592; font-style: italic; font-size: 0.86em; white-space: nowrap; }
+.pause::before { content: "( "; }
+.pause::after { content: " )"; }
+
+/* --------------------------------------------------------- sections */
+.sec.brk { break-before: page; }
+.sec { margin: 0 0 3.5mm; }
+.sech {
+  display: flex; align-items: center; gap: 3mm;
+  background: var(--band); color: #fff; border-radius: 3mm;
+  padding: 1.6mm 3.5mm; break-after: avoid;
+}
+.sech h2 { margin: 0; font-size: 15pt; line-height: 1.15; flex: 1; }
+.sech .secn {
+  background: #fff; color: var(--band); font-weight: 700; font-size: 13pt;
+  min-width: 9mm; height: 9mm; border-radius: 4.5mm; display: inline-flex;
+  align-items: center; justify-content: center; padding: 0 2mm;
+}
+.sech .time { font-weight: 700; font-size: 13pt; background: rgba(255,255,255,.18); padding: 1mm 3mm; border-radius: 2mm; white-space: nowrap; }
+.sech .sr, .sech .sl { color: #fff; text-decoration: underline; text-decoration-thickness: 2px; }
+.secsub { margin: 2mm 1mm 0; color: var(--muted); font-size: 11pt; break-after: avoid; }
+
+/* --------------------------------------------------------- script table */
+table.script { width: 100%; border-collapse: collapse; margin-top: 2.5mm; }
+table.script thead th {
+  font-size: 9pt; letter-spacing: .08em; text-align: left; color: var(--band);
+  border-bottom: 2px solid var(--band); padding: 1mm 2mm;
+}
+table.script th.h-fig { width: 38mm; }
+table.script th.h-say { font-size: 11pt; letter-spacing: .1em; }
+table.script tbody tr { break-inside: avoid; page-break-inside: avoid; }
+table.script td { vertical-align: top; border-bottom: 1px solid var(--line); padding: 1.6mm 1.6mm 1.8mm; }
+td.figcell { width: 38mm; text-align: center; background: #f7f9fa; position: relative; padding-bottom: 4.5mm; }
+td.saycell { padding-left: 3mm; }
+.pname { font-weight: 700; font-size: 11pt; line-height: 1.2; margin-bottom: 1.5mm; text-align: left; }
+.stepn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 7mm; height: 7mm; border-radius: 3.5mm; background: var(--ink); color: #fff;
+  font-size: 11pt; margin-right: 1.5mm; vertical-align: 1px;
+}
+.fc { margin: 1mm 0 1.5mm; }
+.fc svg { display: block; margin: 0 auto; }
+.fcap { font-size: 9.5pt; color: var(--muted); line-height: 1.2; margin-top: .5mm; }
+.badges { display: flex; flex-wrap: wrap; gap: 1.2mm; justify-content: center; margin-top: 1mm; }
+.badge { display: inline-block; font-size: 9.5pt; font-weight: 700; padding: .5mm 2mm; border-radius: 2mm; line-height: 1.3; }
+.b-n { background: #e6eaef; color: var(--ink); }
+.b-inh { background: var(--inh-bg); }
+.b-exh { background: var(--exh-bg); }
+.b-s { background: #fde3cf; color: #8a3a06; }
+.down {
+  position: absolute; left: 0; right: 0; bottom: -3.2mm; text-align: center;
+  font-size: 15pt; line-height: 1; color: var(--band); font-weight: 700; z-index: 2;
+}
+.down::before { content: ""; }
+
+.cue { display: grid; grid-template-columns: 21mm 1fr; column-gap: 2mm; margin: 0 0 1mm; }
+.cue:last-child { margin-bottom: 0; }
+.tag {
+  font-size: 7pt; font-weight: 700; letter-spacing: .03em; line-height: 1.2;
+  padding: .7mm 1mm; border-radius: 1.5mm; align-self: start; margin-top: .8mm;
+  text-align: center; white-space: nowrap;
+}
+.t-in { background: #e8e2f6; color: #4a3a86; }
+.t-pos { background: #e3ecf8; color: #234b86; }
+.t-mov { background: #e3ecf8; color: #234b86; }
+.t-br { background: #fff0b3; color: #6b5500; }
+.t-easy { background: #dff3e6; color: #1f6b3d; }
+.t-strong { background: #fde3cf; color: #8a3a06; }
+.t-next { background: var(--band); color: #fff; }
+.t-say { background: #eceff3; color: #3a4552; }
+.say p { margin: 0 0 1mm; }
+.say p:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------- strips */
+.strip { margin: 2.5mm 0 0; break-inside: avoid; }
+.striptitle { font-size: 9.5pt; font-weight: 700; color: var(--band); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 1mm 1mm; }
+.srow { display: flex; align-items: flex-end; justify-content: space-between; gap: 1mm;
+        background: #f7f9fa; border-radius: 2.5mm; padding: 2mm 2.5mm 2mm; }
+.sf { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
+.sfig svg { display: block; }
+.scap { font-size: 9pt; font-weight: 700; line-height: 1.15; margin-top: 1mm; max-width: 36mm; }
+.sb { font-size: 8.5pt; font-weight: 700; border-radius: 1.5mm; padding: 0 1.5mm; margin-top: .8mm; white-space: nowrap; }
+.sb.inh { background: var(--inh-bg); } .sb.exh { background: var(--exh-bg); } .sb.n { background: #e6eaef; }
+.sb i { font-style: normal; font-size: .75em; margin-right: 1px; }
+.sarrow { font-size: 16pt; color: var(--band); font-weight: 700; align-self: center; padding-bottom: 4.5mm; }
+
+/* --------------------------------------------------------- cobra vs updog */
+.cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 5mm; margin-top: 3mm; break-inside: avoid;
+       border: 1.5px solid var(--line); border-radius: 3mm; padding: 3mm; }
+.cmpcol { text-align: center; }
+.cmpcol svg { display: block; margin: 1mm auto 0; }
+.cmph { font-weight: 700; font-size: 13pt; }
+.cmpt { grid-column: 1 / 3; border-collapse: collapse; width: 100%; font-size: 11.5pt; }
+.cmpt th { text-align: left; font-size: 11pt; padding: 1mm 2mm; border-bottom: 2px solid var(--line); }
+.cmpt td { padding: 1mm 2mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+.cmpt td:first-child { font-weight: 700; color: var(--muted); width: 32mm; }
+
+/* --------------------------------------------------------- rounds */
+.round { border: 1.5px solid var(--line); border-radius: 3mm; padding: 2.5mm 3mm 3mm; margin-top: 3mm; break-inside: avoid; }
+.roundh { font-weight: 700; font-size: 13pt; margin-bottom: 2mm; display: flex; align-items: center; gap: 2.5mm; }
+.roundh .time { margin-left: auto; font-size: 11pt; color: var(--band); }
+.rtag { background: var(--ink); color: #fff; border-radius: 2mm; padding: .6mm 2.5mm; font-size: 11pt; }
+ol.nl { list-style: none; margin: 2mm 0 2mm; padding: 0; columns: 2; column-gap: 6mm; }
+ol.nl li { display: flex; gap: 2mm; break-inside: avoid; margin-bottom: 1.2mm; }
+.nn { flex: 0 0 6.5mm; height: 6.5mm; border-radius: 3.25mm; background: #e6eaef; font-weight: 700; font-size: 10pt;
+      display: inline-flex; align-items: center; justify-content: center; margin-top: .3mm; }
+
+.pmline { margin: 2mm 0 0; font-size: 10pt; color: #6b4a00; background: #fff7df; border-left: 3px solid #e2b33c;
+          padding: 1.5mm 3mm; border-radius: 1mm; }
+
+/* --------------------------------------------------------- cover */
+.cover .ctitle { background: var(--band); color: #fff; border-radius: 4mm; padding: 6mm 7mm 5.5mm; }
+.cover .kicker { font-size: 10.5pt; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+.cover h1 { margin: 1mm 0 1mm; font-size: 30pt; line-height: 1.1; }
+.cover .csub { font-size: 13pt; opacity: .95; }
+.cover h3 { margin: 0 0 2mm; font-size: 12pt; color: var(--band); text-transform: uppercase; letter-spacing: .06em; }
+.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin-top: 5mm; }
+.cgrid2 { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 6mm; margin-top: 5mm; }
+table.tl { border-collapse: collapse; width: 100%; font-size: 11.5pt; }
+table.tl td { border-bottom: 1px solid var(--line); padding: .5mm 1mm; vertical-align: middle; }
+.tlt { font-weight: 700; color: var(--band); width: 12mm; }
+.tln { font-weight: 700; width: 6mm; text-align: center; }
+.tlf { width: 24mm; text-align: center; }
+.tlf svg { display: block; margin: 0 auto; }
+.legend { display: flex; flex-direction: column; gap: 2mm; font-size: 11pt; }
+.lg { display: flex; align-items: center; gap: 2.5mm; }
+.lgs { color: var(--muted); }
+.sw { flex: 0 0 11mm; height: 3mm; border-radius: 1.5mm; }
+.sw-r { background: var(--right); } .sw-l { background: var(--left); } .sw-far { background: #aab5c1; }
+.lgfig svg { flex: 0 0 auto; }
+.pourmoi { margin-top: 4mm; background: #fff7df; border: 1.5px solid #efd58a; border-radius: 3mm; padding: 2.5mm 3.5mm; font-size: 10.5pt; }
+.pmh { font-weight: 700; color: #7a5a00; margin-bottom: 1mm; }
+.pourmoi ul { margin: 0; padding-left: 4.5mm; }
+.pourmoi li { margin-bottom: 1mm; }
+.rescue { background: var(--band-soft); border-radius: 3mm; padding: 3mm 4mm; }
+.rescue p { margin: 0 0 1.6mm; font-size: 12.5pt; }
+.gloss table { border-collapse: collapse; width: 100%; font-size: 10.5pt; }
+.gloss td { padding: .8mm 1.2mm; border-bottom: 1px solid var(--line); }
+.gloss td:nth-child(odd) { font-weight: 700; }
+.gloss td:nth-child(2) { color: var(--muted); border-right: 1px solid var(--line); }
+.gloss td:nth-child(4) { color: var(--muted); }
