@@ -487,3 +487,130 @@ def leg_stretch():
 
 
 ALL.update({"seated_cow": seated_catcow, "seated_cat": lambda: seated_catcow(True), "leg_stretch": leg_stretch})
+
+
+# ------------------------------------------------------- seniors: chair / wall
+CHAIR = "#a07c52"
+
+
+def chair(f, x0, back_left=True, seat_y=44, depth=38):
+    """Side-view chair. Seat from x0 to x0+depth; backrest on the left
+    (back_left) or right end of the seat. Drawn behind the person."""
+    xb = x0 if back_left else x0 + depth
+    xf = x0 + depth if back_left else x0
+    tilt = -3 if back_left else 3
+    pts = [
+        f"M{x0},{-seat_y} L{x0 + depth},{-seat_y}",
+        f"M{xf},{-seat_y} L{xf},0", f"M{xb},{-seat_y} L{xb},0",
+        f"M{xb},{-seat_y} L{xb + tilt},{-(seat_y + 46)}",
+    ]
+    for d_ in pts:
+        f.items.append((-1, f'<path d="{d_}" stroke="{CHAIR}" stroke-width="4.5" stroke-linecap="round" fill="none"/>'))
+    f._track((x0 - 4, 0), (x0 + depth + 4, seat_y + 48))
+
+
+def wall(f, x, h=150):
+    f.items.append((-1, f'<rect x="{x}" y="{-h}" width="7" height="{h}" fill="#d9cfbf"/>'))
+    f._track((x, 0), (x + 7, h))
+
+
+def chair_sit(variant="neutral"):
+    """Seated on a chair, side view facing right, feet flat, hands on thighs."""
+    curve, head, face = {"neutral": (0, 90, True), "cat": (8, 58, -30), "cow": (-5, 100, 15)}[variant]
+    f = side((0, 48), 90 if variant == "neutral" else (92 if variant == "cat" else 88), curve=curve, head=head, face=face,
+             armN=((30, 52), -1), armF=((28, 52), -1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chair_hamstring():
+    """On a chair, right leg stretched forward heel on the floor, chest forward."""
+    f = side((0, 48), 62, curve=3, head=50, face=0,
+             armN=((34, 46), -1), armF=((30, 50), -1),
+             legN=((74, 6), 1), footN=80, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chair_knee():
+    """On a chair, hugging one knee toward the chest."""
+    f = side((0, 48), 92, head=90,
+             armN=((30, 74), 1), armF=((28, 74), 1),
+             legN=('A', 40, -70), footN=-10, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def dog_chair():
+    """Standing, hands on the chair back, back long and horizontal."""
+    f = side((0, 80), -2, head=-8, face=-60,
+             armN=((97, 88), -1), armF=((95, 88), -1),
+             legN=((2, 4), 1), legF=((0, 4), 1), footN=-4, footF=-4)
+    chair(f, 100, back_left=True)
+    return f
+
+
+def lunge_chair(right_back=True):
+    """High lunge holding the chair back: one foot stepped back, heel up."""
+    sN, sF = (R, L) if right_back else (L, R)
+    f = side((0, 66), 90, head=90,
+             armN=((38, 88), -1), armF=((36, 88), -1),
+             legN=((-50, 10), -1), footN=-40,      # near = back leg
+             legF=((30, 4), 1), footF=-2, sideN=sN, sideF=sF)
+    chair(f, 40, back_left=True)
+    return f
+
+
+def wide_stance():
+    """Back view: feet wide apart, hands on hips (before Warrior II)."""
+    f, _ = back((0, 72), 90, armR=((11, 80), 1), armL=((-11, 80), -1),
+                legR=((44, 4), 1), legL=((-44, 4), -1), footR=(0, 10), footL=(180, 10))
+    _dl(f, (46, -12), "D", C["R"])
+    _dl(f, (-46, -12), "I", C["L"])
+    return f
+
+
+def tree_wall():
+    f = tree(True, True)
+    wall(f, -48)
+    return f
+
+
+def stand_heart_chair():
+    f = tadasana_heart()
+    chair(f, 40, back_left=True)
+    return f
+
+
+def arms_up_chair():
+    f = arms_up()
+    chair(f, 40, back_left=True)
+    return f
+
+
+ALL.update({
+    "chair_sit": chair_sit, "chair_cat": lambda: chair_sit("cat"), "chair_cow": lambda: chair_sit("cow"),
+    "chair_hamstring": chair_hamstring, "chair_knee": chair_knee, "dog_chair": dog_chair,
+    "lunge_chair_R": lunge_chair, "lunge_chair_L": lambda: lunge_chair(False), "wide_stance": wide_stance,
+    "tree_wall": tree_wall, "heart_chair": stand_heart_chair, "arms_up_chair": arms_up_chair,
+})
+
+
+def stand_hold():
+    """Standing tall, both hands on the chair back."""
+    f = side((0, 81.5), 90, armN=((38, 88), -1), armF=((36, 88), -1),
+             legN=((1, 4), 1), legF=((-1, 4), 1), footN=-4, footF=-4)
+    chair(f, 40, back_left=True)
+    return f
+
+
+def heel_raise():
+    f = side((0, 88), 90, armN=((38, 92), -1), armF=((36, 92), -1),
+             legN=((2, 12), 1), legF=((0, 12), 1), footN=-60, footF=-60,
+             extra=[("arrow", [(-14, 40), (-14, 64)], 0)])
+    chair(f, 40, back_left=True)
+    return f
+
+
+ALL.update({"stand_hold": stand_hold, "heel_raise": heel_raise})
