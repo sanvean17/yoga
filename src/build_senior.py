@@ -195,66 +195,62 @@ p1 = [
 # =================================================================== PAGE 2
 SAL = [
     ("heart_chair", ("1 Corazón", "1 Cœur"), "exh"), ("arms_up_chair", ("2 Brazos arriba", "2 Bras en haut"), "inh"),
-    (("dog_chair", "half_lift_thighs"), ("3–4 Con apoyo / sin apoyo", "3–4 Avec / sans appui"), ("3 resp.", "3 resp.")),
-    ("stand_hold", ("5 Subimos", "5 On remonte"), "inh"),
-    ("lunge_chair_R", ("6 Pie D atrás", "6 Pied D arrière"), "exh"),
-    ("stand_hold", ("7 Pie D vuelve", "7 Pied D revient"), "inh"),
-    ("arms_up_chair", ("8 Brazos arriba", "8 Bras en haut"), "inh"), ("heart_chair", ("9 Corazón", "9 Cœur"), "exh"),
+    (("dog_chair", "half_lift_thighs"), ("3 Espalda larga: con apoyo / sin apoyo", "3 Dos long : avec / sans appui"),
+     ("3 resp.", "3 resp.")),
+    ("stand_hold", ("4 Volvemos y subimos", "4 On revient, on se redresse"), "inh"),
+    ("lunge_chair_R", ("5 Pie D atrás", "5 Pied D arrière"), "exh"),
+    ("stand_hold", ("6 Pie D vuelve", "6 Pied D revient"), "inh"),
+    ("arms_up_chair", ("7 Brazos arriba", "7 Bras en haut"), "inh"), ("heart_chair", ("8 Corazón", "8 Cœur"), "exh"),
 ]
 R1 = [
-    (1, ("**Corazón.** De pie frente a la silla o a la pared, a un paso largo. Pies a la anchura de las caderas. "
-         "Sin apoyo: de pie en la esterilla. Palmas juntas delante del pecho. Exhalamos.",
-         "**Cœur.** Debout face à la chaise ou au mur, à un grand pas. Pieds largeur de hanches. Paumes jointes devant "
-         "la poitrine. Sans appui : debout sur le tapis. On expire.")),
+    (1, ("**Corazón.** De pie frente a la silla o a la pared, a un paso largo; o sin apoyo, en la esterilla. Pies a la "
+         "anchura de las caderas. Palmas juntas delante del pecho. Exhalamos.",
+         "**Cœur.** Debout face à la chaise ou au mur, à un grand pas ; ou sans appui, sur le tapis. Pieds largeur de "
+         "hanches. Paumes jointes devant la poitrine. On expire.")),
     (2, ("**Brazos arriba.** Inhalamos: abrimos los brazos por los lados y los subimos. Hombros lejos de las orejas. "
-         "[F] Solo hasta la altura de los hombros.",
+         "Solo hasta donde es cómodo.",
          "**Bras en haut.** On inspire : on ouvre les bras sur les côtés et on les monte. Épaules loin des oreilles. "
-         "[F] Seulement jusqu’à hauteur d’épaules.")),
-    (3, ("**Manos al apoyo.** Exhalamos: bajamos los brazos y apoyamos las manos en el respaldo o en la pared, a la "
-         "altura de las caderas. Sin apoyo: doblamos las rodillas y apoyamos las manos en los muslos.",
-         "**Mains sur l’appui.** On expire : on baisse les bras et on pose les mains sur le dossier ou au mur, à "
-         "hauteur des hanches. Sans appui : genoux pliés, mains sur les cuisses.")),
-    (4, ("**Perro con apoyo.** Caminamos un poco hacia atrás. Inhalamos y alargamos la espalda, como una mesa. Brazos "
-         "largos, la cabeza entre los brazos, rodillas suaves. ((3 resp.)) [F] Rodillas dobladas, manos más altas. Sin "
-         "apoyo: espalda larga, manos en los muslos, miramos al suelo.",
-         "**Chien avec appui.** On recule un peu. On inspire, on allonge le dos comme une table. Bras longs, tête entre "
-         "les bras, genoux souples. ((3 resp.)) [F] Genoux pliés, mains plus haut. Sans appui : dos long, mains sur "
-         "les cuisses, regard au sol.")),
-    (5, ("**Subimos.** Caminamos hacia el apoyo. Inhalamos y subimos el torso; las manos se quedan en el apoyo.",
-         "**On remonte.** On revient vers l’appui. On inspire, le buste remonte ; les mains restent sur l’appui.")),
-    (6, ("**Pie derecho atrás.** Exhalamos: el pie derecho da un paso atrás, talón levantado. Doblamos un poco la "
+         "Seulement jusqu’où c’est confortable.")),
+    (3, ("**Espalda larga.** Exhalamos: bajamos los brazos, apoyamos las manos en el respaldo o en la pared y "
+         "caminamos un poco hacia atrás hasta que la espalda queda larga, como una mesa. Brazos largos, rodillas "
+         "suaves. Sin apoyo: doblamos las rodillas, manos en los muslos, espalda larga, miramos al suelo. ((3 resp.))",
+         "**Dos long.** On expire : on baisse les bras, on pose les mains sur le dossier ou au mur et on recule un peu "
+         "jusqu’à avoir le dos long, comme une table. Bras longs, genoux souples. Sans appui : genoux pliés, mains sur "
+         "les cuisses, dos long, regard au sol. ((3 resp.))")),
+    (4, ("**Volvemos y subimos.** Caminamos hacia el apoyo. Inhalamos y subimos el torso: estamos de pie, las manos "
+         "siguen en el apoyo. Sin apoyo: inhalamos y subimos, manos en las caderas.",
+         "**On revient, on se redresse.** On avance vers l’appui. On inspire, le buste remonte : on est debout, les "
+         "mains restent sur l’appui. Sans appui : on inspire, on se redresse, mains sur les hanches.")),
+    (5, ("**Pie derecho atrás.** Exhalamos: el pie derecho da un paso atrás, talón levantado. Doblamos un poco la "
          "rodilla izquierda, encima del tobillo. Espalda recta. Una mano en el apoyo o las manos en las caderas. "
-         "((2 resp.)) [F] Paso pequeño.",
+         "((2 resp.)) Paso pequeño si hace falta.",
          "**Pied droit derrière.** On expire : le pied droit recule d’un pas, talon levé. On plie un peu le genou "
          "gauche, au-dessus de la cheville. Dos vertical. Une main sur l’appui ou les mains sur les hanches. "
-         "((2 resp.)) [F] Petit pas.")),
-    (7, ("**Volvemos.** Inhalamos: el pie derecho vuelve al lado del izquierdo.",
+         "((2 resp.)) Petit pas si besoin.")),
+    (6, ("**Volvemos.** Inhalamos: el pie derecho vuelve al lado del izquierdo.",
          "**On revient.** On inspire : le pied droit revient à côté du gauche.")),
-    (8, ("**Brazos arriba.** Exhalamos, soltamos las manos. Inhalamos, brazos arriba.",
+    (7, ("**Brazos arriba.** Exhalamos, soltamos las manos. Inhalamos, brazos arriba.",
          "**Bras en haut.** On expire, on lâche les mains. On inspire, bras en haut.")),
-    (9, ("**Corazón.** Exhalamos, manos delante del pecho. ((1 resp.))",
+    (8, ("**Corazón.** Exhalamos, manos delante del pecho. ((1 resp.))",
          "**Cœur.** On expire, mains devant la poitrine. ((1 resp.))")),
 ]
 R2 = [
     (1, ("Corazón. Esta vez con el pie izquierdo.", "Cœur. Cette fois avec le pied gauche.")),
     (2, ("Inhalamos, brazos arriba.", "On inspire, bras en haut.")),
-    (3, ("Exhalamos, manos al apoyo.", "On expire, mains sur l’appui.")),
-    (4, ("Atrás. Inhalamos, espalda larga. ((3 resp.))", "On recule. On inspire, dos long. ((3 resp.))")),
-    (5, ("Inhalamos, subimos.", "On inspire, on remonte.")),
-    (6, ("Exhalamos, pie izquierdo atrás. ((2 resp.))", "On expire, pied gauche derrière. ((2 resp.))")),
-    (7, ("Inhalamos, el pie vuelve.", "On inspire, le pied revient.")),
-    (8, ("Inhalamos, brazos arriba.", "On inspire, bras en haut.")),
-    (9, ("Exhalamos, corazón.", "On expire, cœur.")),
+    (3, ("Exhalamos, manos al apoyo, atrás: espalda larga. ((3 resp.))", "On expire, mains sur l’appui, on recule : dos long. ((3 resp.))")),
+    (4, ("Volvemos. Inhalamos, subimos.", "On revient. On inspire, on se redresse.")),
+    (5, ("Exhalamos, pie izquierdo atrás. ((2 resp.))", "On expire, pied gauche derrière. ((2 resp.))")),
+    (6, ("Inhalamos, el pie vuelve.", "On inspire, le pied revient.")),
+    (7, ("Inhalamos, brazos arriba.", "On inspire, bras en haut.")),
+    (8, ("Exhalamos, corazón.", "On expire, cœur.")),
 ]
 R3 = [
     (1, ("Exhalamos… corazón.", "On expire… cœur.")), (2, ("Inhalamos… brazos arriba.", "On inspire… bras en haut.")),
     (3, ("Exhalamos… manos al apoyo, espalda larga.", "On expire… mains sur l’appui, dos long.")),
-    (4, ("Inhalamos… subimos.", "On inspire… on remonte.")),
-    (5, ("Exhalamos… pie derecho atrás.", "On expire… pied droit derrière.")),
-    (6, ("Inhalamos… vuelve.", "On inspire… il revient.")),
-    (7, ("Exhalamos… pie izquierdo atrás.", "On expire… pied gauche derrière.")),
-    (8, ("Inhalamos… vuelve, brazos arriba.", "On inspire… il revient, bras en haut.")),
-    (9, ("Exhalamos… corazón.", "On expire… cœur.")),
+    (4, ("Inhalamos… volvemos y subimos.", "On inspire… on revient, on se redresse.")),
+    (5, ("Exhalamos… pie derecho atrás. Inhalamos… vuelve.", "On expire… pied droit derrière. On inspire… il revient.")),
+    (6, ("Exhalamos… pie izquierdo atrás. Inhalamos… vuelve.", "On expire… pied gauche derrière. On inspire… il revient.")),
+    (7, ("Inhalamos… brazos arriba.", "On inspire… bras en haut.")), (8, ("Exhalamos… corazón.", "On expire… cœur.")),
 ]
 p2 = [
     part(2, "De pie · con una silla o la pared · 0:18 – 0:41", "Debout · avec une chaise ou le mur · 0:18 – 0:41"),
@@ -278,7 +274,7 @@ p2 = [
     band(5, ("Saludo con apoyo · Ronda 1: muy despacio · pie derecho",
              "Salutation avec appui · Ronde 1 : très lent · pied droit"), "0:20 – 0:24"),
     note("chaise, mur ou sans appui : chacun choisit, les gestes sont les mêmes. Sans appui : mains sur les cuisses "
-         "(étapes 3–4) et sur les hanches (étape 6). Personne ne descend au sol ici."),
+         "(étape 3) et sur les hanches (étapes 4–5). Personne ne descend au sol ici."),
     strip(SAL, 0.15), steps(R1),
     '<div class="two">'
     '<div class="rnd">' + band("5b", ("Ronda 2 · pie izquierdo", "Ronde 2 · pied gauche"), "0:24 – 0:26") + steps(R2) +
