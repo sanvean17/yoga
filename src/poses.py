@@ -614,3 +614,83 @@ def heel_raise():
 
 
 ALL.update({"stand_hold": stand_hold, "heel_raise": heel_raise})
+
+
+# ------------------------------------------------- warriors with a chair (back view)
+def chair_front(f, x0, w=30, seat=44, top=88):
+    """Chair seen from the front/back (back views): legs, seat, backrest."""
+    for d_ in [f"M{x0},{-seat} L{x0 + w},{-seat}", f"M{x0},0 L{x0},{-top}", f"M{x0 + w},0 L{x0 + w},{-top}",
+               f"M{x0},{-top} L{x0 + w},{-top}", f"M{x0},{-(top - 14)} L{x0 + w},{-(top - 14)}"]:
+        f.items.append((-1, f'<path d="{d_}" stroke="{CHAIR}" stroke-width="4" stroke-linecap="round" fill="none"/>'))
+    f._track((x0 - 3, 0), (x0 + w + 3, top + 3))
+
+
+def _hip_hand(P, tor, side_sign):
+    """target for a hand resting on the hip (elbow out)."""
+    perp = d(tor - 90)
+    return add(add(P, perp, 11 * side_sign), d(tor), 8)
+
+
+def w2_chair(right=True):
+    s = 1 if right else -1
+    P = (12 * s, 54)
+    front_hand = ((78 * s, 88), -1 if right else 1)
+    hip = (_hip_hand(P, 90, -s), -1 if right else 1)
+    f, _ = back(P, 90, gaze=0 if right else 180,
+                armR=front_hand if right else hip, armL=hip if right else front_hand,
+                legR=((58, 4), 1) if right else ((56, 4), -1),
+                legL=((-56, 4), 1) if right else ((-58, 4), -1),
+                footR=(0, 12) if right else (-20, 7), footL=(200, 7) if right else (180, 12))
+    chair_front(f, 72 if right else -102)
+    _dl(f, (60, -12), "D", C["R"]); _dl(f, (-58, -12), "I", C["L"])
+    return f
+
+
+def rev_chair(right=True):
+    s = 1 if right else -1
+    P = (12 * s, 54)
+    tor = 90 + 12 * s
+    neck = add(P, d(tor), T)
+    perp = d(tor - 90)
+    shoR, shoL = add(neck, perp, 14), add(neck, perp, -14)
+    hipR, hipL = add(P, perp, 8), add(P, perp, -8)
+    up_sho = shoR if right else shoL
+    top = (add(up_sho, d(90 + 12 * s), 50), -1 if right else 1)
+    back_ankle, back_hip = ((-56, 4), hipL) if right else ((56, 4), hipR)
+    slide = add(back_hip, (back_ankle[0] - back_hip[0], back_ankle[1] - back_hip[1]), 0.24)
+    f, _ = back(P, tor, head=tor, gaze=tor + 15 * s,
+                armR=top if right else (slide, -1), armL=(slide, 1) if right else top,
+                legR=((58, 4), 1) if right else ((56, 4), -1),
+                legL=((-56, 4), 1) if right else ((-58, 4), -1),
+                footR=(0, 12) if right else (-20, 7), footL=(200, 7) if right else (180, 12))
+    chair_front(f, 72 if right else -102)
+    _dl(f, (60, -12), "D", C["R"]); _dl(f, (-58, -12), "I", C["L"])
+    return f
+
+
+def sa_chair(right=True):
+    s = 1 if right else -1
+    P = (6 * s, 44)
+    tor = 90 - 45 * s
+    rest = ('A', -90 - 5 * s, 185 if right else -5)
+    hip = (_hip_hand(P, tor, -s), 1 if right else -1)
+    f, _ = back(P, tor, head=tor + 10 * s, gaze=90 - 15 * s,
+                armR=rest if right else hip, armL=hip if right else rest,
+                legR=((60, 4), 1) if right else ((64, 4), -1),
+                legL=((-64, 4), 1) if right else ((-60, 4), -1),
+                footR=(0, 12) if right else (-20, 7), footL=(200, 7) if right else (180, 12))
+    chair_front(f, 74 if right else -104)
+    _dl(f, (62, -12), "D", C["R"]); _dl(f, (-62, -12), "I", C["L"])
+    return f
+
+
+def wide_chair(right=True):
+    f = wide_stance()
+    chair_front(f, 58 if right else -88)
+    return f
+
+
+ALL.update({
+    "w2c_R": w2_chair, "w2c_L": lambda: w2_chair(False), "revc_R": rev_chair, "revc_L": lambda: rev_chair(False),
+    "sac_R": sa_chair, "sac_L": lambda: sa_chair(False), "widec_R": wide_chair, "widec_L": lambda: wide_chair(False),
+})
