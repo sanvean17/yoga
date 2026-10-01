@@ -350,10 +350,10 @@ p3 = [
     grid([card(["tree_wall", "tree_R"], ("Árbol", "Arbre"), ("3 resp./lado", "3 resp./côté"), (
         "De lado junto a la silla o la pared, una mano apoyada. Miramos un punto fijo. Peso al pie izquierdo. Dejamos "
         "los dedos del pie derecho en el suelo y apoyamos el talón en el tobillo. O el pie en la pantorrilla: **nunca "
-        "sobre la rodilla.** ((3 resp.)) Bajamos el pie y cambiamos de lado. [F] Las dos manos en el apoyo.",
+        "sobre la rodilla.** ((3 resp.)) Bajamos el pie y cambiamos de lado. Si hace falta, las dos manos en el apoyo.",
         "De côté près de la chaise ou du mur, une main en appui. Regard sur un point fixe. Poids sur le pied gauche. "
         "On laisse les orteils du pied droit au sol et on pose le talon sur la cheville. Ou le pied sur le mollet : "
-        "**jamais sur le genou.** ((3 resp.)) On repose le pied et on change de côté. [F] Les deux mains sur l’appui."),
+        "**jamais sur le genou.** ((3 resp.)) On repose le pied et on change de côté. Si besoin, les deux mains sur l’appui."),
         mh=17, row=True)], cols=1),
     band(8, ("Volver a sentarnos", "Se rasseoir"), "0:41 – 0:43"),
     grid([card(["chair_sit", "seated_cross"], ("Silla o suelo", "Chaise ou sol"), None, (
