@@ -883,3 +883,243 @@ def chair_wrists():
 
 
 ALL.update({"c_neck": chair_neck, "c_shoulders": chair_shoulders, "c_wrists": chair_wrists})
+
+
+# ---------------------------------------------------------------- course 2 v2: new exercises, chair + no chair
+def _neck_sho(P, tor):
+    neck = add(P, d(tor), T)
+    perp = d(tor - 90)
+    return add(neck, perp, 14), add(neck, perp, -14)
+
+
+def _arms(kind, P, tor):
+    shoR, shoL = _neck_sho(P, tor)
+    up = shoR[1]
+    if kind == "head":      # hands behind the head, elbows out
+        return ((6, up + 26), -1), ((-6, up + 26), 1)
+    if kind == "out":
+        return ((shoR[0] + 50, shoR[1]), -1), ((shoL[0] - 50, shoL[1]), 1)
+    if kind == "cactus":
+        return ('A', 0, 90), ('A', 180, 90)
+    if kind == "eagle":
+        return ((-4, up + 30), 1), ((4, up + 26), -1)
+    if kind == "ribs":
+        return ((18, up - 24), 1), ((-18, up - 24), -1)
+    if kind == "hips":
+        return ((11, P[1] + 8), 1), ((-11, P[1] + 8), -1)
+    if kind == "palm_R":    # both arms up, leaning to the left (right side stretched)
+        a = tor + 8
+        return (add(shoR, d(a), 50), -1), (add(shoL, d(a + 8), 50), 1)
+    if kind == "down":
+        return ((shoR[0] + 4, up - 48), -1), ((shoL[0] - 4, up - 48), 1)
+    raise ValueError(kind)
+
+
+def stand_back(arms="down", torso=90, head=None, gaze=None, legs="normal", arrows=None, colored=True, Pz=None):
+    P = Pz or {"normal": (0, 81.5), "wide": (0, 74), "goddess": (0, 62), "tri_R": (0, 72), "knee_R": (0, 81.5)}[legs]
+    aR, aL = _arms(arms, P, torso) if isinstance(arms, str) else arms
+    L_ = {"normal": (((10, 4), 1), ((-10, 4), -1), (0, 9), (180, 9)),
+          "wide": (((44, 4), 1), ((-44, 4), -1), (0, 10), (180, 10)),
+          "goddess": (((40, 4), 1), ((-40, 4), -1), (-20, 10), (200, 10)),
+          "tri_R": (((48, 4), 1), ((-44, 4), -1), (0, 12), (200, 7))}[legs]
+    f, _ = back(P, torso, head=head, gaze=gaze, armR=aR, armL=aL, legR=L_[0], legL=L_[1],
+                footR=L_[2], footL=L_[3], colored=colored, arrows=arrows)
+    if colored:
+        x = 46 if legs != "normal" else 22
+        _dl(f, (x + 4, -12), "D", C["R"]); _dl(f, (-x - 4, -12), "I", C["L"])
+    return f
+
+
+def chair_back2(arms="down", torso=90, head=None, gaze=None, legs="normal", arrows=None, colored=True):
+    P = (0, 52)
+    aR, aL = _arms(arms, P, torso) if isinstance(arms, str) else arms
+    f, _ = chair_back(torso, head=head, gaze=gaze, armR=aR, armL=aL, legs=legs, colored=colored, arrows=arrows)
+    return f
+
+
+def _wide_chair_legs():
+    pass
+
+
+# extra leg shapes for seated back views
+def chair_back_wide(arms, torso=90, head=None, gaze=None, goddess=False, colored=True):
+    P = (0, 52)
+    aR, aL = _arms(arms, P, torso) if isinstance(arms, str) else arms
+    f, _ = back(P, torso, head=head, gaze=gaze, armR=aR, armL=aL, colored=colored)
+    cR = C["R"] if colored else C["body"]
+    cL = C["L"] if colored else C["body"]
+    if goddess:
+        r, l = [(8, 50), (34, 46), (40, 5), (50, 3)], [(-8, 50), (-34, 46), (-40, 5), (-50, 3)]
+    else:
+        r, l = [(8, 50), (32, 46), (38, 5), (48, 4)], [(-8, 50), (-32, 46), (-38, 5), (-44, 6)]
+    f.line(r, cR, layer=1); f.line(l, cL, layer=1)
+    _stool(f, half=14)
+    if colored:
+        _dl(f, (50, -12), "D", C["R"]); _dl(f, (-50, -12), "I", C["L"])
+    return f
+
+
+def tri_arms(P, tor, knee):
+    shoR, shoL = _neck_sho(P, tor)
+    return (knee, 1), (add(shoL, d(tor), 50), 1)
+
+
+def c2_figs():
+    F = {}
+    circ = lambda f, pts: [f.items.append((6, f'<circle cx="{x}" cy="{-y}" r="9" fill="none" stroke="#6b7785" stroke-width="2.3" stroke-dasharray="36 12"/>')) for x, y in pts]  # noqa
+    # neck turn
+    F["n_chair"] = lambda: chair_back2("down", gaze=0, arrows=[([(-10, 146), (12, 146)], -8)])
+    F["n_stand"] = lambda: stand_back("down", gaze=0, arrows=[([(-10, 176), (12, 176)], -8)])
+    # elbows open / close
+    F["e_chair"] = lambda: chair_back2("head", colored=False)
+    F["e_stand"] = lambda: stand_back("head", colored=False)
+    # arm circles
+
+    def ac(fn):
+        f = fn("out", colored=False)
+        sy = 104 if fn is chair_back2 else 133
+        circ(f, [(78, sy), (-78, sy)])
+        return f
+    F["a_chair"] = lambda: ac(chair_back2)
+    F["a_stand"] = lambda: ac(stand_back)
+    # ribs breathing
+    F["r_chair"] = lambda: chair_back2("ribs", colored=False)
+    F["r_floor"] = lambda: seated_cross(colored=False)
+    # palm tree (side stretch both arms up)
+    F["p_chair"] = lambda: chair_back2("palm_R", torso=104, head=108)
+    F["p_stand"] = lambda: stand_back("palm_R", torso=104, head=108)
+    # eagle arms
+    F["g_chair"] = lambda: chair_back2("eagle", colored=False)
+    F["g_stand"] = lambda: stand_back("eagle", colored=False)
+    # goddess
+    F["d_chair"] = lambda: chair_back_wide("cactus", goddess=True, colored=False)
+    F["d_stand"] = lambda: stand_back("cactus", legs="goddess", colored=False)
+    # triangle (to the right)
+    def tri_chair():
+        P, tor = (0, 52), 50
+        return chair_back_wide(tri_arms(P, tor, (34, 30)), torso=tor, head=tor, gaze=100)
+
+    def tri_stand():
+        P, tor = (0, 72), 40
+        return stand_back(tri_arms(P, tor, (36, 34)), torso=tor, head=tor, gaze=100, legs="tri_R")
+    F["t_chair"] = tri_chair
+    F["t_stand"] = tri_stand
+    return F
+
+
+_C2 = c2_figs()
+
+
+def fingers_stand():
+    f = side((0, 81.5), 90, armN=((50, 128), -1), armF=((48, 128), -1),
+             legN=((1, 4), 1), legF=((-1, 4), 1), footN=-4, footF=-4)
+    f.items.append((6, '<circle cx="54" cy="-128" r="9" fill="none" stroke="#6b7785" stroke-width="2.4" stroke-dasharray="40 16"/>'))
+    f._track((66, 140))
+    return f
+
+
+def heeltoe_chair():
+    f = side((0, 48), 90, armN=((30, 52), -1), armF=((28, 52), -1),
+             legN=('A', 0, -90), footN=35, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def toes_stand():
+    return side((0, 88), 90, armN=((4, 40), -1), armF=((2, 40), -1),
+                legN=((2, 12), 1), legF=((0, 12), 1), footN=-60, footF=-60,
+                extra=[("arrow", [(-14, 40), (-14, 64)], 0)])
+
+
+def march_stand():
+    return side((0, 81.5), 90, armN=((-14, 50), -1), armF=((14, 50), -1),
+                legN=('A', 0, -90), footN=0, legF=((-1, 4), 1), footF=-4, sideN=R, sideF=L)
+
+
+def chest_chair():
+    f = side((2, 48), 86, curve=-6, head=105, face=20,
+             armN=((-14, 46), 1), armF=((-16, 46), 1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chest_stand():
+    return side((0, 81.5), 88, curve=-6, head=105, face=20,
+                armN=((-16, 70), 1), armF=((-18, 70), 1),
+                legN=((1, 4), 1), legF=((-1, 4), 1), footN=-4, footF=-4)
+
+
+def w1_chair():
+    f = side((0, 48), 90, head=95, armN=((5, 148), -1), armF=((2, 148), -1),
+             legN=('A', 0, -90), footN=0, legF=((-64, 6), -1), footF=-30, sideN=R, sideF=L)
+    chair(f, -16, back_left=True, depth=30)
+    return f
+
+
+def w1_stand():
+    return side((0, 62), 90, head=95, armN=((5, 162), -1), armF=((2, 162), -1),
+                legN=((40, 4), 1), footN=0, legF=((-56, 8), -1), footF=-40, sideN=R, sideF=L)
+
+
+def knee_chair():
+    f = side((0, 48), 92, head=90, armN=((2, 46), -1), armF=((0, 46), -1),
+             legN=('A', 25, -80), footN=0, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def knee_stand():
+    return side((0, 81.5), 90, armN=((10, 84), 1), armF=((8, 84), 1),
+                legN=('A', 0, -90), footN=0, legF=((-1, 4), 1), footF=-4, sideN=R, sideF=L)
+
+
+def fig4_chair():
+    f = side((0, 48), 92, head=88, armN=((30, 56), -1), armF=((28, 56), -1),
+             legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    f.line([(0, 48), (16, 60), (46, 54), (52, 56)], C["R"], layer=3)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def fig4_floor():
+    f = side((0, 9.5), 180, head=180, face=90, armN=((-4, 5), 1), armF=((-6, 5), 1),
+             legF=((34, 5), 1), footF=-2, sideN=R, sideF=L)
+    f.line([(0, 9.5), (20, 44), (16, 30), (6, 24)], C["R"], layer=3)
+    return f
+
+
+def hum_floor():
+    return seated_cross(colored=False)
+
+
+ALL.update({k: v for k, v in _C2.items()})
+ALL.update({
+    "fing_stand": fingers_stand, "heeltoe_chair": heeltoe_chair, "toes_stand": toes_stand, "march_stand": march_stand,
+    "chest_chair": chest_chair, "chest_stand": chest_stand, "w1_chair": w1_chair, "w1_stand": w1_stand,
+    "knee_chair": knee_chair, "knee_stand": knee_stand, "fig4_chair": fig4_chair, "fig4_floor": fig4_floor,
+})
+
+
+def eagle_chair():
+    f = side((0, 48), 90, armN=('A', 5, 95), armF=('A', 0, 88),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def eagle_stand():
+    return side((0, 81.5), 90, armN=('A', 5, 95), armF=('A', 0, 88),
+                legN=((1, 4), 1), legF=((-1, 4), 1), footN=-4, footF=-4)
+
+
+def _arm_circles(fn, sy):
+    f = fn("out", colored=False)
+    for x in (78, -78):
+        f.items.append((6, f'<circle cx="{x}" cy="{-sy}" r="9" fill="none" stroke="#6b7785" stroke-width="2.3" stroke-dasharray="36 12"/>'))
+        f._track((x - 11, sy - 11), (x + 11, sy + 11))
+    return f
+
+
+ALL.update({"g_chair": eagle_chair, "g_stand": eagle_stand,
+            "a_chair": lambda: _arm_circles(chair_back2, 104), "a_stand": lambda: _arm_circles(stand_back, 133)})
