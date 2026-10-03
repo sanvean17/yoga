@@ -493,6 +493,9 @@ ALL.update({"seated_cow": seated_catcow, "seated_cat": lambda: seated_catcow(Tru
 CHAIR = "#a07c52"
 
 
+ARM = {"on": False}
+
+
 def chair(f, x0, back_left=True, seat_y=44, depth=38):
     """Side-view chair. Seat from x0 to x0+depth; backrest on the left
     (back_left) or right end of the seat. Drawn behind the person."""
@@ -504,8 +507,11 @@ def chair(f, x0, back_left=True, seat_y=44, depth=38):
         f"M{xf},{-seat_y} L{xf},0", f"M{xb},{-seat_y} L{xb},0",
         f"M{xb},{-seat_y} L{xb + tilt},{-(seat_y + 46)}",
     ]
+    if ARM["on"]:
+        xa = x0 + depth - 6 if back_left else x0 + 6
+        pts.append(f"M{xb + tilt / 2},{-(seat_y + 22)} L{xa},{-(seat_y + 22)} L{xa},{-seat_y}")
     for d_ in pts:
-        f.items.append((-1, f'<path d="{d_}" stroke="{CHAIR}" stroke-width="4.5" stroke-linecap="round" fill="none"/>'))
+        f.items.append((-1, f'<path d="{d_}" stroke="{CHAIR}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'))
     f._track((x0 - 4, 0), (x0 + depth + 4, seat_y + 48))
 
 
@@ -1123,3 +1129,29 @@ def _arm_circles(fn, sy):
 
 ALL.update({"g_chair": eagle_chair, "g_stand": eagle_stand,
             "a_chair": lambda: _arm_circles(chair_back2, 104), "a_stand": lambda: _arm_circles(stand_back, 133)})
+
+
+
+def _shoulder_cross(fn):
+    P = (0, 52) if fn is chair_back2 else (0, 81.5)
+    shoR, shoL = _neck_sho(P, 90)
+    arms = (((shoL[0] - 4, shoR[1] - 8), 1), ((shoR[0] - 6, shoR[1] - 14), -1))
+    return fn(arms, colored=True)
+
+
+def tandem_stand():
+    f = side((0, 81.5), 90, armN=((38, 88), -1), armF=((36, 88), -1),
+             legN=((12, 4), 1), footN=-4, legF=((-6, 4), 1), footF=-4, sideN=R, sideF=L)
+    chair(f, 44, back_left=True)
+    return f
+
+
+def nostril_chair():
+    f = side((0, 48), 90, armN=((10, 111), -1), armF=((28, 52), -1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+ALL.update({"sh_chair": lambda: _shoulder_cross(chair_back2), "sh_stand": lambda: _shoulder_cross(stand_back),
+            "tandem_stand": tandem_stand, "nostril_chair": nostril_chair})

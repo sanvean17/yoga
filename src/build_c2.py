@@ -108,21 +108,21 @@ RESP = lambda n: (f"{n} resp.", f"{n} resp.")  # noqa: E731
 
 
 # ===================================================================
-# COURSE 2 (v2) · new exercises · every card shows BOTH versions:
-#   chair (main text, everyone) + standing [DP] or floor [SU] (coloured block)
+# COURSE 2 (v3) · chairs WITH armrests · every card shows two versions
 # ===================================================================
+import poses as _poses
+_poses.ARM["on"] = True
 
 LBL = {"S": ("SILLA", "CHAISE", "lc"), "P": ("DE PIE", "DEBOUT", "lp"), "F": ("SUELO", "SOL", "lf")}
 
 
-def card2(chair_pose, alt_pose, alt, name, badge, text, mh=19):
-    """two figures side by side: chair version + standing ('P') or floor ('F') version."""
+def card2(a_pose, b_pose, b_kind, name, badge, text, mh=19, a_kind="S"):
     def one(p, k):
         es_, fr_, c = LBL[k]
         return (f'<div class="f2">{fig(p, max_w=30, max_h=mh * 1.15, cap=0.14)}'
                 f'<span class="fl {c}">{es_ if L == "es" else fr_}</span></div>')
     b = f' <span class="badge b-n">{T(badge)}</span>' if badge else ""
-    return (f'<div class="qc c2"><div class="qf row2">{one(chair_pose, "S")}{one(alt_pose, alt)}</div>'
+    return (f'<div class="qc c2"><div class="qf row2">{one(a_pose, a_kind)}{one(b_pose, b_kind)}</div>'
             f'<div class="qt"><div class="qn">{T(name)}{b}</div><div class="qcue">{T(text)}</div></div></div>')
 
 
@@ -131,214 +131,275 @@ def part(n, es_t, fr_t):
             f'{es_t if L == "es" else fr_t}</div>')
 
 
+def para(es_t, fr_t):
+    return f'<div class="cue1">{T((es_t, fr_t))}</div>'
+
+
+SUN_SEAT = [
+    ("chair_sit", ("1 Corazón", "1 Cœur"), "exh"), ("c_arms_up", ("2 Brazos arriba", "2 Bras en haut"), "inh"),
+    ("c_fold", ("3 Flexión", "3 Flexion"), "exh"), ("c_lean", ("4 Espalda larga", "4 Dos long"), "inh"),
+    ("chair_hamstring", ("5 Pierna D delante", "5 Jambe D devant"), "exh"),
+    ("c_arms_up", ("6 Brazos arriba", "6 Bras en haut"), "inh"), ("chair_sit", ("7 Corazón", "7 Cœur"), "exh"),
+]
+SUN_STAND = [
+    ("heart_chair", ("1 Corazón", "1 Cœur"), "exh"), ("arms_up_chair", ("2 Brazos arriba", "2 Bras en haut"), "inh"),
+    ("fold", ("3 Flexión", "3 Flexion"), "exh"), (("dog_chair", "half_lift_thighs"), ("4 Espalda larga", "4 Dos long"), "inh"),
+    ("lunge_chair_R", ("5 Pie D atrás", "5 Pied D arrière"), "exh"),
+    ("arms_up_chair", ("6 Brazos arriba", "6 Bras en haut"), "inh"), ("heart_chair", ("7 Corazón", "7 Cœur"), "exh"),
+]
+SUN_STEPS = [
+    (1, ("**Corazón.** Espalda larga, palmas juntas delante del pecho. Exhalamos.",
+         "**Cœur.** Dos long, paumes jointes devant la poitrine. On expire.")),
+    (2, ("**Brazos arriba.** Inhalamos: abrimos los brazos por los lados y los subimos, hasta donde es cómodo.",
+         "**Bras en haut.** On inspire : on ouvre les bras sur les côtés et on les monte, jusqu’où c’est confortable.")),
+    (3, ("**Flexión (posición 1).** Exhalamos: el pecho baja hacia los muslos, la espalda se redondea, la cabeza cuelga. "
+         "[DP]Rodillas bien dobladas, manos en las piernas.[/DP]",
+         "**Flexion (position 1).** On expire : la poitrine descend vers les cuisses, le dos s’arrondit, la tête pend. "
+         "[DP]Genoux bien pliés, mains sur les jambes.[/DP]")),
+    (4, ("**Espalda larga (posición 2).** Inhalamos: manos en los muslos, por encima de las rodillas. Subimos un poco: la "
+         "espalda plana e inclinada, como una mesa. Miramos al suelo. "
+         "[DP]Manos en el respaldo o en la pared, caminamos un poco atrás; o manos en los muslos.[/DP]",
+         "**Dos long (position 2).** On inspire : mains sur les cuisses, au-dessus des genoux. On remonte un peu : le dos "
+         "plat et incliné, comme une table. Regard au sol. [DP]Mains sur le dossier ou au mur, on recule un peu ; ou mains "
+         "sur les cuisses.[/DP]")),
+    (5, ("**Pierna derecha delante.** Exhalamos: subimos el torso; estiramos la pierna derecha delante, talón en el "
+         "suelo. ((2 resp.)) Inhalamos, el pie vuelve. "
+         "[DP]El pie derecho da un paso atrás, talón arriba, una mano en el apoyo; después vuelve.[/DP]",
+         "**Jambe droite devant.** On expire : on redresse le buste ; on allonge la jambe droite devant, talon au sol. "
+         "((2 resp.)) On inspire, le pied revient. [DP]Le pied droit recule d’un pas, talon levé, une main sur l’appui ; "
+         "puis il revient.[/DP]")),
+    (6, ("**Brazos arriba.** Inhalamos, subimos los brazos.", "**Bras en haut.** On inspire, on monte les bras.")),
+    (7, ("**Corazón.** Exhalamos, manos delante del pecho. ((1 resp.))",
+         "**Cœur.** On expire, mains devant la poitrine. ((1 resp.))")),
+]
+
 P_ALL = [
     '<div class="top"><div><div class="kick">' +
-    ("Clase 2 · guion de la profesora · 1 hora · todo se puede hacer en la silla" if L == "es"
-     else "Cours 2 · version française · même ordre et mêmes numéros que la version espagnole") +
-    '</div><h1>' + ("Yoga suave · silla, de pie o suelo" if L == "es" else "Yoga doux · chaise, debout ou sol") + '</h1></div>'
+    ("Clase 2 · guion de la profesora · 1 hora · de pie, en la silla o en el suelo" if L == "es"
+     else "Cours 2 · version française · même ordre et mêmes lettres que la version espagnole") +
+    '</div><h1>' + ("Yoga suave · cada uno a su manera" if L == "es" else "Yoga doux · chacun à sa façon") + '</h1></div>'
     '<div class="leg"><b class="sr">' + ("naranja = DERECHA" if L == "es" else "orange = DROITE") +
     '</b> · <b class="sl">' + ("azul = IZQUIERDA" if L == "es" else "bleu = GAUCHE") + "</b><br>" +
-    ('<span class="fl lc">SILLA</span> = para todos · <span class="fl lp">DE PIE</span> <span class="fl lf">SUELO</span> = opciones'
+    ('<span class="fl lc">SILLA</span> <span class="fl lp">DE PIE</span> <span class="fl lf">SUELO</span> = las dos versiones dibujadas'
      if L == "es" else
-     '<span class="fl lc">CHAISE</span> = pour tous · <span class="fl lp">DEBOUT</span> <span class="fl lf">SOL</span> = options') +
+     '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT</span> <span class="fl lf">SOL</span> = les deux versions dessinées') +
     '</div></div>',
-    note("texte normal = <b>version chaise, pour tout le monde</b> (même ceux qui ne peuvent pas se lever). Blocs bleus "
-         "« DE PIE » et verts « EN EL SUELO » = options pour les plus mobiles. Chaise stable, sans accoudoirs ni roulettes, "
-         "pieds à plat. <b>Aucune rétention de souffle.</b> Une respiration de silence après chaque phrase. "
-         "En retard : saute O (genou levé) ou N (déesse). Jamais la relaxation."),
-    band(1, ("Bienvenida", "Accueil"), "0:00 – 0:03"),
-    grid([card2("chair_sit", "tadasana", "P", ("Cada uno elige", "Chacun choisit"), None, (
-        "Hola a todos, bienvenidos. Hoy hacemos ejercicios nuevos. Todo se puede hacer sentados en la silla; quien "
-        "quiera y pueda, tendrá opciones de pie o en el suelo. La silla siempre está bien. Nos sentamos un poco hacia "
-        "delante, sin apoyar la espalda, pies bien apoyados a la anchura de las caderas. Espalda larga, hombros relajados. "
-        "**Nada debe doler.** Si algo no se siente bien, paramos y descansamos.",
-        "Bonjour à tous, bienvenue. Aujourd’hui on fait des exercices nouveaux. Tout peut se faire assis sur la chaise ; "
-        "ceux qui veulent et qui peuvent auront des options debout ou au sol. La chaise, c’est toujours bien. On s’assoit "
-        "un peu vers l’avant, sans s’appuyer au dossier, pieds bien posés largeur de hanches. Dos long, épaules détendues. "
-        "**Rien ne doit faire mal.** Si quelque chose ne va pas, on s’arrête et on se repose."))], cols=1),
-    band(2, ("Respiración de inicio", "Respiration du début"), "0:03 – 0:09"),
+    note("texte normal = <b>version chaise</b>, faisable par tous. Blocs bleus « DE PIE » / verts « EN EL SUELO » = options. "
+         "<b>Chaises avec accoudoirs</b> : on s’assoit au bord, devant les accoudoirs, pour les guerriers ; les accoudoirs "
+         "servent d’appui. Pas de respiration du feu ni de rétention (déconseillées : tension, cœur, vertiges). "
+         "En retard : saute P (un pied devant l’autre) ou U (essuie-glaces). Jamais la relaxation."),
+    band(1, ("Bienvenida · las reglas", "Accueil · les règles"), "0:00 – 0:04"),
+    grid([card2("chair_sit", "tadasana", "P", ("Cada uno a su manera", "Chacun à sa façon"), None, (
+        "Hola a todos, bienvenidos. Hoy todo se puede hacer **de pie, en la silla o en el suelo**: os enseñaré las "
+        "opciones y cada uno elige. Lo más importante: **no forzamos nunca. Escuchamos nuestro cuerpo.** Si algo duele o "
+        "no es posible, no pasa nada: descansamos, o lo hacemos poco a poco. "
+        "La respiración es la clave para soltar y ganar amplitud. La amplitud llega poco a poco, milímetro a milímetro. "
+        "No pasa nada si hoy no podemos bajar mucho: no es el objetivo.",
+        "Bonjour à tous, bienvenue. Aujourd’hui tout peut se faire **debout, sur la chaise ou au sol** : je vous montrerai "
+        "les options et chacun choisit. Le plus important : **on ne force jamais. On écoute son corps.** Si quelque chose "
+        "fait mal ou n’est pas possible, ce n’est pas grave : on se repose, ou on y va petit à petit. La respiration est la "
+        "clé pour relâcher et gagner en amplitude. L’amplitude vient peu à peu, millimètre par millimètre. Ce n’est pas "
+        "grave si aujourd’hui on ne peut pas descendre bas : ce n’est pas le but."))], cols=1),
+    band(2, ("Respiración de inicio", "Respiration du début"), "0:04 – 0:10"),
     grid([
-        card2("r_chair", "r_floor", "F", ("A · Respirar en las costillas", "A · Respirer dans les côtes"), ("6 resp.", "6 resp."), (
-            "Cerramos los ojos si queréis. Colocamos las manos a los lados de las costillas. Inhalamos por la nariz y "
-            "sentimos cómo las costillas empujan suavemente las manos hacia fuera. Exhalamos despacio y las costillas "
-            "vuelven. Sin forzar. ((6 respiraciones))",
-            "On ferme les yeux si vous voulez. On pose les mains sur les côtés des côtes. On inspire par le nez et on sent "
-            "les côtes pousser doucement les mains vers l’extérieur. On expire lentement et les côtes reviennent. Sans "
-            "forcer. ((6 respirations))")),
-        card2("c_arms_up", "arms_up", "P", ("B · Brazos delante y arriba", "B · Bras devant et en haut"), ("5 veces", "5 fois"), (
-            "Abrimos los ojos. Inhalamos y subimos los brazos por delante, despacio, hasta donde es cómodo. Exhalamos y "
-            "los bajamos despacio por delante. El movimiento dura lo mismo que la respiración. ((5 veces))",
-            "On ouvre les yeux. On inspire et on monte les bras par l’avant, lentement, jusqu’où c’est confortable. On "
-            "expire et on les baisse lentement par l’avant. Le mouvement dure autant que la respiration. ((5 fois))")),
+        card2("r_chair", "r_floor", "F", ("A · Respiración en tres partes", "A · Respiration en trois parties"), ("5 resp.", "5 resp."), (
+            "Cerramos los ojos si queréis. Una mano en el abdomen. Inhalamos: el abdomen se llena suavemente… las "
+            "costillas se abren… el pecho sube un poco. Exhalamos despacio: el pecho, las costillas, el abdomen. Como una "
+            "ola. Sin forzar. ((5 respiraciones))",
+            "On ferme les yeux si vous voulez. Une main sur le ventre. On inspire : le ventre se remplit doucement… les côtes "
+            "s’ouvrent… la poitrine monte un peu. On expire lentement : la poitrine, les côtes, le ventre. Comme une vague. "
+            "Sans forcer. ((5 respirations))")),
+        card2("c_breath", "arms_up", "P", ("B · Respiración «ja»", "B · Respiration « ha »"), ("5 veces", "5 fois"), (
+            "Para despertar el cuerpo, suavemente. Inhalamos por la nariz y subimos los brazos. Exhalamos por la boca con un "
+            "sonido «jaaa» y bajamos los brazos, despacio, como si soltáramos un peso. ((5 veces)) Si nos mareamos, paramos.",
+            "Pour réveiller le corps, doucement. On inspire par le nez et on monte les bras. On expire par la bouche avec un "
+            "son « haaa » et on baisse les bras, lentement, comme si on lâchait un poids. ((5 fois)) Si la tête tourne, on "
+            "s’arrête.")),
     ]),
-    band(3, ("Calentamiento", "Échauffement"), "0:09 – 0:20"),
+    band(3, ("Calentamiento · en la silla o en el suelo", "Échauffement · sur la chaise ou au sol"), "0:10 – 0:22"),
     grid([
-        card2("n_chair", "n_stand", "P", ("C · Mirar a los lados", "C · Regarder sur les côtés"), ("3 por lado", "3 par côté"), (
-            "Espalda larga. Exhalamos y giramos la cabeza despacio para mirar a la derecha. Inhalamos, al centro. "
-            "Exhalamos, miramos a la izquierda. Inhalamos, al centro. Movimiento pequeño, sin forzar.",
-            "Dos long. On expire et on tourne lentement la tête pour regarder à droite. On inspire, au centre. On expire, "
-            "on regarde à gauche. On inspire, au centre. Petit mouvement, sans forcer.")),
-        card2("e_chair", "e_stand", "P", ("D · Codos que se abren", "D · Coudes qui s’ouvrent"), ("5 veces", "5 fois"), (
-            "Las manos detrás de la cabeza, o en los hombros. Inhalamos y abrimos los codos hacia los lados: el pecho se "
-            "abre. Exhalamos y juntamos los codos delante. ((5 veces))",
-            "Les mains derrière la tête, ou sur les épaules. On inspire et on ouvre les coudes sur les côtés : la poitrine "
-            "s’ouvre. On expire et on rapproche les coudes devant. ((5 fois))")),
+        card2("c_neck", "seated_neck", "F", ("C · Cuello", "C · Cou"), ("3 resp./lado", "3 resp./côté"), (
+            "Exhalamos: oreja derecha hacia el hombro derecho. ((3 resp.)) Al centro, y al otro lado. Después giramos la "
+            "cabeza despacio: miramos a la derecha… a la izquierda. Movimiento pequeño.",
+            "On expire : oreille droite vers l’épaule droite. ((3 resp.)) Au centre, puis de l’autre côté. Puis on tourne la "
+            "tête lentement : on regarde à droite… à gauche. Petit mouvement.")),
+        card2("c_shoulders", "seated_shoulders", "F", ("D · Hombros", "D · Épaules"), ("5 + 5", "5 + 5"), (
+            "Inhalamos, subimos los hombros. Exhalamos, atrás y abajo. Cinco círculos hacia atrás… cinco hacia delante.",
+            "On inspire, on monte les épaules. On expire, en arrière et en bas. Cinq cercles vers l’arrière… cinq vers l’avant.")),
         card2("a_chair", "a_stand", "P", ("E · Círculos de brazos", "E · Cercles de bras"), ("5 + 5", "5 + 5"), (
-            "Brazos abiertos a los lados, a la altura de los hombros, o más bajos. Pequeños círculos hacia delante… y "
-            "hacia atrás. Si se cansan, bajamos los brazos y descansamos.",
-            "Bras ouverts sur les côtés, à hauteur d’épaules, ou plus bas. Petits cercles vers l’avant… et vers l’arrière. "
-            "S’ils fatiguent, on baisse les bras et on se repose.")),
-        card2("c_wrists", "fing_stand", "P", ("F · Manos y dedos", "F · Mains et doigts"), ("5 + 5", "5 + 5"), (
-            "Brazos delante, codos doblados. Tocamos cada dedo con el pulgar, uno por uno, y volvemos. Después abrimos "
-            "bien las manos y cerramos los puños, suavemente. ((5 veces))",
-            "Bras devant, coudes pliés. On touche chaque doigt avec le pouce, un par un, et on revient. Puis on ouvre bien "
-            "les mains et on ferme les poings, doucement. ((5 fois))")),
-        card2("heeltoe_chair", "toes_stand", "P", ("G · Talones y puntas", "G · Talons et pointes"), ("8 veces", "8 fois"), (
-            "Pies en el suelo. Subimos las puntas de los pies; bajamos. Subimos los talones; bajamos. ((8 veces)) "
-            "[DP]Las manos en el respaldo o en la pared: subimos los talones despacio y bajamos.[/DP]",
-            "Pieds au sol. On monte les pointes des pieds ; on redescend. On monte les talons ; on redescend. ((8 fois)) "
-            "[DP]Les mains sur le dossier ou au mur : on monte les talons doucement et on redescend.[/DP]")),
-        card2("c_march", "march_stand", "P", ("H · Marcha con brazos", "H · Marche avec les bras"), ("16 pasos", "16 pas"), (
-            "Levantamos una rodilla y la otra, como si camináramos, y los brazos se mueven como al caminar. Despacio. "
-            "((16 pasos)) [DP]Marchamos en el sitio, una mano en la silla o en la pared si hace falta.[/DP]",
-            "On lève un genou puis l’autre, comme si on marchait, et les bras bougent comme en marchant. Doucement. "
-            "((16 pas)) [DP]On marche sur place, une main sur la chaise ou au mur si besoin.[/DP]")),
-    ]),
-    part(1, "Posturas · en la silla o de pie · 0:20 – 0:40", "Postures · sur la chaise ou debout · 0:20 – 0:40"),
-    band(4, ("Estirar y abrir", "Étirer et ouvrir"), "0:20 – 0:28"),
-    grid([
-        card2("p_chair", "p_stand", "P", ("I · La palmera", "I · Le palmier"), ("3 resp./lado", "3 resp./côté"), (
-            "Inhalamos y subimos los dos brazos; podemos juntar las manos arriba. Exhalamos y nos inclinamos un poco a la "
-            "izquierda, como una palmera con el viento. ((3 resp.)) Inhalamos, al centro. Exhalamos, a la derecha. "
-            "((3 resp.)) Si cuesta, una sola mano arriba y la otra en el asiento.",
-            "On inspire et on monte les deux bras ; on peut joindre les mains en haut. On expire et on se penche un peu à "
-            "gauche, comme un palmier dans le vent. ((3 resp.)) On inspire, au centre. On expire, à droite. ((3 resp.)) "
-            "Si c’est difficile, une seule main en haut, l’autre sur le siège.")),
-        card2("g_chair", "g_stand", "P", ("J · Brazos de águila", "J · Bras d’aigle"), ("3 resp./lado", "3 resp./côté"), (
-            "Brazos delante. Cruzamos el brazo derecho por encima del izquierdo, doblamos los codos y acercamos las "
-            "palmas. O simplemente nos abrazamos: manos en los hombros. Inhalamos, subimos un poco los codos. "
-            "((3 resp.)) Cambiamos de brazo.",
-            "Bras devant. On croise le bras droit par-dessus le gauche, on plie les coudes et on rapproche les paumes. "
-            "Ou simplement on se fait un câlin : mains sur les épaules. On inspire, on monte un peu les coudes. "
-            "((3 resp.)) On change de bras.")),
-        card2("chest_chair", "chest_stand", "P", ("K · Abrir el pecho", "K · Ouvrir la poitrine"), ("3 resp.", "3 resp."), (
-            "Las manos atrás, en el borde del asiento o en el respaldo. Inhalamos: el pecho sube y se abre, los hombros "
-            "van atrás. Miramos al frente. ((3 resp.)) Exhalamos, soltamos. "
-            "[DP]De pie: las manos juntas detrás de la espalda, o en la parte baja de la espalda.[/DP]",
-            "Les mains derrière, sur le bord du siège ou sur le dossier. On inspire : la poitrine monte et s’ouvre, les "
-            "épaules vont en arrière. Regard devant. ((3 resp.)) On expire, on relâche. "
-            "[DP]Debout : les mains jointes derrière le dos, ou sur le bas du dos.[/DP]")),
-        card2("chair_cat", "cat", "F", ("Gato-vaca (repaso)", "Chat-vache (rappel)"), ("4 veces", "4 fois"), (
-            "Manos en las rodillas. Inhalamos, abrimos el pecho. Exhalamos, redondeamos la espalda. ((4 veces)) "
+            "Brazos a los lados, a la altura de los hombros o más bajos. Pequeños círculos hacia delante… hacia atrás. "
+            "Después, círculos grandes con un brazo, despacio.",
+            "Bras sur les côtés, à hauteur d’épaules ou plus bas. Petits cercles vers l’avant… vers l’arrière. Puis de grands "
+            "cercles avec un bras, lentement.")),
+        card2("sh_chair", "sh_stand", "P", ("F · Estirar los hombros", "F · Étirer les épaules"), ("3 resp./lado", "3 resp./côté"), (
+            "El brazo derecho cruza delante del pecho; la mano izquierda lo acerca suavemente, por encima del codo. Hombros "
+            "bajos. ((3 resp.)) Cambiamos de brazo.",
+            "Le bras droit croise devant la poitrine ; la main gauche le rapproche doucement, au-dessus du coude. Épaules "
+            "basses. ((3 resp.)) On change de bras.")),
+        card2("c_wrists", "wrists", "F", ("G · Muñecas y tobillos", "G · Poignets et chevilles"), ("5 + 5", "5 + 5"), (
+            "Círculos con las muñecas, cinco hacia cada lado. Después levantamos un poco un pie: círculos con el tobillo. "
+            "Cambiamos de pie.",
+            "Cercles avec les poignets, cinq de chaque côté. Puis on soulève un peu un pied : cercles avec la cheville. "
+            "On change de pied.")),
+        card2("c_side_R", "sidebend_R", "F", ("H · Inclinación lateral", "H · Inclinaison latérale"), ("3 resp./lado", "3 resp./côté"), (
+            "Antebrazo izquierdo en el reposabrazos. Inhalamos, brazo derecho arriba. Exhalamos, nos inclinamos a la "
+            "izquierda. ((3 resp.)) Cambiamos. [SU]Mano izquierda en el suelo, junto a la cadera.[/SU]",
+            "Avant-bras gauche sur l’accoudoir. On inspire, bras droit en haut. On expire, on se penche à gauche. "
+            "((3 resp.)) On change. [SU]Main gauche au sol, près de la hanche.[/SU]")),
+        card2("c_twist", "seated_twist", "F", ("I · Torsión sentados", "I · Torsion assise"), ("3 resp./lado", "3 resp./côté"), (
+            "Mano izquierda en la rodilla derecha, mano derecha en el reposabrazos derecho. Inhalamos, espalda larga. "
+            "Exhalamos, giramos a la derecha. ((3 resp.)) Cambiamos. [SU]Mano derecha en el suelo, detrás.[/SU]",
+            "Main gauche sur le genou droit, main droite sur l’accoudoir droit. On inspire, dos long. On expire, on tourne à "
+            "droite. ((3 resp.)) On change. [SU]Main droite au sol, derrière.[/SU]")),
+        card2("chair_cat", "cat", "F", ("J · Gato-vaca", "J · Chat-vache"), ("5 veces", "5 fois"), (
+            "Manos en las rodillas. Inhalamos, abrimos el pecho. Exhalamos, redondeamos la espalda. "
             "[SU]A cuatro apoyos, si las rodillas están cómodas.[/SU]",
-            "Mains sur les genoux. On inspire, on ouvre la poitrine. On expire, dos rond. ((4 fois)) "
-            "[SU]À quatre pattes, si les genoux sont à l’aise.[/SU]")),
-    ]),
-    band(5, ("Fuerza y equilibrio", "Force et équilibre"), "0:28 – 0:40"),
-    note("pour le côté droit : <b>chaise — jambe droite pliée</b>. Debout, la chaise ou le mur à côté de la jambe avant. "
-         "Démontre en miroir."),
+            "Mains sur les genoux. On inspire, on ouvre la poitrine. On expire, dos rond. [SU]À quatre pattes, si les genoux "
+            "sont à l’aise.[/SU]")),
+        card2("chest_chair", "chest_stand", "P", ("K · Abrir el pecho", "K · Ouvrir la poitrine"), ("3 resp.", "3 resp."), (
+            "Manos en los reposabrazos. Empujamos suavemente y el pecho se abre hacia delante; hombros atrás. ((3 resp.))",
+            "Mains sur les accoudoirs. On pousse doucement et la poitrine s’ouvre vers l’avant ; épaules en arrière. "
+            "((3 resp.))")),
+    ], cols=3),
+    part(1, "De pie o en la silla · 0:22 – 0:44", "Debout ou sur la chaise · 0:22 – 0:44"),
+    band(4, ("Antes del saludo: aprendemos tres posiciones", "Avant la salutation : on apprend trois positions"), "0:22 – 0:25"),
+    note("explique-les une par une, montre, et laisse-les essayer. <b>« Dos long » ne veut pas dire dos vertical</b> : on se "
+         "penche en avant depuis les hanches, dos plat. La dernière fois ils restaient droits."),
+    grid([
+        card2("c_fold", "fold", "P", ("1 · Flexión", "1 · Flexion"), None, (
+            "Dejamos caer el pecho hacia los muslos. La espalda se redondea, la cabeza y los brazos cuelgan. Rodillas "
+            "dobladas. Todo está relajado.",
+            "On laisse tomber la poitrine vers les cuisses. Le dos s’arrondit, la tête et les bras pendent. Genoux pliés. "
+            "Tout est relâché.")),
+        card2("c_lean", "half_lift_thighs", "P", ("2 · Espalda larga", "2 · Dos long"), None, (
+            "Manos en los muslos, por encima de las rodillas. La espalda **no** está vertical: nos inclinamos hacia delante "
+            "desde las caderas y la espalda queda plana, como una mesa. Miramos al suelo.",
+            "Mains sur les cuisses, au-dessus des genoux. Le dos n’est **pas** vertical : on se penche en avant depuis les "
+            "hanches et le dos reste plat, comme une table. Regard au sol.")),
+        card2("chair_sit", "dog_chair", "P", ("3 · Manos en el apoyo", "3 · Mains sur l’appui"), None, (
+            "Sentados: manos en las rodillas. [DP]Manos en el respaldo o en la pared, a la altura de las caderas; caminamos "
+            "atrás hasta que la espalda queda larga.[/DP]",
+            "Assis : mains sur les genoux. [DP]Mains sur le dossier ou au mur, à hauteur des hanches ; on recule jusqu’à avoir "
+            "le dos long.[/DP]")),
+    ], cols=3),
+    band(5, ("Saludo al sol · sentados o de pie · 3 rondas", "Salutation au soleil · assis ou debout · 3 rondes"), "0:25 – 0:31"),
+    note("ronde 1 lente avec tout le texte, jambe droite ; ronde 2 jambe gauche, moins de mots ; ronde 3 un mouvement par "
+         "respiration (optionnelle)."),
+    '<div class="sl2">' + ("SENTADOS" if L == "es" else "ASSIS") + '</div>', strip(SUN_SEAT, 0.13),
+    '<div class="sl2">' + ("DE PIE" if L == "es" else "DEBOUT") + '</div>', strip(SUN_STAND, 0.13),
+    steps(SUN_STEPS),
+    band(6, ("Guerreros y triángulo", "Guerriers et triangle"), "0:31 – 0:40"),
+    note("<b>avec accoudoirs</b> : ils s’assoient tout au bord, devant les accoudoirs, pour libérer les jambes. Côté droit "
+         "d’abord, puis gauche. Debout : chaise ou mur à côté de la jambe avant."),
     grid([
         card2("w1_chair", "w1_stand", "P", ("L · Guerrero I", "L · Guerrier I"), ("3 resp./lado", "3 resp./côté"), (
-            "Sentados en el borde, un poco de lado. La pierna derecha delante, rodilla encima del tobillo. La pierna "
-            "izquierda se estira atrás, con la punta del pie en el suelo. Inhalamos, brazos arriba, o manos en la cintura. "
-            "((3 resp.)) Cambiamos de lado. "
-            "[DP]Un paso largo atrás con el pie izquierdo, rodilla derecha doblada, una mano en la silla si hace falta.[/DP]",
-            "Assis au bord, un peu de côté. La jambe droite devant, genou au-dessus de la cheville. La jambe gauche "
-            "s’allonge en arrière, pointe du pied au sol. On inspire, bras en haut, ou mains sur la taille. ((3 resp.)) "
-            "On change de côté. [DP]Un grand pas en arrière avec le pied gauche, genou droit plié, une main sur la chaise "
-            "si besoin.[/DP]")),
-        card2("t_chair", "t_stand", "P", ("M · Triángulo", "M · Triangle"), ("3 resp./lado", "3 resp./côté"), (
-            "Piernas separadas, pie derecho hacia fuera. Inhalamos, brazos a los lados. Exhalamos: nos inclinamos a la "
-            "derecha, mano derecha en el muslo o la rodilla, brazo izquierdo arriba. ((3 resp.)) Cambiamos de lado. "
-            "[DP]Piernas estiradas y separadas; la mano de abajo entre la cintura y la rodilla, nunca empuja.[/DP]",
-            "Jambes écartées, pied droit vers l’extérieur. On inspire, bras sur les côtés. On expire : on se penche à "
-            "droite, main droite sur la cuisse ou le genou, bras gauche en haut. ((3 resp.)) On change de côté. "
-            "[DP]Jambes tendues et écartées ; la main du bas entre la taille et le genou, elle ne pousse jamais.[/DP]")),
-        card2("d_chair", "d_stand", "P", ("N · La diosa", "N · La déesse"), ("4 resp.", "4 resp."), (
-            "Piernas bien separadas, puntas de los pies un poco hacia fuera, rodillas en la misma dirección. Brazos en "
-            "forma de cactus: codos a la altura de los hombros, manos arriba. Inhalamos, abrimos el pecho. ((4 resp.)) "
-            "[DP]Pies separados, rodillas un poco dobladas, sin bajar mucho.[/DP]",
-            "Jambes bien écartées, pointes des pieds un peu vers l’extérieur, genoux dans la même direction. Bras en "
-            "cactus : coudes à hauteur d’épaules, mains en haut. On inspire, on ouvre la poitrine. ((4 resp.)) "
-            "[DP]Pieds écartés, genoux un peu pliés, sans descendre beaucoup.[/DP]")),
-        card2("knee_chair", "knee_stand", "P", ("O · Rodilla arriba", "O · Genou levé"), ("3 resp./lado", "3 resp./côté"), (
-            "Manos a los lados del asiento. Levantamos la rodilla derecha un poco y la sostenemos. Miramos un punto fijo. "
-            "((3 resp.)) Bajamos y cambiamos. "
-            "[DP]Una mano en la silla o en la pared. Levantamos la rodilla, solo un poco. Si perdemos el equilibrio, no "
-            "pasa nada.[/DP]",
-            "Mains sur les côtés du siège. On soulève un peu le genou droit et on le tient. Regard sur un point fixe. "
-            "((3 resp.)) On repose et on change. [DP]Une main sur la chaise ou au mur. On lève le genou, juste un peu. Si "
-            "on perd l’équilibre, ce n’est pas grave.[/DP]")),
+            "**Cómo entramos:** nos sentamos al borde, delante de los reposabrazos, y giramos un poco hacia la izquierda. "
+            "El pie derecho delante, rodilla encima del tobillo. La pierna izquierda va atrás, al lado de la silla: la "
+            "rodilla mira al suelo, la punta del pie apoyada. Inhalamos, brazos arriba o manos en la cintura. ((3 resp.)) "
+            "Cambiamos de lado. [DP]Un paso largo atrás con el pie izquierdo, rodilla derecha doblada, una mano en la silla "
+            "si hace falta.[/DP]",
+            "**Comment on entre :** on s’assoit au bord, devant les accoudoirs, et on tourne un peu vers la gauche. Le pied "
+            "droit devant, genou au-dessus de la cheville. La jambe gauche va en arrière, à côté de la chaise : le genou "
+            "regarde le sol, la pointe du pied posée. On inspire, bras en haut ou mains sur la taille. ((3 resp.)) On change "
+            "de côté. [DP]Un grand pas en arrière avec le pied gauche, genou droit plié, une main sur la chaise si besoin.[/DP]")),
+        card2("c_w2_R", "w2c_R", "P", ("M · Guerrero II", "M · Guerrier II"), ("3 resp./lado", "3 resp./côté"), (
+            "**Cómo entramos:** al borde de la silla. La pierna derecha se abre hacia la derecha, delante del reposabrazos, "
+            "rodilla encima del tobillo. La pierna izquierda se estira hacia atrás y a la izquierda, el pie apoyado. "
+            "Inhalamos, brazos en cruz; miramos la mano derecha. ((3 resp.)) Cambiamos de lado. "
+            "[DP]Pies separados, pie derecho hacia fuera, rodilla derecha encima del tobillo; mano en la silla si hace "
+            "falta.[/DP]",
+            "**Comment on entre :** au bord de la chaise. La jambe droite s’ouvre vers la droite, devant l’accoudoir, genou "
+            "au-dessus de la cheville. La jambe gauche s’allonge en arrière et à gauche, pied posé. On inspire, bras en "
+            "croix ; regard sur la main droite. ((3 resp.)) On change de côté. [DP]Pieds écartés, pied droit vers "
+            "l’extérieur, genou droit au-dessus de la cheville ; main sur la chaise si besoin.[/DP]")),
+        card2("t_chair", "t_stand", "P", ("N · Triángulo", "N · Triangle"), ("3 resp./lado", "3 resp./côté"), (
+            "Desde el Guerrero II sentado, estiramos un poco la rodilla derecha. Exhalamos: nos inclinamos a la derecha; "
+            "antebrazo derecho en el muslo o en el reposabrazos; brazo izquierdo arriba. ((3 resp.)) Cambiamos. "
+            "[DP]Piernas estiradas; la mano de abajo entre la cintura y la rodilla, nunca empuja.[/DP]",
+            "Depuis le Guerrier II assis, on tend un peu le genou droit. On expire : on se penche à droite ; avant-bras droit "
+            "sur la cuisse ou sur l’accoudoir ; bras gauche en haut. ((3 resp.)) On change. [DP]Jambes tendues ; la main du "
+            "bas entre la taille et le genou, elle ne pousse jamais.[/DP]")),
+    ], cols=3),
+    band(7, ("Equilibrio", "Équilibre"), "0:40 – 0:44"),
+    grid([
+        card2("c_tree_R", "tree_wall", "P", ("O · Árbol", "O · Arbre"), ("3 resp./lado", "3 resp./côté"), (
+            "Talón derecho en el tobillo izquierdo, rodilla derecha hacia fuera. Manos al pecho, o brazos arriba como ramas. "
+            "Miramos un punto fijo. ((3 resp.)) Cambiamos. [DP]Una mano en la silla o en la pared; dedos del pie en el suelo, o "
+            "el pie en la pantorrilla, nunca sobre la rodilla.[/DP]",
+            "Talon droit sur la cheville gauche, genou droit vers l’extérieur. Mains à la poitrine, ou bras en haut comme des "
+            "branches. Regard sur un point fixe. ((3 resp.)) On change. [DP]Une main sur la chaise ou au mur ; orteils au sol, "
+            "ou le pied sur le mollet, jamais sur le genou.[/DP]")),
+        card2("knee_chair", "tandem_stand", "P", ("P · Un pie delante del otro", "P · Un pied devant l’autre"), ("4 resp./lado", "4 resp./côté"), (
+            "Sentados: levantamos un poco la rodilla derecha y la sostenemos, brazos abiertos para el equilibrio. "
+            "((4 resp.)) Cambiamos. [DP]Una mano en la silla o en la pared. El pie derecho justo delante del izquierdo, "
+            "como en una línea. Miramos al frente. ((4 resp.)) Cambiamos de pie.[/DP]",
+            "Assis : on soulève un peu le genou droit et on le tient, bras ouverts pour l’équilibre. ((4 resp.)) On change. "
+            "[DP]Une main sur la chaise ou au mur. Le pied droit juste devant le gauche, comme sur une ligne. Regard devant. "
+            "((4 resp.)) On change de pied.[/DP]")),
     ]),
-    part(2, "En la silla o en el suelo · 0:40 – 1:00", "Sur la chaise ou au sol · 0:40 – 1:00"),
-    band(6, ("Caderas y espalda", "Hanches et dos"), "0:40 – 0:48"),
+    part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
+    band(8, ("Caderas y espalda", "Hanches et dos"), "0:44 – 0:51"),
     note("ceux qui vont au sol descendent doucement, une main sur la chaise. Les autres restent assis."),
     grid([
-        card2("fig4_chair", "fig4_floor", "F", ("P · El número 4", "P · Le chiffre 4"), ("4 resp./lado", "4 resp./côté"), (
-            "Apoyamos el tobillo derecho sobre la rodilla izquierda, el pie flexionado para proteger la rodilla. Espalda "
-            "larga; si es cómodo, nos inclinamos un poco. ((4 resp.)) Cambiamos. Si no es cómodo, el pie derecho se queda "
-            "en el suelo, delante del izquierdo. "
-            "[SU]Tumbados, pie izquierdo en el suelo: tobillo derecho sobre la rodilla izquierda.[/SU]",
-            "On pose la cheville droite sur le genou gauche, pied fléchi pour protéger le genou. Dos long ; si c’est "
-            "confortable, on se penche un peu. ((4 resp.)) On change. Si ce n’est pas confortable, le pied droit reste au "
-            "sol, devant le gauche. [SU]Allongés, pied gauche au sol : cheville droite sur le genou gauche.[/SU]")),
-        card2("c_fold", "seated_fold", "F", ("Q · Dejarse caer hacia delante", "Q · Se laisser tomber en avant"), ("4 resp.", "4 resp."), (
-            "Pies separados. Exhalamos: el pecho baja hacia los muslos, los brazos cuelgan, la cabeza relajada. "
-            "((4 resp.)) Inhalamos y subimos muy despacio; la cabeza sube la última. Si nos mareamos, bajamos menos. "
-            "[SU]Sentados, piernas delante, rodillas dobladas; el pecho un poco hacia delante.[/SU]",
-            "Pieds écartés. On expire : la poitrine descend vers les cuisses, les bras pendent, tête relâchée. ((4 resp.)) "
-            "On inspire et on remonte très lentement ; la tête monte en dernier. Si la tête tourne, on descend moins. "
-            "[SU]Assis, jambes devant, genoux pliés ; la poitrine un peu vers l’avant.[/SU]")),
-        card2("c_twist", "twist_R", "F", ("R · Torsión", "R · Torsion"), ("3 resp./lado", "3 resp./côté"), (
-            "Mano izquierda en la rodilla derecha, mano derecha en el respaldo. Inhalamos, espalda larga. Exhalamos y "
-            "giramos a la derecha. ((3 resp.)) Cambiamos. "
-            "[SU]Tumbados, brazos en cruz: rodillas juntas a la derecha, miramos a la izquierda.[/SU]",
-            "Main gauche sur le genou droit, main droite sur le dossier. On inspire, dos long. On expire, on tourne à "
-            "droite. ((3 resp.)) On change. [SU]Allongés, bras en croix : genoux serrés à droite, regard à gauche.[/SU]")),
-    ]),
-    band(7, ("Relajación · 5 minutos", "Relaxation · 5 minutes"), "0:48 – 0:54"),
+        card2("chair_sit", "butterfly", "F", ("Q · Mariposa", "Q · Papillon"), ("4 resp.", "4 resp."), (
+            "Rodillas separadas, manos en los muslos. Inhalamos, espalda larga. Exhalamos, nos inclinamos un poco. "
+            "[SU]Plantas de los pies juntas; no empujamos las rodillas.[/SU]",
+            "Genoux écartés, mains sur les cuisses. On inspire, dos long. On expire, on se penche un peu. "
+            "[SU]Plantes des pieds jointes ; on ne pousse pas les genoux.[/SU]")),
+        card2("fig4_chair", "fig4_floor", "F", ("R · El número 4", "R · Le chiffre 4"), ("4 resp./lado", "4 resp./côté"), (
+            "Tobillo derecho sobre la rodilla izquierda, pie flexionado. Si no es cómodo, el pie se queda en el suelo. "
+            "((4 resp.)) Cambiamos. [SU]Tumbados, pie izquierdo en el suelo.[/SU]",
+            "Cheville droite sur le genou gauche, pied fléchi. Si ce n’est pas confortable, le pied reste au sol. "
+            "((4 resp.)) On change. [SU]Allongés, pied gauche au sol.[/SU]")),
+        card2("chair_hamstring", "leg_stretch", "F", ("S · Estirar la pierna", "S · Étirer la jambe"), ("4 resp./lado", "4 resp./côté"), (
+            "Pierna derecha estirada delante, talón en el suelo. Exhalamos, el pecho un poco hacia delante. ((4 resp.)) "
+            "Cambiamos. [SU]Tumbados: cogemos la pierna detrás del muslo, rodilla doblada.[/SU]",
+            "Jambe droite allongée devant, talon au sol. On expire, la poitrine un peu vers l’avant. ((4 resp.)) On change. "
+            "[SU]Allongés : on tient la jambe derrière la cuisse, genou plié.[/SU]")),
+        card2("chair_knee", "knees_chest", "F", ("T · Rodilla al pecho", "T · Genou poitrine"), ("3 resp./lado", "3 resp./côté"), (
+            "Abrazamos la rodilla derecha, espalda larga. ((3 resp.)) Cambiamos. [SU]Tumbados: las dos rodillas al pecho; "
+            "nos balanceamos un poco.[/SU]",
+            "On serre le genou droit, dos long. ((3 resp.)) On change. [SU]Allongés : les deux genoux à la poitrine ; on se "
+            "balance un peu.[/SU]")),
+        card2("chair_sit", "wipers", "F", ("U · Limpiaparabrisas", "U · Essuie-glaces"), ("6 veces", "6 fois"), (
+            "Sentados, rodillas juntas: las llevamos un poco a la derecha… y a la izquierda, despacio. "
+            "[SU]Tumbados, pies separados: rodillas a la derecha y a la izquierda.[/SU]",
+            "Assis, genoux serrés : on les emmène un peu à droite… puis à gauche, lentement. [SU]Allongés, pieds écartés : "
+            "genoux à droite et à gauche.[/SU]")),
+        card2("c_fold", "twist_R", "F", ("V · Soltar la espalda", "V · Relâcher le dos"), ("4 resp.", "4 resp."), (
+            "Exhalamos: dejamos caer el pecho hacia los muslos, brazos colgando. ((4 resp.)) Subimos muy despacio, la cabeza "
+            "la última. [SU]Tumbados, brazos en cruz: rodillas juntas a la derecha, a la izquierda.[/SU]",
+            "On expire : on laisse tomber la poitrine vers les cuisses, bras pendants. ((4 resp.)) On remonte très "
+            "lentement, la tête en dernier. [SU]Allongés, bras en croix : genoux serrés à droite, puis à gauche.[/SU]")),
+    ], cols=3),
+    band(9, ("Relajación · 5 minutos", "Relaxation · 5 minutes"), "0:51 – 0:56"),
     grid([card2("c_relax", "savasana", "F", ("Relajación", "Relaxation"), ("5 min", "5 min"), (
-        "Nos sentamos atrás, la espalda apoyada en el respaldo. Pies en el suelo, un poco separados. Manos sobre los "
-        "muslos, palmas hacia arriba. La barbilla baja un poco. Cerramos los ojos. "
-        "[SU]Tumbados boca arriba; si es más cómodo, rodillas dobladas.[/SU]"
-        "Sentimos el peso del cuerpo: los pies pesan en el suelo… las piernas pesan… los brazos pesan… los hombros "
-        "bajan… la cara se suaviza. Con cada exhalación, soltamos un poco más. ((5 minutos de silencio)) "
-        "[T] Movemos los dedos. Abrimos los ojos. Desde el suelo: giramos a la derecha y nos sentamos despacio.",
-        "On s’assoit au fond, dos contre le dossier. Pieds au sol, un peu écartés. Mains sur les cuisses, paumes vers le "
-        "haut. Le menton descend un peu. On ferme les yeux. [SU]Allongés sur le dos ; si c’est plus confortable, genoux "
-        "pliés.[/SU]On sent le poids du corps : les pieds sont lourds sur le sol… les jambes sont lourdes… les bras sont "
-        "lourds… les épaules descendent… le visage s’adoucit. À chaque expiration, on relâche un peu plus. "
-        "((5 minutes de silence)) [T] On bouge les doigts. On ouvre les yeux. Depuis le sol : on roule à droite et on "
+        "Nos sentamos atrás, espalda en el respaldo, antebrazos en los reposabrazos o manos en los muslos, palmas hacia "
+        "arriba. Pies en el suelo. Cerramos los ojos. [SU]Tumbados boca arriba; si es más cómodo, rodillas dobladas.[/SU]"
+        "Con cada exhalación, el cuerpo pesa un poco más: los pies… las piernas… los brazos… los hombros… la cara. "
+        "((5 minutos de silencio)) [T] Movemos los dedos, abrimos los ojos. Desde el suelo: giramos a la derecha y nos "
+        "sentamos despacio.",
+        "On s’assoit au fond, dos contre le dossier, avant-bras sur les accoudoirs ou mains sur les cuisses, paumes vers le "
+        "haut. Pieds au sol. On ferme les yeux. [SU]Allongés sur le dos ; si c’est plus confortable, genoux pliés.[/SU]"
+        "À chaque expiration, le corps devient un peu plus lourd : les pieds… les jambes… les bras… les épaules… le visage. "
+        "((5 minutes de silence)) [T] On bouge les doigts, on ouvre les yeux. Depuis le sol : on roule à droite et on "
         "s’assoit doucement."), mh=17)], cols=1),
-    band(8, ("Respiración final y cierre", "Respiration finale et clôture"), "0:54 – 1:00"),
+    band(10, ("Respiración final y cierre", "Respiration finale et clôture"), "0:56 – 1:00"),
     grid([
-        card2("chair_sit", "seated_cross", "F", ("S · Labios como para soplar", "S · Lèvres comme pour souffler"), ("6 veces", "6 fois"), (
-            "Inhalamos por la nariz… dos, tres. Exhalamos despacio por la boca, con los labios casi cerrados, como para "
-            "apagar una vela muy despacio… cuatro, cinco, seis. ((6 veces))",
-            "On inspire par le nez… deux, trois. On expire lentement par la bouche, lèvres presque fermées, comme pour "
-            "éteindre une bougie très doucement… quatre, cinq, six. ((6 fois))")),
-        card2("chair_sit", "seated_cross", "F", ("T · La abeja «mmm»", "T · L’abeille « mmm »"), ("4 veces", "4 fois"), (
-            "Inhalamos por la nariz. Exhalamos con la boca cerrada, haciendo un sonido suave: «mmmm», como una abeja. "
-            "Sentimos la vibración. ((4 veces)) Después, manos delante del pecho: gracias por practicar conmigo. Namasté.",
-            "On inspire par le nez. On expire bouche fermée, avec un son doux : « mmmm », comme une abeille. On sent la "
-            "vibration. ((4 fois)) Puis mains devant la poitrine : merci d’avoir pratiqué avec moi. Namasté.")),
-    ]),
-    band(9, ("Si sobra tiempo · opciones", "S’il reste du temps · options"), "+2 – 8 min", opt=True),
-    note("U et V avant la relaxation ; W pour les plus mobiles."),
-    grid([
-        card2("c_wrists", "fing_stand", "P", ("U · Despertar el cuerpo", "U · Réveiller le corps"), ("1 min", "1 min"), (
-            "Con las manos, damos golpecitos suaves: brazos, hombros, piernas. Después frotamos las manos y las ponemos "
-            "sobre los ojos.",
-            "Avec les mains, on tapote doucement : bras, épaules, jambes. Puis on frotte les mains et on les pose sur les "
-            "yeux.")),
-        card2("c_march", "march_stand", "P", ("V · Apretar y soltar", "V · Serrer et relâcher"), ("3 veces", "3 fois"), (
-            "Inhalamos y apretamos suavemente puños, brazos y piernas. Exhalamos y lo soltamos todo. ((3 veces))",
-            "On inspire et on serre doucement poings, bras et jambes. On expire et on relâche tout. ((3 fois))")),
-        card2("chair_sit", "stand_hold", "P", ("W · Levantarse y sentarse", "W · Se lever, s’asseoir"), ("3–5 veces", "3–5 fois"), (
-            "Empujamos los pies contra el suelo y apretamos los muslos tres segundos, sin levantarnos. "
-            "[DP]Pies firmes, manos en los muslos: nos levantamos despacio y nos sentamos despacio.[/DP]",
-            "On pousse les pieds contre le sol et on serre les cuisses trois secondes, sans se lever. "
-            "[DP]Pieds bien posés, mains sur les cuisses : on se lève doucement et on se rassoit doucement.[/DP]")),
+        card2("nostril_chair", "seated_cross", "F", ("W · Respiración alterna", "W · Respiration alternée"), ("5 rondas", "5 rondes"), (
+            "Mano derecha delante de la cara. Con el pulgar cerramos suavemente la nariz derecha: inhalamos por la izquierda. "
+            "Cerramos la izquierda con el anular, abrimos la derecha: exhalamos por la derecha. Inhalamos por la derecha; "
+            "cambiamos; exhalamos por la izquierda. Sin retener el aire. ((5 rondas)) Si es complicado, solo respiramos "
+            "despacio.",
+            "Main droite devant le visage. Avec le pouce, on ferme doucement la narine droite : on inspire par la gauche. On "
+            "ferme la gauche avec l’annulaire, on ouvre la droite : on expire par la droite. On inspire par la droite ; on "
+            "change ; on expire par la gauche. Sans retenir l’air. ((5 rondes)) Si c’est compliqué, on respire simplement "
+            "lentement.")),
+        card2("chair_sit", "seated_cross", "F", ("X · Contar hacia atrás y cierre", "X · Compter à l’envers et clôture"), ("10 resp.", "10 resp."), (
+            "Ojos cerrados. Contamos cada exhalación, en silencio, de diez a uno. Si perdemos la cuenta, volvemos a diez, "
+            "sin prisa. Manos delante del pecho: gracias por practicar conmigo. Namasté.",
+            "Yeux fermés. On compte chaque expiration, en silence, de dix à un. Si on perd le compte, on revient à dix, sans "
+            "se presser. Mains devant la poitrine : merci d’avoir pratiqué avec moi. Namasté.")),
     ]),
 ]
 p1, p2, p3, p4 = P_ALL, [], [], []
@@ -405,12 +466,13 @@ CSS += """
 .vs { background:#e6edf7; border-left:3px solid #4a6fa5; color:#22385a; } .vs .vl { background:#4a6fa5; }
 .vb.inl { display:inline-block; padding:0; border:0; background:none; margin:0; }
 .cue1 { margin:.6mm 0 1mm; font-size:10.6pt; }
-body { font-size:10pt; line-height:1.2; } .qcue { font-size:10pt; } .qn { font-size:10.4pt; }
+body { font-size:9.6pt; line-height:1.18; } .qcue { font-size:9.6pt; } .qn { font-size:10pt; }
 .qc.c2 { flex-direction:column; } .qf.row2 { flex-direction:row; gap:3mm; justify-content:center; width:100%; align-items:flex-end; }
 .f2 { display:flex; flex-direction:column; align-items:center; gap:.4mm; }
-.fl { font-size:6.6pt; font-weight:700; color:#fff; border-radius:1mm; padding:0 1.2mm; letter-spacing:.04em; }
+.fl { font-size:6.4pt; font-weight:700; color:#fff; border-radius:1mm; padding:0 1.2mm; letter-spacing:.04em; }
 .lc { background:#a07c52; } .lp { background:#4a6fa5; } .lf { background:#3f8a5a; }
-.qgrid .qc { break-inside: avoid; } .qband { break-after: avoid; } .pm { break-after: avoid; }
+.sl2 { font-size:7.5pt; font-weight:700; color:var(--band); letter-spacing:.08em; margin:.6mm 0 -.4mm; }
+.qgrid .qc { break-inside: avoid; } .qband { break-after: avoid; } .pm { break-after: avoid; } .part { break-after: avoid; }
 """
 
 body = "".join(P_ALL)
