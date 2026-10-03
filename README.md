@@ -7,3 +7,9 @@ Estructura: parte 1 sentados (suelo o silla) · parte 2 de pie con silla o pared
 
 Regenerar: `cd src && python3 build_senior.py es && node print.js ../build/yoga_guion_suave_ES.html ../yoga_guion_suave_ES.pdf`
 (idem con `fr`). Figuras vectoriales: `src/figures.py`, `src/poses.py`.
+
+## Clase 2 · todo en silla
+
+- `yoga_clase2_ES.pdf` / `yoga_clase2_FR.pdf` — versión base sentada en silla para todos; bloques azules «DE PIE» y verdes «EN EL SUELO» para los más móviles (4 páginas A4 cada uno).
+
+Regenerar: `cd src && python3 build_c2.py es && node print.js ../build/yoga_clase2_ES.html ../yoga_clase2_ES.pdf` (idem con `fr`).

@@ -694,3 +694,192 @@ ALL.update({
     "w2c_R": w2_chair, "w2c_L": lambda: w2_chair(False), "revc_R": rev_chair, "revc_L": lambda: rev_chair(False),
     "sac_R": sa_chair, "sac_L": lambda: sa_chair(False), "widec_R": wide_chair, "widec_L": lambda: wide_chair(False),
 })
+
+
+# ------------------------------------------------------------- course 2: everything on a chair
+STOOL = "#c2a27c"
+
+
+def _stool(f, half=24, seat=44):
+    for d_ in [f"M{-half},{-seat} L{half},{-seat}", f"M{-half + 2},{-seat} L{-half + 2},0", f"M{half - 2},{-seat} L{half - 2},0"]:
+        f.items.append((-1, f'<path d="{d_}" stroke="{STOOL}" stroke-width="4" stroke-linecap="round" fill="none"/>'))
+    f._track((-half - 3, 0), (half + 3, seat + 3))
+
+
+def chair_back(torso=90, head=None, gaze=None, armR=None, armL=None, legs="normal", colored=True, arrows=None):
+    """Seated on a chair, seen from BEHIND (chair drawn as a stool so it does not hide the back).
+    legs: 'normal' | 'warrior_R' | 'warrior_L' | 'tree_R' | 'tree_L'."""
+    P = (0, 52)
+    f, j = back(P, torso, head=head, gaze=gaze, armR=armR, armL=armL, colored=colored, arrows=arrows)
+    cR = C["R"] if colored else C["body"]
+    cL = C["L"] if colored else C["body"]
+    shapes = {
+        "normal": ([(8, 50), (13, 44), (13, 5), (13, 4)], [(-8, 50), (-13, 44), (-13, 5), (-13, 4)]),
+        "warrior_R": ([(8, 50), (40, 45), (44, 5), (55, 4)], [(-8, 50), (-62, 7), (-68, 3)]),
+        "warrior_L": ([(8, 50), (62, 7), (68, 3)], [(-8, 50), (-40, 45), (-44, 5), (-55, 4)]),
+        "tree_R": ([(8, 50), (36, 38), (-6, 12), (-14, 9)], [(-8, 50), (-13, 44), (-13, 5), (-13, 4)]),
+        "tree_L": ([(8, 50), (13, 44), (13, 5), (13, 4)], [(-8, 50), (-36, 38), (6, 12), (14, 9)]),
+    }
+    r, l = shapes[legs]
+    f.line(r, cR, layer=1)
+    f.line(l, cL, layer=1)
+    _stool(f, half=20 if legs == "normal" else 16)
+    if colored:
+        if legs.startswith("tree"):
+            _dl(f, (26, -12), "D", C["R"]); _dl(f, (-26, -12), "I", C["L"])
+        else:
+            _dl(f, (r[-1][0] + 4, -12), "D", C["R"])
+            _dl(f, (l[-1][0] - 4, -12), "I", C["L"])
+    return f, j
+
+
+def _sho(torso, side):
+    neck = add((0, 52), d(torso), T)
+    return add(neck, d(torso - 90), 14 * side)
+
+
+def chair_breath_arms():
+    """seated, arms rising out to the sides (back view)."""
+    f, _ = chair_back(90, armR=((52, 128), -1), armL=((-52, 128), 1), colored=False,
+                      arrows=[([(62, 92), (58, 124)], 6), ([(-62, 92), (-58, 124)], -6)])
+    return f
+
+
+def chair_sidebend(right_arm_up=True):
+    s = 1 if right_arm_up else -1
+    tor = 90 + 14 * s
+    up = _sho(tor, s)
+    armup = (add(up, d(90 + 28 * s), 48), -s)
+    armdown = ((-30 * s, 40), s)
+    f, _ = chair_back(tor, head=tor + 6 * s, armR=armup if right_arm_up else armdown,
+                      armL=armdown if right_arm_up else armup)
+    return f
+
+
+def chair_twist():
+    f, _ = chair_back(90, head=90, gaze=0, armR=((30, 70), -1), armL=((14, 48), -1),
+                      arrows=[([(-20, 82), (20, 88)], -10)])
+    return f
+
+
+def chair_w2(right=True):
+    s = 1 if right else -1
+    shoR, shoL = _sho(90, 1), _sho(90, -1)
+    f, _ = chair_back(90, gaze=0 if right else 180,
+                      armR=((shoR[0] + 50, shoR[1]), -1), armL=((shoL[0] - 50, shoL[1]), 1),
+                      legs="warrior_R" if right else "warrior_L")
+    return f
+
+
+def chair_rev(right=True):
+    s = 1 if right else -1
+    tor = 90 + 10 * s
+    up = _sho(tor, s)
+    top = (add(up, d(90 + 12 * s), 50), -s)
+    low = ((-40 * s, 30), s)
+    f, _ = chair_back(tor, gaze=tor + 15 * s, armR=top if right else low, armL=low if right else top,
+                      legs="warrior_R" if right else "warrior_L")
+    return f
+
+
+def chair_sa(right=True):
+    s = 1 if right else -1
+    tor = 90 - 35 * s
+    up = _sho(tor, -s)
+    top = (add(up, d(90 - 30 * s), 50), s)
+    rest = ('A', -90 - 10 * s, 180 + 15 * s if right else -15)
+    f, _ = chair_back(tor, head=tor + 10 * s, gaze=90 - 15 * s,
+                      armR=rest if right else top, armL=top if right else rest,
+                      legs="warrior_R" if right else "warrior_L")
+    return f
+
+
+def chair_tree(right=True):
+    f, _ = chair_back(90, armR=((3, 88), 1), armL=((-3, 88), -1), legs="tree_R" if right else "tree_L")
+    return f
+
+
+def chair_arms_up():
+    f = chair_sit()
+    f2 = side((0, 48), 90, head=95, armN=((5, 148), -1), armF=((2, 148), -1),
+              legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0,
+              extra=[("arrow", [(24, 100), (24, 130)], 0)])
+    chair(f2, -10, back_left=True)
+    return f2
+
+
+def chair_fold():
+    f = side((0, 48), 35, curve=6, head=-10, face=-60,
+             armN=((38, 14), 1), armF=((36, 14), 1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chair_lean():
+    f = side((0, 48), 60, head=55, face=0,
+             armN=((32, 50), -1), armF=((30, 50), -1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chair_march():
+    f = side((0, 48), 92, head=90,
+             armN=((2, 46), -1), armF=((0, 46), -1),
+             legN=('A', 25, -80), footN=0, legF=('A', 2, -88), footF=0, sideN=R, sideF=L,
+             extra=[("arrow", [(52, 58), (52, 78)], 0)])
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chair_relax():
+    f = side((-4, 48), 98, head=80, face=-40,
+             armN=((28, 50), -1), armF=((26, 50), -1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chair_ankles():
+    f = side((0, 48), 90, armN=((30, 52), -1), armF=((28, 52), -1),
+             legN=('A', 0, -60), footN=-10, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    f.items.append((6, '<circle cx="58" cy="-20" r="7" fill="none" stroke="#6b7785" stroke-width="2.2" stroke-dasharray="30 14"/>'))
+    f._track((66, 28))
+    chair(f, -10, back_left=True)
+    return f
+
+
+ALL.update({
+    "c_breath": chair_breath_arms, "c_side_R": chair_sidebend, "c_twist": chair_twist,
+    "c_w2_R": chair_w2, "c_w2_L": lambda: chair_w2(False), "c_rev_R": chair_rev, "c_rev_L": lambda: chair_rev(False),
+    "c_sa_R": chair_sa, "c_sa_L": lambda: chair_sa(False), "c_tree_R": chair_tree, "c_tree_L": lambda: chair_tree(False),
+    "c_arms_up": chair_arms_up, "c_fold": chair_fold, "c_lean": chair_lean, "c_march": chair_march,
+    "c_relax": chair_relax, "c_ankles": chair_ankles,
+})
+
+
+def chair_neck():
+    f, _ = chair_back(90, head=62, armR=((20, 46), -1), armL=((-20, 46), 1))
+    f.arrow([(-14, 144), (8, 138)], bulge=-6)
+    return f
+
+
+def chair_shoulders():
+    f, _ = chair_back(90, armR=((20, 46), -1), armL=((-20, 46), 1), colored=False)
+    for x in (-14, 14):
+        f.items.append((6, f'<circle cx="{x}" cy="-110" r="11" fill="none" stroke="#6b7785" '
+                           f'stroke-width="2.4" stroke-dasharray="44 12"/>'))
+    return f
+
+
+def chair_wrists():
+    f = side((0, 48), 90, armN=((50, 96), -1), armF=((48, 96), -1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    f.items.append((6, '<circle cx="54" cy="-96" r="9" fill="none" stroke="#6b7785" stroke-width="2.4" stroke-dasharray="40 16"/>'))
+    f._track((66, 108))
+    chair(f, -10, back_left=True)
+    return f
+
+
+ALL.update({"c_neck": chair_neck, "c_shoulders": chair_shoulders, "c_wrists": chair_wrists})
