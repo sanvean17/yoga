@@ -41,10 +41,11 @@ def T(pair):
     h = h.replace("[F] ", "").replace("[F]", "")
     VB = {"[C]": ("vc", "EN LA SILLA", "SUR LA CHAISE"), "[CP]": ("vc", "SILLA O PARED", "CHAISE OU MUR"),
           "[S]": ("vs", "SIN APOYO", "SANS APPUI"),
-          "[DP]": ("vs", "DE PIE", "DEBOUT"), "[SU]": ("vf", "EN EL SUELO", "AU SOL")}
+          "[DP]": ("vs", "DE PIE", "DEBOUT"), "[SU]": ("vf", "EN EL SUELO", "AU SOL"),
+          "[MC]": ("vx", "MÁS COMPLETO", "PLUS COMPLET")}
     for k, (c, les, lfr) in VB.items():
         h = h.replace(k, f'<span class="vb {c}"><span class="vl">{les if L == "es" else lfr}</span>')
-    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]"):
+    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]"):
         h = h.replace(k, "</span>")
     for k, (es, fr, c) in TOKENS.items():
         h = h.replace(k, f'<span class="it {c}">{es if L == "es" else fr}</span>')
@@ -128,6 +129,38 @@ def card2(a_pose, b_pose, b_kind, name, badge, text, mh=19, a_kind="S"):
             f'<div class="qt"><div class="qn">{T(name)}{b}</div><div class="qcue">{T(text)}</div></div></div>')
 
 
+LBL["X"] = ("MÁS COMPLETO", "PLUS COMPLET", "lx")
+
+
+def card3(a, b, c, name, badge, text, mh=18):
+    def one(p, k):
+        es_, fr_, cl = LBL[k]
+        return (f'<div class="f2">{fig(p, max_w=26, max_h=mh * 1.15, cap=0.14)}'
+                f'<span class="fl {cl}">{es_ if L == "es" else fr_}</span></div>')
+    b_ = f' <span class="badge b-n">{T(badge)}</span>' if badge else ""
+    return (f'<div class="qc c2"><div class="qf row2">{one(a, "S")}{one(b, "P")}{one(c, "X")}</div>'
+            f'<div class="qt"><div class="qn">{T(name)}{b_}</div><div class="qcue">{T(text)}</div></div></div>')
+
+
+def menu_silla():
+    items = [
+        ("c_march", ("Marcha sentados: un pie, el otro.", "Marche assise : un pied, puis l’autre.")),
+        ("legext_c", ("Estiramos una pierna delante y volvemos; derecha, izquierda.", "On tend une jambe devant et on revient ; droite, gauche.")),
+        ("heeltoe_chair", ("Talón en el suelo… punta en el suelo.", "Talon au sol… pointe au sol.")),
+        ("chair_cat", ("Gato-vaca: pequeños movimientos de la pelvis.", "Chat-vache : petits mouvements du bassin.")),
+        ("cactus_c", ("Abrir el pecho, brazos en cactus.", "Ouvrir la poitrine, bras en cactus.")),
+        ("c_side_R", ("Inclinación lateral, un lado y el otro.", "Inclinaison latérale, un côté puis l’autre.")),
+        ("chair_hamstring", ("Talón delante, el pecho un poco hacia delante.", "Talon devant, la poitrine un peu vers l’avant.")),
+        ("fig4_chair", ("El número 4 para la cadera.", "Le chiffre 4 pour la hanche.")),
+        ("calf_chair", ("Pierna estirada, puntas del pie hacia nosotros.", "Jambe tendue, pointes du pied vers soi.")),
+    ]
+    cells = "".join(f'<div class="mi">{fig(p, max_w=18, max_h=13, cap=0.1)}<span>{T(t)}</span></div>' for p, t in items)
+    title = ("Menú silla · mientras otros hacen la versión de pie o en el suelo, en la silla podemos hacer:"
+             if L == "es" else
+             "Menu chaise · pendant que d’autres font la version debout ou au sol, sur la chaise on peut faire :")
+    return f'<div class="menu"><div class="mt">{title}</div><div class="mg">{cells}</div></div>'
+
+
 def part(n, es_t, fr_t):
     return (f'<div class="part"><span>{"PARTE" if L == "es" else "PARTIE"} {n}</span>'
             f'{es_t if L == "es" else fr_t}</div>')
@@ -182,14 +215,14 @@ P_ALL = [
     '</div><h1>' + ("Yoga suave · cada uno a su manera" if L == "es" else "Yoga doux · chacun à sa façon") + '</h1></div>'
     '<div class="leg"><b class="sr">' + ("naranja = DERECHA" if L == "es" else "orange = DROITE") +
     '</b> · <b class="sl">' + ("azul = IZQUIERDA" if L == "es" else "bleu = GAUCHE") + "</b><br>" +
-    ('<span class="fl lc">SILLA</span> <span class="fl lp">DE PIE</span> <span class="fl lf">SUELO</span> = las dos versiones dibujadas'
+    ('<span class="fl lc">SILLA</span> <span class="fl lp">DE PIE CON APOYO</span> <span class="fl lf">SUELO</span> <span class="fl lx">MÁS COMPLETO</span>'
      if L == "es" else
-     '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT</span> <span class="fl lf">SOL</span> = les deux versions dessinées') +
+     '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
     note("texte normal = <b>version chaise</b>, faisable par tous. Blocs bleus « DE PIE » / verts « EN EL SUELO » = options. "
          "<b>Chaises avec accoudoirs</b> : on s’assoit au bord, devant les accoudoirs, pour les guerriers ; les accoudoirs "
          "servent d’appui. Pas de respiration du feu ni de rétention (déconseillées : tension, cœur, vertiges). "
-         "En retard : saute la déesse, « pierna al lado », « avión » ou les essuie-glaces. Jamais la relaxation."),
+         "Groupe hétérogène : propose <b>3 niveaux</b> (chaise / debout avec appui / sol ou plus complet) ; ceux qui restent assis suivent le <b>menu chaise</b> pendant les variantes debout ou au sol. On garde toutes les postures pour tester ; en retard : saute la déesse ou les essuie-glaces. Jamais la relaxation."),
     band(1, ("Bienvenida · las reglas", "Accueil · les règles"), "0:00 – 0:04"),
     grid([card2("chair_sit", "tadasana", "P", ("Cada uno a su manera", "Chacun à sa façon"), None, (
         "Hola a todos, bienvenidos. Hoy todo se puede hacer **de pie, en la silla o en el suelo**: os enseñaré las "
@@ -211,12 +244,11 @@ P_ALL = [
             "On ferme les yeux si vous voulez. Une main sur le ventre. On inspire : le ventre se remplit doucement… les côtes "
             "s’ouvrent… la poitrine monte un peu. On expire lentement : la poitrine, les côtes, le ventre. Comme une vague. "
             "Sans forcer. ((5 respirations))")),
-        card2("c_breath", "arms_up", "P", ("B · Respiración «ja»", "B · Respiration « ha »"), ("5 veces", "5 fois"), (
-            "Para despertar el cuerpo, suavemente. Inhalamos por la nariz y subimos los brazos. Exhalamos por la boca con un "
-            "sonido «jaaa» y bajamos los brazos, despacio, como si soltáramos un peso. ((5 veces)) Si nos mareamos, paramos.",
-            "Pour réveiller le corps, doucement. On inspire par le nez et on monte les bras. On expire par la bouche avec un "
-            "son « haaa » et on baisse les bras, lentement, comme si on lâchait un poids. ((5 fois)) Si la tête tourne, on "
-            "s’arrête.")),
+        card2("c_breath", "arms_up", "P", ("B · Brazos y respiración", "B · Bras et respiration"), ("5 veces", "5 fois"), (
+            "Inhalamos por la nariz y abrimos o subimos los brazos, despacio. Exhalamos y los bajamos lentamente. El "
+            "movimiento dura lo mismo que la respiración. ((5 veces)) Los brazos suben solo hasta donde es cómodo.",
+            "On inspire par le nez et on ouvre ou on monte les bras, lentement. On expire et on les redescend lentement. Le "
+            "mouvement dure autant que la respiration. ((5 fois)) Les bras montent seulement jusqu’où c’est confortable.")),
     ]),
     band(3, ("Calentamiento · en la silla o en el suelo", "Échauffement · sur la chaise ou au sol"), "0:10 – 0:22"),
     grid([
@@ -264,6 +296,7 @@ P_ALL = [
             "((3 resp.))")),
     ], cols=3),
     part(1, "De pie o en la silla · 0:22 – 0:44", "Debout ou sur la chaise · 0:22 – 0:44"),
+    menu_silla(),
     band(4, ("Antes del saludo: aprendemos tres posiciones", "Avant la salutation : on apprend trois positions"), "0:22 – 0:25"),
     note("explique-les une par une, montre, et laisse-les essayer. <b>« Dos long » ne veut pas dire dos vertical</b> : on se "
          "penche en avant depuis les hanches, dos plat. La dernière fois ils restaient droits."),
@@ -358,6 +391,22 @@ P_ALL = [
             "[DP]Pieds écartés, genoux un peu pliés, sans descendre beaucoup ; une main sur la chaise si besoin.[/DP]")),
     ]),
     band(7, ("Equilibrio · elegimos una o dos", "Équilibre · on en choisit une ou deux"), "0:40 – 0:44"),
+    note("ne fais pas tous les équilibres : <b>un ou deux par séance</b>, et change d’une semaine à l’autre. Par exemple "
+         "cette semaine : un pied devant l’autre + aigle ; une autre semaine : arbre + jambe sur le côté."),
+    grid([card3("eagle_c", "eagle_p", "eagle_f", ("Águila · tres niveles", "Aigle · trois niveaux"), ("3 resp./lado", "3 resp./côté"), (
+        "**En la silla:** espalda larga; cruzamos una pierna delante de la otra, sin enrollar el pie. Brazos delante: "
+        "cruzamos el brazo derecho por encima del izquierdo y doblamos los codos. Si no llegamos, nos abrazamos: las manos en "
+        "los hombros. ((3 resp.)) Cambiamos. "
+        "[DP]Una mano en la silla o en la pared. Cruzamos un poco una pierna delante de la otra: los dedos del pie cruzado se "
+        "quedan en el suelo, como una muleta. Brazos de águila o manos en los hombros.[/DP]"
+        "[MC]Doblamos un poco las rodillas y cruzamos el muslo por encima del otro, el pie sin apoyar. No hace "
+        "falta enrollar el pie detrás de la pantorrilla.[/MC]",
+        "**Sur la chaise :** dos long ; on croise une jambe devant l’autre, sans enrouler le pied. Bras devant : on croise le "
+        "bras droit par-dessus le gauche et on plie les coudes. Si on n’y arrive pas, on se fait un câlin : mains sur les "
+        "épaules. ((3 resp.)) On change. [DP]Une main sur la chaise ou au mur. On croise un peu une jambe devant l’autre : "
+        "les orteils du pied croisé restent au sol, comme une béquille. Bras d’aigle ou mains sur les épaules.[/DP]"
+        "[MC]On plie un peu les genoux et on croise la cuisse par-dessus l’autre, pied décollé. Pas besoin "
+        "d’enrouler le pied derrière le mollet.[/MC]"))], cols=1),
     grid([
         card2("c_tree_R", "tree_wall", "P", ("O · Árbol", "O · Arbre"), ("3 resp./lado", "3 resp./côté"), (
             "Talón derecho en el tobillo izquierdo, rodilla derecha hacia fuera. Manos al pecho, o brazos arriba como ramas. "
@@ -417,6 +466,20 @@ P_ALL = [
             "[SU]Tumbados, pies separados: rodillas a la derecha y a la izquierda.[/SU]",
             "Assis, genoux serrés : on les emmène un peu à droite… puis à gauche, lentement. [SU]Allongés, pieds écartés : "
             "genoux à droite et à gauche.[/SU]")),
+        card2("cactus_c", "cactus_f", "F", ("Pecho abierto, brazos en cactus", "Poitrine ouverte, bras en cactus"), ("4 resp.", "4 resp."), (
+            "Brazos en cactus: codos a la altura de los hombros, manos arriba. Inhalamos, abrimos el pecho y llevamos los codos "
+            "un poco atrás. ((4 resp.)) [SU]Tumbados, rodillas dobladas o piernas estiradas: brazos en cactus en el suelo, el "
+            "dorso de las manos apoyado.[/SU]",
+            "Bras en cactus : coudes à hauteur d’épaules, mains en haut. On inspire, on ouvre la poitrine et on emmène les "
+            "coudes un peu en arrière. ((4 resp.)) [SU]Allongés, genoux pliés ou jambes allongées : bras en cactus au sol, le "
+            "dos des mains posé.[/SU]")),
+        card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), (
+            "Sentados, manos en las rodillas. Exhalamos y redondeamos un poco la espalda baja; inhalamos y la arqueamos un poco. "
+            "Movimiento pequeño. [SU]Tumbados, rodillas dobladas: exhalamos, la espalda baja se apoya en el suelo; inhalamos, "
+            "se separa un poco.[/SU]",
+            "Assis, mains sur les genoux. On expire et on arrondit un peu le bas du dos ; on inspire et on le creuse un peu. "
+            "Petit mouvement. [SU]Allongés, genoux pliés : on expire, le bas du dos se pose au sol ; on inspire, il se décolle "
+            "un peu.[/SU]")),
         card2("hug_chair", "hug_floor", "F", ("Abrazar un árbol", "Enlacer un arbre"), ("4 resp.", "4 resp."), (
             "Entrelazamos los dedos y empujamos las palmas hacia delante, como si abrazáramos un árbol grande. La espalda "
             "alta se redondea, la cabeza baja un poco. ((4 resp.)) Soltamos.",
@@ -454,15 +517,11 @@ P_ALL = [
         "s’assoit doucement."), mh=17)], cols=1),
     band(10, ("Respiración final y cierre", "Respiration finale et clôture"), "0:56 – 1:00"),
     grid([
-        card2("nostril_chair", "seated_cross", "F", ("W · Respiración alterna", "W · Respiration alternée"), ("5 rondas", "5 rondes"), (
-            "Mano derecha delante de la cara. Con el pulgar cerramos suavemente la nariz derecha: inhalamos por la izquierda. "
-            "Cerramos la izquierda con el anular, abrimos la derecha: exhalamos por la derecha. Inhalamos por la derecha; "
-            "cambiamos; exhalamos por la izquierda. Sin retener el aire. ((5 rondas)) Si es complicado, solo respiramos "
-            "despacio.",
-            "Main droite devant le visage. Avec le pouce, on ferme doucement la narine droite : on inspire par la gauche. On "
-            "ferme la gauche avec l’annulaire, on ouvre la droite : on expire par la droite. On inspire par la droite ; on "
-            "change ; on expire par la gauche. Sans retenir l’air. ((5 rondes)) Si c’est compliqué, on respire simplement "
-            "lentement.")),
+        card2("chair_sit", "seated_cross", "F", ("Exhalación un poco más larga", "Expiration un peu plus longue"), ("6 veces", "6 fois"), (
+            "Ojos cerrados. Inhalamos despacio por la nariz… dos, tres, cuatro. Exhalamos despacio… dos, tres, cuatro, cinco, "
+            "seis. Sin forzar: si cuesta, exhalamos hasta cinco. Sin retener el aire. ((6 veces))",
+            "Yeux fermés. On inspire lentement par le nez… deux, trois, quatre. On expire lentement… deux, trois, quatre, cinq, "
+            "six. Sans forcer : si c’est difficile, on expire sur cinq. Sans retenir l’air. ((6 fois))")),
         card2("chair_sit", "seated_cross", "F", ("X · Contar hacia atrás y cierre", "X · Compter à l’envers et clôture"), ("10 resp.", "10 resp."), (
             "Ojos cerrados. Contamos cada exhalación, en silencio, de diez a uno. Si perdemos la cuenta, volvemos a diez, "
             "sin prisa. Manos delante del pecho: gracias por practicar conmigo. Namasté.",
@@ -538,8 +597,13 @@ body { font-size:9.6pt; line-height:1.18; } .qcue { font-size:9.6pt; } .qn { fon
 .qc.c2 { flex-direction:column; } .qf.row2 { flex-direction:row; gap:3mm; justify-content:center; width:100%; align-items:flex-end; }
 .f2 { display:flex; flex-direction:column; align-items:center; gap:.4mm; }
 .fl { font-size:6.4pt; font-weight:700; color:#fff; border-radius:1mm; padding:0 1.2mm; letter-spacing:.04em; }
-.lc { background:#a07c52; } .lp { background:#4a6fa5; } .lf { background:#3f8a5a; }
+.lc { background:#a07c52; } .lp { background:#4a6fa5; } .lf { background:#3f8a5a; } .lx { background:#7a4fa0; }
+.vx { background:#f1eaf7; border-left:3px solid #7a4fa0; color:#43285c; } .vx .vl { background:#7a4fa0; }
 .sl2 { font-size:7.5pt; font-weight:700; color:var(--band); letter-spacing:.08em; margin:.6mm 0 -.4mm; }
+.menu { border:1.5px solid #a07c52; background:#faf5ee; border-radius:2mm; padding:1.2mm 2mm; margin:1.2mm 0; break-inside:avoid; }
+.mt { font-weight:700; font-size:9.4pt; color:#6b4a24; margin-bottom:1mm; }
+.mg { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1mm 3mm; }
+.mi { display:flex; align-items:center; gap:1.5mm; font-size:9pt; line-height:1.15; } .mi svg { flex:0 0 auto; }
 .keep2 { break-inside: avoid; } .qgrid .qc { break-inside: avoid; } .qband { break-after: avoid; } .pm { break-after: avoid; } .part { break-after: avoid; }
 """
 

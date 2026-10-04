@@ -1238,3 +1238,57 @@ def child_chair():
 ALL.update({"wall_hinge": wall_hinge, "side_leg_stand": side_leg_stand, "side_leg_chair": side_leg_chair,
             "airplane_stand": airplane_stand, "airplane_chair": airplane_chair, "hug_chair": hug_chair,
             "hug_floor": hug_floor, "calf_chair": calf_chair, "child_chair": child_chair})
+
+
+# ------------------------------------------------------------- course 2 v5: eagle 3 levels, cactus, pelvis, leg extension
+def eagle_chair_legs():
+    """seated, near leg crossed over the far leg (knee over knee), eagle arms."""
+    f = side((0, 48), 90, armN=('A', 5, 95), armF=('A', 0, 88),
+             legN=('A', 12, -100), footN=-20, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def eagle_stand_support():
+    """standing, toes of the crossed (near) foot on the floor like a kickstand, far hand on the chair."""
+    f = side((0, 80), 90, armN=('A', 5, 95), armF=((36, 88), -1),
+             legN=((12, 9), 1), footN=-55, legF=((0, 4), 1), footF=-4, sideN=R, sideF=L)
+    chair(f, 42, back_left=True)
+    return f
+
+
+def eagle_stand_full():
+    """standing on the far leg, knees bent, near thigh crossed over, foot off the floor, eagle arms."""
+    return side((-6, 72), 92, head=90, armN=('A', 5, 95), armF=('A', 0, 88),
+                legN=('A', -20, -100), footN=-40, legF=((2, 4), 1), footF=-4, sideN=R, sideF=L)
+
+
+def cactus_chair():
+    return chair_back2("cactus", colored=False)
+
+
+def cactus_floor():
+    """top view, lying face up, arms in cactus, knees bent (feet on the floor)."""
+    f, _ = back((0, 0), 180, face_up=True, colored=False,
+                armR=('A', -90, 180), armL=('A', 90, 180),
+                legR=((76, -16), 1), legL=((76, 16), -1), footR=(-30, 9), footL=(30, 9))
+    f.top_mat = (-80, -50, 96, 50)
+    return f
+
+
+def pelvis_floor():
+    f = supine_knees()
+    f.arrow([(-8, 26), (10, 26)], bulge=-8)
+    return f
+
+
+def leg_ext_chair():
+    f = side((0, 48), 90, armN=((2, 46), -1), armF=((0, 46), -1),
+             legN=('A', 0, -10), footN=80, legF=('A', 2, -88), footF=0, sideN=R, sideF=L,
+             extra=[("arrow", [(70, 30), (70, 44)], 0)])
+    chair(f, -10, back_left=True)
+    return f
+
+
+ALL.update({"eagle_c": eagle_chair_legs, "eagle_p": eagle_stand_support, "eagle_f": eagle_stand_full,
+            "cactus_c": cactus_chair, "cactus_f": cactus_floor, "pelvis_f": pelvis_floor, "legext_c": leg_ext_chair})
