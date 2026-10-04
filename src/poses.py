@@ -1155,3 +1155,86 @@ def nostril_chair():
 
 ALL.update({"sh_chair": lambda: _shoulder_cross(chair_back2), "sh_stand": lambda: _shoulder_cross(stand_back),
             "tandem_stand": tandem_stand, "nostril_chair": nostril_chair})
+
+
+# ---------------------------------------------------- course 2 v4: balance + stretches + flat-back helpers
+def wall_hinge():
+    """Back to the wall, hips pushed back until the bottom touches it, flat back, hands on thighs."""
+    f = side((-4, 76), 30, head=26, face=-25,
+             armN=((14, 52), -1), armF=((12, 52), -1),
+             legN=((10, 4), 1), legF=((8, 4), 1), footN=-4, footF=-4,
+             extra=[("arrow", [(-2, 98), (-14, 92)], 4)])
+    wall(f, -22, h=140)
+    return f
+
+
+def side_leg_stand():
+    P = (0, 81.5)
+    shoR, shoL = _neck_sho(P, 90)
+    f, _ = back(P, 90, armR=((11, 90), 1), armL=((-46, 88), 1),
+                legR=((36, 10), 1), legL=((-10, 4), -1), footR=(10, 9), footL=(180, 9))
+    chair_front(f, -70)
+    _dl(f, (38, -12), "D", C["R"]); _dl(f, (-12, -12), "I", C["L"])
+    return f
+
+
+def side_leg_chair():
+    f, _ = back((0, 52), 90, armR=((20, 46), -1), armL=((-20, 46), 1))
+    f.line([(8, 50), (56, 14), (62, 9)], C["R"], layer=1)
+    f.line([(-8, 50), (-13, 44), (-13, 5), (-13, 4)], C["L"], layer=1)
+    _stool(f, half=18)
+    _dl(f, (60, -12), "D", C["R"]); _dl(f, (-16, -12), "I", C["L"])
+    return f
+
+
+def airplane_stand():
+    P = (0, 81.5)
+    shoR, shoL = _neck_sho(P, 90)
+    f, _ = back(P, 90, armR=((46, 88), -1), armL=(add(shoL, d(100), 50), 1),
+                legR=((10, 4), 1), legL=((-12, 30), 1), footR=(0, 9), footL=(200, 8))
+    chair_front(f, 40)
+    _dl(f, (14, -12), "D", C["R"]); _dl(f, (-16, -12), "I", C["L"])
+    return f
+
+
+def airplane_chair():
+    f, _ = back((0, 52), 90, armR=((20, 46), -1), armL=(add(_neck_sho((0, 52), 90)[1], d(100), 50), 1))
+    f.line([(8, 50), (13, 44), (13, 5), (13, 4)], C["R"], layer=1)
+    f.line([(-8, 50), (-16, 60), (-16, 26), (-22, 24)], C["L"], layer=1)
+    _stool(f, half=18)
+    _dl(f, (18, -12), "D", C["R"]); _dl(f, (-22, -12), "I", C["L"])
+    return f
+
+
+def hug_chair():
+    f = side((0, 48), 88, curve=8, head=60, face=-30,
+             armN=((44, 86), -1), armF=((42, 86), -1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def hug_floor():
+    return side((0, 9), 88, curve=8, head=60, face=-30,
+                armN=((44, 46), -1), armF=((42, 46), -1),
+                legN=('A', -6, 188), legF=('A', -2, 186), footN=180, footF=180)
+
+
+def calf_chair():
+    f = side((0, 48), 80, head=75, face=0, armN=((32, 46), -1), armF=((30, 46), -1),
+             legN=((74, 6), 1), footN=75, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def child_chair():
+    f = side((0, 48), 30, curve=6, head=-20, face=-70,
+             armN=((30, 40), 1), armF=((28, 40), 1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+ALL.update({"wall_hinge": wall_hinge, "side_leg_stand": side_leg_stand, "side_leg_chair": side_leg_chair,
+            "airplane_stand": airplane_stand, "airplane_chair": airplane_chair, "hug_chair": hug_chair,
+            "hug_floor": hug_floor, "calf_chair": calf_chair, "child_chair": child_chair})
