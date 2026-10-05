@@ -154,11 +154,20 @@ def menu_silla():
         ("fig4_chair", ("El número 4 para la cadera.", "Le chiffre 4 pour la hanche.")),
         ("calf_chair", ("Pierna estirada, puntas del pie hacia nosotros.", "Jambe tendue, pointes du pied vers soi.")),
     ]
-    cells = "".join(f'<div class="mi">{fig(p, max_w=18, max_h=13, cap=0.1)}<span>{T(t)}</span></div>' for p, t in items)
-    title = ("Menú silla · mientras otros hacen la versión de pie o en el suelo, en la silla podemos hacer:"
-             if L == "es" else
-             "Menu chaise · pendant que d’autres font la version debout ou au sol, sur la chaise on peut faire :")
-    return f'<div class="menu"><div class="mt">{title}</div><div class="mg">{cells}</div></div>'
+    lab = "SILLA" if L == "es" else "CHAISE"
+    cells = "".join(f'<div class="mi"><div class="f2">{fig(p, max_w=26, max_h=19, cap=0.13)}'
+                    f'<span class="fl lc">{lab}</span></div><span>{T(t)}</span></div>' for p, t in items)
+    if L == "es":
+        title = "Menú silla · para quien se queda sentado"
+        when = ("¿Cuándo? Cada vez que los demás hacen una versión de pie: el saludo de pie (5), los guerreros de pie (6) "
+                "y el águila de pie (7). Quien se queda en la silla elige uno o dos de estos ejercicios y los repite despacio.")
+    else:
+        title = "Menu chaise · pour ceux qui restent assis"
+        when = ("Quand ? Chaque fois que les autres font une version debout : la salutation debout (5), les guerriers "
+                "debout (6) et l’aigle debout (7). Ceux qui restent sur la chaise choisissent un ou deux de ces exercices et "
+                "les répètent lentement.")
+    return (f'<div class="menu"><div class="mt">{title}</div><div class="mw">{T(when)}</div>'
+            f'<div class="mg">{cells}</div></div>')
 
 
 def part(n, es_t, fr_t):
@@ -219,10 +228,6 @@ P_ALL = [
      if L == "es" else
      '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
-    note("texte normal = <b>version chaise</b>, faisable par tous. Blocs bleus « DE PIE » / verts « EN EL SUELO » = options. "
-         "<b>Chaises avec accoudoirs</b> : on s’assoit au bord, devant les accoudoirs, pour les guerriers ; les accoudoirs "
-         "servent d’appui. Pas de respiration du feu ni de rétention (déconseillées : tension, cœur, vertiges). "
-         "Groupe hétérogène : propose <b>3 niveaux</b> (chaise / debout avec appui / sol ou plus complet) ; ceux qui restent assis suivent le <b>menu chaise</b> pendant les variantes debout ou au sol. On garde toutes les postures pour tester ; en retard : saute la déesse ou les essuie-glaces. Jamais la relaxation."),
     band(1, ("Bienvenida · las reglas", "Accueil · les règles"), "0:00 – 0:04"),
     grid([card2("chair_sit", "tadasana", "P", ("Cada uno a su manera", "Chacun à sa façon"), None, (
         "Hola a todos, bienvenidos. Hoy todo se puede hacer **de pie, en la silla o en el suelo**: os enseñaré las "
@@ -390,9 +395,7 @@ P_ALL = [
             "Bras en cactus : coudes à hauteur d’épaules, mains en haut. On inspire, on ouvre la poitrine. ((4 resp.)) "
             "[DP]Pieds écartés, genoux un peu pliés, sans descendre beaucoup ; une main sur la chaise si besoin.[/DP]")),
     ]),
-    band(7, ("Equilibrio · elegimos una o dos", "Équilibre · on en choisit une ou deux"), "0:40 – 0:44"),
-    note("ne fais pas tous les équilibres : <b>un ou deux par séance</b>, et change d’une semaine à l’autre. Par exemple "
-         "cette semaine : un pied devant l’autre + aigle ; une autre semaine : arbre + jambe sur le côté."),
+    band(7, ("Equilibrio · el águila", "Équilibre · l’aigle"), "0:40 – 0:44"),
     grid([card3("eagle_c", "eagle_p", "eagle_f", ("Águila · tres niveles", "Aigle · trois niveaux"), ("3 resp./lado", "3 resp./côté"), (
         "**En la silla:** espalda larga; cruzamos una pierna delante de la otra, sin enrollar el pie. Brazos delante: "
         "cruzamos el brazo derecho por encima del izquierdo y doblamos los codos. Si no llegamos, nos abrazamos: las manos en "
@@ -407,36 +410,6 @@ P_ALL = [
         "les orteils du pied croisé restent au sol, comme une béquille. Bras d’aigle ou mains sur les épaules.[/DP]"
         "[MC]On plie un peu les genoux et on croise la cuisse par-dessus l’autre, pied décollé. Pas besoin "
         "d’enrouler le pied derrière le mollet.[/MC]"))], cols=1),
-    grid([
-        card2("c_tree_R", "tree_wall", "P", ("O · Árbol", "O · Arbre"), ("3 resp./lado", "3 resp./côté"), (
-            "Talón derecho en el tobillo izquierdo, rodilla derecha hacia fuera. Manos al pecho, o brazos arriba como ramas. "
-            "Miramos un punto fijo. ((3 resp.)) Cambiamos. [DP]Una mano en la silla o en la pared; dedos del pie en el suelo, o "
-            "el pie en la pantorrilla, nunca sobre la rodilla.[/DP]",
-            "Talon droit sur la cheville gauche, genou droit vers l’extérieur. Mains à la poitrine, ou bras en haut comme des "
-            "branches. Regard sur un point fixe. ((3 resp.)) On change. [DP]Une main sur la chaise ou au mur ; orteils au sol, "
-            "ou le pied sur le mollet, jamais sur le genou.[/DP]")),
-        card2("knee_chair", "tandem_stand", "P", ("P · Un pie delante del otro", "P · Un pied devant l’autre"), ("4 resp./lado", "4 resp./côté"), (
-            "Sentados: levantamos un poco la rodilla derecha y la sostenemos, brazos abiertos para el equilibrio. "
-            "((4 resp.)) Cambiamos. [DP]Una mano en la silla o en la pared. El pie derecho justo delante del izquierdo, "
-            "como en una línea. Miramos al frente. ((4 resp.)) Cambiamos de pie.[/DP]",
-            "Assis : on soulève un peu le genou droit et on le tient, bras ouverts pour l’équilibre. ((4 resp.)) On change. "
-            "[DP]Une main sur la chaise ou au mur. Le pied droit juste devant le gauche, comme sur une ligne. Regard devant. "
-            "((4 resp.)) On change de pied.[/DP]")),
-        card2("side_leg_chair", "side_leg_stand", "P", ("Pierna al lado", "Jambe sur le côté"), ("5 veces/lado", "5 fois/côté"), (
-            "Sentados: estiramos la pierna derecha hacia el lado, talón en el suelo, y volvemos. ((5 veces)) Cambiamos. "
-            "[DP]De pie detrás de la silla o junto a la pared, una mano apoyada. Levantamos despacio la pierna derecha hacia "
-            "el lado, la punta del pie mira al frente, espalda recta. Bajamos despacio.[/DP]",
-            "Assis : on allonge la jambe droite sur le côté, talon au sol, et on revient. ((5 fois)) On change. [DP]Debout "
-            "derrière la chaise ou près du mur, une main en appui. On lève lentement la jambe droite sur le côté, la pointe "
-            "du pied regarde devant, dos droit. On redescend lentement.[/DP]")),
-        card2("airplane_chair", "airplane_stand", "P", ("Brazo arriba, pie arriba", "Bras en haut, pied levé"), ("3 resp./lado", "3 resp./côté"), (
-            "Sentados: subimos el brazo izquierdo y, a la vez, levantamos un poco el pie izquierdo. Miramos un punto fijo. "
-            "((3 resp.)) Cambiamos de lado. [DP]La mano derecha en la silla o en la pared. Subimos el brazo izquierdo; "
-            "después levantamos un poco el pie izquierdo. ((3 resp.)) Cambiamos.[/DP]",
-            "Assis : on monte le bras gauche et, en même temps, on soulève un peu le pied gauche. Regard sur un point fixe. "
-            "((3 resp.)) On change de côté. [DP]La main droite sur la chaise ou au mur. On monte le bras gauche ; puis on "
-            "soulève un peu le pied gauche. ((3 resp.)) On change.[/DP]")),
-    ]),
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Caderas, piernas y espalda · estiramientos", "Hanches, jambes et dos · étirements"), "0:44 – 0:51"),
     note("ceux qui vont au sol descendent doucement, une main sur la chaise. Les autres restent assis."),
@@ -600,10 +573,12 @@ body { font-size:9.6pt; line-height:1.18; } .qcue { font-size:9.6pt; } .qn { fon
 .lc { background:#a07c52; } .lp { background:#4a6fa5; } .lf { background:#3f8a5a; } .lx { background:#7a4fa0; }
 .vx { background:#f1eaf7; border-left:3px solid #7a4fa0; color:#43285c; } .vx .vl { background:#7a4fa0; }
 .sl2 { font-size:7.5pt; font-weight:700; color:var(--band); letter-spacing:.08em; margin:.6mm 0 -.4mm; }
-.menu { border:1.5px solid #a07c52; background:#faf5ee; border-radius:2mm; padding:1.2mm 2mm; margin:1.2mm 0; break-inside:avoid; }
-.mt { font-weight:700; font-size:9.4pt; color:#6b4a24; margin-bottom:1mm; }
-.mg { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1mm 3mm; }
-.mi { display:flex; align-items:center; gap:1.5mm; font-size:9pt; line-height:1.15; } .mi svg { flex:0 0 auto; }
+.menu { border:1.5px solid #a07c52; background:#faf5ee; border-radius:2mm; padding:1.5mm 2.5mm; margin:1.5mm 0; break-inside:avoid; }
+.mt { font-weight:700; font-size:11pt; color:#6b4a24; }
+.mw { font-size:9.4pt; color:#5a3f1f; margin:.6mm 0 1.4mm; }
+.mg { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.6mm 3mm; }
+.mi { display:flex; align-items:center; gap:2mm; font-size:9.4pt; line-height:1.18; background:#fff; border-radius:1.5mm; padding:1mm 1.5mm; }
+.mi .f2 { flex:0 0 auto; }
 .keep2 { break-inside: avoid; } .qgrid .qc { break-inside: avoid; } .qband { break-after: avoid; } .pm { break-after: avoid; } .part { break-after: avoid; }
 """
 
