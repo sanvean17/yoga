@@ -192,7 +192,7 @@ SUN_STEPS = [
 P_ALL = [
     '<div class="top"><div><div class="kick">' +
     ("Clase 2 · guion de la profesora · 1 hora · de pie, en la silla o en el suelo" if L == "es"
-     else "Cours 2 · version française · même ordre et mêmes lettres que la version espagnole") +
+     else "Cours 2 · version française · même ordre que la version espagnole") +
     '</div><h1>' + ("Yoga suave · cada uno a su manera" if L == "es" else "Yoga doux · chacun à sa façon") + '</h1></div>'
     '<div class="leg"><b class="sr">' + ("naranja = DERECHA" if L == "es" else "orange = DROITE") +
     '</b> · <b class="sl">' + ("azul = IZQUIERDA" if L == "es" else "bleu = GAUCHE") + "</b><br>" +
@@ -201,6 +201,11 @@ P_ALL = [
      '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
     band(1, ("Bienvenida · las reglas", "Accueil · les règles"), "0:00 – 0:04"),
+    note("<b>avant de commencer</b> : chaises solides, sans roulettes ; pour le debout, chaise contre le mur pour qu’elle ne "
+         "glisse pas. Demande discrètement : <b>ostéoporose ?</b> → pas de dos rond profond ni de torsion forte, on plie depuis "
+         "les hanches, dos long. <b>Prothèse de hanche ?</b> → pas de jambes croisées (aigle, chiffre 4), genoux écartés, "
+         "genou poitrine doux. <b>Tension ou vertiges ?</b> → la tête ne descend pas plus bas que le cœur ; on remonte "
+         "lentement."),
     grid([card2("chair_sit", "tadasana", "P", ("Cada uno a su manera", "Chacun à sa façon"), None, (
         "Hola a todos, bienvenidos. Hoy, en cada ejercicio, os enseñaré todas las opciones: **en la silla, de pie o en "
         "el suelo**. Todo se puede hacer en la silla, y también podemos mezclar: una parte en la silla, otra de pie, "
@@ -364,9 +369,9 @@ P_ALL = [
         card2("t_chair", "t_stand", "P", ("N · Triángulo", "N · Triangle"), ("3 resp./lado", "3 resp./côté"), (
             "Desde el Guerrero II sentado, estiramos un poco la rodilla derecha. Exhalamos: nos inclinamos a la derecha; "
             "antebrazo derecho en el muslo o en el reposabrazos; brazo izquierdo arriba. ((3 resp.)) Cambiamos. "
-            "[DP]Piernas estiradas; la mano de abajo entre la cintura y la rodilla, nunca empuja.[/DP]",
+            "[DP]Piernas largas, sin bloquear las rodillas; la mano de abajo entre la cintura y la rodilla, nunca empuja.[/DP]",
             "Depuis le Guerrier II assis, on tend un peu le genou droit. On expire : on se penche à droite ; avant-bras droit "
-            "sur la cuisse ou sur l’accoudoir ; bras gauche en haut. ((3 resp.)) On change. [DP]Jambes tendues ; la main du "
+            "sur la cuisse ou sur l’accoudoir ; bras gauche en haut. ((3 resp.)) On change. [DP]Jambes longues, genoux non bloqués ; la main du "
             "bas entre la taille et le genou, elle ne pousse jamais.[/DP]")),
         card2("d_chair", "d_stand", "P", ("Diosa (extra)", "Déesse (en plus)"), ("4 resp.", "4 resp."), (
             "Al borde de la silla, piernas bien separadas, puntas de los pies hacia fuera, rodillas en la misma dirección. "
@@ -377,6 +382,7 @@ P_ALL = [
             "[DP]Pieds écartés, genoux un peu pliés, sans descendre beaucoup ; une main sur la chaise si besoin.[/DP]")),
     ]),
     band(7, ("Equilibrio · el águila", "Équilibre · l’aigle"), "0:40 – 0:44"),
+    note("prothèse de hanche : on ne croise pas les jambes, seulement les bras ; pieds écartés."),
     grid([card3("eagle_c", "eagle_p", "eagle_f", ("Águila · tres niveles", "Aigle · trois niveaux"), ("3 resp./lado", "3 resp./côté"), (
         "**En la silla:** espalda larga; cruzamos una pierna delante de la otra, sin enrollar el pie. Brazos delante: "
         "cruzamos el brazo derecho por encima del izquierdo y doblamos los codos. Si no llegamos, nos abrazamos: las manos en "
@@ -393,7 +399,8 @@ P_ALL = [
         "d’enrouler le pied derrière le mollet.[/MC]"))], cols=1),
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Caderas, piernas y espalda · estiramientos", "Hanches, jambes et dos · étirements"), "0:44 – 0:51"),
-    note("ceux qui vont au sol descendent doucement, une main sur la chaise. Les autres restent assis."),
+    note("ceux qui vont au sol descendent doucement, une main sur la chaise. Les autres restent assis. Ostéoporose : "
+         "dans « Relâcher le dos » et « l’enfant », on descend peu, dos long. Prothèse de hanche : pas de chiffre 4."),
     grid([
         card2("chair_sit", "butterfly", "F", ("Q · Mariposa", "Q · Papillon"), ("4 resp.", "4 resp."), (
             "Rodillas separadas, manos en los muslos. Inhalamos, espalda larga. Exhalamos, nos inclinamos un poco. "
