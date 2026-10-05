@@ -1292,3 +1292,54 @@ def leg_ext_chair():
 
 ALL.update({"eagle_c": eagle_chair_legs, "eagle_p": eagle_stand_support, "eagle_f": eagle_stand_full,
             "cactus_c": cactus_chair, "cactus_f": cactus_floor, "pelvis_f": pelvis_floor, "legext_c": leg_ext_chair})
+
+
+# --------------------------------------------------------------- course 2 v6: more floor work
+def banana_floor():
+    """top view, lying face up, arms overhead, body curved like a banana (stretch of one side)."""
+    f, _ = back((0, 0), 194, face_up=True, colored=True,
+                armR=('A', 200, 204), armL=('A', 198, 202),
+                legR=('A', -14, -14), legL=('A', -14, -14), footR=(-14, 9), footL=(-14, 9))
+    f.top_mat = (-110, -62, 96, 44)
+    return f
+
+
+def reclined_butterfly():
+    """top view, lying face up, soles together, knees open to the sides."""
+    f, _ = back((0, 0), 180, face_up=True, colored=False,
+                armR=((-6, -30), 1), armL=((-6, 30), -1),
+                legR=((62, -3), -1), legL=((62, 3), 1), footR=(0, 5), footL=(0, 5))
+    f.top_mat = (-80, -50, 80, 50)
+    return f
+
+
+def knee_circles():
+    f = knees_chest()
+    f.items.append((6, '<circle cx="-14" cy="-58" r="12" fill="none" stroke="#6b7785" stroke-width="2.4" stroke-dasharray="54 14"/>'))
+    f._track((-28, 72))
+    return f
+
+
+def open_book():
+    """side lying seen from the front: knees bent, top arm opening backwards (arrow)."""
+    from figures import Fig, W_TORSO
+    f = Fig()
+    body = C["body"]
+    f.line([(0, 10), (-50, 10)], body, w=W_TORSO, layer=2)            # torso
+    f.head((-64, 12))
+    f.line([(0, 10), (30, 24), (44, -2) if False else (54, 8)], body, layer=3)  # legs bent (stacked)
+    f.line([(-48, 12), (-20, 16)], C["body_far"], layer=1)             # bottom arm forward
+    f.line([(-48, 14), (-40, 40), (-34, 60)], C["R"], layer=4)        # top arm opening up/back
+    f.arrow([(-10, 30), (-30, 62)], bulge=-10)
+    f._track((-76, 0), (60, 70))
+    return f
+
+
+def sphinx():
+    return side((0, 8), 16, curve=-3, head=40, face=10, head_top=True,
+                armN=('A', -95, 0), armF=('A', -93, 2),
+                legN=((-77, 6), -1), legF=((-78, 6), -1), footN=183, footF=183)
+
+
+ALL.update({"banana_f": banana_floor, "rbutterfly_f": reclined_butterfly, "kcircles_f": knee_circles,
+            "openbook_f": open_book, "sphinx_f": sphinx})

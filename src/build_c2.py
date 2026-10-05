@@ -142,34 +142,6 @@ def card3(a, b, c, name, badge, text, mh=18):
             f'<div class="qt"><div class="qn">{T(name)}{b_}</div><div class="qcue">{T(text)}</div></div></div>')
 
 
-def menu_silla():
-    items = [
-        ("c_march", ("Marcha sentados: un pie, el otro.", "Marche assise : un pied, puis l’autre.")),
-        ("legext_c", ("Estiramos una pierna delante y volvemos; derecha, izquierda.", "On tend une jambe devant et on revient ; droite, gauche.")),
-        ("heeltoe_chair", ("Talón en el suelo… punta en el suelo.", "Talon au sol… pointe au sol.")),
-        ("chair_cat", ("Gato-vaca: pequeños movimientos de la pelvis.", "Chat-vache : petits mouvements du bassin.")),
-        ("cactus_c", ("Abrir el pecho, brazos en cactus.", "Ouvrir la poitrine, bras en cactus.")),
-        ("c_side_R", ("Inclinación lateral, un lado y el otro.", "Inclinaison latérale, un côté puis l’autre.")),
-        ("chair_hamstring", ("Talón delante, el pecho un poco hacia delante.", "Talon devant, la poitrine un peu vers l’avant.")),
-        ("fig4_chair", ("El número 4 para la cadera.", "Le chiffre 4 pour la hanche.")),
-        ("calf_chair", ("Pierna estirada, puntas del pie hacia nosotros.", "Jambe tendue, pointes du pied vers soi.")),
-    ]
-    lab = "SILLA" if L == "es" else "CHAISE"
-    cells = "".join(f'<div class="mi"><div class="f2">{fig(p, max_w=26, max_h=19, cap=0.13)}'
-                    f'<span class="fl lc">{lab}</span></div><span>{T(t)}</span></div>' for p, t in items)
-    if L == "es":
-        title = "Menú silla · para quien se queda sentado"
-        when = ("¿Cuándo? Cada vez que los demás hacen una versión de pie: el saludo de pie (5), los guerreros de pie (6) "
-                "y el águila de pie (7). Quien se queda en la silla elige uno o dos de estos ejercicios y los repite despacio.")
-    else:
-        title = "Menu chaise · pour ceux qui restent assis"
-        when = ("Quand ? Chaque fois que les autres font une version debout : la salutation debout (5), les guerriers "
-                "debout (6) et l’aigle debout (7). Ceux qui restent sur la chaise choisissent un ou deux de ces exercices et "
-                "les répètent lentement.")
-    return (f'<div class="menu"><div class="mt">{title}</div><div class="mw">{T(when)}</div>'
-            f'<div class="mg">{cells}</div></div>')
-
-
 def part(n, es_t, fr_t):
     return (f'<div class="part"><span>{"PARTE" if L == "es" else "PARTIE"} {n}</span>'
             f'{es_t if L == "es" else fr_t}</div>')
@@ -301,7 +273,6 @@ P_ALL = [
             "((3 resp.))")),
     ], cols=3),
     part(1, "De pie o en la silla · 0:22 – 0:44", "Debout ou sur la chaise · 0:22 – 0:44"),
-    menu_silla(),
     band(4, ("Antes del saludo: aprendemos tres posiciones", "Avant la salutation : on apprend trois positions"), "0:22 – 0:25"),
     note("explique-les une par une, montre, et laisse-les essayer. <b>« Dos long » ne veut pas dire dos vertical</b> : on se "
          "penche en avant depuis les hanches, dos plat. La dernière fois ils restaient droits."),
@@ -475,6 +446,44 @@ P_ALL = [
             "la última. [SU]Tumbados, brazos en cruz: rodillas juntas a la derecha, a la izquierda.[/SU]",
             "On expire : on laisse tomber la poitrine vers les cuisses, bras pendants. ((4 resp.)) On remonte très "
             "lentement, la tête en dernier. [SU]Allongés, bras en croix : genoux serrés à droite, puis à gauche.[/SU]")),
+    ], cols=3),
+    band("8b", ("Más en el suelo", "Plus au sol"), "", opt=True),
+    grid([
+        card2("c_side_R", "banana_f", "F", ("La banana", "La banane"), ("4 resp./lado", "4 resp./côté"), (
+            "Tumbados boca arriba, brazos por encima de la cabeza. Llevamos los pies y las manos un poco hacia la derecha: "
+            "el cuerpo hace una banana y se estira el lado izquierdo. ((4 resp.)) Volvemos al centro y cambiamos. "
+            "[C]Inclinación lateral, una mano en el reposabrazos, el otro brazo arriba.[/C]",
+            "Allongés sur le dos, bras au-dessus de la tête. On emmène les pieds et les mains un peu vers la droite : le "
+            "corps fait une banane et le côté gauche s’étire. ((4 resp.)) On revient au centre et on change. "
+            "[C]Inclinaison latérale, une main sur l’accoudoir, l’autre bras en haut.[/C]")),
+        card2("chair_sit", "rbutterfly_f", "F", ("Mariposa tumbada", "Papillon allongé"), ("6 resp.", "6 resp."), (
+            "Tumbados, plantas de los pies juntas, las rodillas se abren y caen hacia los lados. Si tira, ponemos las manos "
+            "debajo de las rodillas. Inhalamos, el vientre sube; exhalamos, las caderas se sueltan. ((6 resp.)) "
+            "[C]Sentados al borde, rodillas abiertas, plantas de los pies juntas o pies separados.[/C]",
+            "Allongés, plantes des pieds jointes, les genoux s’ouvrent et tombent sur les côtés. Si ça tire, on met les mains "
+            "sous les genoux. On inspire, le ventre monte ; on expire, les hanches se relâchent. ((6 resp.)) "
+            "[C]Assis au bord, genoux ouverts, plantes des pieds jointes ou pieds écartés.[/C]")),
+        card2("chair_knee", "kcircles_f", "F", ("Círculos de rodillas", "Cercles des genoux"), ("5 + 5", "5 + 5"), (
+            "Tumbados, rodillas al pecho, manos sobre las rodillas. Hacemos pequeños círculos con las rodillas: masaje "
+            "para la espalda baja. ((5 círculos)) Cambiamos de sentido. [C]Abrazamos una rodilla y hacemos "
+            "pequeños círculos con el pie; cambiamos.[/C]",
+            "Allongés, genoux à la poitrine, mains sur les genoux. On fait de petits cercles avec les genoux : un massage "
+            "pour le bas du dos. ((5 cercles)) On change de sens. [C]On serre un genou et on fait de petits "
+            "cercles avec le pied ; on change.[/C]")),
+        card2("c_twist", "openbook_f", "F", ("El libro abierto", "Le livre ouvert"), ("3 veces/lado", "3 fois/côté"), (
+            "Tumbados sobre el lado izquierdo, rodillas dobladas, brazos estirados delante, palmas juntas. Inhalamos: el brazo "
+            "derecho se abre hacia atrás como la página de un libro, la mirada lo sigue. Exhalamos: volvemos. ((3 veces)) "
+            "Cambiamos de lado. [C]Torsión suave, mano en el reposabrazos.[/C]",
+            "Allongés sur le côté gauche, genoux pliés, bras tendus devant, paumes jointes. On inspire : le bras droit "
+            "s’ouvre vers l’arrière comme la page d’un livre, le regard le suit. On expire : on revient. ((3 fois)) "
+            "On change de côté. [C]Torsion douce, main sur l’accoudoir.[/C]")),
+        card2("chest_chair", "sphinx_f", "F", ("La esfinge", "Le sphinx"), ("4 resp.", "4 resp."), (
+            "Tumbados boca abajo, codos debajo de los hombros, antebrazos en el suelo. El pecho se abre hacia delante, "
+            "los hombros lejos de las orejas. ((4 resp.)) Bajamos despacio. Si molesta la espalda baja, nos quedamos "
+            "con la frente en las manos. [C]Manos detrás en el asiento, abrimos el pecho.[/C]",
+            "Allongés sur le ventre, coudes sous les épaules, avant-bras au sol. La poitrine s’ouvre vers l’avant, les "
+            "épaules loin des oreilles. ((4 resp.)) On redescend doucement. Si le bas du dos gêne, on reste le front sur "
+            "les mains. [C]Mains derrière sur l’assise, on ouvre la poitrine.[/C]")),
     ], cols=3),
     band(9, ("Relajación · 5 minutos", "Relaxation · 5 minutes"), "0:51 – 0:56"),
     grid([card2("c_relax", "savasana", "F", ("Relajación", "Relaxation"), ("5 min", "5 min"), (
