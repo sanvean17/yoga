@@ -202,16 +202,18 @@ P_ALL = [
     '</div></div>',
     band(1, ("Bienvenida · las reglas", "Accueil · les règles"), "0:00 – 0:04"),
     grid([card2("chair_sit", "tadasana", "P", ("Cada uno a su manera", "Chacun à sa façon"), None, (
-        "Hola a todos, bienvenidos. Hoy, en cada ejercicio, os enseñaré las opciones: **en la silla, de pie o en el "
-        "suelo**. A veces solo hay la opción de la silla. Cada uno elige lo que mejor le va hoy. **Sin presión: ninguna "
+        "Hola a todos, bienvenidos. Hoy, en cada ejercicio, os enseñaré todas las opciones: **en la silla, de pie o en "
+        "el suelo**. Todo se puede hacer en la silla, y también podemos mezclar: una parte en la silla, otra de pie, "
+        "otra en el suelo. Cada uno elige lo que mejor le va hoy. **Sin presión: ninguna "
         "opción es mejor que otra.** De pie, no dudéis en usar la silla para apoyaros. Con las sesiones, poco a poco, "
         "quizás la necesitaréis menos… o no, y está muy bien así: no hay ningún estrés. "
         "Lo más importante: **no forzamos nunca. Escuchamos nuestro cuerpo.** Si algo duele o no es posible, no pasa "
         "nada: descansamos. Vamos despacio; así es como mejoramos, poco a poco. **Mejor menos amplitud que hacer "
         "demasiado**: por ejemplo, mejor bajar un poco con la espalda larga que bajar mucho redondeando la espalda. "
         "La respiración es la clave para soltar; la amplitud llega sola, milímetro a milímetro.",
-        "Bonjour à tous, bienvenue. Aujourd’hui, à chaque exercice, je vous montrerai les options : **sur la chaise, "
-        "debout ou au sol**. Parfois il n’y a que l’option chaise. Chacun choisit ce qui lui convient le mieux aujourd’hui. "
+        "Bonjour à tous, bienvenue. Aujourd’hui, à chaque exercice, je vous montrerai toutes les options : **sur la "
+        "chaise, debout ou au sol**. Tout peut se faire sur la chaise, et on peut aussi mélanger : une partie sur la chaise, "
+        "une autre debout, une autre au sol. Chacun choisit ce qui lui convient le mieux aujourd’hui. "
         "**Aucune pression : aucune option n’est meilleure qu’une autre.** Debout, n’hésitez pas à utiliser la chaise pour "
         "vous appuyer. Au fil des séances, peu à peu, vous en aurez peut-être moins besoin… ou pas, et c’est très bien "
         "comme ça : il n’y a aucun stress. "
