@@ -481,11 +481,13 @@ P_ALL = [
             "Bras en cactus : coudes à hauteur d’épaules, mains en haut. On inspire, on ouvre la poitrine et on emmène les "
             "coudes un peu en arrière. ((4 resp.)) [SU]Allongés, genoux pliés ou jambes allongées : bras en cactus au sol, le "
             "dos des mains posé.[/SU]")),
-        card2("c_fold", "twist_R", "F", ("V · Soltar la espalda", "V · Relâcher le dos"), ("4 resp.", "4 resp."), (
-            "Exhalamos: dejamos caer el pecho hacia los muslos, brazos colgando. ((4 resp.)) Subimos muy despacio, la cabeza "
-            "la última. [SU]Tumbados, brazos en cruz: rodillas juntas a la derecha, a la izquierda. Luego nos ponemos sobre el lado izquierdo.[/SU]",
-            "On expire : on laisse tomber la poitrine vers les cuisses, bras pendants. ((4 resp.)) On remonte très "
-            "lentement, la tête en dernier. [SU]Allongés, bras en croix : genoux serrés à droite, puis à gauche. Puis on se met sur le côté gauche.[/SU]")),
+        card2("c_hinge", "twist_R", "F", ("V · Soltar la espalda", "V · Relâcher le dos"), ("4 resp.", "4 resp."), (
+            "Manos en los muslos, espalda larga. Exhalamos: nos inclinamos un poco hacia delante desde las caderas. ((4 resp.)) "
+            "Subimos despacio. [MC]Si estamos cómodos, soltamos del todo: el pecho hacia los muslos, brazos colgando; "
+            "subimos muy despacio, la cabeza la última.[/MC] [SU]Tumbados, brazos en cruz: rodillas juntas a la derecha, a la izquierda. Luego nos ponemos sobre el lado izquierdo.[/SU]",
+            "Mains sur les cuisses, dos long. On expire : on se penche un peu en avant depuis les hanches. ((4 resp.)) On "
+            "remonte doucement. [MC]Si on est à l’aise, on relâche complètement : la poitrine vers les cuisses, bras "
+            "pendants ; on remonte très lentement, la tête en dernier.[/MC] [SU]Allongés, bras en croix : genoux serrés à droite, puis à gauche. Puis on se met sur le côté gauche.[/SU]")),
         card2("c_twist", "openbook_f", "F", ("Torsión · el libro abierto", "Torsion · le livre ouvert"), ("3 veces/lado", "3 fois/côté"), (
             "Mano izquierda en el reposabrazos derecho. Inhalamos: espalda larga. Exhalamos: giramos hacia la derecha, "
             "la mirada sigue. ((3 resp.)) Cambiamos. [SU]Tumbados sobre el lado izquierdo, rodillas dobladas, brazos "
