@@ -202,16 +202,24 @@ P_ALL = [
     '</div></div>',
     band(1, ("Bienvenida · las reglas", "Accueil · les règles"), "0:00 – 0:04"),
     grid([card2("chair_sit", "tadasana", "P", ("Cada uno a su manera", "Chacun à sa façon"), None, (
-        "Hola a todos, bienvenidos. Hoy todo se puede hacer **de pie, en la silla o en el suelo**: os enseñaré las "
-        "opciones y cada uno elige. Lo más importante: **no forzamos nunca. Escuchamos nuestro cuerpo.** Si algo duele o "
-        "no es posible, no pasa nada: descansamos, o lo hacemos poco a poco. "
-        "La respiración es la clave para soltar y ganar amplitud. La amplitud llega poco a poco, milímetro a milímetro. "
-        "No pasa nada si hoy no podemos bajar mucho: no es el objetivo.",
-        "Bonjour à tous, bienvenue. Aujourd’hui tout peut se faire **debout, sur la chaise ou au sol** : je vous montrerai "
-        "les options et chacun choisit. Le plus important : **on ne force jamais. On écoute son corps.** Si quelque chose "
-        "fait mal ou n’est pas possible, ce n’est pas grave : on se repose, ou on y va petit à petit. La respiration est la "
-        "clé pour relâcher et gagner en amplitude. L’amplitude vient peu à peu, millimètre par millimètre. Ce n’est pas "
-        "grave si aujourd’hui on ne peut pas descendre bas : ce n’est pas le but."))], cols=1),
+        "Hola a todos, bienvenidos. Hoy, en cada ejercicio, os enseñaré las opciones: **en la silla, de pie o en el "
+        "suelo**. A veces solo hay la opción de la silla. Cada uno elige lo que mejor le va hoy. **Sin presión: ninguna "
+        "opción es mejor que otra.** De pie, no dudéis en usar la silla para apoyaros. Con las sesiones, poco a poco, "
+        "quizás la necesitaréis menos… o no, y está muy bien así: no hay ningún estrés. "
+        "Lo más importante: **no forzamos nunca. Escuchamos nuestro cuerpo.** Si algo duele o no es posible, no pasa "
+        "nada: descansamos. Vamos despacio; así es como mejoramos, poco a poco. **Mejor menos amplitud que hacer "
+        "demasiado**: por ejemplo, mejor bajar un poco con la espalda larga que bajar mucho redondeando la espalda. "
+        "La respiración es la clave para soltar; la amplitud llega sola, milímetro a milímetro.",
+        "Bonjour à tous, bienvenue. Aujourd’hui, à chaque exercice, je vous montrerai les options : **sur la chaise, "
+        "debout ou au sol**. Parfois il n’y a que l’option chaise. Chacun choisit ce qui lui convient le mieux aujourd’hui. "
+        "**Aucune pression : aucune option n’est meilleure qu’une autre.** Debout, n’hésitez pas à utiliser la chaise pour "
+        "vous appuyer. Au fil des séances, peu à peu, vous en aurez peut-être moins besoin… ou pas, et c’est très bien "
+        "comme ça : il n’y a aucun stress. "
+        "Le plus important : **on ne force jamais. On écoute son corps.** Si quelque chose fait mal ou n’est pas possible, "
+        "ce n’est pas grave : on se repose. On y va lentement ; c’est comme ça qu’on progresse, petit à petit. **Mieux "
+        "vaut moins d’amplitude que d’en faire trop** : par exemple, mieux vaut descendre un peu avec le dos long que "
+        "descendre beaucoup en arrondissant le dos. La respiration est la clé pour relâcher ; l’amplitude vient toute "
+        "seule, millimètre par millimètre."))], cols=1),
     band(2, ("Respiración de inicio", "Respiration du début"), "0:04 – 0:10"),
     grid([
         card2("r_chair", "r_floor", "F", ("A · Respiración en tres partes", "A · Respiration en trois parties"), ("5 resp.", "5 resp."), (
