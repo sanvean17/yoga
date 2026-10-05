@@ -1343,3 +1343,22 @@ def sphinx():
 
 ALL.update({"banana_f": banana_floor, "rbutterfly_f": reclined_butterfly, "kcircles_f": knee_circles,
             "openbook_f": open_book, "sphinx_f": sphinx})
+
+
+def chair_hinge():
+    """seated, bending forward from the hips with a long back, hands sliding toward the knees."""
+    f = side((0, 48), 38, head=30, face=-30,
+             armN=((42, 54), 1), armF=((40, 54), 1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def stand_hinge():
+    """standing, knees softly bent, bending from the hips with a long back, hands on the thighs/knees."""
+    return side((-16, 70), 14, head=8, face=-30,
+                armN=((6, 46), 1), armF=((4, 46), 1),
+                legN=((1, 4), 1), legF=((-1, 4), 1), footN=-4, footF=-4)
+
+
+ALL.update({"c_hinge": chair_hinge, "hinge": stand_hinge})
