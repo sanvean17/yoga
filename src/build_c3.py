@@ -269,7 +269,7 @@ P_ALL = [
             "On inspire par le nez et on ouvre ou on monte les bras, lentement. On expire et on les redescend lentement. Le "
             "mouvement dure autant que la respiration. ((5 fois)) Les bras montent seulement jusqu’où c’est confortable.")),
     ]),
-    band(3, ("Calentamiento · en la silla, de pie o en el suelo", "Échauffement · sur la chaise, debout ou au sol"), "0:12 – 0:20"),
+    band(3, ("Calentamiento · en la silla, de pie o en el suelo", "Échauffement · sur la chaise, debout ou au sol"), "0:12 – 0:22"),
     note("on reprend le cou, les épaules, l’inclinaison et la torsion. <b>Nouveau</b> : la marche et les talons, qui "
          "réveillent les jambes et les chevilles pour l’équilibre."),
     grid([
@@ -321,8 +321,8 @@ P_ALL = [
             "Mains sur les genoux. On inspire, on ouvre la poitrine. On expire, on arrondit un peu le dos. [SU]À quatre "
             "pattes, si les genoux sont à l’aise.[/SU]")),
     ], cols=3),
-    part(1, "De pie o en la silla · 0:20 – 0:44", "Debout ou sur la chaise · 0:20 – 0:44"),
-    band(4, ("Recordamos las tres posiciones", "On se rappelle les trois positions"), "0:20 – 0:22"),
+    part(1, "De pie o en la silla · 0:22 – 0:46", "Debout ou sur la chaise · 0:22 – 0:46"),
+    band(4, ("Recordamos las tres posiciones", "On se rappelle les trois positions"), "0:22 – 0:24"),
     note("rappel rapide, on les connaît déjà : montre-toi de profil et fais-les essayer une fois. Rappel : « fermer le "
          "livre » (mains dans le pli des hanches) aide à trouver le dos long."),
     grid([
@@ -343,7 +343,7 @@ P_ALL = [
             "le dos long.[/DP]")),
     ], cols=3),
     '<div class="keep2">',
-    band(5, ("Saludo al sol · con el guerrero I · 3 o 4 rondas", "Salutation au soleil · avec le guerrier I · 3 ou 4 rondes"), "0:22 – 0:31"),
+    band(5, ("Saludo al sol · con el guerrero I · 3 o 4 rondas", "Salutation au soleil · avec le guerrier I · 3 ou 4 rondes"), "0:24 – 0:33"),
     note("<b>comment la faire évoluer</b> : on garde la même base et on change <b>une seule chose</b> par semaine. Cette "
          "semaine, les étapes 5 et 6 deviennent le <b>Guerrier I</b> (qu’ils connaissent déjà). Ronde 1 : comme la semaine "
          "dernière (jambe devant / pied arrière), pour se rappeler. Rondes 2 et 3 : avec le Guerrier I, jambe gauche en "
@@ -353,7 +353,7 @@ P_ALL = [
     '<div class="sl2">' + ("SENTADOS" if L == "es" else "ASSIS") + '</div>' + strip(SUN_SEAT, 0.13) +
     '<div class="sl2">' + ("DE PIE" if L == "es" else "DEBOUT") + '</div>' + strip(SUN_STAND, 0.13) + '</div>',
     steps(SUN_STEPS),
-    band(6, ("Guerrero I, guerrero inverso y diosa", "Guerrier I, guerrier inversé et déesse"), "0:31 – 0:40"),
+    band(6, ("Guerrero I, guerrero inverso y diosa", "Guerrier I, guerrier inversé et déesse"), "0:33 – 0:42"),
     note("deux postures qu’on répète (Guerrier I, déesse) et <b>une nouvelle</b> : le guerrier inversé. <b>Avec "
          "accoudoirs</b> : ils s’assoient tout au bord, devant les accoudoirs. Côté droit d’abord, puis gauche. Debout : "
          "chaise ou mur à côté de la jambe avant."),
@@ -394,7 +394,7 @@ P_ALL = [
             "[DP]Pieds écartés, genoux un peu pliés, une main sur la chaise si besoin. On expire, on plie un peu plus les "
             "genoux ; on inspire, on les allonge sans les bloquer. Sans descendre beaucoup.[/DP]")),
     ], cols=3),
-    band(7, ("Equilibrio · la rodilla arriba", "Équilibre · le genou levé"), "0:40 – 0:44"),
+    band(7, ("Equilibrio · la rodilla arriba", "Équilibre · le genou levé"), "0:42 – 0:46"),
     note("nouvel équilibre (on a déjà fait l’arbre et l’aigle). Fixer un point immobile au sol, deux mètres devant. Si "
          "quelqu’un vacille : il repose le pied, c’est normal, on recommence. Le genou monte seulement jusqu’où c’est "
          "confortable, pas besoin d’arriver à la hauteur de la hanche."),
@@ -416,8 +416,8 @@ P_ALL = [
         "[MC]Sans appui : mains à la poitrine ; si on est à l’aise, les bras montent. Le genou monte vers la hauteur de la "
         "hanche.[/MC]"))], cols=1),
     '<div style="break-before:page"></div>',
-    part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
-    band(8, ("Estiramientos · en la silla o en el suelo", "Étirements · sur la chaise ou au sol"), "0:44 – 0:51"),
+    part(2, "En la silla o en el suelo · 0:46 – 1:00", "Sur la chaise ou au sol · 0:46 – 1:00"),
+    band(8, ("Estiramientos · en la silla o en el suelo", "Étirements · sur la chaise ou au sol"), "0:46 – 0:51"),
     note("on en reprend certains et on mélange : <b>nouveaux</b> = flexion jambes longues et « brazo y pierna » (à quatre "
          "pattes). Ordre au sol : assis → sur le dos → à quatre pattes → l’enfant → sur le dos pour la relaxation. Ceux qui "
          "vont au sol descendent doucement, une main sur la chaise. Tu choisis selon le temps. Ostéoporose : dans la flexion "
