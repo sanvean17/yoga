@@ -1362,3 +1362,25 @@ def stand_hinge():
 
 
 ALL.update({"c_hinge": chair_hinge, "hinge": stand_hinge})
+
+
+def w1_chair_prep():
+    """seated warrior I legs (right foot front, left leg back), hands resting on the front thigh."""
+    f = side((0, 48), 90, head=90, armN=((24, 54), 1), armF=((22, 54), 1),
+             legN=('A', 0, -90), footN=0, legF=((-64, 6), -1), footF=-30, sideN=R, sideF=L)
+    chair(f, -16, back_left=True, depth=30)
+    return f
+
+
+ALL.update({"w1_chair_prep": w1_chair_prep})
+
+
+def bird_dog():
+    """table (hands and knees): right arm reaches forward, left leg reaches back."""
+    k = _knees()
+    return side((0, 47), 4, head=4, face=-40,
+                armN=('A', 2, 2), armF=((48, 1), -1), sideN=R, sideF=L,
+                legN=k["legN"], footN=k.get("footN"), legF=('A', 182, 182), footF=0)
+
+
+ALL.update({"bird_dog": bird_dog})
