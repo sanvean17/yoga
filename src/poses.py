@@ -1384,3 +1384,20 @@ def bird_dog():
 
 
 ALL.update({"bird_dog": bird_dog})
+
+
+def knee_stand_chair():
+    """standing knee lift, one hand on the chair back (chair behind)."""
+    f = side((0, 81.5), 90, armN=((10, 84), 1), armF=((-36, 86), 1),
+             legN=('A', 0, -90), footN=0, legF=((-1, 4), 1), footF=-4, sideN=R, sideF=L)
+    chair(f, -78, back_left=False)
+    return f
+
+
+def knee_stand_up():
+    """standing knee lift without support, arms up."""
+    return side((0, 81.5), 90, head=95, armN=((5, 181), -1), armF=((2, 181), -1),
+                legN=('A', 0, -90), footN=0, legF=((-1, 4), 1), footF=-4, sideN=R, sideF=L)
+
+
+ALL.update({"knee_stand_chair": knee_stand_chair, "knee_stand_up": knee_stand_up})

@@ -237,7 +237,24 @@ P_ALL = [
         "n’est pas grave : on se repose. On y va lentement ; c’est comme ça qu’on progresse, petit à petit. **Mieux vaut "
         "moins d’amplitude que d’en faire trop.** Aujourd’hui on reprend ce qu’on connaît déjà et on ajoute quelques "
         "nouveautés."))], cols=1),
-    band(2, ("Respiración de inicio", "Respiration du début"), "0:04 – 0:10"),
+    band(2, ("Respiración · la clave del yoga", "Respiration · la clé du yoga"), "0:04 – 0:12"),
+    note("prends le temps : c’est le fil de tout le cours. Pendant les exercices, répète souvent la règle : « on inspire, "
+         "on ouvre ; on expire, on ferme »."),
+    grid([card2("c_breath", "arms_up", "P", ("El yoga es respiración", "Le yoga, c’est la respiration"), None, (
+        "**El yoga es, ante todo, respiración.** Hoy nos fijamos en ella. Respiramos **por la nariz**, tranquilos, sin "
+        "ruido. Una regla sencilla: **inhalamos cuando abrimos o subimos**: los brazos suben, el pecho se abre, la espalda "
+        "se alarga. **Exhalamos cuando cerramos o bajamos**: nos inclinamos, giramos, bajamos los brazos, entramos en el "
+        "estiramiento. El movimiento sigue a la respiración, no al revés: si el aire se acaba, esperamos a la siguiente. "
+        "**Nunca retenemos el aire.** En las posturas que mantenemos, cada exhalación ayuda a soltar un poco más. Si nos "
+        "perdemos, no pasa nada: respiramos normalmente y volvemos cuando podamos. "
+        "Probamos: inhalamos y subimos los hombros; exhalamos y los bajamos. ((3 veces))",
+        "**Le yoga, c’est avant tout la respiration.** Aujourd’hui on y fait attention. On respire **par le nez**, "
+        "tranquillement, sans bruit. Une règle simple : **on inspire quand on ouvre ou qu’on monte** : les bras montent, "
+        "la poitrine s’ouvre, le dos s’allonge. **On expire quand on ferme ou qu’on descend** : on se penche, on tourne, on "
+        "descend les bras, on entre dans l’étirement. Le mouvement suit la respiration, pas l’inverse : si l’air se "
+        "termine, on attend la respiration suivante. **On ne retient jamais l’air.** Dans les postures qu’on tient, chaque "
+        "expiration aide à relâcher un peu plus. Si on se perd, ce n’est pas grave : on respire normalement et on revient "
+        "quand on peut. On essaie : on inspire et on monte les épaules ; on expire et on les descend. ((3 fois))"))], cols=1),
     grid([
         card2("r_chair", "r_floor", "F", ("Respiración en tres partes", "Respiration en trois parties"), ("5 resp.", "5 resp."), (
             "Cerramos los ojos si queréis. Una mano en el abdomen. Inhalamos: el abdomen se llena suavemente… las "
@@ -252,9 +269,9 @@ P_ALL = [
             "On inspire par le nez et on ouvre ou on monte les bras, lentement. On expire et on les redescend lentement. Le "
             "mouvement dure autant que la respiration. ((5 fois)) Les bras montent seulement jusqu’où c’est confortable.")),
     ]),
-    band(3, ("Calentamiento · en la silla, de pie o en el suelo", "Échauffement · sur la chaise, debout ou au sol"), "0:10 – 0:20"),
+    band(3, ("Calentamiento · en la silla, de pie o en el suelo", "Échauffement · sur la chaise, debout ou au sol"), "0:12 – 0:20"),
     note("on reprend le cou, les épaules, l’inclinaison et la torsion. <b>Nouveau</b> : la marche et les talons, qui "
-         "réveillent les jambes et les chevilles pour l’arbre."),
+         "réveillent les jambes et les chevilles pour l’équilibre."),
     grid([
         card2("c_neck", "seated_neck", "F", ("Cuello", "Cou"), ("3 resp./lado", "3 resp./côté"), (
             "Exhalamos: oreja derecha hacia el hombro derecho. ((3 resp.)) Al centro, y al otro lado. Después giramos la "
@@ -377,25 +394,27 @@ P_ALL = [
             "[DP]Pieds écartés, genoux un peu pliés, une main sur la chaise si besoin. On expire, on plie un peu plus les "
             "genoux ; on inspire, on les allonge sans les bloquer. Sans descendre beaucoup.[/DP]")),
     ], cols=3),
-    band(7, ("Equilibrio · el árbol", "Équilibre · l’arbre"), "0:40 – 0:44"),
-    note("le pied ne se pose <b>jamais contre le genou</b> : cheville, mollet ou cuisse. Fixer un point immobile au sol, "
-         "deux mètres devant. Si quelqu’un vacille : il repose le pied, c’est normal, on recommence."),
-    grid([card3("c_tree_R", "tree_wall", "tree_R", ("Árbol · tres niveles", "Arbre · trois niveaux"), ("3 resp./lado", "3 resp./côté"), (
-        "Miramos un punto fijo en el suelo. **En la silla:** al borde, espalda larga. Abrimos la rodilla derecha hacia fuera "
-        "y apoyamos la planta del pie derecho contra la pierna izquierda, en el tobillo o en la pantorrilla. Manos juntas "
-        "delante del pecho. ((3 resp.)) Cambiamos. "
-        "[DP]Una mano en la silla o en la pared. El talón derecho sobre el tobillo izquierdo, los dedos del pie se quedan "
-        "en el suelo, como una pata de cabra. La rodilla derecha se abre hacia fuera. La otra mano en el pecho, si "
-        "queremos.[/DP]"
-        "[MC]Sin apoyo: el pie sube a la pantorrilla o al muslo, nunca contra la rodilla. Manos al pecho o brazos arriba, "
-        "como ramas.[/MC]",
-        "On regarde un point fixe au sol. **Sur la chaise :** au bord, dos long. On ouvre le genou droit vers l’extérieur et "
-        "on pose la plante du pied droit contre la jambe gauche, sur la cheville ou le mollet. Mains jointes devant la "
-        "poitrine. ((3 resp.)) On change. "
-        "[DP]Une main sur la chaise ou au mur. Le talon droit sur la cheville gauche, les orteils restent au sol, comme une "
-        "béquille. Le genou droit s’ouvre vers l’extérieur. L’autre main sur la poitrine, si on veut.[/DP]"
-        "[MC]Sans appui : le pied monte au mollet ou à la cuisse, jamais contre le genou. Mains à la poitrine ou bras en haut, "
-        "comme des branches.[/MC]"))], cols=1),
+    band(7, ("Equilibrio · la rodilla arriba", "Équilibre · le genou levé"), "0:40 – 0:44"),
+    note("nouvel équilibre (on a déjà fait l’arbre et l’aigle). Fixer un point immobile au sol, deux mètres devant. Si "
+         "quelqu’un vacille : il repose le pied, c’est normal, on recommence. Le genou monte seulement jusqu’où c’est "
+         "confortable, pas besoin d’arriver à la hauteur de la hanche."),
+    grid([card3("knee_chair", "knee_stand_chair", "knee_stand_up", ("Rodilla arriba · tres niveles", "Genou levé · trois niveaux"), ("3 resp./lado", "3 resp./côté"), (
+        "Miramos un punto fijo en el suelo. **En la silla:** al borde, espalda larga, manos en el asiento o en los "
+        "reposabrazos. Inhalamos: subimos la rodilla derecha un poco, el pie se separa del suelo. ((3 resp.)) Exhalamos: "
+        "bajamos despacio. Cambiamos. "
+        "[DP]De pie, una mano en el respaldo o en la pared. El peso en el pie izquierdo. Inhalamos: subimos la rodilla "
+        "derecha un poco; si es mucho, solo el talón, la punta del pie se queda en el suelo. ((3 resp.)) Exhalamos: "
+        "bajamos. Cambiamos.[/DP]"
+        "[MC]Sin apoyo: manos al pecho; si estamos cómodos, los brazos suben. La rodilla sube hacia la altura de la "
+        "cadera.[/MC]",
+        "On regarde un point fixe au sol. **Sur la chaise :** au bord, dos long, mains sur l’assise ou les accoudoirs. On "
+        "inspire : on monte un peu le genou droit, le pied décolle du sol. ((3 resp.)) On expire : on redescend doucement. "
+        "On change. "
+        "[DP]Debout, une main sur le dossier ou au mur. Le poids sur le pied gauche. On inspire : on monte un peu le genou "
+        "droit ; si c’est trop, seulement le talon, la pointe du pied reste au sol. ((3 resp.)) On expire : on redescend. "
+        "On change.[/DP]"
+        "[MC]Sans appui : mains à la poitrine ; si on est à l’aise, les bras montent. Le genou monte vers la hauteur de la "
+        "hanche.[/MC]"))], cols=1),
     '<div style="break-before:page"></div>',
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Estiramientos · en la silla o en el suelo", "Étirements · sur la chaise ou au sol"), "0:44 – 0:51"),
