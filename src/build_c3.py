@@ -239,47 +239,55 @@ P_ALL = [
         "otra.** De pie, no dudéis en usar la silla para apoyaros. "
         "Lo más importante: **no forzamos nunca. Escuchamos nuestro cuerpo.** Si algo duele o no es posible, no pasa nada: "
         "descansamos. Vamos despacio; así es como mejoramos, poco a poco. **Mejor menos amplitud que hacer demasiado.** "
-        "Hoy retomamos lo que ya conocemos y añadimos algunas cosas nuevas.",
+        "Y hoy empezamos por lo más importante: **la respiración**.",
         "Bonjour à tous, rebienvenue. Comme toujours, à chaque exercice je vous montrerai toutes les options : **sur la "
         "chaise, debout ou au sol**. Tout peut se faire sur la chaise, et on peut aussi mélanger : une partie sur la chaise, "
         "une autre debout, une autre au sol. Chacun choisit ce qui lui convient le mieux aujourd’hui. **Aucune pression : "
         "aucune option n’est meilleure qu’une autre.** Debout, n’hésitez pas à utiliser la chaise pour vous appuyer. "
         "Le plus important : **on ne force jamais. On écoute son corps.** Si quelque chose fait mal ou n’est pas possible, ce "
         "n’est pas grave : on se repose. On y va lentement ; c’est comme ça qu’on progresse, petit à petit. **Mieux vaut "
-        "moins d’amplitude que d’en faire trop.** Aujourd’hui on reprend ce qu’on connaît déjà et on ajoute quelques "
-        "nouveautés."))], cols=1),
+        "moins d’amplitude que d’en faire trop.** Et aujourd’hui on commence par le plus important : **la respiration**."))], cols=1),
     band(2, ("Respiración · la clave del yoga", "Respiration · la clé du yoga"), "0:04 – 0:12"),
-    note("prends le temps : c’est le fil de tout le cours. Pendant les exercices, répète souvent la règle : « on inspire, "
-         "on ouvre ; on expire, on ferme »."),
+    note("prends le temps : c’est le fil de tout le cours. La dernière fois, certains n’arrivaient pas à tenir la "
+         "respiration guidée : dis-le clairement et répète souvent <b>« a vuestro ritmo »</b>. Pendant les exercices, "
+         "répète aussi la règle : « on inspire, on ouvre ; on expire, on ferme »."),
     grid([card2("c_breath", "arms_up", "P", ("El yoga es respiración", "Le yoga, c’est la respiration"), None, (
-        "**El yoga es, ante todo, respiración.** Hoy nos fijamos en ella. Respiramos **por la nariz**, tranquilos, sin "
-        "ruido. Una regla sencilla: **inhalamos cuando abrimos o subimos**: los brazos suben, el pecho se abre, la espalda "
-        "se alarga. **Exhalamos cuando cerramos o bajamos**: nos inclinamos, giramos, bajamos los brazos, entramos en el "
-        "estiramiento. El movimiento sigue a la respiración, no al revés: si el aire se acaba, esperamos a la siguiente. "
-        "**Nunca retenemos el aire.** En las posturas que mantenemos, cada exhalación ayuda a soltar un poco más. Si nos "
-        "perdemos, no pasa nada: respiramos normalmente y volvemos cuando podamos. "
+        "**El yoga es, ante todo, respiración.** Respiramos **por la nariz**, tranquilos, sin ruido. "
+        "**Cómo soltar:** con cada exhalación soltamos un poco: los hombros bajan, la mandíbula se suelta, el abdomen se "
+        "relaja. "
+        "**Cuándo respirar:** **inhalamos cuando abrimos o subimos**: los brazos suben, el pecho se abre, la espalda se "
+        "alarga. **Exhalamos cuando cerramos o bajamos**: nos inclinamos, giramos, bajamos los brazos, entramos en el "
+        "estiramiento. "
+        "**A vuestro ritmo:** cada uno tiene su respiración. Si no podéis seguir mi ritmo o los números que cuento, no "
+        "pasa nada: respirad a vuestro ritmo, más corto, y el movimiento sigue vuestra respiración. **Nunca retenemos el "
+        "aire** y nunca forzamos para que dure más. Si nos perdemos, respiramos normalmente y volvemos cuando podamos. "
         "Probamos: inhalamos y subimos los hombros; exhalamos y los bajamos. ((3 veces))",
-        "**Le yoga, c’est avant tout la respiration.** Aujourd’hui on y fait attention. On respire **par le nez**, "
-        "tranquillement, sans bruit. Une règle simple : **on inspire quand on ouvre ou qu’on monte** : les bras montent, "
-        "la poitrine s’ouvre, le dos s’allonge. **On expire quand on ferme ou qu’on descend** : on se penche, on tourne, on "
-        "descend les bras, on entre dans l’étirement. Le mouvement suit la respiration, pas l’inverse : si l’air se "
-        "termine, on attend la respiration suivante. **On ne retient jamais l’air.** Dans les postures qu’on tient, chaque "
-        "expiration aide à relâcher un peu plus. Si on se perd, ce n’est pas grave : on respire normalement et on revient "
-        "quand on peut. On essaie : on inspire et on monte les épaules ; on expire et on les descend. ((3 fois))"))], cols=1),
+        "**Le yoga, c’est avant tout la respiration.** On respire **par le nez**, tranquillement, sans bruit. "
+        "**Comment relâcher :** à chaque expiration on relâche un peu : les épaules descendent, la mâchoire se desserre, le "
+        "ventre se détend. "
+        "**Quand respirer :** **on inspire quand on ouvre ou qu’on monte** : les bras montent, la poitrine s’ouvre, le dos "
+        "s’allonge. **On expire quand on ferme ou qu’on descend** : on se penche, on tourne, on descend les bras, on entre "
+        "dans l’étirement. "
+        "**À votre rythme :** chacun a sa respiration. Si vous n’arrivez pas à suivre mon rythme ou les chiffres que je "
+        "compte, ce n’est pas grave : respirez à votre rythme, plus court, et le mouvement suit votre respiration. **On ne "
+        "retient jamais l’air** et on ne force jamais pour qu’il dure plus longtemps. Si on se perd, on respire normalement "
+        "et on revient quand on peut. On essaie : on inspire et on monte les épaules ; on expire et on les descend. "
+        "((3 fois))"))], cols=1),
     grid([
         card2("r_chair", "r_floor", "F", ("Respiración en tres partes", "Respiration en trois parties"), ("5 resp.", "5 resp."), (
             "Cerramos los ojos si queréis. Una mano en el abdomen. Inhalamos: el abdomen se llena suavemente… las "
             "costillas se abren… el pecho sube un poco. Exhalamos despacio: el pecho, las costillas, el abdomen. Como una "
-            "ola. Sin forzar. ((5 respiraciones))",
+            "ola. Sin forzar, a vuestro ritmo. ((5 respiraciones))",
             "On ferme les yeux si vous voulez. Une main sur le ventre. On inspire : le ventre se remplit doucement… les côtes "
             "s’ouvrent… la poitrine monte un peu. On expire lentement : la poitrine, les côtes, le ventre. Comme une vague. "
-            "Sans forcer. ((5 respirations))")),
+            "Sans forcer, à votre rythme. ((5 respirations))")),
         card2("c_breath", "arms_up", "P", ("Brazos y respiración", "Bras et respiration"), ("5 veces", "5 fois"), (
             "Inhalamos por la nariz y abrimos o subimos los brazos, despacio. Exhalamos y los bajamos lentamente. El "
             "movimiento dura lo mismo que la respiración. ((5 veces)) Los brazos suben solo hasta donde es cómodo.",
             "On inspire par le nez et on ouvre ou on monte les bras, lentement. On expire et on les redescend lentement. Le "
             "mouvement dure autant que la respiration. ((5 fois)) Les bras montent seulement jusqu’où c’est confortable.")),
     ]),
+    '<div style="break-before:page"></div>',
     band(3, ("Calentamiento · en la silla o en el suelo", "Échauffement · sur la chaise ou au sol"), "0:12 – 0:22"),
     note("tout le début se fait <b>assis ou au sol</b>, sans se relever : ceux qui sont au sol restent assis en tailleur, "
          "puis passent à quatre pattes pour la fin. On reprend ce qu’ils connaissent (cou, épaules, poignets/chevilles, "
@@ -594,9 +602,9 @@ P_ALL = [
     grid([
         card2("chair_sit", "seated_cross", "F", ("Exhalación un poco más larga", "Expiration un peu plus longue"), ("6 veces", "6 fois"), mh=13, text=(
             "Ojos cerrados. Inhalamos despacio por la nariz… dos, tres, cuatro. Exhalamos despacio… dos, tres, cuatro, cinco, "
-            "seis. Sin forzar: si cuesta, exhalamos hasta cinco. Sin retener el aire. ((6 veces))",
+            "seis. Si los números son demasiado largos, contamos menos o respiramos a nuestro ritmo: lo importante es que la exhalación sea un poco más larga. Sin retener el aire. ((6 veces))",
             "Yeux fermés. On inspire lentement par le nez… deux, trois, quatre. On expire lentement… deux, trois, quatre, cinq, "
-            "six. Sans forcer : si c’est difficile, on expire sur cinq. Sans retenir l’air. ((6 fois))")),
+            "six. Si les chiffres sont trop longs, on compte moins ou on respire à son rythme : l’important, c’est que l’expiration soit un peu plus longue. Sans retenir l’air. ((6 fois))")),
         card2("chair_sit", "seated_cross", "F", ("Contar hacia atrás y cierre", "Compter à l’envers et clôture"), ("10 resp.", "10 resp."), mh=13, text=(
             "Ojos cerrados. Contamos cada exhalación, en silencio, de diez a uno. Si perdemos la cuenta, volvemos a diez, "
             "sin prisa. Manos delante del pecho: gracias por practicar conmigo. Namasté.",
