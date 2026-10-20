@@ -199,12 +199,18 @@ SUN_STEPS = [
          "[DP]Manos en el respaldo, caminamos un poco atrás; o manos en los muslos.[/DP]",
          "**Dos long.** On inspire : on remonte un peu, le dos plat comme une table. Regard au sol. "
          "[DP]Mains sur le dossier, on recule un peu ; ou mains sur les cuisses.[/DP]")),
-    (5, ("**NUEVO EN EL SALUDO · Pierna izquierda atrás.** Exhalamos: subimos el torso; giramos un poco en la silla y la pierna "
-         "izquierda va atrás, al lado de la silla, la punta del pie apoyada. Manos en el muslo derecho. "
-         "[DP]El pie izquierdo da un paso atrás, rodilla derecha un poco doblada, una mano en la silla.[/DP]",
-         "**NOUVEAU DANS LA SALUTATION · Jambe gauche en arrière.** On expire : on redresse le buste ; on tourne un peu sur la chaise et la "
-         "jambe gauche va en arrière, à côté de la chaise, la pointe du pied posée. Mains sur la cuisse droite. "
-         "[DP]Le pied gauche recule d’un pas, genou droit un peu plié, une main sur la chaise.[/DP]")),
+    (5, ("**NUEVO EN EL SALUDO · Pierna izquierda atrás.** Exhalamos: subimos el torso; giramos un poco en la silla, el "
+         "muslo derecho sobre la silla, y la pierna izquierda va atrás, al lado de la silla, la punta del pie apoyada. El "
+         "pecho y las caderas miran hacia delante. Manos en el muslo derecho. "
+         "[DP]El pie izquierdo da un paso atrás. Los pies separados como sobre dos raíles, no sobre una cuerda. El pie de "
+         "atrás un poco girado hacia fuera, el talón en el suelo si podemos. Rodilla derecha doblada, encima del tobillo. "
+         "Las caderas miran hacia delante, como los faros de un coche. Una mano en la silla.[/DP]",
+         "**NOUVEAU DANS LA SALUTATION · Jambe gauche en arrière.** On expire : on redresse le buste ; on tourne un peu sur la "
+         "chaise, la cuisse droite sur la chaise, et la jambe gauche va en arrière, à côté de la chaise, la pointe du pied "
+         "posée. La poitrine et les hanches regardent devant. Mains sur la cuisse droite. "
+         "[DP]Le pied gauche recule d’un pas. Les pieds écartés comme sur deux rails, pas sur une corde. Le pied arrière un "
+         "peu tourné vers l’extérieur, le talon au sol si on peut. Genou droit plié, au-dessus de la cheville. Les hanches "
+         "regardent devant, comme les phares d’une voiture. Une main sur la chaise.[/DP]")),
     (6, ("**NUEVO EN EL SALUDO · Guerrero I.** Inhalamos: subimos los brazos, o uno solo si la otra mano está en la silla. "
          "((2 resp.))",
          "**NOUVEAU DANS LA SALUTATION · Guerrier I.** On inspire : on monte les bras, ou un seul si l’autre main est sur la chaise. "
@@ -375,15 +381,39 @@ P_ALL = [
     say("Primero mirad: os enseño el saludo entero, paso a paso. Después lo hacemos juntos.",
         "D’abord regardez : je vous montre la salutation entière, étape par étape. Ensuite on la fait ensemble."),
     note("<b>comment la faire évoluer</b> : on garde la même base et on change <b>une seule chose</b> par semaine. Cette "
-         "semaine, les étapes 5 et 6 deviennent le <b>Guerrier I</b> (qu’ils connaissent déjà). Ronde 1 : comme la semaine "
-         "dernière (jambe devant / pied arrière), pour se rappeler. Ronde 2 : avec le Guerrier I, jambe gauche en "
-         "arrière. Ronde 3 (facultative, tu décides sur place) : avec le Guerrier I, jambe droite en arrière. Rien d’autre "
-         "à ajouter cette semaine. "
+         "semaine, les étapes 5 et 6 deviennent le <b>Guerrier I</b> (qu’ils connaissent déjà). <b>D’abord la démonstration</b> : tu fais "
+         "la salutation entière en détaillant chaque étape (texte 1 à 7 ci-dessous), surtout le Guerrier I : pied arrière, "
+         "hanches devant. <b>Ensuite 3 rondes ensemble</b> avec moins de mots (R1, R2, R3) : un seul conseil par ronde. "
+         "Ronde 3 facultative, tu décides sur place. Rien d’autre à ajouter cette semaine. "
          "<b>Semaines suivantes</b> : tenir 3 resp. dans le Guerrier I ; puis remplacer le Guerrier I par le Guerrier II ; "
          "puis enchaîner Guerrier I → Guerrier II dans la même ronde."),
     '<div class="sl2">' + ("SENTADOS" if L == "es" else "ASSIS") + '</div>' + strip(SUN_SEAT, 0.13) +
     '<div class="sl2">' + ("DE PIE" if L == "es" else "DEBOUT") + '</div>' + strip(SUN_STAND, 0.13) + '</div>',
     steps(SUN_STEPS),
+    '<div class="keep2">',
+    say("**Ahora juntos · 3 rondas** · menos palabras, un consejo por ronda:",
+        "**Maintenant ensemble · 3 rondes** · moins de mots, un conseil par ronde :"),
+    steps([
+        ("R1", ("**Pierna izquierda atrás.** Corazón… inhalamos, brazos arriba… exhalamos, flexión… inhalamos, espalda "
+                "larga… exhalamos, la pierna izquierda atrás… inhalamos, guerrero I. → Las caderas miran hacia delante. "
+                "((2 resp.)) Exhalamos, corazón.",
+                "**Jambe gauche en arrière.** Cœur… on inspire, bras en haut… on expire, flexion… on inspire, dos long… on "
+                "expire, la jambe gauche en arrière… on inspire, guerrier I. → Les hanches regardent devant. ((2 resp.)) On "
+                "expire, cœur.")),
+        ("R2", ("**Pierna derecha atrás.** Corazón… brazos arriba… flexión… espalda larga… la pierna derecha atrás… "
+                "guerrero I. → Si os tambaleáis: el paso más corto o los pies más separados. ((2 resp.)) Corazón.",
+                "**Jambe droite en arrière.** Cœur… bras en haut… flexion… dos long… la jambe droite en arrière… guerrier I. "
+                "→ Si vous vacillez : le pas plus court ou les pieds plus écartés. ((2 resp.)) Cœur.")),
+        ("R3", ("**Opcional · pierna izquierda.** Ahora a vuestro ritmo, un movimiento con cada respiración. → Hombros lejos "
+                "de las orejas. Corazón.",
+                "**Facultative · jambe gauche.** Maintenant à votre rythme, un mouvement par respiration. → Les épaules loin "
+                "des oreilles. Cœur.")),
+        ("✓", ("**Otros consejos, uno cada vez:** la rodilla de delante encima del tobillo · el pie de atrás un poco hacia "
+               "fuera · una mano en la silla, sin problema · brazos en V si los hombros tiran · miramos al frente.",
+               "**Autres conseils, un à la fois :** le genou avant au-dessus de la cheville · le pied arrière un peu vers "
+               "l’extérieur · une main sur la chaise, sans problème · bras en V si les épaules tirent · on regarde devant.")),
+    ]),
+    '</div>',
     '<div class="keep2">',
     band(6, ("Guerrero II e inverso · y una postura nueva: la diosa", "Guerrier II et inversé · et une nouvelle posture : la déesse"), "0:33 – 0:42"),
     say("Para cada postura: primero os la enseño, y después la hacemos juntos.",
