@@ -42,10 +42,12 @@ def T(pair):
     VB = {"[C]": ("vc", "EN LA SILLA", "SUR LA CHAISE"), "[CP]": ("vc", "SILLA O PARED", "CHAISE OU MUR"),
           "[S]": ("vs", "SIN APOYO", "SANS APPUI"),
           "[DP]": ("vs", "DE PIE", "DEBOUT"), "[SU]": ("vf", "EN EL SUELO", "AU SOL"),
-          "[MC]": ("vx", "MÁS COMPLETO", "PLUS COMPLET")}
+          "[MC]": ("vx", "MÁS COMPLETO", "PLUS COMPLET"),
+          "[NO]": ("vn", "LO QUE NO HACEMOS", "CE QU’ON NE FAIT PAS"),
+          "[JU]": ("vj", "JUNTOS · CONSEJOS", "ENSEMBLE · ASTUCES")}
     for k, (c, les, lfr) in VB.items():
         h = h.replace(k, f'<span class="vb {c}"><span class="vl">{les if L == "es" else lfr}</span>')
-    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]"):
+    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]", "[/NO]", "[/JU]"):
         h = h.replace(k, "</span>")
     for k, (es, fr, c) in TOKENS.items():
         h = h.replace(k, f'<span class="it {c}">{es if L == "es" else fr}</span>')
@@ -161,6 +163,152 @@ _card2 = card2
 def card2(*a, **k):
     k.setdefault('mh', 17)
     return _card2(*a, **k)
+
+
+# ---- "lo que no hacemos" (what to avoid) + "juntos" (new tips while practising together) ----
+def _x(no_es, no_fr, ju_es, ju_fr):
+    return (f" [NO]{no_es}[/NO] [JU]{ju_es}[/JU]", f" [NO]{no_fr}[/NO] [JU]{ju_fr}[/JU]")
+
+
+EXTRA = {
+    "Cuello": _x(
+        "No hacemos círculos completos con la cabeza. No tiramos con la mano.",
+        "On ne fait pas de cercles complets avec la tête. On ne tire pas avec la main.",
+        "Derecha: los hombros bajan, la mandíbula se suelta. Izquierda: exhalamos y la cabeza pesa un poco más, sin empujar.",
+        "Droite : les épaules descendent, la mâchoire se desserre. Gauche : on expire et la tête pèse un peu plus, sans pousser."),
+    "Hombros": _x(
+        "No subimos los hombros con fuerza. El cuello no se tensa.",
+        "On ne monte pas les épaules avec force. Le cou ne se crispe pas.",
+        "Los brazos sueltos, las manos en los muslos. Círculos lentos, al ritmo de la respiración.",
+        "Les bras relâchés, les mains sur les cuisses. Des cercles lents, au rythme de la respiration."),
+    "Muñecas y tobillos": _x(
+        "Si hay dolor en las articulaciones, el movimiento es más pequeño.",
+        "S’il y a une douleur dans les articulations, le mouvement est plus petit.",
+        "Si el pie no sube, el talón se queda en el suelo y hacemos círculos con la punta.",
+        "Si le pied ne monte pas, le talon reste au sol et on fait des cercles avec la pointe."),
+    "Inclinación lateral": _x(
+        "No nos inclinamos hacia delante. No hundimos el hombro de abajo. Las dos nalgas se quedan en la silla.",
+        "On ne se penche pas vers l’avant. On n’écrase pas l’épaule du bas. Les deux fesses restent sur la chaise.",
+        "Derecha: imaginamos que estamos entre dos cristales. Izquierda: si cuesta subir el brazo, la mano en la cabeza "
+        "o en la cintura.",
+        "Droite : on imagine qu’on est entre deux vitres. Gauche : si c’est difficile de monter le bras, la main sur la tête "
+        "ou à la taille."),
+    "Nuevo · Círculos del torso": _x(
+        "No vamos lejos hacia delante ni hacia atrás. La cabeza no se mueve sola: sigue al torso.",
+        "On ne va pas loin vers l’avant ni vers l’arrière. La tête ne bouge pas seule : elle suit le buste.",
+        "Primero círculos muy pequeños, después un poco más grandes. Los pies se quedan bien apoyados.",
+        "D’abord de tout petits cercles, puis un peu plus grands. Les pieds restent bien posés."),
+    "Gato-vaca": _x(
+        "No echamos la cabeza atrás. No forzamos la espalda baja.",
+        "On ne lance pas la tête en arrière. On ne force pas le bas du dos.",
+        "El movimiento empieza en la pelvis. En el suelo: si molestan las muñecas, las manos un poco más adelante; "
+        "las rodillas separadas como las caderas.",
+        "Le mouvement commence dans le bassin. Au sol : si les poignets gênent, les mains un peu plus en avant ; les genoux "
+        "écartés comme les hanches."),
+    "Nuevo · Abrir un brazo": _x(
+        "No giramos con fuerza. No forzamos el cuello para mirar la mano.",
+        "On ne tourne pas avec force. On ne force pas le cou pour regarder la main.",
+        "Derecha: el brazo de apoyo largo, sin bloquear el codo. Izquierda: si cuesta, la mano en el hombro y abrimos solo "
+        "el codo.",
+        "Droite : le bras d’appui long, sans bloquer le coude. Gauche : si c’est difficile, la main sur l’épaule et on "
+        "ouvre seulement le coude."),
+    "Nuevo · Brazo y pierna": _x(
+        "No subimos el brazo o la pierna más alto que la espalda. No arqueamos la espalda baja. No aguantamos el aire.",
+        "On ne monte pas le bras ou la jambe plus haut que le dos. On ne creuse pas le bas du dos. On ne retient pas l’air.",
+        "Derecha: la mirada al suelo, el cuello largo. Izquierda: imaginamos un vaso de agua sobre la espalda: no se cae.",
+        "Droite : le regard au sol, le cou long. Gauche : on imagine un verre d’eau sur le dos : il ne tombe pas."),
+    "1 · Flexión": _x(
+        "No bloqueamos las rodillas. Si hay vértigo, la cabeza no baja más que el corazón.",
+        "On ne bloque pas les genoux. En cas de vertige, la tête ne descend pas plus bas que le cœur.",
+        "Las manos resbalan por los muslos. Subimos despacio, con la espalda larga.",
+        "Les mains glissent sur les cuisses. On remonte doucement, le dos long."),
+    "Guerrero II · recordatorio": _x(
+        "La rodilla de delante no pasa la punta del pie ni se cae hacia dentro. No inclinamos el torso hacia delante. "
+        "Los hombros no suben.",
+        "Le genou avant ne dépasse pas la pointe du pied et ne tombe pas vers l’intérieur. On ne penche pas le buste vers "
+        "l’avant. Les épaules ne montent pas.",
+        "Derecha: la rodilla mira al dedo pequeño del pie. Izquierda: los brazos largos, los hombros bajos; si los brazos "
+        "cansan, manos en la cintura.",
+        "Droite : le genou regarde le petit orteil. Gauche : les bras longs, les épaules basses ; si les bras fatiguent, "
+        "mains sur la taille."),
+    "→ Guerrero inverso · recordatorio": _x(
+        "No echamos el cuerpo atrás. No apoyamos peso en la mano de abajo. No doblamos el cuello.",
+        "On ne se jette pas en arrière. On ne met pas de poids sur la main du bas. On ne casse pas le cou.",
+        "Derecha: la rodilla de delante sigue doblada. Izquierda: inhalamos al subir el brazo, exhalamos al bajarlo.",
+        "Droite : le genou avant reste plié. Gauche : on inspire en montant le bras, on expire en le descendant."),
+    "Nuevo · La diosa": _x(
+        "Las rodillas no van hacia dentro. No bajamos mucho. No arqueamos la espalda baja. Los hombros no suben.",
+        "Les genoux ne rentrent pas vers l’intérieur. On ne descend pas beaucoup. On ne creuse pas le bas du dos. Les "
+        "épaules ne montent pas.",
+        "Primera vez: las rodillas miran hacia los pies. Segunda vez: el coxis hacia el suelo, la espalda larga. Si los "
+        "brazos cansan, manos en los muslos.",
+        "Première fois : les genoux regardent vers les pieds. Deuxième fois : le coccyx vers le sol, le dos long. Si les bras "
+        "fatiguent, mains sur les cuisses."),
+    "Rodilla arriba · tres niveles": _x(
+        "No miramos al suelo cerca de los pies. No bloqueamos la rodilla de apoyo. No aguantamos el aire.",
+        "On ne regarde pas le sol près des pieds. On ne bloque pas le genou d’appui. On ne retient pas l’air.",
+        "Derecha: la rodilla de apoyo un poco blanda. Izquierda: el peso en todo el pie, los dedos de los pies sueltos.",
+        "Droite : le genou d’appui un peu souple. Gauche : le poids sur tout le pied, les orteils relâchés."),
+    "Mariposa": _x(
+        "No empujamos las rodillas hacia abajo. No redondeamos la espalda para bajar más.",
+        "On ne pousse pas les genoux vers le bas. On n’arrondit pas le dos pour descendre plus.",
+        "En el suelo, si las rodillas están muy altas, los pies más lejos. Exhalamos y los muslos pesan.",
+        "Au sol, si les genoux sont très hauts, les pieds plus loin. On expire et les cuisses deviennent lourdes."),
+    "Nuevo · El puente": _x(
+        "No subimos alto. No arqueamos la espalda. No apretamos el cuello. No aguantamos el aire.",
+        "On ne monte pas haut. On ne creuse pas le dos. On ne serre pas le cou. On ne retient pas l’air.",
+        "Los brazos a lo largo del cuerpo, palmas hacia abajo. Si es cómodo, subimos y bajamos vértebra a vértebra.",
+        "Les bras le long du corps, paumes vers le bas. Si c’est confortable, on monte et on descend vertèbre par vertèbre."),
+    "Rodilla al pecho": _x(
+        "No tiramos fuerte. En el suelo, no levantamos la cabeza.",
+        "On ne tire pas fort. Au sol, on ne soulève pas la tête.",
+        "Si molesta la rodilla, cogemos detrás del muslo. Los hombros sueltos, apoyados.",
+        "Si le genou gêne, on tient derrière la cuisse. Les épaules relâchées, posées."),
+    "Torsión tumbada": _x(
+        "No forzamos para que las rodillas toquen el suelo. Los hombros se quedan apoyados.",
+        "On ne force pas pour que les genoux touchent le sol. Les épaules restent posées.",
+        "Derecha: si las rodillas no llegan, se quedan a medio camino. Izquierda: con cada exhalación, soltamos un poco más.",
+        "Droite : si les genoux n’arrivent pas, ils restent à mi-chemin. Gauche : à chaque expiration, on relâche un peu plus."),
+    "Nuevo · La banana": _x(
+        "No giramos la pelvis. No arqueamos la espalda.",
+        "On ne tourne pas le bassin. On ne creuse pas le dos.",
+        "Si los hombros no suben, los brazos doblados o las manos en la cabeza. Cada exhalación, un poco más larga.",
+        "Si les épaules ne montent pas, les bras pliés ou les mains sur la tête. Chaque expiration, un peu plus longue."),
+    "Descanso: el niño": _x(
+        "No forzamos las rodillas. Si molesta, no apoyamos la cabeza.",
+        "On ne force pas les genoux. Si ça gêne, on ne pose pas la tête.",
+        "En el suelo, rodillas separadas. Respiramos hacia la espalda: se abre al inhalar.",
+        "Au sol, genoux écartés. On respire vers le dos : il s’ouvre à l’inspiration."),
+}
+
+
+def _with_extra(args, kw):
+    a = list(args)
+    name = a[3][0] if len(a) > 3 else None
+    if name in EXTRA:
+        ex = EXTRA[name]
+        if len(a) > 5:
+            a[5] = (a[5][0] + ex[0], a[5][1] + ex[1])
+        elif "text" in kw:
+            kw["text"] = (kw["text"][0] + ex[0], kw["text"][1] + ex[1])
+    return a, kw
+
+
+_card2x = card2
+
+
+def card2(*a, **k):
+    a, k = _with_extra(a, k)
+    return _card2x(*a, **k)
+
+
+_card3x = card3
+
+
+def card3(*a, **k):
+    a, k = _with_extra(a, k)
+    return _card3x(*a, **k)
+
 
 
 def opt(html):
@@ -351,7 +499,9 @@ P_ALL = [
     part(1, "De pie o en la silla · 0:22 – 0:46", "Debout ou sur la chaise · 0:22 – 0:46"),
     note("<b>méthode pour toute la partie debout</b> (salutation, guerriers, déesse, équilibre) : 1) tu montres la posture "
          "et tu la <b>décortiques</b> étape par étape, ils regardent sans bouger ; 2) ensuite on la pratique <b>ensemble</b>, "
-         "lentement, avec la respiration."),
+         "lentement, avec la respiration, d’un côté puis de l’autre. <b>Ensemble, ne répète pas la démo</b> : dis seulement "
+         "les astuces du cadre turquoise <b>ENSEMBLE</b> (une différente par côté). Le cadre rouge = <b>ce qu’on ne fait "
+         "pas</b>, à montrer pendant la démo. Même chose pour l’échauffement et les étirements."),
     say("**Cómo vamos a trabajar:** para cada postura, primero os la enseño yo, paso a paso, y vosotros solo miráis. "
         "Después la hacemos juntos, despacio, con la respiración.",
         "**Comment on va travailler :** pour chaque posture, d’abord je vous la montre, étape par étape, et vous regardez "
@@ -713,6 +863,8 @@ body { font-size:9.6pt; line-height:1.18; } .qcue { font-size:9.6pt; } .qn { fon
 """
 
 CSS += """
+.vn { background:#fbeaea; border-left:3px solid #b8453f; color:#5c1f1b; } .vn .vl { background:#b8453f; }
+.vj { background:#e3f3f3; border-left:3px solid #2a8a8a; color:#154545; } .vj .vl { background:#2a8a8a; }
 .optc { border:2px dashed #e0701e; background:#fff8f1; }
 .obadge { font-size:6.6pt; font-weight:700; color:#fff; background:#e0701e; border-radius:1mm; padding:0 1.2mm; letter-spacing:.04em; vertical-align:1px; }
 """
