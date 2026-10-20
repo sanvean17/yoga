@@ -1401,3 +1401,36 @@ def knee_stand_up():
 
 
 ALL.update({"knee_stand_chair": knee_stand_chair, "knee_stand_up": knee_stand_up})
+
+
+def _torso_ring(f, cy, rx=24, ry=7):
+    """dashed ellipse with an arrow head: 'circles with the torso'."""
+    f.items.append((6, f'<ellipse cx="0" cy="{-cy}" rx="{rx}" ry="{ry}" fill="none" stroke="#6b7785" '
+                       f'stroke-width="2.4" stroke-dasharray="40 10"/>'))
+    f.items.append((6, f'<path d="M{rx - 6},{-cy + ry - 1} l7,-1 l-3,6" fill="none" stroke="#6b7785" stroke-width="2.4" '
+                       f'stroke-linecap="round" stroke-linejoin="round"/>'))
+    f._track((-rx - 2, cy + ry + 2), (rx + 2, cy - ry - 2))
+
+
+def torso_circles_chair():
+    """seated on the chair, seen from behind, hands on the knees, torso leaning a little: circles."""
+    f, _ = chair_back(82, head=84, armR=((18, 42), -1), armL=((-14, 42), 1))
+    _torso_ring(f, 96, rx=28, ry=8)
+    return f
+
+
+def torso_circles_floor():
+    """seated cross-legged on the floor, hands on the knees, torso leaning a little: circles."""
+    f, _ = back((0, 15), 82, head=84, armR=((31, 18), -1), armL=((-29, 18), 1),
+                colored=False, **_cross_legs())
+    _torso_ring(f, 58, rx=30, ry=8)
+    return f
+
+
+def table_arm_up():
+    """hands and knees, near (right) arm opening up to the ceiling."""
+    return side((0, 47), 4, head=2, face=-20,
+                armN=('A', 90, 90), armF=((48, 1), -1), **_knees())
+
+
+ALL.update({"tcircles_c": torso_circles_chair, "tcircles_f": torso_circles_floor, "table_arm_up": table_arm_up})
