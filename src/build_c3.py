@@ -44,10 +44,11 @@ def T(pair):
           "[DP]": ("vs", "DE PIE", "DEBOUT"), "[SU]": ("vf", "EN EL SUELO", "AU SOL"),
           "[MC]": ("vx", "MÁS COMPLETO", "PLUS COMPLET"),
           "[NO]": ("vn", "LO QUE NO HACEMOS", "CE QU’ON NE FAIT PAS"),
+          "[TO]": ("vt", "PARA TODOS", "POUR TOUS"),
           "[JU]": ("vj", "JUNTOS · LO QUE DIGO", "ENSEMBLE · CE QUE JE DIS")}
     for k, (c, les, lfr) in VB.items():
         h = h.replace(k, f'<span class="vb {c}"><span class="vl">{les if L == "es" else lfr}</span>')
-    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]", "[/NO]", "[/JU]"):
+    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]", "[/NO]", "[/JU]", "[/TO]"):
         h = h.replace(k, "</span>")
     for k, (es, fr, c) in TOKENS.items():
         h = h.replace(k, f'<span class="it {c}">{es if L == "es" else fr}</span>')
@@ -226,10 +227,10 @@ EXTRA = {
         "Attention : le genou avant ne dépasse pas la pointe du pied et ne tombe pas vers l’intérieur ; le buste ne penche "
         "pas vers l’avant ; les épaules ne montent pas.",
         "**Derecha:** al borde, la pierna derecha se abre, la izquierda atrás… inhalamos, brazos en cruz. → La rodilla mira "
-        "al dedo pequeño del pie. ((2 resp.)) **Izquierda:** igual, al otro lado… → Hombros bajos; si cansan los brazos, "
+        "en la misma dirección que el pie. ((2 resp.)) **Izquierda:** igual, al otro lado… → Hombros bajos; si cansan los brazos, "
         "manos en la cintura. ((2 resp.))",
         "**Droite :** au bord, la jambe droite s’ouvre, la gauche en arrière… on inspire, bras en croix. → Le genou regarde "
-        "le petit orteil. ((2 resp.)) **Gauche :** pareil, de l’autre côté… → Épaules basses ; si les bras fatiguent, mains "
+        "dans la même direction que le pied. ((2 resp.)) **Gauche :** pareil, de l’autre côté… → Épaules basses ; si les bras fatiguent, mains "
         "sur la taille. ((2 resp.))"),
     "→ Guerrero inverso · recordatorio": _i(
         "Cuidado: no echamos el cuerpo atrás, no apoyamos peso en la mano de abajo y no doblamos el cuello.",
@@ -262,11 +263,6 @@ EXTRA = {
         "pesan.",
         "Attention : on ne pousse pas les genoux vers le bas et on n’arrondit pas le dos pour descendre plus. On expire et "
         "les cuisses deviennent lourdes."),
-    "Nuevo · El puente": _i(
-        "Cuidado: no subimos alto, no arqueamos la espalda, no apretamos el cuello y no aguantamos el aire. Los brazos a lo "
-        "largo del cuerpo, palmas hacia abajo.",
-        "Attention : on ne monte pas haut, on ne creuse pas le dos, on ne serre pas le cou et on ne retient pas l’air. Les "
-        "bras le long du corps, paumes vers le bas."),
     "Rodilla al pecho": _i(
         "Cuidado: no tiramos fuerte. Si molesta la rodilla, cogemos detrás del muslo; los hombros sueltos.",
         "Attention : on ne tire pas fort. Si le genou gêne, on tient derrière la cuisse ; les épaules relâchées."),
@@ -298,13 +294,31 @@ FLOOR = {
 _TAGS = (" [SU]", " [DP]", " [MC]", " [C]", "[SU]", "[DP]", "[MC]", "[C]")
 
 
-def _inject(text, main, floor, ju):
+import re
+NOWRAP = {"Relajación", "Cada uno a su manera", "El yoga es respiración", "Nuevo · La diosa"}
+
+
+def _inject(text, main, floor, ju, wrap=True):
     cut = min([text.find(t) for t in _TAGS if text.find(t) >= 0] or [len(text)])
-    head, tail = text[:cut].rstrip(), text[cut:]
-    head = head + " " + main
+    head, tail = text[:cut].strip(), text[cut:].strip()
     if floor and "[/SU]" in tail:
         tail = tail.replace("[/SU]", " " + floor + "[/SU]", 1)
-    out = head + (" " + tail.lstrip() if tail else "")
+    variants = ("[SU]" in tail) or ("[DP]" in tail)
+    intro = ""
+    if wrap and variants and head:
+        m = re.search(r"\*\*(En la silla|Sur la chaise) ?:\*\* ?", head)
+        if m:
+            intro, head = head[:m.start()].strip(), head[m.end():]
+        else:
+            m = re.match(r"(\*\*[^*]+?\.\*\*)\s+(.+)", head, re.S)
+            if m:
+                intro, head = m.group(1), m.group(2)
+        head = "[C]" + head + "[/C]"
+        if intro:
+            head = intro + " " + head
+    out = head + (" " + tail if tail else "")
+    if main:
+        out += (" [TO]" + main + "[/TO]") if (wrap and variants) else (" " + main)
     if ju:
         out += " [JU]" + ju + "[/JU]"
     return out
@@ -313,16 +327,19 @@ def _inject(text, main, floor, ju):
 def _with_extra(args, kw):
     a = list(args)
     name = a[3][0] if len(a) > 3 else None
-    if name in EXTRA:
-        es, fr, jes, jfr = EXTRA[name]
-        fes, ffr = FLOOR.get(name, (None, None))
-        key = 5 if len(a) > 5 else "text"
-        t = a[5] if key == 5 else kw["text"]
-        t = (_inject(t[0], es, fes, jes), _inject(t[1], fr, ffr, jfr))
-        if key == 5:
-            a[5] = t
-        else:
-            kw["text"] = t
+    if name is None or name in NOWRAP:
+        return a, kw
+    es, fr, jes, jfr = EXTRA.get(name, (None, None, None, None))
+    fes, ffr = FLOOR.get(name, (None, None))
+    key = 5 if len(a) > 5 else "text"
+    t = a[5] if key == 5 else kw.get("text")
+    if not t:
+        return a, kw
+    t = (_inject(t[0], es, fes, jes), _inject(t[1], fr, ffr, jfr))
+    if key == 5:
+        a[5] = t
+    else:
+        kw["text"] = t
     return a, kw
 
 
@@ -595,11 +612,11 @@ P_ALL = [
          "bord, devant les accoudoirs. Côté droit d’abord, puis gauche. Debout : chaise ou mur à côté de la jambe avant."),
     grid([
         card2("c_w2_R", "w2c_R", "P", ("Guerrero II · recordatorio", "Guerrier II · rappel"), ("2 resp./lado", "2 resp./côté"), (
-            "**Esta postura ya la conocemos: Guerrero II y Guerrero inverso. La hacemos una vez a cada lado.** Al borde de "
+            "**Estas dos posturas ya las conocemos: Guerrero II y Guerrero inverso. Las hacemos una vez a cada lado.** Al borde de "
             "la silla, la pierna derecha se abre hacia la derecha, rodilla encima del tobillo; la pierna izquierda se estira "
             "atrás y a la izquierda. Inhalamos, brazos en cruz; miramos la mano derecha. ((2 resp.)) [DP]Pies separados, pie "
             "derecho hacia fuera, rodilla derecha encima del tobillo; mano en la silla si hace falta.[/DP]",
-            "**Cette posture, on la connaît déjà : Guerrier II et Guerrier inversé. On la fait une fois de chaque côté.** Au "
+            "**Ces deux postures, on les connaît déjà : Guerrier II et Guerrier inversé. On les fait une fois de chaque côté.** Au "
             "bord de la chaise, la jambe droite s’ouvre vers la droite, genou au-dessus de la cheville ; la jambe gauche "
             "s’allonge en arrière et à gauche. On inspire, bras en croix ; regard sur la main droite. ((2 resp.)) [DP]Pieds "
             "écartés, pied droit vers l’extérieur, genou droit au-dessus de la cheville ; main sur la chaise si besoin.[/DP]")),
@@ -613,20 +630,30 @@ P_ALL = [
             "bras. On change de côté. [DP]Pareil ; la main gauche peut rester sur la chaise. La poitrine s’ouvre vers le "
             "haut, on ne se jette pas en arrière.[/DP]")),
         card2("d_chair", "d_stand", "P", ("Nuevo · La diosa", "Nouveau · La déesse"), ("3 resp. + 4 veces", "3 resp. + 4 fois"), (
-            "**Ahora vamos a aprender una postura nueva: la Diosa.** "
-            "**1 · La postura:** al borde de la silla, piernas bien separadas, puntas de los pies hacia fuera, rodillas en la "
-            "misma dirección. Brazos en cactus: codos a la altura de los hombros, manos arriba. ((2 o 3 resp.)) "
-            "**2 · Ahora añadimos un poco de movimiento.** Exhalamos, los codos vienen hacia delante. Inhalamos, abrimos los "
-            "brazos y el pecho. ((4 veces)) "
+            "**Ahora vamos a aprender una postura nueva: la Diosa.** **1 · Las piernas:** "
+            "[C]Al borde de la silla, piernas bien separadas, puntas de los pies hacia fuera, rodillas en la misma "
+            "dirección.[/C] "
             "[DP]Pies separados, puntas hacia fuera, rodillas en la misma dirección, un poco dobladas, sin bajar mucho; una "
-            "mano en la silla si hace falta.[/DP]",
-            "**Maintenant on va apprendre une nouvelle posture : la Déesse.** "
-            "**1 · La posture :** au bord de la chaise, jambes bien écartées, pointes des pieds vers l’extérieur, genoux dans "
-            "la même direction. Bras en cactus : coudes à hauteur d’épaules, mains en haut. ((2 ou 3 resp.)) "
-            "**2 · Maintenant on ajoute un peu de mouvement.** On expire, les coudes viennent vers l’avant. On inspire, on "
-            "ouvre les bras et la poitrine. ((4 fois)) "
+            "mano en la silla si hace falta.[/DP] "
+            "[TO]Brazos en cactus: codos a la altura de los hombros, manos arriba. ((2 o 3 resp.)) **2 · Ahora añadimos un "
+            "poco de movimiento.** Exhalamos, los codos vienen hacia delante. Inhalamos, abrimos los brazos y el pecho. "
+            "((4 veces)) Cuidado: las rodillas no van hacia dentro, no bajamos mucho, no arqueamos la espalda baja y los "
+            "hombros no suben.[/TO] "
+            "[JU]Piernas separadas, puntas hacia fuera… brazos en cactus. → Las rodillas miran hacia los pies. ((3 resp.)) "
+            "Ahora el movimiento: exhalamos, codos delante; inhalamos, abrimos. → El coxis hacia el suelo, la espalda "
+            "larga. ((4 veces)) Si cansan los brazos, manos en los muslos.[/JU]",
+            "**Maintenant on va apprendre une nouvelle posture : la Déesse.** **1 · Les jambes :** "
+            "[C]Au bord de la chaise, jambes bien écartées, pointes des pieds vers l’extérieur, genoux dans la même "
+            "direction.[/C] "
             "[DP]Pieds écartés, pointes vers l’extérieur, genoux dans la même direction, un peu pliés, sans descendre "
-            "beaucoup ; une main sur la chaise si besoin.[/DP]")),
+            "beaucoup ; une main sur la chaise si besoin.[/DP] "
+            "[TO]Bras en cactus : coudes à hauteur d’épaules, mains en haut. ((2 ou 3 resp.)) **2 · Maintenant on ajoute un "
+            "peu de mouvement.** On expire, les coudes viennent vers l’avant. On inspire, on ouvre les bras et la "
+            "poitrine. ((4 fois)) Attention : les genoux ne rentrent pas vers l’intérieur, on ne descend pas beaucoup, on "
+            "ne creuse pas le bas du dos et les épaules ne montent pas.[/TO] "
+            "[JU]Jambes écartées, pointes vers l’extérieur… bras en cactus. → Les genoux regardent vers les pieds. "
+            "((3 resp.)) Maintenant le mouvement : on expire, coudes devant ; on inspire, on ouvre. → Le coccyx vers le sol, "
+            "le dos long. ((4 fois)) Si les bras fatiguent, mains sur les cuisses.[/JU]")),
     ], cols=3),
     '</div>',
     '<div class="keep2">',
@@ -695,13 +722,15 @@ P_ALL = [
             "un peu.[/SU]"))),
         card2("chair_sit", "bridge", "F", ("Nuevo · El puente", "Nouveau · Le pont"), ("3 veces", "3 fois"), (
             "Pies bien apoyados. Empujamos suavemente los pies en el suelo y apretamos un poco las piernas y los glúteos. "
-            "Respiramos. ((3 resp.)) Soltamos. ((3 veces)) Sin levantarnos de la silla. "
-            "[SU]Tumbados, rodillas dobladas, pies separados como las caderas. Inhalamos: empujamos los pies y subimos un "
-            "poco las caderas, muy suave. Exhalamos: bajamos despacio.[/SU]",
+            "Respiramos. ((3 resp.)) Soltamos. ((3 veces)) No aguantamos el aire. "
+            "[SU]Tumbados, rodillas dobladas, pies separados como las caderas. Brazos al lado del cuerpo. Inhalamos, "
+            "empujamos los pies y subimos un poco las caderas. No subimos mucho y no arqueamos la espalda. Exhalamos y "
+            "bajamos despacio.[/SU]",
             "Pieds bien posés. On pousse doucement les pieds dans le sol et on contracte un peu les jambes et les fessiers. "
-            "On respire. ((3 resp.)) On relâche. ((3 fois)) Sans se lever de la chaise. "
-            "[SU]Allongés, genoux pliés, pieds écartés largeur de hanches. On inspire : on pousse dans les pieds et on monte "
-            "un peu les hanches, très doucement. On expire : on redescend doucement.[/SU]")),
+            "On respire. ((3 resp.)) On relâche. ((3 fois)) On ne retient pas l’air. "
+            "[SU]Allongés, genoux pliés, pieds écartés largeur de hanches. Bras le long du corps. On inspire, on pousse "
+            "dans les pieds et on monte un peu les hanches. On ne monte pas beaucoup et on ne creuse pas le dos. On expire "
+            "et on redescend doucement.[/SU]")),
         opt(card2("chair_knee", "kcircles_f", "F", ("Círculos", "Cercles"), ("5 + 5", "5 + 5"), (
             "Abrazamos la rodilla derecha y hacemos pequeños círculos con el pie. ((5 círculos)) Cambiamos de sentido, luego "
             "de pierna. [SU]Tumbados, rodillas al pecho, manos sobre las rodillas: pequeños círculos con las rodillas, "
@@ -885,6 +914,7 @@ body { font-size:9.6pt; line-height:1.18; } .qcue { font-size:9.6pt; } .qn { fon
 CSS += """
 .vn { background:#fbeaea; border-left:3px solid #b8453f; color:#5c1f1b; } .vn .vl { background:#b8453f; }
 .vj { background:#e3f3f3; border-left:3px solid #2a8a8a; color:#154545; } .vj .vl { background:#2a8a8a; }
+.vt { background:#eef0f3; border-left:3px solid #5d6b7a; color:#2b3540; } .vt .vl { background:#5d6b7a; }
 .optc { border:2px dashed #e0701e; background:#fff8f1; }
 .obadge { font-size:6.6pt; font-weight:700; color:#fff; background:#e0701e; border-radius:1mm; padding:0 1.2mm; letter-spacing:.04em; vertical-align:1px; }
 """
