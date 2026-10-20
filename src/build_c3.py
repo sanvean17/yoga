@@ -366,14 +366,22 @@ SUN_STEPS = [
          "**Cœur.** Dos long, paumes jointes devant la poitrine. On expire.")),
     (2, ("**Brazos arriba.** Inhalamos: abrimos los brazos por los lados y los subimos, hasta donde es cómodo.",
          "**Bras en haut.** On inspire : on ouvre les bras sur les côtés et on les monte, jusqu’où c’est confortable.")),
-    (3, ("**Flexión.** Exhalamos: nos inclinamos desde las caderas, manos en los muslos, la espalda larga. "
-         "[MC]Si estamos cómodos, soltamos más: la cabeza cuelga.[/MC]",
-         "**Flexion.** On expire : on se penche depuis les hanches, mains sur les cuisses, le dos long. "
-         "[MC]Si on est à l’aise, on relâche davantage : la tête pend.[/MC]")),
-    (4, ("**Espalda larga.** Inhalamos: subimos un poco, la espalda plana como una mesa. Miramos al suelo. "
-         "[DP]Manos en el respaldo, caminamos un poco atrás; o manos en los muslos.[/DP]",
-         "**Dos long.** On inspire : on remonte un peu, le dos plat comme une table. Regard au sol. "
-         "[DP]Mains sur le dossier, on recule un peu ; ou mains sur les cuisses.[/DP]")),
+    (3, ("**Flexión.** Exhalamos: rodillas un poco dobladas, nos inclinamos hacia delante **desde las caderas**; las "
+         "manos resbalan por los muslos hacia las rodillas. La espalda queda larga. Cuidado: no bloqueamos las rodillas; si "
+         "hay vértigo, la cabeza no baja más que el corazón. "
+         "[MC]Si estamos cómodos, soltamos más: la espalda se redondea, la cabeza y los brazos cuelgan.[/MC]",
+         "**Flexion.** On expire : genoux légèrement pliés, on se penche en avant **depuis les hanches** ; les mains glissent "
+         "sur les cuisses vers les genoux. Le dos reste long. Attention : on ne bloque pas les genoux ; en cas de vertige, "
+         "la tête ne descend pas plus bas que le cœur. "
+         "[MC]Si on est à l’aise, on relâche davantage : le dos s’arrondit, la tête et les bras pendent.[/MC]")),
+    (4, ("**Espalda larga.** Inhalamos: subimos un poco, manos en los muslos, la espalda plana como una mesa. Como si "
+         "cerráramos un libro: nos doblamos en las caderas, no en la espalda. Miramos al suelo, el cuello largo. "
+         "[DP]Manos en el respaldo o en la pared, a la altura de las caderas; caminamos un poco atrás hasta que la espalda "
+         "queda larga. O manos en los muslos.[/DP]",
+         "**Dos long.** On inspire : on remonte un peu, mains sur les cuisses, le dos plat comme une table. Comme si on "
+         "fermait un livre : on se plie dans les hanches, pas dans le dos. Regard au sol, le cou long. "
+         "[DP]Mains sur le dossier ou au mur, à hauteur des hanches ; on recule un peu jusqu’à avoir le dos long. Ou mains "
+         "sur les cuisses.[/DP]")),
     (5, ("**NUEVO EN EL SALUDO · Pierna izquierda atrás.** Exhalamos: subimos el torso; giramos un poco en la silla, el "
          "muslo derecho sobre la silla, y la pierna izquierda va atrás, al lado de la silla, la punta del pie apoyada. El "
          "pecho y las caderas miran hacia delante. Manos en el muslo derecho. "
@@ -534,34 +542,15 @@ P_ALL = [
         "Después la hacemos juntos, despacio, con la respiración.",
         "**Comment on va travailler :** pour chaque posture, d’abord je vous la montre, étape par étape, et vous regardez "
         "seulement. Ensuite on la fait ensemble, doucement, avec la respiration."),
-    band(4, ("Recordamos las tres posiciones", "On se rappelle les trois positions"), "0:22 – 0:24"),
-    note("rappel rapide, on les connaît déjà : montre-toi de profil et fais-les essayer une fois. Rappel : « fermer le "
-         "livre » (mains dans le pli des hanches) aide à trouver le dos long."),
-    grid([
-        card3("c_hinge", "hinge", "fold", ("1 · Flexión", "1 · Flexion"), None, (
-            "Rodillas un poco dobladas. Nos inclinamos hacia delante **desde las caderas**, manos en los muslos. La espalda "
-            "queda larga. [MC]Si estamos cómodos, soltamos más: la cabeza y los brazos cuelgan.[/MC]",
-            "Genoux légèrement pliés. On se penche en avant **depuis les hanches**, mains sur les cuisses. Le dos reste "
-            "long. [MC]Si on est à l’aise, on relâche davantage : la tête et les bras pendent.[/MC]")),
-        card2("c_lean", "half_lift_thighs", "P", ("2 · Espalda larga", "2 · Dos long"), None, (
-            "Manos en los muslos. Nos inclinamos desde las caderas y la espalda queda plana, como una mesa. Como si "
-            "cerráramos un libro. Miramos al suelo.",
-            "Mains sur les cuisses. On se penche depuis les hanches et le dos reste plat, comme une table. Comme si on "
-            "fermait un livre. Regard au sol.")),
-        card2("chair_sit", "dog_chair", "P", ("3 · Manos en el apoyo", "3 · Mains sur l’appui"), None, (
-            "Sentados: manos en las rodillas. [DP]Manos en el respaldo o en la pared, a la altura de las caderas; caminamos "
-            "atrás hasta que la espalda queda larga.[/DP]",
-            "Assis : mains sur les genoux. [DP]Mains sur le dossier ou au mur, à hauteur des hanches ; on recule jusqu’à avoir "
-            "le dos long.[/DP]")),
-    ], cols=3),
     '<div class="keep2">',
-    band(5, ("Saludo al sol · con el guerrero I · 3 rondas · la tercera opcional", "Salutation au soleil · avec le guerrier I · 3 rondes · la troisième facultative"), "0:24 – 0:33"),
+    band(5, ("Saludo al sol · con el guerrero I · 3 rondas · la tercera opcional", "Salutation au soleil · avec le guerrier I · 3 rondes · la troisième facultative"), "0:22 – 0:33"),
     say("Primero mirad: os enseño el saludo entero, paso a paso. Después lo hacemos juntos.",
         "D’abord regardez : je vous montre la salutation entière, étape par étape. Ensuite on la fait ensemble."),
     note("<b>comment la faire évoluer</b> : on garde la même base et on change <b>une seule chose</b> par semaine. Cette "
          "semaine, les étapes 5 et 6 deviennent le <b>Guerrier I</b> (qu’ils connaissent déjà). <b>D’abord la démonstration</b> : tu fais "
-         "la salutation entière en détaillant chaque étape (texte 1 à 7 ci-dessous), surtout le Guerrier I : pied arrière, "
-         "hanches devant. <b>Ensuite 3 rondes ensemble</b> avec moins de mots (R1, R2, R3) : un seul conseil par ronde. "
+         "la salutation entière en détaillant chaque étape (texte 1 à 7 ci-dessous) ; c’est là que tu rappelles les "
+         "positions (flexion depuis les hanches, dos long = « fermer le livre ») et le Guerrier I : pied arrière, hanches "
+         "devant. <b>Ensuite 3 rondes ensemble</b> avec moins de mots (R1, R2, R3) : un seul conseil par ronde. "
          "Ronde 3 facultative, tu décides sur place. Rien d’autre à ajouter cette semaine. "
          "<b>Semaines suivantes</b> : tenir 3 resp. dans le Guerrier I ; puis remplacer le Guerrier I par le Guerrier II ; "
          "puis enchaîner Guerrier I → Guerrier II dans la même ronde."),
