@@ -199,15 +199,15 @@ SUN_STEPS = [
          "[DP]Manos en el respaldo, caminamos un poco atrás; o manos en los muslos.[/DP]",
          "**Dos long.** On inspire : on remonte un peu, le dos plat comme une table. Regard au sol. "
          "[DP]Mains sur le dossier, on recule un peu ; ou mains sur les cuisses.[/DP]")),
-    (5, ("**NUEVO · Pierna izquierda atrás.** Exhalamos: subimos el torso; giramos un poco en la silla y la pierna "
+    (5, ("**NUEVO EN EL SALUDO · Pierna izquierda atrás.** Exhalamos: subimos el torso; giramos un poco en la silla y la pierna "
          "izquierda va atrás, al lado de la silla, la punta del pie apoyada. Manos en el muslo derecho. "
          "[DP]El pie izquierdo da un paso atrás, rodilla derecha un poco doblada, una mano en la silla.[/DP]",
-         "**NOUVEAU · Jambe gauche en arrière.** On expire : on redresse le buste ; on tourne un peu sur la chaise et la "
+         "**NOUVEAU DANS LA SALUTATION · Jambe gauche en arrière.** On expire : on redresse le buste ; on tourne un peu sur la chaise et la "
          "jambe gauche va en arrière, à côté de la chaise, la pointe du pied posée. Mains sur la cuisse droite. "
          "[DP]Le pied gauche recule d’un pas, genou droit un peu plié, une main sur la chaise.[/DP]")),
-    (6, ("**NUEVO · Guerrero I.** Inhalamos: subimos los brazos, o uno solo si la otra mano está en la silla. "
+    (6, ("**NUEVO EN EL SALUDO · Guerrero I.** Inhalamos: subimos los brazos, o uno solo si la otra mano está en la silla. "
          "((2 resp.))",
-         "**NOUVEAU · Guerrier I.** On inspire : on monte les bras, ou un seul si l’autre main est sur la chaise. "
+         "**NOUVEAU DANS LA SALUTATION · Guerrier I.** On inspire : on monte les bras, ou un seul si l’autre main est sur la chaise. "
          "((2 resp.))")),
     (7, ("**Corazón.** Exhalamos: bajamos los brazos, la pierna vuelve, manos delante del pecho. ((1 resp.)) "
          "La ronda siguiente, con la otra pierna.",
@@ -264,12 +264,12 @@ P_ALL = [
         "((3 fois))"))], cols=1),
     grid([
         card2("r_chair", "r_floor", "F", ("Respiración en tres partes", "Respiration en trois parties"), ("5 resp.", "5 resp."), (
-            "Cerramos los ojos si queréis. Una mano en el abdomen. Inhalamos: el abdomen se llena suavemente… las "
-            "costillas se abren… el pecho sube un poco. Exhalamos despacio: el pecho, las costillas, el abdomen. Como una "
-            "ola. Sin forzar, a vuestro ritmo. ((5 respiraciones))",
-            "On ferme les yeux si vous voulez. Une main sur le ventre. On inspire : le ventre se remplit doucement… les côtes "
-            "s’ouvrent… la poitrine monte un peu. On expire lentement : la poitrine, les côtes, le ventre. Comme une vague. "
-            "Sans forcer, à votre rythme. ((5 respirations))")),
+            "Cerramos los ojos si queréis. Una mano en el abdomen. Inhalamos: el abdomen y las costillas se expanden "
+            "suavemente… el pecho se abre un poco. Exhalamos despacio y todo vuelve. Sin forzar, a vuestro ritmo. "
+            "((5 respiraciones))",
+            "On ferme les yeux si vous voulez. Une main sur le ventre. On inspire : le ventre et les côtes s’ouvrent "
+            "doucement… la poitrine s’ouvre un peu. On expire lentement et tout revient. Sans forcer, à votre rythme. "
+            "((5 respirations))")),
         card2("c_breath", "arms_up", "P", ("Brazos y respiración", "Bras et respiration"), ("5 veces", "5 fois"), (
             "Inhalamos por la nariz y abrimos o subimos los brazos, despacio. Exhalamos y los bajamos lentamente. El "
             "movimiento dura lo mismo que la respiración. ((5 veces)) Los brazos suben solo hasta donde es cómodo.",
@@ -371,13 +371,14 @@ P_ALL = [
             "le dos long.[/DP]")),
     ], cols=3),
     '<div class="keep2">',
-    band(5, ("Saludo al sol · con el guerrero I · 3 o 4 rondas", "Salutation au soleil · avec le guerrier I · 3 ou 4 rondes"), "0:24 – 0:33"),
+    band(5, ("Saludo al sol · con el guerrero I · 3 rondas · la tercera opcional", "Salutation au soleil · avec le guerrier I · 3 rondes · la troisième facultative"), "0:24 – 0:33"),
     say("Primero mirad: os enseño el saludo entero, paso a paso. Después lo hacemos juntos.",
         "D’abord regardez : je vous montre la salutation entière, étape par étape. Ensuite on la fait ensemble."),
     note("<b>comment la faire évoluer</b> : on garde la même base et on change <b>une seule chose</b> par semaine. Cette "
          "semaine, les étapes 5 et 6 deviennent le <b>Guerrier I</b> (qu’ils connaissent déjà). Ronde 1 : comme la semaine "
-         "dernière (jambe devant / pied arrière), pour se rappeler. Rondes 2 et 3 : avec le Guerrier I, jambe gauche en "
-         "arrière puis jambe droite. Ronde 4 (optionnelle) : un mouvement par respiration, sans pause. "
+         "dernière (jambe devant / pied arrière), pour se rappeler. Ronde 2 : avec le Guerrier I, jambe gauche en "
+         "arrière. Ronde 3 (facultative, tu décides sur place) : avec le Guerrier I, jambe droite en arrière. Rien d’autre "
+         "à ajouter cette semaine. "
          "<b>Semaines suivantes</b> : tenir 3 resp. dans le Guerrier I ; puis remplacer le Guerrier I par le Guerrier II ; "
          "puis enchaîner Guerrier I → Guerrier II dans la même ronde."),
     '<div class="sl2">' + ("SENTADOS" if L == "es" else "ASSIS") + '</div>' + strip(SUN_SEAT, 0.13) +
@@ -455,23 +456,27 @@ P_ALL = [
     '<div style="break-before:page"></div>',
     part(2, "En la silla o en el suelo · 0:46 – 1:00", "Sur la chaise ou au sol · 0:46 – 1:00"),
     band(8, ("Estiramientos · en la silla o en el suelo", "Étirements · sur la chaise ou au sol"), "0:46 – 0:51"),
-    note("on en reprend certains et on mélange : <b>nouveaux</b> = le pont et la banane. "
+    note("<b>en 5 minutes, ne fais pas toutes les cartes</b>. Parcours de base : papillon → pont (nouveau) → genou poitrine → "
+         "torsion → banane (nouvelle) → enfant, puis relaxation. Les cartes en <b>pointillés orange</b> sont la réserve "
+         "(flexion jambes longues s’il reste du temps). "
          "Ordre au sol : assis → sur le dos → sur le côté → sur le ventre → l’enfant → sur le dos pour la relaxation. Ceux qui "
-         "vont au sol descendent doucement, une main sur la chaise. Tu choisis selon le temps : les cartes avec un <b>cadre orange en pointillés</b> sont <b>facultatives</b>. Ostéoporose : dans la flexion "
+         "vont au sol descendent doucement, une main sur la chaise. Ostéoporose : dans la flexion "
          "et l’enfant, on descend peu, dos long. Prothèse récente ou consigne de ne pas croiser : pas de chiffre 4."),
     grid([
         card2("chair_sit", "butterfly", "F", ("Mariposa", "Papillon"), ("4 resp.", "4 resp."), (
             "Rodillas separadas, manos en los muslos. Inhalamos, espalda larga. Exhalamos, nos inclinamos un poco. "
-            "[SU]Sentados en el suelo, plantas de los pies juntas; no empujamos las rodillas.[/SU]",
+            "[SU]Sentados en el suelo, plantas de los pies juntas; no empujamos las rodillas. Luego nos tumbamos boca "
+            "arriba, rodillas dobladas.[/SU]",
             "Genoux écartés, mains sur les cuisses. On inspire, dos long. On expire, on se penche un peu. "
-            "[SU]Assis au sol, plantes des pieds jointes ; on ne pousse pas les genoux.[/SU]")),
+            "[SU]Assis au sol, plantes des pieds jointes ; on ne pousse pas les genoux. Puis on s’allonge sur le dos, "
+            "genoux pliés.[/SU]")),
         opt(card2("calf_chair", "legs_long", "F", ("Pantorrillas", "Mollets"), ("4 resp./lado", "4 resp./côté"), (
             "Pierna derecha estirada delante, talón en el suelo. Subimos las puntas del pie hacia nosotros: se estira la "
             "pantorrilla. ((4 resp.)) Cambiamos. [SU]Seguimos sentados, piernas delante: puntas de los pies hacia "
             "nosotros.[/SU]",
             "Jambe droite allongée devant, talon au sol. On ramène les pointes du pied vers nous : le mollet s’étire. "
             "((4 resp.)) On change. [SU]On reste assis, jambes devant : pointes des pieds vers nous.[/SU]"))),
-        card2("c_hinge", "seated_fold", "F", ("Flexión piernas largas", "Flexion jambes longues"), ("4 resp.", "4 resp."), (
+        opt(card2("c_hinge", "seated_fold", "F", ("Flexión piernas largas", "Flexion jambes longues"), ("4 resp.", "4 resp."), (
             "Al borde de la silla, las dos piernas un poco estiradas delante, talones en el suelo, rodillas un poco dobladas. "
             "Inhalamos: espalda larga. Exhalamos: nos inclinamos desde las caderas, manos en los muslos o en las rodillas. "
             "((4 resp.)) Subimos despacio. [SU]Sentados, piernas delante, rodillas dobladas tanto como haga falta. Nos "
@@ -480,26 +485,23 @@ P_ALL = [
             "Au bord de la chaise, les deux jambes un peu allongées devant, talons au sol, genoux un peu pliés. On inspire : "
             "dos long. On expire : on se penche depuis les hanches, mains sur les cuisses ou les genoux. ((4 resp.)) On "
             "remonte doucement. [SU]Assis, jambes devant, genoux pliés autant qu’il faut. On se penche depuis les hanches, "
-            "dos long, mains sur les jambes. Puis on s’allonge sur le dos, genoux pliés.[/SU]")),
-        card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), (
+            "dos long, mains sur les jambes. Puis on s’allonge sur le dos, genoux pliés.[/SU]"))),
+        opt(card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), (
             "Sentados, manos en las rodillas. Exhalamos y redondeamos un poco la espalda baja; inhalamos y la arqueamos un poco. "
             "Movimiento pequeño. [SU]Tumbados, rodillas dobladas: exhalamos, la espalda baja se apoya en el suelo; inhalamos, "
             "se separa un poco.[/SU]",
             "Assis, mains sur les genoux. On expire et on arrondit un peu le bas du dos ; on inspire et on le creuse un peu. "
             "Petit mouvement. [SU]Allongés, genoux pliés : on expire, le bas du dos se pose au sol ; on inspire, il se décolle "
-            "un peu.[/SU]")),
-        card2("c_lean", "bridge", "F", ("Nuevo · El puente", "Nouveau · Le pont"), ("4 veces", "4 fois"), (
-            "Levantarse de la silla: pies firmes, nos inclinamos un poco hacia delante, empujamos los pies y nos ponemos "
-            "de pie; nos sentamos despacio. Manos en los reposabrazos si hace falta. ((4 veces)) "
-            "Si no podemos levantarnos: empujamos suavemente los pies en el suelo y apretamos las piernas y los glúteos, "
-            "sin bloquear la respiración. ((3 resp.)) Soltamos. [SU]Tumbados, rodillas dobladas, pies separados como las "
-            "caderas. Inhalamos: empujamos los pies y subimos un poco las caderas. Exhalamos: bajamos despacio.[/SU]",
-            "Se lever de la chaise : pieds bien posés, on se penche un peu en avant, on pousse dans les pieds et on se met "
-            "debout ; on se rassoit doucement. Mains sur les accoudoirs si besoin. ((4 fois)) "
-            "Si on ne peut pas se lever : on pousse doucement les pieds dans le sol et on contracte les jambes et les "
-            "fessiers, sans bloquer la respiration. ((3 resp.)) On relâche. [SU]Allongés, genoux pliés, pieds écartés "
-            "largeur de hanches. On inspire : on pousse dans les pieds et on monte un peu les hanches. On expire : on "
-            "redescend doucement.[/SU]")),
+            "un peu.[/SU]"))),
+        card2("chair_sit", "bridge", "F", ("Nuevo · El puente", "Nouveau · Le pont"), ("3 veces", "3 fois"), (
+            "Pies bien apoyados. Empujamos suavemente los pies en el suelo y apretamos un poco las piernas y los glúteos. "
+            "Respiramos. ((3 resp.)) Soltamos. ((3 veces)) Sin levantarnos de la silla. "
+            "[SU]Tumbados, rodillas dobladas, pies separados como las caderas. Inhalamos: empujamos los pies y subimos un "
+            "poco las caderas, muy suave. Exhalamos: bajamos despacio.[/SU]",
+            "Pieds bien posés. On pousse doucement les pieds dans le sol et on contracte un peu les jambes et les fessiers. "
+            "On respire. ((3 resp.)) On relâche. ((3 fois)) Sans se lever de la chaise. "
+            "[SU]Allongés, genoux pliés, pieds écartés largeur de hanches. On inspire : on pousse dans les pieds et on monte "
+            "un peu les hanches, très doucement. On expire : on redescend doucement.[/SU]")),
         opt(card2("chair_knee", "kcircles_f", "F", ("Círculos", "Cercles"), ("5 + 5", "5 + 5"), (
             "Abrazamos la rodilla derecha y hacemos pequeños círculos con el pie. ((5 círculos)) Cambiamos de sentido, luego "
             "de pierna. [SU]Tumbados, rodillas al pecho, manos sobre las rodillas: pequeños círculos con las rodillas, "
@@ -512,16 +514,16 @@ P_ALL = [
             "nos balanceamos un poco.[/SU]",
             "On serre le genou droit, dos long. ((3 resp.)) On change. [SU]Allongés : les deux genoux à la poitrine ; on se "
             "balance un peu.[/SU]")),
-        card2("fig4_chair", "fig4_floor", "F", ("El número 4", "Le chiffre 4"), ("4 resp./lado", "4 resp./côté"), (
+        opt(card2("fig4_chair", "fig4_floor", "F", ("El número 4", "Le chiffre 4"), ("4 resp./lado", "4 resp./côté"), (
             "Tobillo derecho sobre la rodilla izquierda, pie flexionado. Si no es cómodo, el pie se queda en el suelo. "
             "((4 resp.)) Cambiamos. [SU]Tumbados, pie izquierdo en el suelo.[/SU]",
             "Cheville droite sur le genou gauche, pied fléchi. Si ce n’est pas confortable, le pied reste au sol. "
-            "((4 resp.)) On change. [SU]Allongés, pied gauche au sol.[/SU]")),
-        card2("chair_hamstring", "leg_stretch", "F", ("Estirar la pierna", "Étirer la jambe"), ("4 resp./lado", "4 resp./côté"), (
+            "((4 resp.)) On change. [SU]Allongés, pied gauche au sol.[/SU]"))),
+        opt(card2("chair_hamstring", "leg_stretch", "F", ("Estirar la pierna", "Étirer la jambe"), ("4 resp./lado", "4 resp./côté"), (
             "Pierna derecha estirada delante, talón en el suelo. Exhalamos, el pecho un poco hacia delante. ((4 resp.)) "
             "Cambiamos. [SU]Tumbados: cogemos la pierna detrás del muslo, rodilla doblada.[/SU]",
             "Jambe droite allongée devant, talon au sol. On expire, la poitrine un peu vers l’avant. ((4 resp.)) On change. "
-            "[SU]Allongés : on tient la jambe derrière la cuisse, genou plié.[/SU]")),
+            "[SU]Allongés : on tient la jambe derrière la cuisse, genou plié.[/SU]"))),
         opt(card2("cactus_c", "cactus_f", "F", ("Pecho abierto, brazos en cactus", "Poitrine ouverte, bras en cactus"), ("4 resp.", "4 resp."), (
             "Brazos en cactus: codos a la altura de los hombros, manos arriba. Inhalamos, abrimos el pecho y llevamos los codos "
             "un poco atrás. ((4 resp.)) [SU]Tumbados, rodillas dobladas: brazos en cactus en el suelo, el dorso de las "
