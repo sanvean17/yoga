@@ -226,28 +226,20 @@ P_ALL = [
      if L == "es" else
      '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
-    band(1, ("Bienvenida · las reglas", "Accueil · les règles"), "0:00 – 0:04"),
+    band(1, ("Bienvenida", "Accueil"), "0:00 – 0:02"),
     note("<b>avant de commencer</b> : chaises solides, sans roulettes ; pour le debout, chaise contre le mur pour qu’elle ne "
          "glisse pas. Demande aux nouveaux : <b>ostéoporose ?</b> → pas de dos rond profond ni de torsion forte, on plie depuis "
          "les hanches, dos long. <b>Prothèse de hanche ?</b> → si elle est récente ou si on lui a dit de ne pas croiser les "
          "jambes : pas de jambes croisées (chiffre 4), genoux écartés, genou poitrine doux. <b>Tension ou vertiges ?</b> → la "
          "tête ne descend pas plus bas que le cœur ; on remonte lentement."),
     grid([card2("chair_sit", "tadasana", "P", ("Cada uno a su manera", "Chacun à sa façon"), None, (
-        "Hola a todos, bienvenidos de nuevo. Como siempre, en cada ejercicio os enseñaré todas las opciones: **en la "
-        "silla, de pie o en el suelo**. Todo se puede hacer en la silla, y también podemos mezclar: una parte en la silla, "
-        "otra de pie, otra en el suelo. Cada uno elige lo que mejor le va hoy. **Sin presión: ninguna opción es mejor que "
-        "otra.** De pie, no dudéis en usar la silla para apoyaros. "
-        "Lo más importante: **no forzamos nunca. Escuchamos nuestro cuerpo.** Si algo duele o no es posible, no pasa nada: "
-        "descansamos. Vamos despacio; así es como mejoramos, poco a poco. **Mejor menos amplitud que hacer demasiado.** "
-        "Y hoy empezamos por lo más importante: **la respiración**.",
-        "Bonjour à tous, rebienvenue. Comme toujours, à chaque exercice je vous montrerai toutes les options : **sur la "
-        "chaise, debout ou au sol**. Tout peut se faire sur la chaise, et on peut aussi mélanger : une partie sur la chaise, "
-        "une autre debout, une autre au sol. Chacun choisit ce qui lui convient le mieux aujourd’hui. **Aucune pression : "
-        "aucune option n’est meilleure qu’une autre.** Debout, n’hésitez pas à utiliser la chaise pour vous appuyer. "
-        "Le plus important : **on ne force jamais. On écoute son corps.** Si quelque chose fait mal ou n’est pas possible, ce "
-        "n’est pas grave : on se repose. On y va lentement ; c’est comme ça qu’on progresse, petit à petit. **Mieux vaut "
-        "moins d’amplitude que d’en faire trop.** Et aujourd’hui on commence par le plus important : **la respiration**."))], cols=1),
-    band(2, ("Respiración · la clave del yoga", "Respiration · la clé du yoga"), "0:04 – 0:12"),
+        "Hola a todos, bienvenidos de nuevo. Ya conocéis las reglas: en cada ejercicio os enseño las opciones, **en la "
+        "silla, de pie o en el suelo**, y cada uno elige. **No forzamos nunca, escuchamos nuestro cuerpo.** Hoy empezamos "
+        "por lo más importante: **la respiración**.",
+        "Bonjour à tous, rebienvenue. Vous connaissez les règles : à chaque exercice je vous montre les options, **sur la "
+        "chaise, debout ou au sol**, et chacun choisit. **On ne force jamais, on écoute son corps.** Aujourd’hui on "
+        "commence par le plus important : **la respiration**."))], cols=1),
+    band(2, ("Respiración · la clave del yoga", "Respiration · la clé du yoga"), "0:02 – 0:12"),
     note("prends le temps : c’est le fil de tout le cours. La dernière fois, certains n’arrivaient pas à tenir la "
          "respiration guidée : dis-le clairement et répète souvent <b>« a vuestro ritmo »</b>. Pendant les exercices, "
          "répète aussi la règle : « on inspire, on ouvre ; on expire, on ferme »."),
