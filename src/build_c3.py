@@ -154,6 +154,11 @@ def para(es_t, fr_t):
 
 
 
+
+def note(*_a, **_k):
+    """course 3: no teacher notes on the sheet."""
+    return ""
+
 # ===================================================================
 # COURSE 3 · same format as course 2 · sun salutation evolves (warrior I inside)
 # ===================================================================
@@ -465,7 +470,6 @@ P_ALL = [
             "On inspire par le nez et on ouvre ou on monte les bras, lentement. On expire et on les redescend lentement. Le "
             "mouvement dure autant que la respiration. ((5 fois)) Les bras montent seulement jusqu’où c’est confortable.")),
     ]),
-    '<div style="break-before:page"></div>',
     band(3, ("Calentamiento · en la silla o en el suelo", "Échauffement · sur la chaise ou au sol"), "0:12 – 0:22"),
     note("tout le début se fait <b>assis ou au sol</b>, sans se relever : ceux qui sont au sol restent assis en tailleur, "
          "puis passent à quatre pattes pour la fin. On reprend ce qu’ils connaissent (cou, épaules, poignets/chevilles, "
@@ -650,7 +654,6 @@ P_ALL = [
         "[MC]Sans appui : mains à la poitrine ; si on est à l’aise, les bras montent. Le genou monte vers la hauteur de la "
         "hanche.[/MC]"))], cols=1),
     '</div>',
-    '<div style="break-before:page"></div>',
     part(2, "En la silla o en el suelo · 0:46 – 1:00", "Sur la chaise ou au sol · 0:46 – 1:00"),
     band(8, ("Estiramientos · en la silla o en el suelo", "Étirements · sur la chaise ou au sol"), "0:46 – 0:51"),
     note("<b>en 5 minutes, ne fais pas toutes les cartes</b>. Parcours de base : papillon → pont (nouveau) → genou poitrine → "
