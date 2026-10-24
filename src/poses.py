@@ -1434,3 +1434,102 @@ def table_arm_up():
 
 
 ALL.update({"tcircles_c": torso_circles_chair, "tcircles_f": torso_circles_floor, "table_arm_up": table_arm_up})
+
+
+# ---------------- course 4 ----------------
+def silla_chair():
+    """seated 'invisible chair': at the edge, leaning forward with a long back, arms up along the ears."""
+    f = side((0, 48), 70, head=72, face=0,
+             armN=('A', 76, 76), armF=('A', 78, 78),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def silla_stand():
+    """standing 'invisible chair': knees bent, hips back, arms up; a real chair behind for safety."""
+    f = side((-14, 66), 66, head=70, face=0,
+             armN=('A', 72, 72), armF=('A', 74, 74),
+             legN=((2, 4), 1), legF=((0, 4), 1), footN=-4, footF=-4)
+    chair(f, -56, back_left=True)
+    return f
+
+
+def avion_chair():
+    """seated airplane: leaning forward with a long back, arms forward, right foot a little off the floor."""
+    f = side((0, 48), 52, head=48, face=-10,
+             armN=('A', 20, 20), armF=('A', 22, 22),
+             legN=('A', 4, -60), footN=10, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def avion_stand():
+    """standing airplane with both hands on the chair back: torso leaning, left leg back and low."""
+    f = side((0, 80), 40, head=38, face=-10,
+             armN=((44, 86), -1), armF=((42, 86), -1),
+             legN=((4, 4), 1), footN=-4, legF=('A', 214, 214), footF=-90, sideN=R, sideF=L)
+    chair(f, 42, back_left=True)
+    return f
+
+
+def avion_free():
+    """airplane without support: torso leaning, arms forward, left leg back and low."""
+    return side((0, 80), 38, head=36, face=-10,
+                armN=('A', 30, 30), armF=('A', 32, 32),
+                legN=((4, 4), 1), footN=-4, legF=('A', 210, 210), footF=-90, sideN=R, sideF=L)
+
+
+def chin_chair():
+    """seated tall, the head slides back (double chin): arrow at the head."""
+    f = side((0, 48), 92, head=90,
+             armN=((30, 50), -1), armF=((28, 50), -1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0,
+             extra=[("arrow", [(18, 116), (6, 116)], 0)])
+    chair(f, -10, back_left=True)
+    return f
+
+
+def chin_floor():
+    return side((0, 10), 92, head=90, armN=((24, 22), -1), armF=((22, 22), -1),
+                legN=((64, 6), 1), legF=((63, 6), 1), footN=80, footF=80,
+                extra=[("arrow", [(18, 78), (6, 78)], 0)])
+
+
+def heel_slide_floor():
+    """lying on the back: one knee bent, the other heel slides along the floor (arrow)."""
+    return side((0, 9.5), 180, head=180, face=90,
+                armN=((-4, 5), 1), armF=((-6, 5), 1),
+                legN=((52, 5), 1), footN=-2, legF=((34, 5), 1), footF=-2, sideN=R, sideF=L,
+                extra=[("arrow", [(70, 2), (46, 2)], 0)])
+
+
+def heel_slide_chair():
+    """on the chair: the right foot slides forward and back along the floor (arrow)."""
+    f = side((0, 48), 92, head=90,
+             armN=((30, 50), -1), armF=((28, 50), -1),
+             legN=((62, 5), 1), footN=40, legF=('A', 2, -88), footF=0, sideN=R, sideF=L,
+             extra=[("arrow", [(44, -4), (74, -4)], 0)])
+    chair(f, -10, back_left=True)
+    return f
+
+
+def legs_on_chair():
+    """lying on the back, calves resting on the chair seat."""
+    f = side((0, 9.5), 180, head=180, face=90,
+             armN=((-4, 5), 1), armF=((-6, 5), 1),
+             legN=('A', 55, 0), footN=90, legF=('A', 57, 2), footF=90)
+    chair(f, 28, back_left=False, seat_y=44)
+    return f
+
+
+def knee_chest_one():
+    """lying on the back: right knee to the chest held behind the thigh, left foot on the floor."""
+    return side((0, 9.5), 180, head=180, face=90,
+                armN=((-6, 38), 1), armF=((-8, 38), 1),
+                legN=('A', 122, -12), footN=-60, legF=((34, 5), 1), footF=-2, sideN=R, sideF=L)
+
+
+ALL.update({"silla_c": silla_chair, "silla_p": silla_stand, "avion_c": avion_chair, "avion_p": avion_stand,
+            "avion_f": avion_free, "chin_c": chin_chair, "chin_f": chin_floor, "heel_f": heel_slide_floor,
+            "heel_c": heel_slide_chair, "legs_chair_f": legs_on_chair, "knee1_f": knee_chest_one})
