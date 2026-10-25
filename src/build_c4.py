@@ -21,6 +21,8 @@ TOKENS = {
     "[D]": ("DESDE", "DÉPART", "it-d"),
     "[F]": ("MÁS FÁCIL", "PLUS FACILE", "it-f"),
     "[T]": ("→ SIGUIENTE", "→ SUITE", "it-t"),
+    "[cS]": ("SILLA", "CHAISE", "it-cs"), "[cF]": ("SUELO", "SOL", "it-cf"),
+    "[cP]": ("DE PIE", "DEBOUT", "it-cp"), "[cX]": ("MÁS COMPLETO", "PLUS COMPLET", "it-cx"),
 }
 BR_ES = re.compile(r"\b(Inhalamos|inhalamos|Exhalamos|exhalamos|inhalaremos|exhalaremos|Inhalando|Exhalando)\b")
 BR_FR = re.compile(r"\b(on inspire|On inspire|on expire|On expire|inspire|expire|inspirera|expirera)\b")
@@ -45,11 +47,12 @@ def T(pair):
           "[MC]": ("vx", "MÁS COMPLETO", "PLUS COMPLET"),
           "[NO]": ("vn", "LO QUE NO HACEMOS", "CE QU’ON NE FAIT PAS"),
           "[TO]": ("vt", "PARA TODOS", "POUR TOUS"),
+          "[OP]": ("vop", "", ""), "[L]": ("vline", "", ""),
           "[SE]": ("vse", "LO QUE SENTIMOS", "CE QU’ON RESSENT"),
           "[JU]": ("vj", "JUNTOS · LO QUE DIGO", "ENSEMBLE · CE QUE JE DIS")}
     for k, (c, les, lfr) in VB.items():
         h = h.replace(k, f'<span class="vb {c}"><span class="vl">{les if L == "es" else lfr}</span>')
-    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]", "[/NO]", "[/JU]", "[/TO]", "[/SE]"):
+    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]", "[/NO]", "[/JU]", "[/TO]", "[/SE]", "[/OP]", "[/L]"):
         h = h.replace(k, "</span>")
     for k, (es, fr, c) in TOKENS.items():
         h = h.replace(k, f'<span class="it {c}">{es if L == "es" else fr}</span>')
@@ -566,11 +569,153 @@ for _k, _v in SE.items():
     TEXTS[_k]["se"] = _v
 
 
+# ---- spoken format: BENEFIT (start) + what we do + FEEL (end), then one small OPTIONS box ----
+BEN = {
+    "Cuello": ("Esto sirve para soltar el cuello.", "Ça sert à relâcher le cou."),
+    "Hombros": ("Esto suelta los hombros.", "Ça relâche les épaules."),
+    "Nuevo · Abrazo y apertura": ("Esto abre el pecho y estira la espalda alta.", "Ça ouvre la poitrine et étire le haut du dos."),
+    "Nuevo · La cabeza atrás": ("Esto alarga la nuca y nos ayuda a estar más rectos.", "Ça allonge la nuque et ça aide à se tenir plus droit."),
+    "Muñecas y tobillos": ("Esto mueve las articulaciones; unos tobillos ágiles ayudan al equilibrio.",
+                           "Ça bouge les articulations ; des chevilles souples aident l’équilibre."),
+    "Inclinación lateral": ("Esto estira los costados y nos ayuda a respirar mejor.", "Ça étire les côtés et ça aide à mieux respirer."),
+    "Círculos del torso": ("Esto mueve la columna en todas las direcciones.", "Ça bouge la colonne dans toutes les directions."),
+    "Gato-vaca": ("Esto da flexibilidad a la columna.", "Ça assouplit la colonne."),
+    "Guerrero II · recordatorio": ("Esto fortalece las piernas y abre el pecho.", "Ça muscle les jambes et ouvre la poitrine."),
+    "Nuevo · Ángulo lateral": ("Esto estira todo el costado y fortalece las piernas.", "Ça étire tout le côté et muscle les jambes."),
+    "Triángulo adaptado · recordatorio": ("Esto estira el costado y la parte interior de las piernas.",
+                                          "Ça étire le côté et l’intérieur des jambes."),
+    "Nuevo · El avión": ("Esto entrena el equilibrio y fortalece los tobillos: nos ayuda a no caernos.",
+                         "Ça entraîne l’équilibre et muscle les chevilles : ça aide à ne pas tomber."),
+    "Nuevo · Estirarse como al despertar": ("Esto despierta todo el cuerpo y alarga la espalda.",
+                                            "Ça réveille tout le corps et allonge le dos."),
+    "Balanceo de la pelvis": ("Esto mueve la espalda baja con suavidad.", "Ça bouge le bas du dos en douceur."),
+    "Rodilla al pecho": ("Esto relaja la espalda baja.", "Ça relâche le bas du dos."),
+    "Nuevo · Talones que se deslizan": ("Esto mueve la cadera y la rodilla sin forzar.", "Ça bouge la hanche et le genou sans forcer."),
+    "Nuevo · Ángel en el suelo": ("Esto abre el pecho y los hombros.", "Ça ouvre la poitrine et les épaules."),
+    "La banana": ("Esto estira todo el costado.", "Ça étire tout le côté."),
+    "Torsión tumbada": ("Esto relaja la espalda.", "Ça détend le dos."),
+    "Nuevo · La almeja": ("Esto fortalece el lado de la cadera: nos ayuda a caminar más estables.",
+                          "Ça muscle le côté de la hanche : ça aide à marcher plus stable."),
+    "Nuevo · Apretar los glúteos": ("Esto fortalece los glúteos sin mover la cadera: nos ayuda a levantarnos y a caminar.",
+                                    "Ça muscle les fesses sans bouger la hanche : ça aide à se lever et à marcher."),
+    "Descanso: el niño": ("Esto descansa la espalda.", "Ça repose le dos."),
+}
+FEEL = {
+    "Cuello": ("Notamos que tira suavemente en el lado del cuello. Si duele o marea, más pequeño.",
+               "On sent que ça tire doucement sur le côté du cou. Si ça fait mal ou que ça tourne, plus petit."),
+    "Hombros": ("Notamos calor en los hombros; el cuello no se tensa.", "On sent de la chaleur dans les épaules ; le cou ne se crispe pas."),
+    "Nuevo · Abrazo y apertura": ("Al abrir, notamos el pecho que se estira; al abrazarnos, entre los omóplatos. Si pincha el "
+                                  "hombro, más pequeño.",
+                                  "En ouvrant, on sent la poitrine qui s’étire ; en se faisant un câlin, entre les omoplates. "
+                                  "Si l’épaule pique, plus petit."),
+    "Nuevo · La cabeza atrás": ("Notamos que se alarga la parte de atrás del cuello. No debe doler la garganta ni marear.",
+                                "On sent l’arrière du cou qui s’allonge. La gorge ne doit pas faire mal, et ça ne doit pas "
+                                "tourner."),
+    "Muñecas y tobillos": ("Es un movimiento suave; si duele una articulación, más pequeño.",
+                           "C’est un mouvement doux ; si une articulation fait mal, plus petit."),
+    "Inclinación lateral": ("Notamos que tira en el costado de arriba, no en el cuello ni en la espalda baja.",
+                            "On sent que ça tire sur le côté du haut, pas dans le cou ni dans le bas du dos."),
+    "Círculos del torso": ("Notamos la espalda que se mueve suave. Si marea, círculos más pequeños.",
+                           "On sent le dos qui bouge en douceur. Si ça tourne, des cercles plus petits."),
+    "Gato-vaca": ("Notamos toda la espalda que se mueve, sin pellizcos en la espalda baja ni en el cuello.",
+                  "On sent tout le dos qui bouge, sans pincement dans le bas du dos ni dans le cou."),
+    "Guerrero II · recordatorio": ("Notamos calor y trabajo en los muslos. Si duele la rodilla o pellizca la ingle, más pequeño.",
+                                   "On sent de la chaleur et du travail dans les cuisses. Si le genou fait mal ou que l’aine "
+                                   "pince, plus petit."),
+    "Nuevo · Ángulo lateral": ("Notamos que tira en el costado de arriba. Si pellizca la ingle, la rodilla o la espalda baja, "
+                               "menos.",
+                               "On sent que ça tire sur le côté du haut. Si l’aine, le genou ou le bas du dos pincent, moins."),
+    "Triángulo adaptado · recordatorio": ("Notamos que tira suave en el costado y en la parte interior del muslo; nada en la "
+                                          "rodilla ni en el cuello.",
+                                          "On sent que ça tire doucement sur le côté et à l’intérieur de la cuisse ; rien "
+                                          "dans le genou ni dans le cou."),
+    "Nuevo · El avión": ("Notamos trabajo en el tobillo y en la pierna de apoyo; nada en la espalda baja.",
+                         "On sent le travail dans la cheville et la jambe d’appui ; rien dans le bas du dos."),
+    "Nuevo · Estirarse como al despertar": ("Notamos que todo el cuerpo se alarga, de las manos a los pies. Si molestan los "
+                                            "hombros, los brazos se quedan a lo largo del cuerpo.",
+                                            "On sent tout le corps qui s’allonge, des mains aux pieds. Si les épaules "
+                                            "gênent, les bras restent le long du corps."),
+    "Balanceo de la pelvis": ("Notamos un movimiento pequeño en la espalda baja; no debe doler.",
+                              "On sent un petit mouvement dans le bas du dos ; ça ne doit pas faire mal."),
+    "Rodilla al pecho": ("Notamos que tira suave en el glúteo y la espalda baja. Si pellizca delante de la cadera, la rodilla "
+                         "más lejos.",
+                         "On sent que ça tire doucement dans la fesse et le bas du dos. Si ça pince devant la hanche, le "
+                         "genou plus loin."),
+    "Nuevo · Talones que se deslizan": ("No debe tirar: es un movimiento libre. Si pellizca la ingle, más pequeño.",
+                                        "Ça ne doit pas tirer : c’est un mouvement libre. Si l’aine pince, plus petit."),
+    "Nuevo · Ángel en el suelo": ("Notamos que tira suave en el pecho y los hombros. Si pincha un hombro, más pequeño.",
+                                  "On sent que ça tire doucement dans la poitrine et les épaules. Si une épaule pique, plus "
+                                  "petit."),
+    "La banana": ("Notamos todo el costado que se alarga, de los pies a las manos; nada en la espalda baja.",
+                  "On sent tout le côté qui s’allonge, des pieds aux mains ; rien dans le bas du dos."),
+    "Torsión tumbada": ("Notamos la espalda que se suelta. Si pellizca la espalda baja o un hombro, las rodillas menos lejos.",
+                        "On sent le dos qui se relâche. Si le bas du dos ou une épaule pincent, les genoux moins loin."),
+    "Nuevo · La almeja": ("Notamos calor en el lado del glúteo. Si duele la cadera o la espalda, más pequeño.",
+                          "On sent de la chaleur sur le côté de la fesse. Si la hanche ou le dos font mal, plus petit."),
+    "Nuevo · Apretar los glúteos": ("Notamos los glúteos que trabajan; la respiración sigue tranquila.",
+                                    "On sent les fesses qui travaillent ; la respiration reste tranquille."),
+    "Descanso: el niño": ("Notamos la espalda que se suelta; nada en las rodillas ni en las caderas.",
+                          "On sent le dos qui se relâche ; rien dans les genoux ni dans les hanches."),
+}
+
+
+def _build(d, i, name=None):
+    parts = []
+    if d["intro"]:
+        parts.append(d["intro"][i])
+    say_ = []
+    if name in BEN:
+        say_.append(BEN[name][i])
+    say_.append(d["common"][i])
+    if name in FEEL:
+        say_.append(FEEL[name][i])
+    parts.append(" ".join(say_))
+    lines = []
+    if d["chair"]:
+        lines.append("[L][cS] " + d["chair"][i] + "[/L]")
+    if d["alt"]:
+        chip = "[cF]" if d["alt"][0] == "SU" else "[cP]"
+        lines.append("[L]" + chip + " " + d["alt"][1 + i] + "[/L]")
+    if d["mc"]:
+        lines.append("[L][cX] " + d["mc"][i] + "[/L]")
+    if lines:
+        parts.append("[OP]" + "".join(lines) + "[/OP]")
+    if d["ju"]:
+        parts.append("[JU]" + d["ju"][i] + "[/JU]")
+    return " ".join(parts)
+
+
+TEXTS["Nuevo · Estirarse como al despertar"] = _t((
+    "Inhalamos: los brazos suben por encima de la cabeza y las piernas se alargan, como cuando nos despertamos por la "
+    "mañana. Exhalamos: soltamos. ((3 veces)) Despacio, sin forzar.",
+    "On inspire : les bras montent au-dessus de la tête et les jambes s’allongent, comme quand on se réveille le matin. On "
+    "expire : on relâche. ((3 fois)) Lentement, sans forcer."),
+    intro=("**Bajamos al suelo como hemos aprendido: de lado, a cuatro apoyos, una rodilla, las manos en la silla. Quien "
+           "prefiere, se queda en la silla.**",
+           "**On descend au sol comme on l’a appris : de côté, à quatre pattes, un genou, les mains sur la chaise. Ceux qui "
+           "préfèrent restent sur la chaise.**"),
+    chair=("Sentados, la espalda larga; los brazos suben y las piernas se estiran un poco delante.",
+           "Assis, le dos long ; les bras montent et les jambes s’allongent un peu devant."),
+    alt=("SU", "Tumbados boca arriba, piernas largas o rodillas dobladas.",
+         "Allongés sur le dos, jambes longues ou genoux pliés."))
+TEXTS["Nuevo · Apretar los glúteos"] = _t((
+    "Apretamos los glúteos, como si quisiéramos sujetar una moneda. ((5 segundos)) Soltamos del todo. ((5 segundos)) "
+    "((8 veces)) No aguantamos el aire: respiramos mientras apretamos.",
+    "On serre les fesses, comme pour tenir une pièce de monnaie. ((5 secondes)) On relâche complètement. ((5 secondes)) "
+    "((8 fois)) On ne retient pas l’air : on respire pendant qu’on serre."),
+    chair=("Sentados, los pies bien apoyados.", "Assis, les pieds bien posés."),
+    alt=("SU", "Tumbados boca arriba, piernas largas o rodillas dobladas.",
+         "Allongés sur le dos, jambes longues ou genoux pliés."))
+TEXTS["Balanceo de la pelvis"]["intro"] = None
+TEXTS["Nuevo · La almeja"]["alt"] = ("SU", TEXTS["Nuevo · La almeja"]["alt"][1].replace(" Luego nos tumbamos boca arriba.", " Luego nos tumbamos boca arriba."),
+                                     TEXTS["Nuevo · La almeja"]["alt"][2])
+
+
 def _with_text(args, kw):
     a = list(args)
     name = a[3][0] if len(a) > 3 else None
     if name in TEXTS:
-        t = (_build(TEXTS[name], 0), _build(TEXTS[name], 1))
+        t = (_build(TEXTS[name], 0, name), _build(TEXTS[name], 1, name))
         if len(a) > 5:
             a[5] = t
         else:
@@ -593,44 +738,44 @@ SUN_STAND = [
 SUN_STEPS = [
     (1, ("**Corazón.** Espalda larga, palmas juntas delante del pecho. Exhalamos.",
          "**Cœur.** Dos long, paumes jointes devant la poitrine. On expire.")),
-    (2, ("**NUEVO EN EL SALUDO · La silla invisible.** Inhalamos: subimos los brazos. "
-         "[C]Al borde de la silla, nos inclinamos un poco hacia delante con la espalda larga, como para levantarnos.[/C] "
-         "[DP]Doblamos las rodillas y llevamos las caderas hacia atrás, como para sentarnos en una silla que no está. Poco. "
-         "El peso en los talones, las rodillas en la dirección de los pies. La silla de verdad detrás, por seguridad.[/DP] "
-         "[TO]Si cuesta subir los brazos: brazos delante o manos en los muslos. Cuidado: no bajamos mucho; si molestan las "
-         "rodillas, menos.[/TO] [SE]Sirve para fortalecer los muslos y los glúteos: levantarnos de una silla, subir "
-         "escaleras. ✓ Calor en los muslos. ✗ Dolor en las rodillas.[/SE]",
-         "**NOUVEAU DANS LA SALUTATION · La chaise invisible.** On inspire : on monte les bras. "
-         "[C]Au bord de la chaise, on se penche un peu vers l’avant le dos long, comme pour se lever.[/C] "
-         "[DP]On plie les genoux et on recule les hanches, comme pour s’asseoir sur une chaise qui n’est pas là. Peu. Le "
-         "poids sur les talons, les genoux dans la direction des pieds. La vraie chaise derrière, par sécurité.[/DP] "
-         "[TO]Si les bras montent difficilement : bras devant ou mains sur les cuisses. Attention : on ne descend pas "
-         "beaucoup ; si les genoux gênent, moins.[/TO] [SE]Sert à muscler les cuisses et les fesses : se lever d’une chaise, "
-         "monter les escaliers. ✓ Chaleur dans les cuisses. ✗ Douleur dans les genoux.[/SE]")),
-    (3, ("**Flexión.** Exhalamos: rodillas un poco dobladas, nos inclinamos **desde las caderas**; las manos resbalan por "
-         "los muslos. La espalda larga. Cuidado: si hay vértigo, la cabeza no baja más que el corazón. "
-         "[SE]Sirve para estirar la espalda y la parte de atrás de las piernas. ✓ Tira detrás de los muslos. ✗ Pinchazo en la "
-         "espalda baja o en las rodillas.[/SE] [MC]Si estamos cómodos, soltamos más: la cabeza y los brazos cuelgan.[/MC]",
-         "**Flexion.** On expire : genoux légèrement pliés, on se penche **depuis les hanches** ; les mains glissent sur "
-         "les cuisses. Le dos long. Attention : en cas de vertige, la tête ne descend pas plus bas que le cœur. "
-         "[SE]Sert à étirer le dos et l’arrière des jambes. ✓ Ça tire derrière les cuisses. ✗ Piqûre dans le bas du dos ou les "
-         "genoux.[/SE] [MC]Si on est à l’aise, on relâche davantage : la tête et les bras pendent.[/MC]")),
+    (2, ("**NUEVO EN EL SALUDO · La silla invisible.** Esto fortalece los muslos y los glúteos: lo usamos para levantarnos "
+         "de una silla o subir escaleras. Inhalamos: subimos los brazos y doblamos un poco las rodillas, como para "
+         "sentarnos. Notamos calor en los muslos; si duelen las rodillas, menos. Si cuesta subir los brazos: brazos delante "
+         "o manos en los muslos. "
+         "[OP][L][cS] Al borde de la silla, nos inclinamos un poco hacia delante con la espalda larga, como para "
+         "levantarnos.[/L][L][cP] Las caderas hacia atrás, poco; el peso en los talones, las rodillas en la dirección de los "
+         "pies; la silla de verdad detrás.[/L][/OP]",
+         "**NOUVEAU DANS LA SALUTATION · La chaise invisible.** Ça muscle les cuisses et les fesses : c’est ce qu’on utilise "
+         "pour se lever d’une chaise ou monter les escaliers. On inspire : on monte les bras et on plie un peu les genoux, "
+         "comme pour s’asseoir. On sent de la chaleur dans les cuisses ; si les genoux font mal, moins. Si les bras montent "
+         "difficilement : bras devant ou mains sur les cuisses. "
+         "[OP][L][cS] Au bord de la chaise, on se penche un peu vers l’avant le dos long, comme pour se lever.[/L][L][cP] "
+         "Les hanches en arrière, peu ; le poids sur les talons, les genoux dans la direction des pieds ; la vraie chaise "
+         "derrière.[/L][/OP]")),
+    (3, ("**Flexión.** Esto estira la espalda y la parte de atrás de las piernas. Exhalamos: rodillas un poco dobladas, nos "
+         "inclinamos **desde las caderas**; las manos resbalan por los muslos, la espalda larga. Notamos que tira detrás de "
+         "los muslos; si pincha la espalda baja o hay vértigo, subimos un poco. "
+         "[OP][L][cX] Si estamos cómodos, la cabeza y los brazos cuelgan.[/L][/OP]",
+         "**Flexion.** Ça étire le dos et l’arrière des jambes. On expire : genoux légèrement pliés, on se penche **depuis "
+         "les hanches** ; les mains glissent sur les cuisses, le dos long. On sent que ça tire derrière les cuisses ; si le "
+         "bas du dos pique ou que ça tourne, on remonte un peu. "
+         "[OP][L][cX] Si on est à l’aise, la tête et les bras pendent.[/L][/OP]")),
     (4, ("**Espalda larga.** Inhalamos: subimos un poco, la espalda plana como una mesa, el cuello largo. "
-         "[DP]Manos en el respaldo, o en los muslos.[/DP]",
+         "[OP][L][cP] Manos en el respaldo, o en los muslos.[/L][/OP]",
          "**Dos long.** On inspire : on remonte un peu, le dos plat comme une table, le cou long. "
-         "[DP]Mains sur le dossier, ou sur les cuisses.[/DP]")),
-    (5, ("**Pierna izquierda atrás.** Exhalamos. [C]Giramos un poco en la silla; la pierna izquierda va atrás, al lado de "
-         "la silla, la punta del pie apoyada.[/C] [DP]El pie izquierdo da un paso atrás, pies como sobre dos raíles; una "
-         "mano en la silla.[/DP] [TO]Las caderas miran hacia delante.[/TO]",
-         "**Jambe gauche en arrière.** On expire. [C]On tourne un peu sur la chaise ; la jambe gauche va en arrière, à côté "
-         "de la chaise, la pointe du pied posée.[/C] [DP]Le pied gauche recule d’un pas, pieds comme sur deux rails ; une "
-         "main sur la chaise.[/DP] [TO]Les hanches regardent devant.[/TO]")),
-    (6, ("**Guerrero I.** Inhalamos: subimos los brazos, o uno solo si la otra mano está en la silla. ((2 resp.)) "
-         "[SE]Sirve para fortalecer las piernas y estirar la parte delantera de la cadera. ✓ Tira delante de la cadera de la "
-         "pierna de atrás. ✗ Rodilla de delante, espalda baja.[/SE]",
-         "**Guerrier I.** On inspire : on monte les bras, ou un seul si l’autre main est sur la chaise. ((2 resp.)) "
-         "[SE]Sert à muscler les jambes et étirer l’avant de la hanche. ✓ Ça tire devant la hanche de la jambe arrière. "
-         "✗ Genou avant, bas du dos.[/SE]")),
+         "[OP][L][cP] Mains sur le dossier, ou sur les cuisses.[/L][/OP]")),
+    (5, ("**Pierna izquierda atrás.** Exhalamos. Las caderas miran hacia delante. "
+         "[OP][L][cS] Giramos un poco en la silla; la pierna izquierda va atrás, al lado de la silla, la punta del pie "
+         "apoyada.[/L][L][cP] El pie izquierdo da un paso atrás, pies como sobre dos raíles; una mano en la silla.[/L][/OP]",
+         "**Jambe gauche en arrière.** On expire. Les hanches regardent devant. "
+         "[OP][L][cS] On tourne un peu sur la chaise ; la jambe gauche va en arrière, à côté de la chaise, la pointe du pied "
+         "posée.[/L][L][cP] Le pied gauche recule d’un pas, pieds comme sur deux rails ; une main sur la chaise.[/L][/OP]")),
+    (6, ("**Guerrero I.** Esto fortalece las piernas y estira la parte delantera de la cadera. Inhalamos: subimos los brazos, "
+         "o uno solo si la otra mano está en la silla. ((2 resp.)) Notamos que tira delante de la cadera de la pierna de "
+         "atrás; nada en la rodilla de delante ni en la espalda baja.",
+         "**Guerrier I.** Ça muscle les jambes et étire l’avant de la hanche. On inspire : on monte les bras, ou un seul si "
+         "l’autre main est sur la chaise. ((2 resp.)) On sent que ça tire devant la hanche de la jambe arrière ; rien dans "
+         "le genou avant ni dans le bas du dos.")),
     (7, ("**Corazón.** Exhalamos: bajamos los brazos, la pierna vuelve, manos delante del pecho. ((1 resp.))",
          "**Cœur.** On expire : on descend les bras, la jambe revient, mains devant la poitrine. ((1 resp.))")),
 ]
@@ -677,18 +822,20 @@ P_ALL = [
      if L == "es" else
      '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
-    band(1, ("Bienvenida · un consejo", "Accueil · une astuce"), "0:00 – 0:04"),
-    grid([card2("chair_sit", "c_lean", "S", ("Bienvenida · sentarse y levantarse bien", "Accueil · bien s’asseoir et se lever"), None, (
-        "Hola a todos, bienvenidos de nuevo. Como siempre: cada uno elige su opción, **no forzamos nunca** y respiramos a "
-        "nuestro ritmo. Si algo tira suavemente, está bien; si pincha o duele en una articulación, salimos un poco. "
-        "**Hoy, un consejo:** sentados, sobre los dos huesos de las nalgas, los pies planos. Para levantarnos: los pies un "
-        "poco atrás, la nariz por encima de los pies, empujamos con los pies y las manos. Y cambiamos de posición despacio: "
-        "esperamos una respiración antes de levantarnos.",
-        "Bonjour à tous, rebienvenue. Comme toujours : chacun choisit son option, **on ne force jamais** et on respire à son "
-        "rythme. Si ça tire doucement, c’est bien ; si ça pique ou fait mal dans une articulation, on sort un peu. "
-        "**Aujourd’hui, une astuce :** assis, sur les deux os des fesses, les pieds à plat. Pour se lever : les pieds un peu "
-        "en arrière, le nez au-dessus des pieds, on pousse avec les pieds et les mains. Et on change de position "
-        "lentement : on attend une respiration avant de se lever."))], cols=1),
+    band(1, ("Bienvenida", "Accueil"), "0:00 – 0:04"),
+    grid([card2("chair_sit", "c_lean", "S", ("Bienvenida · nos sentamos bien", "Accueil · on s’assoit bien"), None, (
+        "Hola a todos, bienvenidos de nuevo. Antes de empezar, nos sentamos bien. Notad los dos huesos de las nalgas sobre "
+        "la silla… los pies planos en el suelo… la espalda que crece hacia el techo. Así. Esta es nuestra base para toda "
+        "la clase. Hoy, como las hojas en otoño, vamos a soltar lo que no necesitamos: las tensiones de la semana. Como "
+        "siempre, cada uno elige su opción y no forzamos nunca: si algo tira suavemente, está bien; si duele, lo hacemos "
+        "más pequeño. Y un consejo para hoy: cuando nos levantemos, los pies un poco atrás, la nariz por encima de los "
+        "pies, empujamos con los pies… y despacio, esperando una respiración.",
+        "Bonjour à tous, rebienvenue. Avant de commencer, on s’assoit bien. Sentez les deux os des fesses sur la chaise… "
+        "les pieds à plat au sol… le dos qui grandit vers le plafond. Voilà. C’est notre base pour tout le cours. "
+        "Aujourd’hui, comme les feuilles en automne, on va lâcher ce dont on n’a pas besoin : les tensions de la semaine. "
+        "Comme toujours, chacun choisit son option et on ne force jamais : si ça tire doucement, c’est bien ; si ça fait "
+        "mal, on fait plus petit. Et une astuce pour aujourd’hui : quand on se lève, les pieds un peu en arrière, le nez "
+        "au-dessus des pieds, on pousse avec les pieds… et doucement, en attendant une respiration."))], cols=1),
     band(2, ("Respiración", "Respiration"), "0:04 – 0:11"),
     grid([
         card2("r_chair", "r_floor", "F", ("Respiración en tres partes", "Respiration en trois parties"), ("5 resp.", "5 resp."), (
@@ -769,6 +916,7 @@ P_ALL = [
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Estiramientos suaves · caderas y espalda", "Étirements doux · hanches et dos"), "0:44 – 0:51"),
     grid([
+        card2("c_arms_up", "stretch_f", "F", ("Nuevo · Estirarse como al despertar", "Nouveau · S’étirer comme au réveil"), ("3 veces", "3 fois"), ("", "")),
         card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),
         card2("chair_knee", "knee1_f", "F", ("Rodilla al pecho", "Genou poitrine"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("heel_c", "heel_f", "F", ("Nuevo · Talones que se deslizan", "Nouveau · Talons qui glissent"), ("5 veces/lado", "5 fois/côté"), ("", "")),
@@ -776,6 +924,7 @@ P_ALL = [
         card2("c_side_R", "banana_f", "F", ("La banana", "La banane"), ("4 resp./lado", "4 resp./côté"), ("", "")),
         card2("c_twist", "twist_R", "F", ("Torsión tumbada", "Torsion allongée"), ("4 resp./lado", "4 resp./côté"), ("", "")),
         card2("d_chair", "clam_f", "F", ("Nuevo · La almeja", "Nouveau · La coquille"), ("8 veces/lado", "8 fois/côté"), ("", "")),
+        card2("chair_sit", "supine_knees", "F", ("Nuevo · Apretar los glúteos", "Nouveau · Serrer les fesses"), ("8 veces", "8 fois"), ("", "")),
         opt(card2("child_chair", "child", "F", ("Descanso: el niño", "Repos : l’enfant"), ("5 resp.", "5 resp."), ("", ""))),
     ], cols=3),
     band(9, ("Relajación · 5 minutos", "Relaxation · 5 minutes"), "0:51 – 0:56"),
@@ -882,6 +1031,11 @@ CSS += """
 .vt { background:#ffffff; border:1.4px solid #222; border-left:4px solid #222; color:#111; } .vt .vl { background:#222; }
 .vc { background:#fbe3c9 !important; border-left:3px solid #c0651a !important; color:#5a2e08 !important; } .vc .vl { background:#c0651a !important; }
 .vse { background:#fff6d6; border-left:3px solid #c9a227; color:#4d3d05; } .vse .vl { background:#b38f12; }
+.vop { background:#f2f3f5; border-left:3px solid #9aa3ad; color:#2b3540; padding:.6mm 1.6mm; }
+.vop .vl, .vline .vl { display:none; }
+.vline { display:block; margin:.3mm 0; padding:0; background:none; border:0; }
+.it-cs { background:#c0651a; color:#fff; } .it-cf { background:#3f8a5a; color:#fff; } .it-cp { background:#4a6fa5; color:#fff; }
+.it-cx { background:#7a4fa0; color:#fff; }
 .optc { border:2px dashed #e0701e; background:#fff8f1; }
 .obadge { font-size:6.6pt; font-weight:700; color:#fff; background:#e0701e; border-radius:1mm; padding:0 1.2mm; letter-spacing:.04em; vertical-align:1px; }
 """

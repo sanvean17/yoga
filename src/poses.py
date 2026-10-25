@@ -1555,3 +1555,15 @@ ALL.update({"clam_f": clamshell})
 
 
 ALL.update({"open_c": lambda: chair_back2("out", colored=False)})
+
+
+def big_stretch():
+    """top view, lying on the back, arms long overhead and legs long: stretching like waking up."""
+    f, _ = back((0, 0), 180, face_up=True, colored=False,
+                armR=('A', 186, 186), armL=('A', 174, 174),
+                legR=((78, -10), 1), legL=((78, 10), -1), footR=(0, 9), footL=(0, 9))
+    f.top_mat = (-110, -38, 96, 38)
+    return f
+
+
+ALL.update({"stretch_f": big_stretch})
