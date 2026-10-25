@@ -815,26 +815,46 @@ BEN["Nuevo · El bastón (Dandasana)"] = ("Esta postura despierta la espalda y n
              "Cette posture réveille le dos et nous apprend à bien nous tenir assis.")
 FEEL["Nuevo · El bastón (Dandasana)"] = ("Notamos que la espalda trabaja y se alarga, y un estiramiento suave detrás de las piernas; nada en la espalda baja.",
               "On sent le dos qui travaille et s’allonge, et un étirement doux derrière les jambes ; rien dans le bas du dos.")
-TEXTS["Nuevo · Cabeza a la rodilla (Janu Sirsasana adaptada)"] = _t((
-    "Inhalamos: la espalda larga. Exhalamos: nos inclinamos un poco hacia la pierna derecha, desde las caderas; las manos "
-    "en la pierna, donde llegan. ((4 resp.)) Subimos despacio y cambiamos de pierna. Cuidado: la cabeza no tiene que "
-    "llegar a la rodilla; la espalda se queda larga.",
-    "On inspire : le dos long. On expire : on se penche un peu vers la jambe droite, depuis les hanches ; les mains sur la "
-    "jambe, là où elles arrivent. ((4 resp.)) On remonte doucement et on change de jambe. Attention : la tête n’a pas "
-    "besoin d’arriver au genou ; le dos reste long."),
-    chair=("Pierna derecha estirada delante, talón en el suelo; la otra pierna doblada.",
-           "Jambe droite allongée devant, talon au sol ; l’autre jambe pliée."),
-    alt=("SU", "Pierna derecha larga; la planta del pie izquierdo contra el interior del muslo o de la pantorrilla "
-         "derecha. Si la cadera molesta, las dos piernas largas. Luego nos tumbamos boca arriba, despacio, apoyándonos "
-         "en los codos.",
-         "Jambe droite longue ; la plante du pied gauche contre l’intérieur de la cuisse ou du mollet droit. Si la hanche "
-         "gêne, les deux jambes longues. Puis on s’allonge sur le dos, doucement, en s’appuyant sur les coudes."))
-BEN["Nuevo · Cabeza a la rodilla (Janu Sirsasana adaptada)"] = ("Esta postura estira la parte de atrás de una pierna y el costado de la espalda.",
-                                                                "Cette posture étire l’arrière d’une jambe et le côté du dos.")
-FEEL["Nuevo · Cabeza a la rodilla (Janu Sirsasana adaptada)"] = ("Notamos que tira detrás del muslo de la pierna larga; si "
-                                                                 "pellizca la cadera de la pierna doblada, la estiramos.",
-                                                                 "On sent que ça tire derrière la cuisse de la jambe longue ; "
-                                                                 "si la hanche de la jambe pliée pince, on l’allonge.")
+TEXTS["Nuevo · Una pierna larga (Marichyasana adaptada)"] = _t((
+    "La pierna derecha larga delante, los dedos del pie miran al techo; la rodilla izquierda doblada, el pie izquierdo en "
+    "el suelo, un poco lejos de la cadera. Las dos rodillas miran al techo. Inhalamos: la espalda larga. Exhalamos: nos "
+    "inclinamos un poco hacia la pierna derecha, desde las caderas; las manos en la pierna, donde llegan. ((4 resp.)) "
+    "Subimos despacio y cambiamos de pierna. Cuidado: la cabeza no tiene que bajar; la espalda se queda larga.",
+    "La jambe droite longue devant, les orteils regardent le plafond ; le genou gauche plié, le pied gauche au sol, un "
+    "peu loin de la hanche. Les deux genoux regardent le plafond. On inspire : le dos long. On expire : on se penche un "
+    "peu vers la jambe droite, depuis les hanches ; les mains sur la jambe, là où elles arrivent. ((4 resp.)) On remonte "
+    "doucement et on change de jambe. Attention : la tête n’a pas besoin de descendre ; le dos reste long."),
+    chair=("Pierna derecha estirada delante, talón en el suelo; la otra pierna doblada, el pie en el suelo.",
+           "Jambe droite allongée devant, talon au sol ; l’autre jambe pliée, le pied au sol."),
+    alt=("SU", "Sentados, pierna derecha larga, pie izquierdo en el suelo; si cuesta, la espalda contra la pared y solo "
+         "crecemos, sin inclinarnos. Luego nos tumbamos boca arriba, despacio, apoyándonos en los codos.",
+         "Assis, jambe droite longue, pied gauche au sol ; si c’est difficile, le dos contre le mur et on grandit "
+         "seulement, sans se pencher. Puis on s’allonge sur le dos, doucement, en s’appuyant sur les coudes."))
+BEN["Nuevo · Una pierna larga (Marichyasana adaptada)"] = ("Esta postura estira la parte de atrás de una pierna, sin abrir la cadera.",
+               "Cette posture étire l’arrière d’une jambe, sans ouvrir la hanche.")
+FEEL["Nuevo · Una pierna larga (Marichyasana adaptada)"] = ("Notamos que tira detrás del muslo de la pierna larga; si pellizca delante de la cadera, alejamos el pie "
+                "o nos inclinamos menos.",
+                "On sent que ça tire derrière la cuisse de la jambe longue ; si ça pince devant la hanche, on éloigne le "
+                "pied ou on se penche moins.")
+TEXTS["El puente pequeño (Setu Bandhasana)"] = _t((
+    "Los pies empujan el suelo. Inhalamos: empujamos los pies y subimos solo un poco la pelvis. Exhalamos: bajamos "
+    "despacio. ((4 veces)) Cuidado: no subimos mucho, no arqueamos la espalda y no aguantamos el aire.",
+    "Les pieds poussent dans le sol. On inspire : on pousse dans les pieds et on décolle juste un peu le bassin. On "
+    "expire : on redescend doucement. ((4 fois)) Attention : on ne monte pas haut, on ne creuse pas le dos et on ne "
+    "retient pas l’air."),
+    chair=("Sin levantarnos: los pies empujan el suelo, apretamos un poco las piernas y los glúteos, respiramos "
+           "((3 resp.)) y soltamos.",
+           "Sans se lever : les pieds poussent dans le sol, on contracte un peu les jambes et les fessiers, on respire "
+           "((3 resp.)) et on relâche."),
+    alt=("SU", "Tumbados, rodillas dobladas, pies separados como las caderas, brazos al lado del cuerpo; la pelvis "
+         "sube solo un poco.",
+         "Allongés, genoux pliés, pieds largeur du bassin, bras le long du corps ; le bassin décolle juste un peu."))
+BEN["El puente pequeño (Setu Bandhasana)"] = ("Esto fortalece las piernas y los glúteos: nos ayuda a levantarnos y a caminar.",
+               "Ça muscle les jambes et les fessiers : ça aide à se lever et à marcher.")
+FEEL["El puente pequeño (Setu Bandhasana)"] = ("Notamos que trabajan los glúteos y los muslos; si pellizca la cadera, la rodilla o la espalda, la pelvis "
+                "se queda en el suelo y solo empujamos los pies.",
+                "On sent les fessiers et les cuisses qui travaillent ; si ça pince à la hanche, au genou ou au dos, le "
+                "bassin reste au sol et on pousse juste dans les pieds.")
 TEXTS["Nuevo · Montaña tumbada (Supta Tadasana)"]["intro"] = None
 TEXTS["Torsión tumbada (Supta Matsyendrasana)"]["alt"] = ("SU",
     "Tumbados, brazos en cruz: rodillas juntas a la derecha, la cabeza puede mirar a la izquierda. Los hombros se quedan "
@@ -881,14 +901,14 @@ SUN_STEPS = [
          "sentarnos. Notamos calor en los muslos; si duelen las rodillas, menos. Si cuesta subir los brazos: brazos delante "
          "o manos en los muslos. "
          "[OP][L][cS] Al borde de la silla, nos inclinamos un poco hacia delante con la espalda larga, como para "
-         "levantarnos.[/L][L][cP] Las caderas hacia atrás, poco; el peso en los talones, las rodillas en la dirección de los "
+         "levantarnos.[/L][L][cP] Las caderas hacia atrás, poco; el peso en todo el pie, un poco hacia los talones, las rodillas en la dirección de los "
          "pies; la silla de verdad detrás.[/L][/OP]",
          "**NOUVEAU DANS LA SALUTATION · La chaise invisible.** Ça muscle les cuisses et les fesses : c’est ce qu’on utilise "
          "pour se lever d’une chaise ou monter les escaliers. On inspire : on monte les bras et on plie un peu les genoux, "
          "comme pour s’asseoir. On sent de la chaleur dans les cuisses ; si les genoux font mal, moins. Si les bras montent "
          "difficilement : bras devant ou mains sur les cuisses. "
          "[OP][L][cS] Au bord de la chaise, on se penche un peu vers l’avant le dos long, comme pour se lever.[/L][L][cP] "
-         "Les hanches en arrière, peu ; le poids sur les talons, les genoux dans la direction des pieds ; la vraie chaise "
+         "Les hanches en arrière, peu ; le poids sur tout le pied, un peu vers les talons, les genoux dans la direction des pieds ; la vraie chaise "
          "derrière.[/L][/OP]")),
     (3, ("**Flexión.** Esto estira la espalda y la parte de atrás de las piernas. Exhalamos: rodillas un poco dobladas, nos "
          "inclinamos **desde las caderas**; las manos resbalan por los muslos, la espalda larga. Notamos que tira detrás de "
@@ -1026,10 +1046,10 @@ P_ALL = [
     steps([
         ("R1", ("**Pierna izquierda atrás.** Corazón… inhalamos, silla invisible… exhalamos, flexión… inhalamos, espalda "
                 "larga… exhalamos, la pierna izquierda atrás… inhalamos, guerrero I. → En la silla invisible, el peso en "
-                "los talones. ((2 resp.)) Corazón.",
+                "todo el pie, un poco hacia los talones. ((2 resp.)) Corazón.",
                 "**Jambe gauche en arrière.** Cœur… on inspire, chaise invisible… on expire, flexion… on inspire, dos long… "
                 "on expire, la jambe gauche en arrière… on inspire, guerrier I. → Dans la chaise invisible, le poids sur "
-                "les talons. ((2 resp.)) Cœur.")),
+                "tout le pied, un peu vers les talons. ((2 resp.)) Cœur.")),
         ("R2", ("**Pierna derecha atrás.** Corazón… silla… flexión… espalda larga… la pierna derecha atrás… guerrero I. "
                 "→ Las caderas miran hacia delante. ((2 resp.)) Corazón.",
                 "**Jambe droite en arrière.** Cœur… chaise… flexion… dos long… la jambe droite en arrière… guerrier I. → Les "
@@ -1061,12 +1081,12 @@ P_ALL = [
     band(8, ("Posturas sentadas y tumbadas · caderas y espalda", "Postures assises puis allongées · hanches et dos"), "0:44 – 0:51"),
     grid([
         card2("danda_c", "danda_f", "F", ("Nuevo · El bastón (Dandasana)", "Nouveau · Le bâton (Dandasana)"), ("4 resp.", "4 resp."), ("", "")),
-        card2("chair_hamstring", "janu_f", "F", ("Nuevo · Cabeza a la rodilla (Janu Sirsasana adaptada)", "Nouveau · Tête au genou (Janu Sirsasana adaptée)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("chair_hamstring", "mari_f", "F", ("Nuevo · Una pierna larga (Marichyasana adaptada)", "Nouveau · Une jambe longue (Marichyasana adaptée)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
         card2("c_arms_up", "stretch_f", "F", ("Nuevo · Montaña tumbada (Supta Tadasana)", "Nouveau · Montagne allongée (Supta Tadasana)"), ("3 resp.", "3 resp."), ("", "")),
         card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),
+        card2("chair_sit", "bridge", "F", ("El puente pequeño (Setu Bandhasana)", "Le petit pont (Setu Bandhasana)"), ("4 veces", "4 fois"), ("", "")),
         card2("chair_knee", "knee1_f", "F", ("Rodilla al pecho (Apanasana)", "Genou poitrine (Apanasana)"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("chair_hamstring", "leg_stretch", "F", ("Nuevo · Pierna estirada (Supta Padangusthasana adaptada)", "Nouveau · Jambe tendue (Supta Padangusthasana adaptée)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
-        card2("cactus_c", "cactus_f", "F", ("Pecho abierto, brazos en cactus", "Poitrine ouverte, bras en cactus"), ("4 resp.", "4 resp."), ("", "")),
         card2("c_side_R", "banana_f", "F", ("La banana (Bananasana)", "La banane (Bananasana)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
         card2("c_twist", "twist_R", "F", ("Torsión tumbada (Supta Matsyendrasana)", "Torsion allongée (Supta Matsyendrasana)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
     ], cols=3),

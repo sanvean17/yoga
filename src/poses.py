@@ -1598,3 +1598,13 @@ def danda_floor():
 
 
 ALL.update({"danda_c": danda_chair, "danda_f": danda_floor})
+
+
+def mari_floor(bend=1):
+    """seated on the floor: right leg long, left knee up with the foot flat on the floor (legs stay parallel, no hip
+    opening); leaning forward a little from the hips, back long, hands on the long leg."""
+    return side((0, 10), 70, head=64, face=-10, armN=((54, 12), -1), armF=((52, 12), -1),
+                legN=('A', -3, -3), footN=80, legF=((40, 1), bend), footF=0, sideN=R, sideF=L)
+
+
+ALL.update({"mari_f": mari_floor, "mari_f2": lambda: mari_floor(-1)})
