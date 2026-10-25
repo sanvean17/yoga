@@ -815,7 +815,7 @@ BEN["Nuevo · El bastón (Dandasana)"] = ("Esta postura despierta la espalda y n
              "Cette posture réveille le dos et nous apprend à bien nous tenir assis.")
 FEEL["Nuevo · El bastón (Dandasana)"] = ("Notamos que la espalda trabaja y se alarga, y un estiramiento suave detrás de las piernas; nada en la espalda baja.",
               "On sent le dos qui travaille et s’allonge, et un étirement doux derrière les jambes ; rien dans le bas du dos.")
-TEXTS["Nuevo · Una pierna larga (Marichyasana adaptada)"] = _t((
+TEXTS["Nuevo · Una pierna larga · estiramiento sentado"] = _t((
     "La pierna derecha larga delante, los dedos del pie miran al techo; la rodilla izquierda doblada, el pie izquierdo en "
     "el suelo, un poco lejos de la cadera. Las dos rodillas miran al techo. Inhalamos: la espalda larga. Exhalamos: nos "
     "inclinamos un poco hacia la pierna derecha, desde las caderas; las manos en la pierna, donde llegan. ((4 resp.)) "
@@ -830,9 +830,9 @@ TEXTS["Nuevo · Una pierna larga (Marichyasana adaptada)"] = _t((
          "crecemos, sin inclinarnos. Luego nos tumbamos boca arriba, despacio, apoyándonos en los codos.",
          "Assis, jambe droite longue, pied gauche au sol ; si c’est difficile, le dos contre le mur et on grandit "
          "seulement, sans se pencher. Puis on s’allonge sur le dos, doucement, en s’appuyant sur les coudes."))
-BEN["Nuevo · Una pierna larga (Marichyasana adaptada)"] = ("Esta postura estira la parte de atrás de una pierna, sin abrir la cadera.",
+BEN["Nuevo · Una pierna larga · estiramiento sentado"] = ("Esta postura estira la parte de atrás de una pierna, sin abrir la cadera.",
                "Cette posture étire l’arrière d’une jambe, sans ouvrir la hanche.")
-FEEL["Nuevo · Una pierna larga (Marichyasana adaptada)"] = ("Notamos que tira detrás del muslo de la pierna larga; si pellizca delante de la cadera, alejamos el pie "
+FEEL["Nuevo · Una pierna larga · estiramiento sentado"] = ("Notamos que tira detrás del muslo de la pierna larga; si pellizca delante de la cadera, alejamos el pie "
                 "o nos inclinamos menos.",
                 "On sent que ça tire derrière la cuisse de la jambe longue ; si ça pince devant la hanche, on éloigne le "
                 "pied ou on se penche moins.")
@@ -1015,7 +1015,7 @@ P_ALL = [
     grid([
         card2("c_neck", "seated_neck", "F", ("Cuello", "Cou"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("c_shoulders", "seated_shoulders", "F", ("Hombros", "Épaules"), ("5 + 5", "5 + 5"), ("", "")),
-        card2("open_c", "hug_chair", "S", ("Nuevo · Abrazo y apertura", "Nouveau · S’ouvrir et se faire un câlin"), ("5 veces", "5 fois"), ("", ""), a_kind="S"),
+        card2("open_c", "hug_floor", "F", ("Nuevo · Abrazo y apertura", "Nouveau · S’ouvrir et se faire un câlin"), ("5 veces", "5 fois"), ("", ""), a_kind="S"),
         card2("c_wrists", "wrists", "F", ("Muñecas y tobillos", "Poignets et chevilles"), ("5 + 5", "5 + 5"), ("", "")),
         card2("c_side_R", "sidebend_R", "F", ("Inclinación lateral", "Inclinaison latérale"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("tcircles_c", "tcircles_f", "F", ("Círculos del torso", "Cercles du buste"), ("4 + 4", "4 + 4"), ("", "")),
@@ -1081,7 +1081,7 @@ P_ALL = [
     band(8, ("Posturas sentadas y tumbadas · caderas y espalda", "Postures assises puis allongées · hanches et dos"), "0:44 – 0:51"),
     grid([
         card2("danda_c", "danda_f", "F", ("Nuevo · El bastón (Dandasana)", "Nouveau · Le bâton (Dandasana)"), ("4 resp.", "4 resp."), ("", "")),
-        card2("chair_hamstring", "mari_f", "F", ("Nuevo · Una pierna larga (Marichyasana adaptada)", "Nouveau · Une jambe longue (Marichyasana adaptée)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("chair_hamstring", "mari_f", "F", ("Nuevo · Una pierna larga · estiramiento sentado", "Nouveau · Une jambe longue · étirement assis"), ("4 resp./lado", "4 resp./côté"), ("", "")),
         card2("c_arms_up", "stretch_f", "F", ("Nuevo · Montaña tumbada (Supta Tadasana)", "Nouveau · Montagne allongée (Supta Tadasana)"), ("3 resp.", "3 resp."), ("", "")),
         card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),
         card2("chair_sit", "bridge", "F", ("El puente pequeño (Setu Bandhasana)", "Le petit pont (Setu Bandhasana)"), ("4 veces", "4 fois"), ("", "")),
