@@ -1567,3 +1567,13 @@ def big_stretch():
 
 
 ALL.update({"stretch_f": big_stretch})
+
+
+def janu_floor():
+    """seated on the floor: right leg long, left knee bent with the foot against the inside of the right thigh;
+    leaning forward from the hips with a long back, hands on the long leg."""
+    return side((0, 10), 60, head=56, face=-20, armN=((44, 16), -1), armF=((42, 16), -1),
+                legN=('A', -5, -5), footN=80, legF=('A', 18, 196), footF=110, sideN=R, sideF=L)
+
+
+ALL.update({"janu_f": janu_floor})
