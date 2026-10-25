@@ -711,6 +711,63 @@ TEXTS["Nuevo · La almeja"]["alt"] = ("SU", TEXTS["Nuevo · La almeja"]["alt"][1
                                      TEXTS["Nuevo · La almeja"]["alt"][2])
 
 
+
+def _rename(old, new):
+    TEXTS[new] = TEXTS[old]
+    for dct in (BEN, FEEL):
+        if old in dct:
+            dct[new] = dct[old]
+
+
+_rename("Nuevo · Estirarse como al despertar", "Nuevo · Montaña tumbada (Supta Tadasana)")
+_rename("Rodilla al pecho", "Rodilla al pecho (Apanasana)")
+_rename("La banana", "La banana (Bananasana)")
+_rename("Torsión tumbada", "Torsión tumbada (Supta Matsyendrasana)")
+_rename("Descanso: el niño", "Descanso: el niño (Balasana)")
+TEXTS["Torsión tumbada (Supta Matsyendrasana)"]["alt"] = ("SU",
+    "Tumbados, brazos en cruz: rodillas juntas a la derecha, la cabeza puede mirar a la izquierda. Los hombros se quedan "
+    "apoyados; si las rodillas no llegan al suelo, se quedan a medio camino.",
+    "Allongés, bras en croix : genoux serrés à droite, la tête peut regarder à gauche. Les épaules restent posées ; si les "
+    "genoux n’arrivent pas au sol, ils restent à mi-chemin.")
+TEXTS["Rodilla al pecho (Apanasana)"]["alt"] = ("SU",
+    "Tumbados, la rodilla derecha hacia el pecho, el pie izquierdo en el suelo. Una pierna cada vez.",
+    "Allongés, le genou droit vers la poitrine, le pied gauche au sol. Une jambe à la fois.")
+TEXTS["Nuevo · Pierna estirada (Supta Padangusthasana adaptada)"] = _t((
+    "Exhalamos: la pierna derecha se alarga hacia el techo, sin bloquear la rodilla; la rodilla puede quedarse doblada. "
+    "Respiramos tranquilos. ((4 resp.)) Bajamos despacio y cambiamos de pierna. Cuidado: no tiramos de la pierna; las manos "
+    "solo la sostienen.",
+    "On expire : la jambe droite s’allonge vers le plafond, sans bloquer le genou ; le genou peut rester plié. On respire "
+    "tranquillement. ((4 resp.)) On redescend doucement et on change de jambe. Attention : on ne tire pas sur la jambe ; les "
+    "mains la soutiennent seulement."),
+    chair=("Pierna derecha estirada delante, talón en el suelo; el pecho un poco hacia delante, la espalda larga.",
+           "Jambe droite allongée devant, talon au sol ; la poitrine un peu vers l’avant, le dos long."),
+    alt=("SU", "Tumbados, el pie izquierdo en el suelo; las manos detrás del muslo derecho, nunca detrás de la rodilla.",
+         "Allongés, le pied gauche au sol ; les mains derrière la cuisse droite, jamais derrière le genou."))
+BEN["Nuevo · Pierna estirada (Supta Padangusthasana adaptada)"] = (
+    "Esta postura estira la parte de atrás de la pierna, tumbados, sin cargar la espalda.",
+    "Cette posture étire l’arrière de la jambe, allongé, sans charger le dos.")
+FEEL["Nuevo · Pierna estirada (Supta Padangusthasana adaptada)"] = (
+    "Notamos que tira suave detrás del muslo; nada detrás de la rodilla ni en la espalda baja.",
+    "On sent que ça tire doucement derrière la cuisse ; rien derrière le genou ni dans le bas du dos.")
+TEXTS["Pecho abierto, brazos en cactus"] = _t((
+    "Inhalamos: el pecho se abre y los hombros se sueltan hacia el suelo. Exhalamos: todo se relaja. ((4 resp.)) Los "
+    "brazos se quedan quietos; solo respiramos.",
+    "On inspire : la poitrine s’ouvre et les épaules se relâchent vers le sol. On expire : tout se détend. ((4 resp.)) Les "
+    "bras restent immobiles ; on respire seulement."),
+    chair=("Sentados, la espalda en el respaldo, brazos en cactus: codos a la altura de los hombros, manos arriba.",
+           "Assis, le dos contre le dossier, bras en cactus : coudes à hauteur d’épaules, mains en haut."),
+    alt=("SU", "Tumbados, rodillas dobladas: brazos en cactus en el suelo, el dorso de las manos apoyado. Si molesta el "
+         "hombro, las manos sobre el vientre.",
+         "Allongés, genoux pliés : bras en cactus au sol, le dos des mains posé. Si l’épaule gêne, les mains sur le "
+         "ventre."))
+BEN["Pecho abierto, brazos en cactus"] = ("Esta postura abre el pecho y los hombros, y da espacio a la respiración.",
+                                         "Cette posture ouvre la poitrine et les épaules, et donne de l’espace à la respiration.")
+FEEL["Pecho abierto, brazos en cactus"] = ("Notamos el pecho que se abre; si pincha un hombro, los brazos más bajos.",
+                                          "On sent la poitrine qui s’ouvre ; si une épaule pique, les bras plus bas.")
+BEN["Nuevo · Montaña tumbada (Supta Tadasana)"] = ("Esta postura despierta todo el cuerpo y alarga la espalda.",
+                                                   "Cette posture réveille tout le corps et allonge le dos.")
+
+
 def _with_text(args, kw):
     a = list(args)
     name = a[3][0] if len(a) > 3 else None
@@ -822,20 +879,26 @@ P_ALL = [
      if L == "es" else
      '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
-    band(1, ("Bienvenida", "Accueil"), "0:00 – 0:04"),
-    grid([card2("chair_sit", "c_lean", "S", ("Bienvenida · nos sentamos bien", "Accueil · on s’assoit bien"), None, (
-        "Hola a todos, bienvenidos de nuevo. Antes de empezar, nos sentamos bien. Notad los dos huesos de las nalgas sobre "
-        "la silla… los pies planos en el suelo… la espalda que crece hacia el techo. Así. Esta es nuestra base para toda "
-        "la clase. Hoy, como las hojas en otoño, vamos a soltar lo que no necesitamos: las tensiones de la semana. Como "
-        "siempre, cada uno elige su opción y no forzamos nunca: si algo tira suavemente, está bien; si duele, lo hacemos "
-        "más pequeño. Y un consejo para hoy: cuando nos levantemos, los pies un poco atrás, la nariz por encima de los "
-        "pies, empujamos con los pies… y despacio, esperando una respiración.",
-        "Bonjour à tous, rebienvenue. Avant de commencer, on s’assoit bien. Sentez les deux os des fesses sur la chaise… "
-        "les pieds à plat au sol… le dos qui grandit vers le plafond. Voilà. C’est notre base pour tout le cours. "
-        "Aujourd’hui, comme les feuilles en automne, on va lâcher ce dont on n’a pas besoin : les tensions de la semaine. "
-        "Comme toujours, chacun choisit son option et on ne force jamais : si ça tire doucement, c’est bien ; si ça fait "
-        "mal, on fait plus petit. Et une astuce pour aujourd’hui : quand on se lève, les pieds un peu en arrière, le nez "
-        "au-dessus des pieds, on pousse avec les pieds… et doucement, en attendant une respiration."))], cols=1),
+    band(1, ("Llegada · centrarnos", "Arrivée · se centrer"), "0:00 – 0:04"),
+    grid([card2("chair_sit", "seated_cross", "F", ("Llegamos", "On arrive"), None, (
+        "Hola a todos, bienvenidos. Nos sentamos cómodos, la espalda larga, las manos sobre los muslos o juntas delante "
+        "del pecho. Si queréis, cerramos los ojos. ((pausa)) "
+        "Notamos lo que nos sostiene: los pies en el suelo… las nalgas en la silla o en el suelo… Dejamos que el cuerpo pese. "
+        "((pausa)) Soltamos la cara: la frente, la mandíbula… los hombros bajan. ((pausa)) "
+        "Ahora solo observamos la respiración, sin cambiarla: el aire entra… el aire sale. ((3 resp.)) "
+        "Fuera es otoño: los árboles dejan caer sus hojas, sin esfuerzo, para descansar. Hoy hacemos lo mismo: con cada "
+        "exhalación, soltamos un poco de lo que no necesitamos, una tensión, una preocupación. ((pausa)) "
+        "Elegimos una palabra para la clase, por ejemplo: calma, suavidad, soltar. La guardamos con nosotros. ((pausa)) "
+        "Como siempre, cada uno a su ritmo, sin forzar. Abrimos los ojos despacio. Empezamos.",
+        "Bonjour à tous, bienvenue. On s’assoit confortablement, le dos long, les mains sur les cuisses ou jointes devant la "
+        "poitrine. Si vous voulez, on ferme les yeux. ((pause)) "
+        "On sent ce qui nous porte : les pieds au sol… les fesses sur la chaise ou au sol… On laisse le corps devenir "
+        "lourd. ((pause)) On relâche le visage : le front, la mâchoire… les épaules descendent. ((pause)) "
+        "Maintenant on observe seulement la respiration, sans la changer : l’air entre… l’air sort. ((3 resp.)) "
+        "Dehors c’est l’automne : les arbres laissent tomber leurs feuilles, sans effort, pour se reposer. Aujourd’hui on "
+        "fait pareil : à chaque expiration, on lâche un peu de ce dont on n’a pas besoin, une tension, un souci. ((pause)) "
+        "On choisit un mot pour le cours, par exemple : calme, douceur, lâcher. On le garde avec nous. ((pause)) "
+        "Comme toujours, chacun à son rythme, sans forcer. On ouvre les yeux doucement. On commence."))], cols=1),
     band(2, ("Respiración", "Respiration"), "0:04 – 0:11"),
     grid([
         card2("r_chair", "r_floor", "F", ("Respiración en tres partes", "Respiration en trois parties"), ("5 resp.", "5 resp."), (
@@ -856,17 +919,19 @@ P_ALL = [
         card2("c_neck", "seated_neck", "F", ("Cuello", "Cou"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("c_shoulders", "seated_shoulders", "F", ("Hombros", "Épaules"), ("5 + 5", "5 + 5"), ("", "")),
         card2("open_c", "hug_chair", "S", ("Nuevo · Abrazo y apertura", "Nouveau · S’ouvrir et se faire un câlin"), ("5 veces", "5 fois"), ("", ""), a_kind="S"),
-        card2("chin_c", "chin_f", "F", ("Nuevo · La cabeza atrás", "Nouveau · La tête en arrière"), ("5 veces", "5 fois"), ("", "")),
         card2("c_wrists", "wrists", "F", ("Muñecas y tobillos", "Poignets et chevilles"), ("5 + 5", "5 + 5"), ("", "")),
         card2("c_side_R", "sidebend_R", "F", ("Inclinación lateral", "Inclinaison latérale"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("tcircles_c", "tcircles_f", "F", ("Círculos del torso", "Cercles du buste"), ("4 + 4", "4 + 4"), ("", "")),
         card2("chair_cat", "cat", "F", ("Gato-vaca", "Chat-vache"), ("5 veces", "5 fois"), ("", "")),
     ], cols=3),
     part(1, "De pie o en la silla · 0:22 – 0:44", "Debout ou sur la chaise · 0:22 – 0:44"),
-    say("Recordad: **primero os enseño la postura paso a paso y vosotros miráis; después la hacemos juntos**, despacio, "
-        "con la respiración.",
-        "Rappel : **d’abord je vous montre la posture étape par étape et vous regardez ; ensuite on la fait ensemble**, "
-        "doucement, avec la respiration."),
+    say("**Para levantarnos de la silla:** los pies un poco atrás, la nariz por encima de los pies, empujamos con los pies y "
+        "las manos, y nos levantamos despacio; esperamos una respiración antes de empezar. Recordad: **primero os enseño la "
+        "postura paso a paso y vosotros miráis; después la hacemos juntos**, despacio, con la respiración.",
+        "**Pour se lever de la chaise :** les pieds un peu en arrière, le nez au-dessus des pieds, on pousse avec les pieds "
+        "et les mains, et on se lève doucement ; on attend une respiration avant de commencer. Rappel : **d’abord je vous "
+        "montre la posture étape par étape et vous regardez ; ensuite on la fait ensemble**, doucement, avec la "
+        "respiration."),
     '<div class="keep2">',
     band(5, ("Saludo al sol · con la silla invisible y el guerrero I · 3 rondas, la tercera opcional",
              "Salutation au soleil · avec la chaise invisible et le guerrier I · 3 rondes, la troisième facultative"), "0:22 – 0:31"),
@@ -914,18 +979,16 @@ P_ALL = [
                 ("", ""))], cols=1),
     '</div>',
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
-    band(8, ("Estiramientos suaves · caderas y espalda", "Étirements doux · hanches et dos"), "0:44 – 0:51"),
+    band(8, ("Posturas en el suelo o en la silla · caderas y espalda", "Postures au sol ou sur la chaise · hanches et dos"), "0:44 – 0:51"),
     grid([
-        card2("c_arms_up", "stretch_f", "F", ("Nuevo · Estirarse como al despertar", "Nouveau · S’étirer comme au réveil"), ("3 veces", "3 fois"), ("", "")),
+        card2("c_arms_up", "stretch_f", "F", ("Nuevo · Montaña tumbada (Supta Tadasana)", "Nouveau · Montagne allongée (Supta Tadasana)"), ("3 resp.", "3 resp."), ("", "")),
         card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),
-        card2("chair_knee", "knee1_f", "F", ("Rodilla al pecho", "Genou poitrine"), ("3 resp./lado", "3 resp./côté"), ("", "")),
-        card2("heel_c", "heel_f", "F", ("Nuevo · Talones que se deslizan", "Nouveau · Talons qui glissent"), ("5 veces/lado", "5 fois/côté"), ("", "")),
-        card2("cactus_c", "cactus_f", "F", ("Nuevo · Ángel en el suelo", "Nouveau · L’ange au sol"), ("5 veces", "5 fois"), ("", "")),
-        card2("c_side_R", "banana_f", "F", ("La banana", "La banane"), ("4 resp./lado", "4 resp./côté"), ("", "")),
-        card2("c_twist", "twist_R", "F", ("Torsión tumbada", "Torsion allongée"), ("4 resp./lado", "4 resp./côté"), ("", "")),
-        card2("d_chair", "clam_f", "F", ("Nuevo · La almeja", "Nouveau · La coquille"), ("8 veces/lado", "8 fois/côté"), ("", "")),
-        card2("chair_sit", "supine_knees", "F", ("Nuevo · Apretar los glúteos", "Nouveau · Serrer les fesses"), ("8 veces", "8 fois"), ("", "")),
-        opt(card2("child_chair", "child", "F", ("Descanso: el niño", "Repos : l’enfant"), ("5 resp.", "5 resp."), ("", ""))),
+        card2("chair_knee", "knee1_f", "F", ("Rodilla al pecho (Apanasana)", "Genou poitrine (Apanasana)"), ("3 resp./lado", "3 resp./côté"), ("", "")),
+        card2("chair_hamstring", "leg_stretch", "F", ("Nuevo · Pierna estirada (Supta Padangusthasana adaptada)", "Nouveau · Jambe tendue (Supta Padangusthasana adaptée)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("cactus_c", "cactus_f", "F", ("Pecho abierto, brazos en cactus", "Poitrine ouverte, bras en cactus"), ("4 resp.", "4 resp."), ("", "")),
+        card2("c_side_R", "banana_f", "F", ("La banana (Bananasana)", "La banane (Bananasana)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("c_twist", "twist_R", "F", ("Torsión tumbada (Supta Matsyendrasana)", "Torsion allongée (Supta Matsyendrasana)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        opt(card2("child_chair", "child", "F", ("Descanso: el niño (Balasana)", "Repos : l’enfant (Balasana)"), ("5 resp.", "5 resp."), ("", ""))),
     ], cols=3),
     band(9, ("Relajación · 5 minutos", "Relaxation · 5 minutes"), "0:51 – 0:56"),
     grid([card2("c_relax", "savasana", "F", ("Relajación", "Relaxation"), ("5 min", "5 min"), ("", ""), mh=12)], cols=1),
