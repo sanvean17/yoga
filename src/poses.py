@@ -1533,3 +1533,25 @@ def knee_chest_one():
 ALL.update({"silla_c": silla_chair, "silla_p": silla_stand, "avion_c": avion_chair, "avion_p": avion_stand,
             "avion_f": avion_free, "chin_c": chin_chair, "chin_f": chin_floor, "heel_f": heel_slide_floor,
             "heel_c": heel_slide_chair, "legs_chair_f": legs_on_chair, "knee1_f": knee_chest_one})
+
+
+def clamshell():
+    """side lying (seen from the front), knees bent, feet together: the top knee opens up like a shell (arrow)."""
+    from figures import Fig, W_TORSO
+    f = Fig()
+    body = C["body"]
+    f.line([(-66, 8), (-48, 10)], C["body_far"], layer=1)             # bottom arm under the head
+    f.line([(0, 10), (-50, 10)], body, w=W_TORSO, layer=2)            # torso
+    f.head((-62, 20))
+    f.line([(0, 9), (30, 2), (54, 8)], C["L"], layer=1)               # bottom leg (left)
+    f.line([(0, 12), (24, 30), (54, 10)], C["R"], layer=3)            # top leg (right), knee opening
+    f.line([(-30, 18), (-14, 24)], body, layer=4)                     # top arm resting in front
+    f.arrow([(30, 18), (24, 40)], bulge=-6)
+    f._track((-74, -2), (62, 46))
+    return f
+
+
+ALL.update({"clam_f": clamshell})
+
+
+ALL.update({"open_c": lambda: chair_back2("out", colored=False)})

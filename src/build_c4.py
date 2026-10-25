@@ -45,10 +45,11 @@ def T(pair):
           "[MC]": ("vx", "MÁS COMPLETO", "PLUS COMPLET"),
           "[NO]": ("vn", "LO QUE NO HACEMOS", "CE QU’ON NE FAIT PAS"),
           "[TO]": ("vt", "PARA TODOS", "POUR TOUS"),
+          "[SE]": ("vse", "LO QUE SENTIMOS", "CE QU’ON RESSENT"),
           "[JU]": ("vj", "JUNTOS · LO QUE DIGO", "ENSEMBLE · CE QUE JE DIS")}
     for k, (c, les, lfr) in VB.items():
         h = h.replace(k, f'<span class="vb {c}"><span class="vl">{les if L == "es" else lfr}</span>')
-    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]", "[/NO]", "[/JU]", "[/TO]"):
+    for k in ("[/C]", "[/CP]", "[/S]", "[/DP]", "[/SU]", "[/MC]", "[/NO]", "[/JU]", "[/TO]", "[/SE]"):
         h = h.replace(k, "</span>")
     for k, (es, fr, c) in TOKENS.items():
         h = h.replace(k, f'<span class="it {c}">{es if L == "es" else fr}</span>')
@@ -204,6 +205,8 @@ def _build(d, i):
         parts.append("[TO]" + d["common"][i] + "[/TO]")
     else:
         parts.append(d["common"][i])
+    if d.get("se"):
+        parts.append("[SE]" + d["se"][i] + "[/SE]")
     if d["mc"]:
         parts.append("[MC]" + d["mc"][i] + "[/MC]")
     if d["ju"]:
@@ -435,6 +438,134 @@ TEXTS = {
 }
 
 
+TEXTS["Nuevo · Abrazo y apertura"] = _t((
+    "Inhalamos: abrimos los brazos a los lados, el pecho se abre, los omóplatos se acercan. Exhalamos: nos abrazamos, las "
+    "manos en los hombros; la espalda alta se ensancha. ((5 veces)) Despacio, con la respiración. Igual en la silla o "
+    "sentados en el suelo. Cuidado: no echamos la cabeza atrás; los brazos se abren solo hasta donde es cómodo.",
+    "On inspire : on ouvre les bras sur les côtés, la poitrine s’ouvre, les omoplates se rapprochent. On expire : on se "
+    "fait un câlin, les mains sur les épaules ; le haut du dos s’élargit. ((5 fois)) Lentement, avec la respiration. Pareil "
+    "sur la chaise ou assis au sol. Attention : on ne lance pas la tête en arrière ; les bras s’ouvrent seulement jusqu’où "
+    "c’est confortable."))
+TEXTS["Balanceo de la pelvis"] = _t((
+    "Exhalamos: la espalda baja se redondea un poco. Inhalamos: se arquea un poco. ((6 veces)) Movimiento pequeño y lento. "
+    "Cuidado: no empujamos con fuerza.",
+    "On expire : le bas du dos s’arrondit un peu. On inspire : il se creuse un peu. ((6 fois)) Petit mouvement, lent. "
+    "Attention : on ne pousse pas avec force."),
+    intro=("**Bajamos al suelo como hemos aprendido: de lado, a cuatro apoyos, una rodilla, las manos en la silla. Quien "
+           "prefiere, se queda en la silla.**",
+           "**On descend au sol comme on l’a appris : de côté, à quatre pattes, un genou, les mains sur la chaise. Ceux qui "
+           "préfèrent restent sur la chaise.**"),
+    chair=("Sentados, manos en las rodillas.", "Assis, mains sur les genoux."),
+    alt=("SU", "Tumbados, rodillas dobladas, pies separados como las caderas. Al exhalar, la espalda baja se apoya en el "
+         "suelo.",
+         "Allongés, genoux pliés, pieds écartés largeur de hanches. À l’expiration, le bas du dos se pose au sol."))
+TEXTS["Nuevo · Ángel en el suelo"] = _t((
+    "Inhalamos: los brazos se deslizan hacia arriba, despacio, solo hasta donde es cómodo. Exhalamos: bajan. ((5 veces)) "
+    "Si molesta un hombro, el movimiento es más pequeño, o las manos descansan sobre el vientre. Cuidado: la espalda baja "
+    "no se arquea.",
+    "On inspire : les bras glissent vers le haut, lentement, seulement jusqu’où c’est confortable. On expire : ils "
+    "redescendent. ((5 fois)) Si une épaule gêne, le mouvement est plus petit, ou les mains se posent sur le ventre. "
+    "Attention : le bas du dos ne se creuse pas."),
+    chair=("Sentados, la espalda en el respaldo, brazos en cactus: codos a la altura de los hombros.",
+           "Assis, le dos contre le dossier, bras en cactus : coudes à hauteur d’épaules."),
+    alt=("SU", "Tumbados, rodillas dobladas, brazos en cactus en el suelo, el dorso de las manos apoyado; los brazos se "
+         "deslizan por el suelo, como un ángel en la nieve.",
+         "Allongés, genoux pliés, bras en cactus au sol, le dos des mains posé ; les bras glissent sur le sol, comme un ange "
+         "dans la neige."))
+TEXTS["Nuevo · La almeja"] = _t((
+    "Exhalamos al abrir, inhalamos al cerrar. ((8 veces)) Despacio. Cuidado: la pelvis no gira hacia atrás; el movimiento "
+    "es pequeño.",
+    "On expire en ouvrant, on inspire en fermant. ((8 fois)) Lentement. Attention : le bassin ne tourne pas vers l’arrière ; "
+    "le mouvement est petit."),
+    chair=("Sentados al borde, rodillas juntas, manos por fuera de las rodillas. Abrimos un poco las rodillas; las manos "
+           "frenan suavemente.",
+           "Assis au bord, genoux serrés, mains à l’extérieur des genoux. On ouvre un peu les genoux ; les mains freinent "
+           "doucement."),
+    alt=("SU", "Tumbados sobre el lado izquierdo, rodillas dobladas, la cabeza sobre el brazo. Los pies juntos; la rodilla "
+         "de arriba sube un poco, como una almeja que se abre, y baja. Después, el otro lado. Luego nos tumbamos boca "
+         "arriba.",
+         "Allongés sur le côté gauche, genoux pliés, la tête sur le bras. Les pieds joints ; le genou du dessus monte un "
+         "peu, comme un coquillage qui s’ouvre, et redescend. Puis l’autre côté. Ensuite on s’allonge sur le dos."))
+TEXTS["Torsión tumbada"]["alt"] = ("SU", TEXTS["Torsión tumbada"]["alt"][1] + " Luego nos ponemos sobre el lado izquierdo.",
+                                   TEXTS["Torsión tumbada"]["alt"][2] + " Puis on se met sur le côté gauche.")
+TEXTS["Rodilla al pecho"]["intro"] = None
+TEXTS["Relajación"]["alt"] = ("SU", "Tumbados boca arriba; si es más cómodo, rodillas dobladas.",
+                              "Allongés sur le dos ; si c’est plus confortable, genoux pliés.")
+
+SE = {
+    "Cuello": ("Sirve para soltar la tensión del cuello. ✓ Tira suavemente en el lado del cuello. ✗ No debe doler ni marear.",
+               "Sert à relâcher la tension du cou. ✓ Ça tire doucement sur le côté du cou. ✗ Ça ne doit pas faire mal ni donner "
+               "le vertige."),
+    "Hombros": ("Sirve para soltar los hombros. ✓ Calor y movimiento en los hombros. ✗ Dolor en el cuello.",
+                "Sert à relâcher les épaules. ✓ Chaleur et mouvement dans les épaules. ✗ Douleur dans le cou."),
+    "Nuevo · Abrazo y apertura": ("Sirve para abrir el pecho y estirar la espalda alta. ✓ Al abrir, se estira el pecho; al "
+                                  "abrazar, entre los omóplatos. ✗ Pinchazo en los hombros.",
+                                  "Sert à ouvrir la poitrine et étirer le haut du dos. ✓ En ouvrant, la poitrine s’étire ; "
+                                  "en se faisant un câlin, entre les omoplates. ✗ Piqûre dans les épaules."),
+    "Nuevo · La cabeza atrás": ("Sirve para alargar la nuca y ayudar a la espalda a estar más recta. ✓ Se alarga la parte "
+                                "de atrás del cuello. ✗ Dolor en la garganta o mareo.",
+                                "Sert à allonger la nuque et aider le dos à se redresser. ✓ L’arrière du cou s’allonge. "
+                                "✗ Douleur dans la gorge ou vertige."),
+    "Muñecas y tobillos": ("Sirve para mover las articulaciones; los tobillos ágiles ayudan al equilibrio. ✓ Movimiento "
+                           "suave. ✗ Dolor en la articulación: más pequeño.",
+                           "Sert à bouger les articulations ; des chevilles souples aident l’équilibre. ✓ Mouvement doux. "
+                           "✗ Douleur dans l’articulation : plus petit."),
+    "Inclinación lateral": ("Sirve para estirar los costados y respirar mejor. ✓ Tira en el costado. ✗ Cuello, espalda baja.",
+                            "Sert à étirer les côtés et mieux respirer. ✓ Ça tire sur le côté. ✗ Cou, bas du dos."),
+    "Círculos del torso": ("Sirve para mover la columna en todas las direcciones. ✓ Movimiento suave en la espalda. "
+                           "✗ Mareo o dolor en la espalda baja.",
+                           "Sert à bouger la colonne dans toutes les directions. ✓ Mouvement doux dans le dos. ✗ Vertige "
+                           "ou douleur dans le bas du dos."),
+    "Gato-vaca": ("Sirve para dar flexibilidad a la columna. ✓ Movimiento en toda la espalda. ✗ Pellizco en la espalda baja "
+                  "o en el cuello.",
+                  "Sert à assouplir la colonne. ✓ Mouvement dans tout le dos. ✗ Pincement dans le bas du dos ou dans le cou."),
+    "Guerrero II · recordatorio": ("Sirve para fortalecer las piernas y abrir el pecho. ✓ Trabajo, calor en los muslos. "
+                                   "✗ Rodilla, ingle que pellizca.",
+                                   "Sert à muscler les jambes et ouvrir la poitrine. ✓ Travail, chaleur dans les cuisses. "
+                                   "✗ Genou, aine qui pince."),
+    "Nuevo · Ángulo lateral": ("Sirve para estirar todo el costado y fortalecer las piernas. ✓ Tira en el costado de "
+                               "arriba. ✗ Ingle, rodilla, espalda baja, cuello.",
+                               "Sert à étirer tout le côté et muscler les jambes. ✓ Ça tire sur le côté du haut. ✗ Aine, "
+                               "genou, bas du dos, cou."),
+    "Triángulo adaptado · recordatorio": ("Sirve para estirar el costado y la parte interior de las piernas. ✓ Costado e "
+                                          "interior del muslo, suave. ✗ Rodilla, ingle, cuello.",
+                                          "Sert à étirer le côté et l’intérieur des jambes. ✓ Côté et intérieur de la "
+                                          "cuisse, doucement. ✗ Genou, aine, cou."),
+    "Nuevo · El avión": ("Sirve para entrenar el equilibrio y fortalecer los tobillos y las piernas: ayuda a evitar caídas. "
+                         "✓ Trabajo en el tobillo y la pierna de apoyo. ✗ Espalda baja.",
+                         "Sert à entraîner l’équilibre et muscler les chevilles et les jambes : ça aide à éviter les "
+                         "chutes. ✓ Travail dans la cheville et la jambe d’appui. ✗ Bas du dos."),
+    "Balanceo de la pelvis": ("Sirve para mover la espalda baja con suavidad. ✓ Movimiento pequeño en la espalda baja. "
+                              "✗ Dolor en la espalda.",
+                              "Sert à bouger le bas du dos en douceur. ✓ Petit mouvement dans le bas du dos. ✗ Douleur "
+                              "dans le dos."),
+    "Rodilla al pecho": ("Sirve para relajar la espalda baja. ✓ Glúteo y espalda baja, suave. ✗ Pellizco delante de la "
+                         "cadera, rodilla.",
+                         "Sert à relâcher le bas du dos. ✓ Fesse et bas du dos, doucement. ✗ Pincement devant la hanche, "
+                         "genou."),
+    "Nuevo · Talones que se deslizan": ("Sirve para mover la cadera y la rodilla sin forzar. ✓ Movimiento libre, sin tirar. "
+                                        "✗ Pellizco en la ingle.",
+                                        "Sert à bouger la hanche et le genou sans forcer. ✓ Mouvement libre, sans tirer. "
+                                        "✗ Pincement dans l’aine."),
+    "Nuevo · Ángel en el suelo": ("Sirve para abrir el pecho y los hombros, y enderezar la espalda. ✓ Tira suavemente en "
+                                  "el pecho y los hombros. ✗ Pinchazo en el hombro: más pequeño.",
+                                  "Sert à ouvrir la poitrine et les épaules, et redresser le dos. ✓ Ça tire doucement dans "
+                                  "la poitrine et les épaules. ✗ Piqûre dans l’épaule : plus petit."),
+    "La banana": ("Sirve para estirar todo el costado. ✓ El costado, de los pies a las manos. ✗ Espalda baja.",
+                  "Sert à étirer tout le côté. ✓ Le côté, des pieds aux mains. ✗ Bas du dos."),
+    "Torsión tumbada": ("Sirve para relajar la espalda. ✓ Espalda, glúteo, pecho. ✗ Espalda baja u hombro que pellizca.",
+                        "Sert à détendre le dos. ✓ Dos, fesse, poitrine. ✗ Bas du dos ou épaule qui pince."),
+    "Nuevo · La almeja": ("Sirve para fortalecer el lado de la cadera: ayuda a caminar con más estabilidad. ✓ Trabajo, "
+                          "calor en el lado del glúteo. ✗ Dolor en la cadera o en la espalda baja: más pequeño.",
+                          "Sert à muscler le côté de la hanche : ça aide à marcher avec plus de stabilité. ✓ Travail, "
+                          "chaleur sur le côté de la fesse. ✗ Douleur dans la hanche ou le bas du dos : plus petit."),
+    "Descanso: el niño": ("Sirve para descansar la espalda. ✓ La espalda se suelta. ✗ Rodillas o caderas.",
+                          "Sert à reposer le dos. ✓ Le dos se relâche. ✗ Genoux ou hanches."),
+}
+for _k, _v in SE.items():
+    TEXTS[_k]["se"] = _v
+
+
 def _with_text(args, kw):
     a = list(args)
     name = a[3][0] if len(a) > 3 else None
@@ -467,19 +598,23 @@ SUN_STEPS = [
          "[DP]Doblamos las rodillas y llevamos las caderas hacia atrás, como para sentarnos en una silla que no está. Poco. "
          "El peso en los talones, las rodillas en la dirección de los pies. La silla de verdad detrás, por seguridad.[/DP] "
          "[TO]Si cuesta subir los brazos: brazos delante o manos en los muslos. Cuidado: no bajamos mucho; si molestan las "
-         "rodillas, menos.[/TO]",
+         "rodillas, menos.[/TO] [SE]Sirve para fortalecer los muslos y los glúteos: levantarnos de una silla, subir "
+         "escaleras. ✓ Calor en los muslos. ✗ Dolor en las rodillas.[/SE]",
          "**NOUVEAU DANS LA SALUTATION · La chaise invisible.** On inspire : on monte les bras. "
          "[C]Au bord de la chaise, on se penche un peu vers l’avant le dos long, comme pour se lever.[/C] "
          "[DP]On plie les genoux et on recule les hanches, comme pour s’asseoir sur une chaise qui n’est pas là. Peu. Le "
          "poids sur les talons, les genoux dans la direction des pieds. La vraie chaise derrière, par sécurité.[/DP] "
          "[TO]Si les bras montent difficilement : bras devant ou mains sur les cuisses. Attention : on ne descend pas "
-         "beaucoup ; si les genoux gênent, moins.[/TO]")),
+         "beaucoup ; si les genoux gênent, moins.[/TO] [SE]Sert à muscler les cuisses et les fesses : se lever d’une chaise, "
+         "monter les escaliers. ✓ Chaleur dans les cuisses. ✗ Douleur dans les genoux.[/SE]")),
     (3, ("**Flexión.** Exhalamos: rodillas un poco dobladas, nos inclinamos **desde las caderas**; las manos resbalan por "
          "los muslos. La espalda larga. Cuidado: si hay vértigo, la cabeza no baja más que el corazón. "
-         "[MC]Si estamos cómodos, soltamos más: la cabeza y los brazos cuelgan.[/MC]",
+         "[SE]Sirve para estirar la espalda y la parte de atrás de las piernas. ✓ Tira detrás de los muslos. ✗ Pinchazo en la "
+         "espalda baja o en las rodillas.[/SE] [MC]Si estamos cómodos, soltamos más: la cabeza y los brazos cuelgan.[/MC]",
          "**Flexion.** On expire : genoux légèrement pliés, on se penche **depuis les hanches** ; les mains glissent sur "
          "les cuisses. Le dos long. Attention : en cas de vertige, la tête ne descend pas plus bas que le cœur. "
-         "[MC]Si on est à l’aise, on relâche davantage : la tête et les bras pendent.[/MC]")),
+         "[SE]Sert à étirer le dos et l’arrière des jambes. ✓ Ça tire derrière les cuisses. ✗ Piqûre dans le bas du dos ou les "
+         "genoux.[/SE] [MC]Si on est à l’aise, on relâche davantage : la tête et les bras pendent.[/MC]")),
     (4, ("**Espalda larga.** Inhalamos: subimos un poco, la espalda plana como una mesa, el cuello largo. "
          "[DP]Manos en el respaldo, o en los muslos.[/DP]",
          "**Dos long.** On inspire : on remonte un peu, le dos plat comme une table, le cou long. "
@@ -490,8 +625,12 @@ SUN_STEPS = [
          "**Jambe gauche en arrière.** On expire. [C]On tourne un peu sur la chaise ; la jambe gauche va en arrière, à côté "
          "de la chaise, la pointe du pied posée.[/C] [DP]Le pied gauche recule d’un pas, pieds comme sur deux rails ; une "
          "main sur la chaise.[/DP] [TO]Les hanches regardent devant.[/TO]")),
-    (6, ("**Guerrero I.** Inhalamos: subimos los brazos, o uno solo si la otra mano está en la silla. ((2 resp.))",
-         "**Guerrier I.** On inspire : on monte les bras, ou un seul si l’autre main est sur la chaise. ((2 resp.))")),
+    (6, ("**Guerrero I.** Inhalamos: subimos los brazos, o uno solo si la otra mano está en la silla. ((2 resp.)) "
+         "[SE]Sirve para fortalecer las piernas y estirar la parte delantera de la cadera. ✓ Tira delante de la cadera de la "
+         "pierna de atrás. ✗ Rodilla de delante, espalda baja.[/SE]",
+         "**Guerrier I.** On inspire : on monte les bras, ou un seul si l’autre main est sur la chaise. ((2 resp.)) "
+         "[SE]Sert à muscler les jambes et étirer l’avant de la hanche. ✓ Ça tire devant la hanche de la jambe arrière. "
+         "✗ Genou avant, bas du dos.[/SE]")),
     (7, ("**Corazón.** Exhalamos: bajamos los brazos, la pierna vuelve, manos delante del pecho. ((1 resp.))",
          "**Cœur.** On expire : on descend les bras, la jambe revient, mains devant la poitrine. ((1 resp.))")),
 ]
@@ -538,44 +677,19 @@ P_ALL = [
      if L == "es" else
      '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
-    band(1, ("Bienvenida · consejos y beneficios", "Accueil · astuces et bienfaits"), "0:00 – 0:07"),
-    grid([card2("chair_sit", "tadasana", "P", ("Bienvenida", "Accueil"), None, (
-        "Hola a todos, bienvenidos de nuevo. Ya conocéis las reglas: en cada ejercicio os enseño las opciones, **en la "
-        "silla, de pie o en el suelo**, y cada uno elige. **No forzamos nunca, escuchamos nuestro cuerpo** y respiramos a "
-        "nuestro ritmo. Hoy, antes de empezar, dos consejos importantes, y lo que vamos a hacer.",
-        "Bonjour à tous, rebienvenue. Vous connaissez les règles : à chaque exercice je vous montre les options, **sur la "
-        "chaise, debout ou au sol**, et chacun choisit. **On ne force jamais, on écoute son corps** et on respire à son "
-        "rythme. Aujourd’hui, avant de commencer, deux astuces importantes, et ce qu’on va faire."))], cols=1),
-    grid([
-        card2("chair_sit", "c_lean", "S", ("Consejo 1 · Sentarse y levantarse bien", "Astuce 1 · Bien s’asseoir et se lever"), None, (
-            "**Sentados:** sobre los dos huesos de las nalgas, los pies planos en el suelo, las rodillas encima de los "
-            "tobillos, la espalda larga. **Para levantarnos de la silla:** los pies un poco atrás, nos inclinamos hacia "
-            "delante (la nariz por encima de los pies), empujamos con los pies y, si hace falta, con las manos en los "
-            "reposabrazos. **Cambiamos de posición despacio:** de tumbados a sentados, de sentados a de pie, esperamos una "
-            "respiración; si no, la cabeza puede dar vueltas. **Para bajar al suelo y subir:** de lado, a cuatro apoyos, "
-            "una rodilla en el suelo, las manos en la silla… y arriba. Nunca de golpe.",
-            "**Assis :** sur les deux os des fesses, les pieds à plat au sol, les genoux au-dessus des chevilles, le dos "
-            "long. **Pour se lever de la chaise :** les pieds un peu en arrière, on se penche en avant (le nez au-dessus "
-            "des pieds), on pousse avec les pieds et, si besoin, avec les mains sur les accoudoirs. **On change de "
-            "position lentement :** d’allongé à assis, d’assis à debout, on attend une respiration ; sinon la tête peut "
-            "tourner. **Pour descendre au sol et remonter :** de côté, à quatre pattes, un genou au sol, les mains sur la "
-            "chaise… et debout. Jamais d’un coup.")),
-        card2("c_hinge", "hinge", "P", ("Consejo 2 · ¿Estiramiento o dolor?", "Astuce 2 · Étirement ou douleur ?"), None, (
-            "**Un estiramiento que tira suavemente, como si el músculo se alargara: está bien.** Respiramos y nos quedamos. "
-            "**Un dolor que pincha, que pellizca, o que está en la articulación (la rodilla, la ingle, la espalda baja): "
-            "no.** Salimos un poco de la postura, la hacemos más pequeña o en la silla. Nunca vamos al máximo: mejor "
-            "quedarnos un poco antes. Y en cada postura os diré dónde debe tirar y dónde no.",
-            "**Un étirement qui tire doucement, comme si le muscle s’allongeait : c’est bien.** On respire et on reste. "
-            "**Une douleur qui pique, qui pince, ou qui est dans l’articulation (le genou, l’aine, le bas du dos) : non.** "
-            "On sort un peu de la posture, on la fait plus petite ou sur la chaise. On ne va jamais au maximum : mieux vaut "
-            "s’arrêter un peu avant. Et pour chaque posture, je vous dirai où ça doit tirer et où ça ne doit pas tirer.")),
-    ]),
-    '<div class="keep2">',
-    say("**Lo que vamos a hacer hoy y para qué sirve** · ✓ dónde debe tirar · ✗ dónde no:",
-        "**Ce qu’on va faire aujourd’hui et à quoi ça sert** · ✓ où ça doit tirer · ✗ où ça ne doit pas tirer :"),
-    steps(BENEFITS),
-    '</div>',
-    band(2, ("Respiración", "Respiration"), "0:07 – 0:13"),
+    band(1, ("Bienvenida · un consejo", "Accueil · une astuce"), "0:00 – 0:04"),
+    grid([card2("chair_sit", "c_lean", "S", ("Bienvenida · sentarse y levantarse bien", "Accueil · bien s’asseoir et se lever"), None, (
+        "Hola a todos, bienvenidos de nuevo. Como siempre: cada uno elige su opción, **no forzamos nunca** y respiramos a "
+        "nuestro ritmo. Si algo tira suavemente, está bien; si pincha o duele en una articulación, salimos un poco. "
+        "**Hoy, un consejo:** sentados, sobre los dos huesos de las nalgas, los pies planos. Para levantarnos: los pies un "
+        "poco atrás, la nariz por encima de los pies, empujamos con los pies y las manos. Y cambiamos de posición despacio: "
+        "esperamos una respiración antes de levantarnos.",
+        "Bonjour à tous, rebienvenue. Comme toujours : chacun choisit son option, **on ne force jamais** et on respire à son "
+        "rythme. Si ça tire doucement, c’est bien ; si ça pique ou fait mal dans une articulation, on sort un peu. "
+        "**Aujourd’hui, une astuce :** assis, sur les deux os des fesses, les pieds à plat. Pour se lever : les pieds un peu "
+        "en arrière, le nez au-dessus des pieds, on pousse avec les pieds et les mains. Et on change de position "
+        "lentement : on attend une respiration avant de se lever."))], cols=1),
+    band(2, ("Respiración", "Respiration"), "0:04 – 0:11"),
     grid([
         card2("r_chair", "r_floor", "F", ("Respiración en tres partes", "Respiration en trois parties"), ("5 resp.", "5 resp."), (
             "Cerramos los ojos si queréis. Una mano en el abdomen. Inhalamos: el abdomen y las costillas se expanden "
@@ -590,10 +704,11 @@ P_ALL = [
             "On inspire par le nez et on ouvre ou on monte les bras, lentement. On expire et on les redescend lentement. Le "
             "mouvement dure autant que la respiration. ((5 fois)) Les bras montent seulement jusqu’où c’est confortable.")),
     ]),
-    band(3, ("Calentamiento · en la silla o en el suelo", "Échauffement · sur la chaise ou au sol"), "0:13 – 0:22"),
+    band(3, ("Calentamiento · en la silla o en el suelo", "Échauffement · sur la chaise ou au sol"), "0:11 – 0:22"),
     grid([
         card2("c_neck", "seated_neck", "F", ("Cuello", "Cou"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("c_shoulders", "seated_shoulders", "F", ("Hombros", "Épaules"), ("5 + 5", "5 + 5"), ("", "")),
+        card2("open_c", "hug_chair", "S", ("Nuevo · Abrazo y apertura", "Nouveau · S’ouvrir et se faire un câlin"), ("5 veces", "5 fois"), ("", ""), a_kind="S"),
         card2("chin_c", "chin_f", "F", ("Nuevo · La cabeza atrás", "Nouveau · La tête en arrière"), ("5 veces", "5 fois"), ("", "")),
         card2("c_wrists", "wrists", "F", ("Muñecas y tobillos", "Poignets et chevilles"), ("5 + 5", "5 + 5"), ("", "")),
         card2("c_side_R", "sidebend_R", "F", ("Inclinación lateral", "Inclinaison latérale"), ("3 resp./lado", "3 resp./côté"), ("", "")),
@@ -654,15 +769,17 @@ P_ALL = [
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Estiramientos suaves · caderas y espalda", "Étirements doux · hanches et dos"), "0:44 – 0:51"),
     grid([
+        card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),
         card2("chair_knee", "knee1_f", "F", ("Rodilla al pecho", "Genou poitrine"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("heel_c", "heel_f", "F", ("Nuevo · Talones que se deslizan", "Nouveau · Talons qui glissent"), ("5 veces/lado", "5 fois/côté"), ("", "")),
-        card2("c_twist", "twist_R", "F", ("Torsión tumbada", "Torsion allongée"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("cactus_c", "cactus_f", "F", ("Nuevo · Ángel en el suelo", "Nouveau · L’ange au sol"), ("5 veces", "5 fois"), ("", "")),
         card2("c_side_R", "banana_f", "F", ("La banana", "La banane"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("c_twist", "twist_R", "F", ("Torsión tumbada", "Torsion allongée"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("d_chair", "clam_f", "F", ("Nuevo · La almeja", "Nouveau · La coquille"), ("8 veces/lado", "8 fois/côté"), ("", "")),
         opt(card2("child_chair", "child", "F", ("Descanso: el niño", "Repos : l’enfant"), ("5 resp.", "5 resp."), ("", ""))),
-        card2("c_relax", "legs_chair_f", "F", ("Nuevo · Piernas en la silla", "Nouveau · Jambes sur la chaise"), ("5 resp.", "5 resp."), ("", "")),
     ], cols=3),
     band(9, ("Relajación · 5 minutos", "Relaxation · 5 minutes"), "0:51 – 0:56"),
-    grid([card2("c_relax", "legs_chair_f", "F", ("Relajación", "Relaxation"), ("5 min", "5 min"), ("", ""), mh=12)], cols=1),
+    grid([card2("c_relax", "savasana", "F", ("Relajación", "Relaxation"), ("5 min", "5 min"), ("", ""), mh=12)], cols=1),
     band(10, ("Respiración final y cierre", "Respiration finale et clôture"), "0:56 – 1:00"),
     grid([
         card2("chair_sit", "seated_cross", "F", ("Exhalación un poco más larga", "Expiration un peu plus longue"), ("6 veces", "6 fois"), (
@@ -764,6 +881,7 @@ CSS += """
 .vj { background:#e3f3f3; border-left:3px solid #2a8a8a; color:#154545; } .vj .vl { background:#2a8a8a; }
 .vt { background:#ffffff; border:1.4px solid #222; border-left:4px solid #222; color:#111; } .vt .vl { background:#222; }
 .vc { background:#fbe3c9 !important; border-left:3px solid #c0651a !important; color:#5a2e08 !important; } .vc .vl { background:#c0651a !important; }
+.vse { background:#fff6d6; border-left:3px solid #c9a227; color:#4d3d05; } .vse .vl { background:#b38f12; }
 .optc { border:2px dashed #e0701e; background:#fff8f1; }
 .obadge { font-size:6.6pt; font-weight:700; color:#fff; background:#e0701e; border-radius:1mm; padding:0 1.2mm; letter-spacing:.04em; vertical-align:1px; }
 """
