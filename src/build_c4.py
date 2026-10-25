@@ -795,22 +795,26 @@ BEN["Torsión sentada (Bharadvajasana adaptada)"] = ("Esta postura mueve la colu
                                                     "Cette posture bouge la colonne et détend le dos.")
 FEEL["Torsión sentada (Bharadvajasana adaptada)"] = ("Notamos un giro suave en la espalda; nada en la espalda baja.",
                                                      "On sent une rotation douce dans le dos ; rien dans le bas du dos.")
-TEXTS["Pinza sentada (Paschimottanasana adaptada)"] = _t((
-    "Inhalamos: la espalda larga. Exhalamos: nos inclinamos desde las caderas, las manos resbalan por las piernas. "
-    "((4 resp.)) Subimos despacio. Cuidado: no redondeamos la espalda para bajar más.",
-    "On inspire : le dos long. On expire : on se penche depuis les hanches, les mains glissent sur les jambes. ((4 resp.)) "
-    "On remonte doucement. Attention : on n’arrondit pas le dos pour descendre plus."),
+TEXTS["Nuevo · El bastón (Dandasana)"] = _t((
+    "Las piernas largas delante, los dedos de los pies miran al techo. Las manos empujan suavemente a los lados de las "
+    "caderas. Inhalamos: crecemos, la coronilla sube hacia el techo. Exhalamos: los hombros bajan, lejos de las orejas. "
+    "((4 resp.)) Cuidado: no nos echamos atrás; si la espalda se redondea, doblamos las rodillas.",
+    "Les jambes longues devant, les orteils regardent le plafond. Les mains poussent doucement de chaque côté des "
+    "hanches. On inspire : on grandit, le sommet de la tête monte vers le plafond. On expire : les épaules descendent, "
+    "loin des oreilles. ((4 resp.)) Attention : on ne part pas en arrière ; si le dos s’arrondit, on plie les genoux."),
     intro=("**Quien quiera, se sienta en el suelo despacio, con la ayuda de la silla; quien prefiera, se queda en la silla.**",
            "**Ceux qui veulent s’assoient au sol doucement, avec l’aide de la chaise ; ceux qui préfèrent restent sur la "
            "chaise.**"),
-    chair=("Al borde de la silla, las dos piernas un poco estiradas delante, talones en el suelo, rodillas un poco dobladas.",
-           "Au bord de la chaise, les deux jambes un peu allongées devant, talons au sol, genoux un peu pliés."),
-    alt=("SU", "Sentados, piernas delante, rodillas dobladas tanto como haga falta.",
-         "Assis, jambes devant, genoux pliés autant qu’il faut."))
-BEN["Pinza sentada (Paschimottanasana adaptada)"] = ("Esta postura estira la parte de atrás de las piernas y la espalda.",
-                                                    "Cette posture étire l’arrière des jambes et le dos.")
-FEEL["Pinza sentada (Paschimottanasana adaptada)"] = ("Notamos que tira detrás de los muslos; nada en la espalda baja.",
-                                                     "On sent que ça tire derrière les cuisses ; rien dans le bas du dos.")
+    chair=("Al borde de la silla, las dos piernas largas delante, talones en el suelo; las manos empujan el asiento.",
+           "Au bord de la chaise, les deux jambes longues devant, talons au sol ; les mains poussent sur l’assise."),
+    alt=("SU", "Sentados, piernas largas delante; si cuesta, las rodillas dobladas, o la espalda contra la pared.",
+         "Assis, jambes longues devant ; si c’est difficile, genoux pliés, ou le dos contre le mur."),
+    mc=("Inhalamos: los brazos suben por encima de la cabeza; nos quedamos 3 respiraciones con la espalda larga.",
+        "On inspire : les bras montent au-dessus de la tête ; on reste 3 respirations, le dos long."))
+BEN["Nuevo · El bastón (Dandasana)"] = ("Esta postura despierta la espalda y nos enseña a sentarnos rectos.",
+             "Cette posture réveille le dos et nous apprend à bien nous tenir assis.")
+FEEL["Nuevo · El bastón (Dandasana)"] = ("Notamos que la espalda trabaja y se alarga, y un estiramiento suave detrás de las piernas; nada en la espalda baja.",
+              "On sent le dos qui travaille et s’allonge, et un étirement doux derrière les jambes ; rien dans le bas du dos.")
 TEXTS["Nuevo · Cabeza a la rodilla (Janu Sirsasana adaptada)"] = _t((
     "Inhalamos: la espalda larga. Exhalamos: nos inclinamos un poco hacia la pierna derecha, desde las caderas; las manos "
     "en la pierna, donde llegan. ((4 resp.)) Subimos despacio y cambiamos de pierna. Cuidado: la cabeza no tiene que "
@@ -1056,7 +1060,7 @@ P_ALL = [
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Posturas sentadas y tumbadas · caderas y espalda", "Postures assises puis allongées · hanches et dos"), "0:44 – 0:51"),
     grid([
-        card2("c_hinge", "seated_fold", "F", ("Pinza sentada (Paschimottanasana adaptada)", "Pince assise (Paschimottanasana adaptée)"), ("4 resp.", "4 resp."), ("", "")),
+        card2("danda_c", "danda_f", "F", ("Nuevo · El bastón (Dandasana)", "Nouveau · Le bâton (Dandasana)"), ("4 resp.", "4 resp."), ("", "")),
         card2("chair_hamstring", "janu_f", "F", ("Nuevo · Cabeza a la rodilla (Janu Sirsasana adaptada)", "Nouveau · Tête au genou (Janu Sirsasana adaptée)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
         card2("c_arms_up", "stretch_f", "F", ("Nuevo · Montaña tumbada (Supta Tadasana)", "Nouveau · Montagne allongée (Supta Tadasana)"), ("3 resp.", "3 resp."), ("", "")),
         card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),

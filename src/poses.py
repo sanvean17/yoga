@@ -1577,3 +1577,24 @@ def janu_floor():
 
 
 ALL.update({"janu_f": janu_floor})
+
+
+def danda_chair():
+    """at the edge of the chair: both legs long in front, heels on the floor, hands pressing the seat, back tall."""
+    f = side((0, 48), 90, head=90, face=True,
+             armN=((4, 50), 1), armF=((2, 50), 1),
+             legN=((74, 6), 1), footN=80, legF=((72, 6), 1), footF=80,
+             extra=[("arrow", [(-10, 100), (-10, 116)], 0)])
+    chair(f, -10, back_left=True)
+    return f
+
+
+def danda_floor():
+    """Dandasana: seated on the floor, legs long, hands pressing the floor beside the hips, back tall."""
+    return side((0, 10), 90, head=90, face=True,
+                armN=((6, 8), 1), armF=((4, 8), 1),
+                legN=('A', 0, 0), footN=80, legF=('A', 1, 1), footF=80,
+                extra=[("arrow", [(-10, 62), (-10, 78)], 0)])
+
+
+ALL.update({"danda_c": danda_chair, "danda_f": danda_floor})
