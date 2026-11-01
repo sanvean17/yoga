@@ -1608,3 +1608,64 @@ def mari_floor(bend=1):
 
 
 ALL.update({"mari_f": mari_floor, "mari_f2": lambda: mari_floor(-1)})
+
+
+def dancer_chair():
+    """seated dancer: sitting at the front corner of the chair, left thigh on the seat; the right leg slides back,
+    knee toward the floor, toes down; the left arm goes up (stretch in front of the right hip)."""
+    f = side((0, 48), 90, head=90, face=True,
+             armN=((8, 50), 1), armF=('A', 96, 96),
+             legN=((-40, 3), 1), footN=180, legF=('A', 2, -88), footF=0, sideN=R, sideF=L)
+    chair(f, -30, back_left=True)
+    return f
+
+
+def dancer_stand():
+    """standing dancer with a hand on the chair back: the right heel goes up toward the buttock, knee down, the right
+    arm goes up."""
+    f = side((0, 80), 88, head=88, face=True,
+             armN=('A', 98, 98), armF=((40, 86), -1),
+             legN=('A', -98, 135), footN=150, legF=((2, 4), 1), footF=-4, sideN=R, sideF=L)
+    chair(f, 40, back_left=True)
+    return f
+
+
+def dancer_free():
+    """fuller dancer: the right hand holds the ankle, the left arm reaches forward, the torso tilts a little forward."""
+    return side((0, 80), 72, head=70, face=-5,
+                armN=((-24, 78), 1), armF=("A", 40, 40),
+                legN=("A", -112, 100), footN=120, legF=((2, 4), 1), footF=-4, sideN=R, sideF=L)
+
+
+ALL.update({"dancer_c": dancer_chair, "dancer_p": dancer_stand, "dancer_f": dancer_free})
+
+
+def mtwist_floor():
+    """seated on the floor: left leg long, right knee up with the foot flat; the left arm hugs the right knee, the right
+    hand on the floor behind; turning gently toward the bent knee (curved arrow)."""
+    return side((0, 10), 90, head=90, face=True,
+                armN=((-16, 12), 1), armF=((30, 40), -1),
+                legN=((36, 1), 1), footN=0, legF=('A', -2, -2), footF=80, sideN=R, sideF=L,
+                extra=[("arrow", [(-16, 46), (16, 50)], -8)])
+
+
+def fish_floor():
+    """gentle fish: lying on the back, legs long, forearms on the floor under the shoulders, the chest lifts a little,
+    the back of the head stays on the floor."""
+    return side((0, 9.5), 160, curve=-6, head=196, face=90,
+                armN=((-6, 3), -1), armF=((-8, 3), -1),
+                legN=('A', 0, 0), legF=('A', 1, 1), footN=80, footF=80,
+                extra=[("arrow", [(-28, 26), (-28, 42)], 0)])
+
+
+def fish_chair():
+    """gentle fish on the chair: hands on the seat behind the hips, the chest lifts and opens, the gaze stays forward."""
+    f = side((0, 48), 96, curve=-4, head=96, face=True,
+             armN=((-14, 50), 1), armF=((-16, 50), 1),
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0,
+             extra=[("arrow", [(14, 84), (14, 100)], 0)])
+    chair(f, -22, back_left=True)
+    return f
+
+
+ALL.update({"mtwist_f": mtwist_floor, "fish_f": fish_floor, "fish_c": fish_chair})
