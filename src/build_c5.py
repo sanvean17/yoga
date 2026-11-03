@@ -226,11 +226,9 @@ TEXTS = {
     # ---------------- warm-up ----------------
     "Cuello": _t((
         "Exhalamos: oreja derecha hacia el hombro derecho. ((3 resp.)) Al centro, y al otro lado. Después giramos la cabeza "
-        "despacio: miramos a la derecha… a la izquierda. Movimiento pequeño. Los hombros bajan, la mandíbula se suelta. "
-        "Cuidado: no hacemos círculos completos con la cabeza y no tiramos con la mano.",
+        "despacio: miramos a la derecha… a la izquierda. Movimiento pequeño. Los hombros bajan, la mandíbula se suelta.",
         "On expire : oreille droite vers l’épaule droite. ((3 resp.)) Au centre, puis de l’autre côté. Puis on tourne la tête "
-        "lentement : on regarde à droite… à gauche. Petit mouvement. Les épaules descendent, la mâchoire se desserre. "
-        "Attention : on ne fait pas de cercles complets avec la tête et on ne tire pas avec la main.")),
+        "lentement : on regarde à droite… à gauche. Petit mouvement. Les épaules descendent, la mâchoire se desserre.")),
     "Hombros": _t((
         "Inhalamos, subimos los hombros. Exhalamos, atrás y abajo. Cinco círculos hacia atrás… cinco hacia delante. Los "
         "brazos sueltos; círculos lentos, al ritmo de la respiración. Sin fuerza: el cuello no se tensa.",
@@ -254,12 +252,10 @@ TEXTS = {
         "cercles avec la cheville. On change de pied. Si les articulations font mal, le mouvement est plus petit. Si le pied "
         "ne monte pas, le talon reste au sol et on fait des cercles avec la pointe.")),
     "Inclinación lateral": _t((
-        "Inhalamos, brazo derecho arriba. Exhalamos, nos inclinamos a la izquierda. ((3 resp.)) Cambiamos. Imaginamos que "
-        "estamos entre dos cristales. Si cuesta subir el brazo, la mano en la cabeza o en la cintura. Cuidado: no nos "
-        "inclinamos hacia delante; las dos nalgas se quedan apoyadas.",
-        "On inspire, bras droit en haut. On expire, on se penche à gauche. ((3 resp.)) On change. On imagine qu’on est entre "
-        "deux vitres. Si le bras monte difficilement, la main sur la tête ou à la taille. Attention : on ne se penche pas "
-        "vers l’avant ; les deux fesses restent posées."),
+        "Inhalamos, brazo derecho arriba. Exhalamos, nos inclinamos a la izquierda. ((3 resp.)) Cambiamos. Si cuesta subir el "
+        "brazo, la mano en la cabeza o en la cintura.",
+        "On inspire, bras droit en haut. On expire, on se penche à gauche. ((3 resp.)) On change. Si le bras monte "
+        "difficilement, la main sur la tête ou à la taille."),
         chair=("Antebrazo izquierdo en el reposabrazos.", "Avant-bras gauche sur l’accoudoir."),
         alt=("SU", "Mano izquierda en el suelo, junto a la cadera.", "Main gauche au sol, près de la hanche.")),
     "Círculos del torso": _t((
@@ -273,10 +269,12 @@ TEXTS = {
         alt=("SU", "Sentados con las piernas cruzadas, manos sobre las rodillas.",
              "Assis en tailleur, mains sur les genoux.")),
     "Gato-vaca": _t((
-        "Inhalamos, abrimos el pecho. Exhalamos, redondeamos **un poco** la espalda. ((5 veces)) Movimiento pequeño, empieza "
-        "en la pelvis. Cuidado: no echamos la cabeza atrás y no forzamos la espalda.",
-        "On inspire, on ouvre la poitrine. On expire, on arrondit **un peu** le dos. ((5 fois)) Petit mouvement, il commence "
-        "dans le bassin. Attention : on ne lance pas la tête en arrière et on ne force pas le dos."),
+        "Inhalamos: la pelvis bascula hacia delante, el pecho se abre, la mirada al frente. Exhalamos: el ombligo entra, "
+        "la espalda se redondea **un poco**, la barbilla baja hacia el pecho. ((5 veces)) Los pies se quedan bien apoyados "
+        "y los hombros lejos de las orejas.",
+        "On inspire : le bassin bascule vers l’avant, la poitrine s’ouvre, le regard devant. On expire : le nombril rentre, "
+        "le dos s’arrondit **un peu**, le menton descend vers la poitrine. ((5 fois)) Les pieds restent bien posés et les "
+        "épaules loin des oreilles."),
         chair=("Manos en las rodillas, pies bien apoyados.", "Mains sur les genoux, pieds bien posés."),
         alt=("SU", "A cuatro apoyos, si las rodillas y las muñecas están cómodas: manos debajo de los hombros, rodillas "
              "debajo de las caderas.",
@@ -1078,8 +1076,8 @@ BEN["Nuevo · Brazos de vaca (Gomukhasana, solo los brazos)"] = (
     "Esto abre los hombros y el pecho: lo contrario del águila.",
     "Ça ouvre les épaules et la poitrine : l’inverse de l’aigle.")
 FEEL["Nuevo · Brazos de vaca (Gomukhasana, solo los brazos)"] = (
-    "Notamos que tira detrás del brazo de arriba y delante del hombro de abajo; nada que pinche.",
-    "On sent que ça tire derrière le bras du haut et devant l’épaule du bas ; rien qui pique.")
+    "Notamos que tira detrás del brazo de arriba y delante del hombro de abajo.",
+    "On sent que ça tire derrière le bras du haut et devant l’épaule du bas.")
 
 TEXTS["Nuevo · Doblar y estirar la rodilla (Janu Naman)"] = _t((
     "Las manos debajo del muslo derecho. Inhalamos: estiramos la pierna, los dedos del pie hacia nosotros. Exhalamos: "
@@ -1096,8 +1094,8 @@ BEN["Nuevo · Doblar y estirar la rodilla (Janu Naman)"] = (
     "Esto mueve la rodilla y despierta el muslo: unas rodillas que se mueven nos ayudan a caminar.",
     "Ça bouge le genou et réveille la cuisse : des genoux qui bougent nous aident à marcher.")
 FEEL["Nuevo · Doblar y estirar la rodilla (Janu Naman)"] = (
-    "Notamos el muslo que trabaja y la rodilla que se mueve; nada que pinche.",
-    "On sent la cuisse qui travaille et le genou qui bouge ; rien qui pique.")
+    "Notamos el muslo que trabaja y la rodilla que se mueve.",
+    "On sent la cuisse qui travaille et le genou qui bouge.")
 
 TEXTS["Nuevo · Estiramiento intenso del costado (Parsvottanasana)"] = _t((
     "La silla delante. El pie derecho delante, el izquierdo un paso atrás, los pies como sobre dos raíles; las caderas "
@@ -1149,8 +1147,8 @@ BEN["La cobra baja (Bhujangasana)"] = (
     "Esta postura fortalece la espalda y abre el pecho: nos ayuda a no encorvarnos.",
     "Cette posture muscle le dos et ouvre la poitrine : elle aide à ne pas se voûter.")
 FEEL["La cobra baja (Bhujangasana)"] = (
-    "Notamos que trabaja la espalda, entre los omóplatos; nada que pinche en la espalda baja.",
-    "On sent le dos qui travaille, entre les omoplates ; rien qui pique dans le bas du dos.")
+    "Notamos que trabaja la espalda, entre los omóplatos.",
+    "On sent le dos qui travaille, entre les omoplates.")
 
 TEXTS["La postura del niño (Balasana)"] = _t((
     "Desde boca abajo, empujamos con las manos y llevamos las caderas hacia los talones; la frente en el suelo o sobre "
@@ -1234,9 +1232,8 @@ _set("Guerrero II · recordatorio", _steps([
     "Le buste reste droit, au centre, entre les deux jambes ; on regarde la main droite. ((2 resp.))",
     "Pour sortir : on inspire, on allonge la jambe ; on expire, on descend les bras.",
 ], "Cuidado: el torso no se inclina hacia delante. " + HIP[0], "Attention : le buste ne penche pas vers l’avant. " + HIP[1]),
-    ("Esta postura fortalece las piernas y abre el pecho: nos da estabilidad para caminar y subir escaleras.",
-     "Cette posture muscle les jambes et ouvre la poitrine : elle nous donne de la stabilité pour marcher et monter les "
-     "escaliers."),
+    ("Esta postura fortalece las piernas y abre el pecho.",
+     "Cette posture muscle les jambes et ouvre la poitrine."),
     ("Notamos calor y trabajo en los muslos, sobre todo en la pierna doblada; nada en la rodilla ni en la ingle.",
      "On sent de la chaleur et du travail dans les cuisses, surtout la jambe pliée ; rien dans le genou ni dans l’aine."))
 
@@ -1441,6 +1438,39 @@ _set("Limpiaparabrisas (Jathara Parivartanasana suave)", _steps([
      "aide la digestion."))
 
 
+FEEL["Gato-vaca"] = ("Notamos la espalda que se calienta y la respiración que se hace más amplia.",
+                     "On sent le dos qui se réchauffe et la respiration qui devient plus ample.")
+
+
+TEXTS["Pinza sentada (Paschimottanasana adaptada)"] = _t(_steps([
+    "Las dos piernas largas delante, los dedos de los pies miran al techo; las rodillas pueden estar un poco dobladas.",
+    "Las manos en los muslos.",
+    "Inhalamos: la espalda larga, crecemos.",
+    "Exhalamos: nos inclinamos un poco hacia delante desde las caderas, como una bisagra; las manos resbalan hacia las "
+    "rodillas o las espinillas. ((4 resp.))",
+    "Para salir: inhalamos, subimos despacio con la espalda larga.",
+], [
+    "Les deux jambes longues devant, les orteils regardent le plafond ; les genoux peuvent être un peu pliés.",
+    "Les mains sur les cuisses.",
+    "On inspire : le dos long, on grandit.",
+    "On expire : on se penche un peu vers l’avant depuis les hanches, comme une charnière ; les mains glissent vers les "
+    "genoux ou les tibias. ((4 resp.))",
+    "Pour sortir : on inspire, on remonte doucement le dos long.",
+], "Cuidado: no redondeamos la espalda para bajar más; si tira mucho, doblamos las rodillas.",
+   "Attention : on n’arrondit pas le dos pour descendre plus ; si ça tire trop, on plie les genoux."),
+    chair=("Al borde de la silla, las dos piernas largas delante, los talones en el suelo.",
+           "Au bord de la chaise, les deux jambes longues devant, les talons au sol."),
+    alt=("SU", "Sentados en el suelo, las dos piernas largas; si cuesta, las rodillas dobladas.",
+         "Assis au sol, les deux jambes longues ; si c’est difficile, les genoux pliés."))
+BEN["Pinza sentada (Paschimottanasana adaptada)"] = (
+    "Esta postura estira la parte de atrás de las dos piernas y alarga la espalda: unas piernas menos rígidas hacen el "
+    "paso más largo y más fácil.",
+    "Cette posture étire l’arrière des deux jambes et allonge le dos : des jambes moins raides rendent le pas plus long "
+    "et plus facile.")
+FEEL["Pinza sentada (Paschimottanasana adaptada)"] = ("Notamos que tira detrás de los muslos; nada en la espalda baja.",
+                                                      "On sent que ça tire derrière les cuisses ; rien dans le bas du dos.")
+
+
 def _with_text(args, kw):
     a = list(args)
     name = a[3][0] if len(a) > 3 else None
@@ -1596,13 +1626,6 @@ P_ALL = [
         card2("chair_sit", "heart_chair", "P", ("Nuevo · Los pies despiertos (Pada bandha)", "Nouveau · Les pieds réveillés (Pada bandha)"), ("5 veces + 3 resp.", "5 fois + 3 resp."), ("", "")),
     ], cols=3),
     part(1, "De pie o en la silla · 0:22 – 0:44", "Debout ou sur la chaise · 0:22 – 0:44"),
-    say("**Para levantarnos de la silla:** los pies un poco atrás, la nariz por encima de los pies, empujamos con los pies y "
-        "las manos, y nos levantamos despacio; esperamos una respiración antes de empezar. Recordad: **primero os enseño la "
-        "postura paso a paso y vosotros miráis; después la hacemos juntos**, despacio, con la respiración.",
-        "**Pour se lever de la chaise :** les pieds un peu en arrière, le nez au-dessus des pieds, on pousse avec les pieds "
-        "et les mains, et on se lève doucement ; on attend une respiration avant de commencer. Rappel : **d’abord je vous "
-        "montre la posture étape par étape et vous regardez ; ensuite on la fait ensemble**, doucement, avec la "
-        "respiration."),
     '<div class="keep2">',
     band(5, ("Saludo al sol · 2 rondas A + 2 rondas B (los dos lados)",
              "Salutation au soleil · 2 rondes A + 2 rondes B (les deux côtés)"), "0:22 – 0:31"),
@@ -1675,7 +1698,7 @@ P_ALL = [
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Sentados, boca abajo, boca arriba · caderas y espalda", "Assis, sur le ventre, sur le dos · hanches et dos"), "0:44 – 0:51"),
     grid([
-        card2("chair_hamstring", "mari_f", "F", ("Una pierna larga · estiramiento sentado", "Une jambe longue · étirement assis"), ("4 resp./lado", "4 resp./côté"), ("", "")),
+        card2("danda_c", "seated_fold", "F", ("Pinza sentada (Paschimottanasana adaptada)", "Pince assise (Paschimottanasana adaptée)"), ("4 resp.", "4 resp."), ("", "")),
         card2("c_twist", "seated_twist", "F", ("Torsión sentada (Bharadvajasana adaptada)", "Torsion assise (Bharadvajasana adaptée)"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("chair_cow", "cobra", "F", ("La cobra baja (Bhujangasana)", "Le cobra bas (Bhujangasana)"), ("4 veces", "4 fois"), ("", "")),
         card2("child_chair", "child", "F", ("La postura del niño (Balasana)", "La posture de l’enfant (Balasana)"), ("5 resp.", "5 resp."), ("", "")),
