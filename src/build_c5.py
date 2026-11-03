@@ -1183,6 +1183,264 @@ TEXTS["Torsión sentada (Bharadvajasana adaptada)"]["alt"] = (
     "doucement : d’abord sur le côté, puis sur le ventre.")
 
 
+# ---------------- course 5, round 3: benefit + step by step + feeling ----------------
+def _steps(es_steps, fr_steps, es_end="", fr_end=""):
+    def mk(lst, end):
+        return "".join(f"[L]**{k} ·** {t}[/L]" for k, t in enumerate(lst, 1)) + (" " + end if end else "")
+    return (mk(es_steps, es_end), mk(fr_steps, fr_end))
+
+
+def _set(name, common, ben, feel=None):
+    TEXTS[name] = dict(TEXTS[name])
+    TEXTS[name]["common"] = common
+    BEN[name] = ben
+    if feel:
+        FEEL[name] = feel
+
+
+_set("Torsión sentada (Bharadvajasana adaptada)", _steps([
+    "Las dos nalgas bien apoyadas. Inhalamos: crecemos, la coronilla hacia el techo.",
+    "Exhalamos: giramos hacia la derecha; primero el abdomen…",
+    "…después el pecho y los hombros…",
+    "…y la cabeza al final: los ojos miran por encima del hombro derecho.",
+    "En cada inhalación crecemos; en cada exhalación giramos un poquito más, sin forzar. ((3 resp.))",
+    "Para salir: primero vuelve la cabeza, después el pecho, después el abdomen. Cambiamos de lado.",
+], [
+    "Les deux fesses bien posées. On inspire : on grandit, le sommet de la tête vers le plafond.",
+    "On expire : on tourne vers la droite ; d’abord le ventre…",
+    "…puis la poitrine et les épaules…",
+    "…et la tête en dernier : les yeux regardent par-dessus l’épaule droite.",
+    "À chaque inspiration on grandit ; à chaque expiration on tourne un tout petit peu plus, sans forcer. ((3 resp.))",
+    "Pour sortir : d’abord la tête revient, puis la poitrine, puis le ventre. On change de côté.",
+], "Cuidado: las manos no tiran; giramos con la espalda, no con los brazos.",
+   "Attention : les mains ne tirent pas ; on tourne avec le dos, pas avec les bras."),
+    ("Esta postura mueve la columna y suelta la espalda. En yoga se dice que también masajea suavemente el abdomen y "
+     "ayuda a la digestión.",
+     "Cette posture bouge la colonne et détend le dos. En yoga, on dit qu’elle masse aussi doucement le ventre et "
+     "qu’elle aide la digestion."),
+    ("Notamos un giro suave en toda la espalda y el pecho que se abre; nada en la espalda baja.",
+     "On sent une rotation douce dans tout le dos et la poitrine qui s’ouvre ; rien dans le bas du dos."))
+
+_set("Guerrero II · recordatorio", _steps([
+    "Los pies: el pie derecho mira hacia la derecha; el izquierdo, un poco hacia dentro.",
+    "Doblamos la rodilla derecha: la rodilla encima del tobillo y mirando hacia el pie, nunca hacia dentro.",
+    "Inhalamos: los brazos se abren en cruz, a la altura de los hombros; los hombros bajan.",
+    "El torso se queda recto, en el centro, entre las dos piernas; miramos la mano derecha. ((2 resp.))",
+    "Para salir: inhalamos, estiramos la pierna; exhalamos, bajamos los brazos.",
+], [
+    "Les pieds : le pied droit regarde vers la droite ; le gauche, un peu vers l’intérieur.",
+    "On plie le genou droit : le genou au-dessus de la cheville et dans la direction du pied, jamais vers l’intérieur.",
+    "On inspire : les bras s’ouvrent en croix, à hauteur des épaules ; les épaules descendent.",
+    "Le buste reste droit, au centre, entre les deux jambes ; on regarde la main droite. ((2 resp.))",
+    "Pour sortir : on inspire, on allonge la jambe ; on expire, on descend les bras.",
+], "Cuidado: el torso no se inclina hacia delante. " + HIP[0], "Attention : le buste ne penche pas vers l’avant. " + HIP[1]),
+    ("Esta postura fortalece las piernas y abre el pecho: nos da estabilidad para caminar y subir escaleras.",
+     "Cette posture muscle les jambes et ouvre la poitrine : elle nous donne de la stabilité pour marcher et monter les "
+     "escaliers."),
+    ("Notamos calor y trabajo en los muslos, sobre todo en la pierna doblada; nada en la rodilla ni en la ingle.",
+     "On sent de la chaleur et du travail dans les cuisses, surtout la jambe pliée ; rien dans le genou ni dans l’aine."))
+
+_set("Guerrero inverso · recordatorio", _steps([
+    "Desde el guerrero II; la rodilla de delante sigue doblada.",
+    "La palma derecha gira y mira al techo.",
+    "Inhalamos: el brazo derecho sube hacia el techo y un poco hacia atrás.",
+    "La mano izquierda baja por la pierna izquierda y descansa, sin apoyar peso.",
+    "El pecho mira hacia arriba; respiramos en el costado derecho. ((2 resp.))",
+    "Para salir: exhalamos, volvemos al guerrero II.",
+], [
+    "Depuis le guerrier II ; le genou avant reste plié.",
+    "La paume droite tourne et regarde le plafond.",
+    "On inspire : le bras droit monte vers le plafond et un peu vers l’arrière.",
+    "La main gauche descend le long de la jambe gauche et se pose, sans appuyer.",
+    "La poitrine regarde vers le haut ; on respire dans le côté droit. ((2 resp.))",
+    "Pour sortir : on expire, on revient en guerrier II.",
+], "Cuidado: no echamos el cuerpo atrás; el pecho se abre hacia arriba. " + HIP[0],
+   "Attention : on ne part pas en arrière ; la poitrine s’ouvre vers le haut. " + HIP[1]),
+    ("Esta postura estira todo el costado y abre el pecho: ayuda a respirar más amplio.",
+     "Cette posture étire tout le côté et ouvre la poitrine : elle aide à respirer plus ample."))
+
+_set("Ángulo lateral · recordatorio", _steps([
+    "Desde el guerrero II; la rodilla de delante sigue doblada.",
+    "Exhalamos: el torso se inclina hacia la pierna derecha y el antebrazo derecho se apoya en el muslo, sin empujar.",
+    "Inhalamos: el brazo izquierdo sube hacia el techo, o la mano se queda en la cintura.",
+    "Alargamos una línea desde el pie izquierdo hasta la mano izquierda. ((2 resp.))",
+    "Para salir: inhalamos, subimos con la fuerza de las piernas.",
+], [
+    "Depuis le guerrier II ; le genou avant reste plié.",
+    "On expire : le buste se penche vers la jambe droite et l’avant-bras droit se pose sur la cuisse, sans appuyer.",
+    "On inspire : le bras gauche monte vers le plafond, ou la main reste sur la taille.",
+    "On allonge une ligne du pied gauche jusqu’à la main gauche. ((2 resp.))",
+    "Pour sortir : on inspire, on remonte avec la force des jambes.",
+], "Cuidado: el pecho no cae hacia el suelo; el cuello largo; miramos al frente o al suelo. " + HIP[0],
+   "Attention : la poitrine ne tombe pas vers le sol ; le cou long ; on regarde devant ou vers le sol. " + HIP[1]),
+    ("Esta postura estira todo el costado y fortalece las piernas: ayuda a respirar mejor.",
+     "Cette posture étire tout le côté et muscle les jambes : elle aide à mieux respirer."))
+
+_set("Nuevo · El bailarín (Natarajasana adaptado)", _steps([
+    "Una mano en la silla. **Los pies:** los tres puntos del pie izquierdo en el suelo.",
+    "**El abdomen:** al exhalar, el bajo vientre entra un poco. **La mirada:** un punto fijo en el suelo.",
+    "Pasamos el peso al pie izquierdo; la rodilla izquierda ligeramente flexionada, sin bloquearla.",
+    "Inhalamos: el talón derecho sube hacia atrás; la rodilla derecha mira al suelo, cerca de la otra.",
+    "Si estamos cómodos, el brazo libre sube. ((3 resp.))",
+    "Para salir: exhalamos, el pie vuelve al suelo despacio. Cambiamos de lado.",
+], [
+    "Une main sur la chaise. **Les pieds :** les trois points du pied gauche au sol.",
+    "**Le ventre :** en expirant, le bas du ventre rentre un peu. **Le regard :** un point fixe au sol.",
+    "On passe le poids sur le pied gauche ; le genou gauche légèrement plié, sans le bloquer.",
+    "On inspire : le talon droit monte vers l’arrière ; le genou droit regarde le sol, près de l’autre.",
+    "Si on est à l’aise, le bras libre monte. ((3 resp.))",
+    "Pour sortir : on expire, le pied revient au sol doucement. On change de côté.",
+], "Cuidado: no arqueamos la espalda baja; no aguantamos el aire.",
+   "Attention : on ne creuse pas le bas du dos ; on ne retient pas l’air."),
+    ("Esta postura entrena el equilibrio, para evitar caídas, fortalece el tobillo y estira delante de la cadera, que se "
+     "acorta cuando estamos mucho sentados.",
+     "Cette posture entraîne l’équilibre, pour éviter les chutes, muscle la cheville et étire l’avant de la hanche, qui "
+     "se raccourcit quand on est beaucoup assis."))
+
+_set("Una pierna larga · estiramiento sentado", _steps([
+    "La pierna derecha larga delante, los dedos del pie miran al techo.",
+    "La rodilla izquierda doblada, el pie izquierdo en el suelo, un poco lejos de la cadera. Las dos rodillas miran al "
+    "techo.",
+    "Inhalamos: la espalda larga, crecemos.",
+    "Exhalamos: nos inclinamos un poco hacia delante desde las caderas, como una bisagra; las manos resbalan por la "
+    "pierna, hasta donde llegan. ((4 resp.))",
+    "Para salir: inhalamos, subimos despacio con la espalda larga. Cambiamos de pierna.",
+], [
+    "La jambe droite longue devant, les orteils regardent le plafond.",
+    "Le genou gauche plié, le pied gauche au sol, un peu loin de la hanche. Les deux genoux regardent le plafond.",
+    "On inspire : le dos long, on grandit.",
+    "On expire : on se penche un peu vers l’avant depuis les hanches, comme une charnière ; les mains glissent sur la "
+    "jambe, jusqu’où elles arrivent. ((4 resp.))",
+    "Pour sortir : on inspire, on remonte doucement le dos long. On change de jambe.",
+], "Cuidado: la cabeza no tiene que bajar; la espalda se queda larga.",
+   "Attention : la tête n’a pas besoin de descendre ; le dos reste long."),
+    ("Esta postura estira la parte de atrás de la pierna, sin abrir la cadera: unas piernas menos rígidas hacen el paso "
+     "más largo y más fácil.",
+     "Cette posture étire l’arrière de la jambe, sans ouvrir la hanche : des jambes moins raides rendent le pas plus "
+     "long et plus facile."))
+
+_set("La cobra baja (Bhujangasana)", _steps([
+    "Tumbados boca abajo, la frente en el suelo, las piernas largas, los empeines en el suelo.",
+    "Las manos debajo de los hombros, los codos cerca del cuerpo.",
+    "Empujamos suavemente la pelvis y los pies contra el suelo.",
+    "Inhalamos: primero sube la cabeza, después el pecho; los brazos ayudan, pero no empujan. El abdomen se queda en el "
+    "suelo.",
+    "Exhalamos: bajamos despacio, primero el pecho, después la frente. ((4 veces))",
+], [
+    "Allongés sur le ventre, le front au sol, les jambes longues, le dessus des pieds au sol.",
+    "Les mains sous les épaules, les coudes près du corps.",
+    "On pousse doucement le bassin et les pieds dans le sol.",
+    "On inspire : d’abord la tête monte, puis la poitrine ; les bras aident, mais ne poussent pas. Le ventre reste au "
+    "sol.",
+    "On expire : on redescend doucement, d’abord la poitrine, puis le front. ((4 fois))",
+], "Cuidado: subimos poco; el cuello largo, miramos al suelo delante; si molesta la espalda baja, más bajo o en esfinge.",
+   "Attention : on monte peu ; le cou long, on regarde le sol devant ; si le bas du dos gêne, plus bas ou en sphinx."),
+    ("Esta postura fortalece la espalda y abre el pecho: nos ayuda a no encorvarnos y a respirar mejor.",
+     "Cette posture muscle le dos et ouvre la poitrine : elle aide à ne pas se voûter et à mieux respirer."))
+
+_set("La postura del niño (Balasana)", _steps([
+    "Desde boca abajo, las manos debajo de los hombros.",
+    "Empujamos con las manos y pasamos a cuatro apoyos.",
+    "Separamos un poco las rodillas.",
+    "Exhalamos: las caderas van despacio hacia los talones; la frente en el suelo o sobre las manos.",
+    "Respiramos hacia la espalda. ((5 resp.))",
+    "Para salir: las manos caminan hacia las rodillas y nos sentamos de lado.",
+], [
+    "Depuis le ventre, les mains sous les épaules.",
+    "On pousse avec les mains et on passe à quatre pattes.",
+    "On écarte un peu les genoux.",
+    "On expire : les hanches vont doucement vers les talons ; le front au sol ou sur les mains.",
+    "On respire vers le dos. ((5 resp.))",
+    "Pour sortir : les mains marchent vers les genoux et on s’assoit sur le côté.",
+], "Cuidado: si molestan las rodillas o las caderas, nos quedamos tumbados boca abajo, la cabeza sobre las manos.",
+   "Attention : si les genoux ou les hanches gênent, on reste allongé sur le ventre, la tête sur les mains."),
+    ("Esta postura descansa la espalda después de la cobra y calma la respiración.",
+     "Cette posture repose le dos après le cobra et calme la respiration."))
+
+_set("Balanceo de la pelvis", _steps([
+    "Tumbados boca arriba, rodillas dobladas, los pies separados como las caderas.",
+    "Exhalamos: la espalda baja se acerca al suelo; la pelvis se balancea un poco hacia nosotros.",
+    "Inhalamos: la espalda baja se separa un poquito del suelo.",
+    "Movimiento pequeño y lento, como una ola. ((6 veces))",
+], [
+    "Allongés sur le dos, genoux pliés, les pieds écartés largeur de hanches.",
+    "On expire : le bas du dos se rapproche du sol ; le bassin bascule un peu vers soi.",
+    "On inspire : le bas du dos se décolle un tout petit peu du sol.",
+    "Petit mouvement lent, comme une vague. ((6 fois))",
+], "Cuidado: no empujamos con fuerza.", "Attention : on ne pousse pas avec force."),
+    ("Esto mueve la espalda baja con suavidad y alivia la rigidez de la mañana.",
+     "Ça bouge le bas du dos en douceur et soulage les raideurs du matin."))
+
+_set("El puente pequeño (Setu Bandhasana)", _steps([
+    "Tumbados, rodillas dobladas, los pies separados como las caderas, cerca de las nalgas; los brazos al lado del "
+    "cuerpo.",
+    "Exhalamos: la espalda baja se acerca al suelo, como en el balanceo.",
+    "Inhalamos: empujamos los pies y subimos solo un poco la pelvis.",
+    "Exhalamos: bajamos despacio. ((4 veces))",
+], [
+    "Allongés, genoux pliés, les pieds écartés largeur de hanches, près des fesses ; les bras le long du corps.",
+    "On expire : le bas du dos se rapproche du sol, comme dans la bascule.",
+    "On inspire : on pousse dans les pieds et on décolle juste un peu le bassin.",
+    "On expire : on redescend doucement. ((4 fois))",
+], "Cuidado: no subimos mucho, no arqueamos la espalda y no aguantamos el aire.",
+   "Attention : on ne monte pas haut, on ne creuse pas le dos et on ne retient pas l’air."),
+    ("Esto fortalece las piernas y los glúteos: nos ayuda a levantarnos de la silla y a caminar.",
+     "Ça muscle les jambes et les fessiers : ça aide à se lever de la chaise et à marcher."))
+
+_set("Rodilla al pecho (Apanasana)", _steps([
+    "Tumbados, las dos rodillas dobladas, los pies en el suelo.",
+    "Exhalamos: la rodilla derecha viene hacia el pecho; las manos cogen detrás del muslo, no la rodilla.",
+    "Los hombros sueltos, la cabeza apoyada.",
+    "En cada exhalación, la rodilla se acerca un poquito. ((3 resp.))",
+    "Para salir: el pie vuelve al suelo. Cambiamos de pierna.",
+], [
+    "Allongés, les deux genoux pliés, les pieds au sol.",
+    "On expire : le genou droit vient vers la poitrine ; les mains tiennent derrière la cuisse, pas le genou.",
+    "Les épaules relâchées, la tête posée.",
+    "À chaque expiration, le genou se rapproche un tout petit peu. ((3 resp.))",
+    "Pour sortir : le pied revient au sol. On change de jambe.",
+], "Cuidado: no tiramos fuerte; si pellizca delante de la cadera, la rodilla se queda más lejos.",
+   "Attention : on ne tire pas fort ; si ça pince devant la hanche, le genou reste plus loin."),
+    ("Esto relaja la espalda baja. En yoga se dice que también alivia el vientre hinchado y ayuda a la digestión.",
+     "Ça relâche le bas du dos. En yoga, on dit que ça soulage aussi le ventre gonflé et que ça aide la digestion."))
+
+_set("La banana (Bananasana)", _steps([
+    "Tumbados boca arriba, piernas largas, los brazos por encima de la cabeza o las manos en la cabeza.",
+    "Llevamos los dos pies un poco hacia la izquierda.",
+    "Después, las manos un poco hacia la izquierda: el cuerpo hace una banana.",
+    "Respiramos en el costado derecho, que se estira. ((4 resp.))",
+    "Volvemos al centro y cambiamos de lado.",
+], [
+    "Allongés sur le dos, jambes longues, les bras au-dessus de la tête ou les mains sur la tête.",
+    "On emmène les deux pieds un peu vers la gauche.",
+    "Puis les mains un peu vers la gauche : le corps fait une banane.",
+    "On respire dans le côté droit, qui s’étire. ((4 resp.))",
+    "On revient au centre et on change de côté.",
+], "Cuidado: no giramos la pelvis y no arqueamos la espalda.",
+   "Attention : on ne tourne pas le bassin et on ne creuse pas le dos."),
+    ("Esta postura estira todo el costado, de los pies a las manos: ayuda a respirar más amplio.",
+     "Cette posture étire tout le côté, des pieds aux mains : elle aide à respirer plus ample."))
+
+_set("Limpiaparabrisas (Jathara Parivartanasana suave)", _steps([
+    "Tumbados, rodillas dobladas, los pies un poco más separados que las caderas, los brazos en cruz.",
+    "Exhalamos: las rodillas caen despacio hacia la derecha.",
+    "Inhalamos: vuelven al centro.",
+    "Exhalamos: hacia la izquierda. ((6 veces))",
+    "Al final, nos quedamos a cada lado; la cabeza puede mirar al lado contrario. ((3 resp.))",
+], [
+    "Allongés, genoux pliés, les pieds un peu plus écartés que les hanches, les bras en croix.",
+    "On expire : les genoux tombent doucement vers la droite.",
+    "On inspire : ils reviennent au centre.",
+    "On expire : vers la gauche. ((6 fois))",
+    "À la fin, on reste de chaque côté ; la tête peut regarder du côté opposé. ((3 resp.))",
+], "Cuidado: los hombros se quedan apoyados; las rodillas bajan solo hasta donde es cómodo.",
+   "Attention : les épaules restent posées ; les genoux descendent seulement jusqu’où c’est confortable."),
+    ("Esto suelta la espalda baja y las caderas, como un masaje. En yoga se dice que también masajea el abdomen y ayuda "
+     "a la digestión.",
+     "Ça détend le bas du dos et les hanches, comme un massage. En yoga, on dit que ça masse aussi le ventre et que ça "
+     "aide la digestion."))
+
+
 def _with_text(args, kw):
     a = list(args)
     name = a[3][0] if len(a) > 3 else None
