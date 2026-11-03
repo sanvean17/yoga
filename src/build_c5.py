@@ -934,43 +934,49 @@ FLOW = (
     "Inhalamos: guerrero inverso, el brazo derecho sube… exhalamos: ángulo lateral, el antebrazo derecho en el muslo, el "
     "brazo izquierdo sube… inhalamos: guerrero inverso… exhalamos: ángulo lateral. ((3 veces)) → Los pies no se mueven; "
     "la rodilla de delante sigue encima del tobillo. Inhalamos, subimos; exhalamos, volvemos al centro. "
-    "**Izquierda:** igual. → Despacio: un movimiento con cada respiración. Si cansa, nos quedamos en guerrero II o nos "
-    "sentamos.",
+    "**Izquierda:** igual. → Despacio: un movimiento con cada respiración. Si cansa, estiramos la pierna de "
+    "delante, volvemos al centro o nos sentamos.",
     "**Droite :** jambe droite ouverte, la gauche en arrière… on inspire, guerrier II, bras en croix. ((1 resp.)) On "
     "inspire : guerrier inversé, le bras droit monte… on expire : angle latéral, l’avant-bras droit sur la cuisse, le "
     "bras gauche monte… on inspire : guerrier inversé… on expire : angle latéral. ((3 fois)) → Les pieds ne bougent pas ; "
     "le genou avant reste au-dessus de la cheville. On inspire, on remonte ; on expire, on revient au centre. "
-    "**Gauche :** pareil. → Lentement : un mouvement par respiration. Si c’est fatigant, on reste en guerrier II ou on "
-    "s’assoit.")
+    "**Gauche :** pareil. → Lentement : un mouvement par respiration. Si c’est fatigant, on allonge la jambe "
+    "avant, on revient au centre ou on s’assoit.")
 
 # ---------------- balance: the dancer ----------------
 TEXTS["Nuevo · El bailarín (Natarajasana adaptado)"] = _t((
-    "Primero, los tres secretos: **los pies** (tres puntos en el pie de apoyo), **el abdomen** (el bajo vientre entra un "
-    "poco), **la mirada** (un punto fijo en el suelo). Inhalamos: la pierna derecha va hacia atrás, la rodilla mira al "
-    "suelo; un brazo sube. ((3 resp.)) Exhalamos: volvemos despacio. Cambiamos de lado. Cuidado: la rodilla de apoyo un "
-    "poco blanda; no arqueamos la espalda baja; no aguantamos el aire.",
-    "D’abord, les trois secrets : **les pieds** (trois points sur le pied d’appui), **le ventre** (le bas du ventre rentre "
-    "un peu), **le regard** (un point fixe au sol). On inspire : la jambe droite part en arrière, le genou regarde le "
-    "sol ; un bras monte. ((3 resp.)) On expire : on revient doucement. On change de côté. Attention : le genou d’appui "
-    "un peu souple ; on ne creuse pas le bas du dos ; on ne retient pas l’air."),
-    chair=("Sentados de lado, en la esquina de la silla, el muslo izquierdo apoyado. La pierna derecha se desliza hacia "
-           "atrás, la rodilla hacia el suelo, la punta del pie apoyada; el brazo izquierdo sube.",
-           "Assis de côté, sur le coin de la chaise, la cuisse gauche posée. La jambe droite glisse vers l’arrière, le "
-           "genou vers le sol, la pointe du pied posée ; le bras gauche monte."),
+    "Primero, los tres apoyos: **los pies** (tres puntos en el pie de apoyo), **el abdomen** (el bajo vientre entra un "
+    "poco), **la mirada** (un punto fijo en el suelo). Una mano en la silla. Inhalamos: la pierna derecha va hacia atrás, "
+    "la rodilla mira al suelo; el otro brazo sube solo si estamos cómodos. ((3 resp.)) Exhalamos: volvemos despacio. "
+    "Cambiamos de lado. Cuidado: la rodilla de apoyo ligeramente flexionada, sin bloquearla; no arqueamos la espalda "
+    "baja; no aguantamos el aire.",
+    "D’abord, les trois appuis : **les pieds** (trois points sur le pied d’appui), **le ventre** (le bas du ventre rentre "
+    "un peu), **le regard** (un point fixe au sol). Une main sur la chaise. On inspire : la jambe droite part en arrière, "
+    "le genou regarde le sol ; l’autre bras monte seulement si on est à l’aise. ((3 resp.)) On expire : on revient "
+    "doucement. On change de côté. Attention : le genou d’appui légèrement plié, sans le bloquer ; on ne creuse pas le bas "
+    "du dos ; on ne retient pas l’air."),
+    chair=("Nos giramos un poco hacia la izquierda y nos sentamos en la esquina delantera derecha del asiento, delante del "
+           "reposabrazos; el muslo izquierdo sobre el asiento, la mano izquierda en el reposabrazos. La pierna derecha sale "
+           "por la esquina y se desliza hacia atrás, la rodilla hacia el suelo, la punta del pie apoyada. Si el "
+           "reposabrazos molesta, la pierna va solo un poco atrás. El brazo derecho sube si es cómodo.",
+           "On se tourne un peu vers la gauche et on s’assoit sur le coin avant droit de l’assise, devant l’accoudoir ; la "
+           "cuisse gauche sur l’assise, la main gauche sur l’accoudoir. La jambe droite sort par le coin et glisse vers "
+           "l’arrière, le genou vers le sol, la pointe du pied posée. Si l’accoudoir gêne, la jambe part seulement un peu "
+           "en arrière. Le bras droit monte si c’est confortable."),
     alt=("DP", "La silla a la izquierda, la mano izquierda en el respaldo. El talón derecho sube hacia la nalga, sin "
-         "cogerlo; las dos rodillas cerca. El brazo derecho sube.",
+         "cogerlo; las dos rodillas cerca. El brazo derecho sube solo si es cómodo; si no, la mano en la cintura.",
          "La chaise à gauche, la main gauche sur le dossier. Le talon droit monte vers la fesse, sans l’attraper ; les "
-         "deux genoux proches. Le bras droit monte."),
-    mc=("La mano derecha coge el tobillo o el pantalón; el brazo izquierdo va delante, o la mano se queda en la silla. "
-        "El torso se inclina solo un poco hacia delante.",
-        "La main droite attrape la cheville ou le pantalon ; le bras gauche part devant, ou la main reste sur la chaise. "
-        "Le buste se penche juste un peu vers l’avant."),
-    ju=("**Derecha:** los pies, el abdomen, la mirada… inhalamos, la pierna derecha atrás, un brazo sube. → La rodilla "
-        "mira al suelo. ((3 resp.)) **Izquierda:** igual… → Si tiembla, está bien: es el equilibrio que trabaja; la mano "
-        "vuelve a la silla cuando queremos.",
-        "**Droite :** les pieds, le ventre, le regard… on inspire, la jambe droite en arrière, un bras monte. → Le genou "
-        "regarde le sol. ((3 resp.)) **Gauche :** pareil… → Si ça tremble, c’est bien : c’est l’équilibre qui travaille ; "
-        "la main revient sur la chaise quand on veut."))
+         "deux genoux proches. Le bras droit monte seulement si c’est confortable ; sinon, la main sur la taille."),
+    mc=("La mano izquierda sigue en la silla; la mano derecha coge el tobillo o el pantalón. El torso se inclina solo un "
+        "poco hacia delante.",
+        "La main gauche reste sur la chaise ; la main droite attrape la cheville ou le pantalon. Le buste se penche juste "
+        "un peu vers l’avant."),
+    ju=("**Derecha:** una mano en la silla… los pies, el abdomen, la mirada… inhalamos, la pierna derecha atrás. → La "
+        "rodilla mira al suelo. ((3 resp.)) **Izquierda:** igual… → Si nos balanceamos un poco, podemos apoyarnos más en "
+        "la silla.",
+        "**Droite :** une main sur la chaise… les pieds, le ventre, le regard… on inspire, la jambe droite en arrière. → "
+        "Le genou regarde le sol. ((3 resp.)) **Gauche :** pareil… → Si on se balance un peu, on peut s’appuyer davantage "
+        "sur la chaise."))
 BEN["Nuevo · El bailarín (Natarajasana adaptado)"] = (
     "Esta postura entrena el equilibrio y estira la parte delantera del muslo y de la cadera.",
     "Cette posture entraîne l’équilibre et étire l’avant de la cuisse et de la hanche.")
@@ -1169,6 +1175,14 @@ TEXTS["Nuevo · Torsión con una rodilla arriba"]["alt"] = (
     "doucement : d’abord sur le côté, puis sur le ventre.")
 
 
+TEXTS["Torsión sentada (Bharadvajasana adaptada)"] = dict(TEXTS["Torsión sentada (Bharadvajasana adaptada)"])
+TEXTS["Torsión sentada (Bharadvajasana adaptada)"]["alt"] = (
+    "SU", "Sentados con las piernas cruzadas; mano izquierda en la rodilla derecha, mano derecha en el suelo, detrás. "
+    "Luego nos tumbamos boca abajo, despacio: primero de lado, después sobre el abdomen.",
+    "Assis en tailleur ; main gauche sur le genou droit, main droite au sol, derrière. Puis on s’allonge sur le ventre, "
+    "doucement : d’abord sur le côté, puis sur le ventre.")
+
+
 def _with_text(args, kw):
     a = list(args)
     name = a[3][0] if len(a) > 3 else None
@@ -1261,28 +1275,25 @@ SUN_B_STEPS = [
 INTRO_ES = (
     "Hola a todos, bienvenidos. Nos sentamos bien: los dos huesos de las nalgas en la silla, los pies planos, la espalda "
     "larga. Notamos la respiración. ((3 resp.)) "
-    "La semana pasada me preguntasteis: ¿cómo mantener el equilibrio? En yoga hay una respuesta: los **bandhas**. Bandha "
-    "quiere decir «cierre» o «llave»: un pequeño apretón, muy suave, que nos da estabilidad. Hoy, tres secretos. "
-    "**Uno · los pies (Pada bandha):** tres puntos en el suelo: el talón, la base del dedo gordo y la base del dedo "
-    "pequeño. Empujamos suavemente en los tres. ((2 resp.)) "
-    "**Dos · el abdomen (Uddiyana bandha, versión suave):** exhalamos y el bajo vientre entra un poco hacia la espalda, "
-    "como cuando nos abrochamos un pantalón. Seguimos respirando normalmente: no aguantamos el aire. ((3 resp.)) "
-    "Hay también un bandha en el suelo de la pelvis (Mula bandha); hoy solo lo nombramos. "
-    "**Tres · la mirada (Drishti):** miramos un punto fijo en el suelo, un poco lejos; los ojos quietos, el cuerpo "
-    "quieto. Hoy, en el equilibrio, lo recordaremos: **los pies, el abdomen, la mirada.** Empezamos.")
+    "La semana pasada me preguntasteis cómo mantener el equilibrio. Hoy vamos a explorar tres apoyos para el equilibrio: "
+    "los pies, una activación suave del abdomen y la mirada. Seguimos respirando con naturalidad. "
+    "**Los pies:** tres puntos en el suelo: el talón, la base del dedo gordo y la base del dedo pequeño. Empujamos "
+    "suavemente en los tres. ((2 resp.)) "
+    "**El abdomen:** al exhalar, el bajo vientre entra un poco hacia la espalda, sin apretar fuerte, y seguimos "
+    "respirando. ((3 resp.)) En yoga, a estos apoyos de los pies y del abdomen se les llama bandhas. "
+    "**La mirada:** un punto fijo en el suelo, un poco lejos; los ojos quietos ayudan al cuerpo a estar quieto. "
+    "Hoy, en el equilibrio, lo recordaremos: **los pies, el abdomen, la mirada.** Empezamos.")
 INTRO_FR = (
     "Bonjour à tous, bienvenue. On s’assoit bien : les deux os des fesses sur la chaise, les pieds à plat, le dos long. On "
     "sent la respiration. ((3 resp.)) "
-    "La semaine dernière, vous m’avez demandé : comment tenir l’équilibre ? En yoga, il y a une réponse : les "
-    "**bandhas**. Bandha veut dire « verrou » ou « clé » : un petit serrage, très doux, qui nous donne de la stabilité. "
-    "Aujourd’hui, trois secrets. "
-    "**Un · les pieds (Pada bandha) :** trois points au sol : le talon, la base du gros orteil et la base du petit orteil. "
-    "On pousse doucement sur les trois. ((2 resp.)) "
-    "**Deux · le ventre (Uddiyana bandha, version douce) :** on expire et le bas du ventre rentre un peu vers le dos, "
-    "comme quand on ferme un pantalon. On continue à respirer normalement : on ne retient pas l’air. ((3 resp.)) "
-    "Il existe aussi un bandha du périnée (Mula bandha) ; aujourd’hui, on le nomme seulement. "
-    "**Trois · le regard (Drishti) :** on regarde un point fixe au sol, un peu loin ; les yeux immobiles, le corps "
-    "immobile. Aujourd’hui, dans l’équilibre, on s’en souviendra : **les pieds, le ventre, le regard.** On commence.")
+    "La semaine dernière, vous m’avez demandé comment tenir l’équilibre. Aujourd’hui, on va explorer trois appuis pour "
+    "l’équilibre : les pieds, une activation douce du ventre et le regard. On continue à respirer naturellement. "
+    "**Les pieds :** trois points au sol : le talon, la base du gros orteil et la base du petit orteil. On pousse "
+    "doucement sur les trois. ((2 resp.)) "
+    "**Le ventre :** en expirant, le bas du ventre rentre un peu vers le dos, sans serrer fort, et on continue à "
+    "respirer. ((3 resp.)) En yoga, ces appuis des pieds et du ventre s’appellent des bandhas. "
+    "**Le regard :** un point fixe au sol, un peu loin ; des yeux immobiles aident le corps à rester immobile. "
+    "Aujourd’hui, dans l’équilibre, on s’en souviendra : **les pieds, le ventre, le regard.** On commence.")
 
 P_ALL = [
     '<div class="top"><div><div class="kick">' +
@@ -1295,7 +1306,7 @@ P_ALL = [
      if L == "es" else
      '<span class="fl lc">CHAISE</span> <span class="fl lp">DEBOUT AVEC APPUI</span> <span class="fl lf">SOL</span> <span class="fl lx">PLUS COMPLET</span>') +
     '</div></div>',
-    band(1, ("Bienvenida · los secretos del equilibrio: los bandhas", "Accueil · les secrets de l’équilibre : les bandhas"), "0:00 – 0:05"),
+    band(1, ("Bienvenida · tres apoyos para el equilibrio", "Accueil · trois appuis pour l’équilibre"), "0:00 – 0:05"),
     grid([card2("chair_sit", "heart_chair", "P", ("Los pies, el abdomen, la mirada", "Les pieds, le ventre, le regard"), None,
                 (INTRO_ES, INTRO_FR), mh=11)], cols=1),
     band(2, ("Respiración", "Respiration"), "0:05 – 0:11"),
@@ -1335,15 +1346,16 @@ P_ALL = [
         "montre la posture étape par étape et vous regardez ; ensuite on la fait ensemble**, doucement, avec la "
         "respiration."),
     '<div class="keep2">',
-    band(5, ("Saludo al sol · 2 rondas A + 1 ronda B (la 4.ª opcional)",
-             "Salutation au soleil · 2 rondes A + 1 ronde B (la 4e facultative)"), "0:22 – 0:31"),
+    band(5, ("Saludo al sol · 2 rondas A + 2 rondas B (los dos lados)",
+             "Salutation au soleil · 2 rondes A + 2 rondes B (les deux côtés)"), "0:22 – 0:31"),
     say("**Antes de empezar:** hay dos saludos. **El A** es el más sencillo. **El B** añade dos cosas: la silla invisible y el "
-        "guerrero I; es un poco más fuerte. El saludo al sol completo también baja al suelo: en las próximas semanas "
-        "añadiremos esas partes poco a poco, con la ayuda de la silla. **Saludo A:** primero mirad, os lo enseño entero, "
+        "guerrero I; es un poco más fuerte. En otras versiones del saludo al sol también bajamos al "
+        "suelo: en las próximas semanas añadiremos algunas de esas partes, poco a poco, con la ayuda de la silla. **Saludo A:** primero mirad, os lo enseño entero, "
         "paso a paso. Después lo hacemos juntos.",
         "**Avant de commencer :** il y a deux salutations. **La A** est la plus simple. **La B** ajoute deux choses : la "
-        "chaise invisible et le guerrier I ; elle est un peu plus forte. La vraie salutation au soleil descend aussi au "
-        "sol : dans les prochaines semaines, on ajoutera ces parties petit à petit, avec l’aide de la chaise. "
+        "chaise invisible et le guerrier I ; elle est un peu plus forte. Dans d’autres versions de la salutation au soleil, "
+        "on descend aussi au sol : dans les prochaines semaines, on ajoutera certaines de ces parties, petit à petit, avec "
+        "l’aide de la chaise. "
         "**Salutation A :** d’abord regardez, je vous la montre entière, étape par étape. Ensuite on la fait ensemble."),
     '<div class="sl2">' + ("SENTADOS" if L == "es" else "ASSIS") + '</div>' + strip(SUN_A_SEAT, 0.13) +
     '<div class="sl2">' + ("DE PIE" if L == "es" else "DEBOUT") + '</div>' + strip(SUN_A_STAND, 0.13),
@@ -1357,8 +1369,8 @@ P_ALL = [
     '</div>',
     steps(SUN_B_STEPS),
     '<div class="keep2">',
-    say("**Ahora juntos** · menos palabras, un consejo por ronda:",
-        "**Maintenant ensemble** · moins de mots, un conseil par ronde :"),
+    say("**Ahora juntos · 4 rondas** · menos palabras, un consejo por ronda:",
+        "**Maintenant ensemble · 4 rondes** · moins de mots, un conseil par ronde :"),
     steps([
         ("R1", ("**A · pierna izquierda atrás.** Corazón… inhalamos, brazos arriba… exhalamos, flexión… inhalamos, espalda "
                 "larga… exhalamos, la pierna izquierda atrás. ((2 resp.)) Inhalamos, la pierna vuelve, brazos arriba… "
@@ -1371,19 +1383,19 @@ P_ALL = [
                 "**A · jambe droite en arrière.** Cœur… bras en haut… flexion… dos long… la jambe droite en arrière… bras en "
                 "haut… cœur. → Dans la flexion, les genoux un peu pliés.")),
         ("R3", ("**B · pierna izquierda atrás.** Corazón… silla invisible… flexión… espalda larga… la pierna izquierda "
-                "atrás… guerrero I. ((2 resp.)) Corazón. → En la silla invisible, el peso en todo el pie, un poco hacia los "
+                "atrás… guerrero I. ((1 resp.)) Corazón. → En la silla invisible, el peso en todo el pie, un poco hacia los "
                 "talones.",
                 "**B · jambe gauche en arrière.** Cœur… chaise invisible… flexion… dos long… la jambe gauche en arrière… "
-                "guerrier I. ((2 resp.)) Cœur. → Dans la chaise invisible, le poids sur tout le pied, un peu vers les "
+                "guerrier I. ((1 resp.)) Cœur. → Dans la chaise invisible, le poids sur tout le pied, un peu vers les "
                 "talons.")),
-        ("R4", ("**Opcional · B · pierna derecha atrás.** A vuestro ritmo, un movimiento con cada respiración. → Hombros "
-                "lejos de las orejas. Corazón.",
-                "**Facultative · B · jambe droite en arrière.** À votre rythme, un mouvement par respiration. → Les épaules "
-                "loin des oreilles. Cœur.")),
+        ("R4", ("**B · pierna derecha atrás.** Corazón… silla invisible… flexión… espalda larga… la pierna derecha "
+                "atrás… guerrero I. ((1 resp.)) Corazón. → Hombros lejos de las orejas.",
+                "**B · jambe droite en arrière.** Cœur… chaise invisible… flexion… dos long… la jambe droite en arrière… "
+                "guerrier I. ((1 resp.)) Cœur. → Les épaules loin des oreilles.")),
     ]),
     '</div>',
-    band(6, ("La danza del guerrero · y una postura nueva: Parsvottanasana",
-             "La danse du guerrier · et une posture nouvelle : Parsvottanasana"), "0:31 – 0:40"),
+    band(6, ("La danza del guerrero · guerrero II → guerrero inverso → ángulo lateral",
+             "La danse du guerrier · guerrier II → guerrier inversé → angle latéral"), "0:31 – 0:40"),
     say("Primero os recuerdo las tres posturas, de un lado. Después las unimos juntos con la respiración: derecha, y luego "
         "izquierda.",
         "D’abord je vous rappelle les trois postures, d’un côté. Ensuite on les relie ensemble avec la respiration : à "
@@ -1396,15 +1408,6 @@ P_ALL = [
     grid([card2("revc_R", "sac_R", "P", ("Nuevo · Juntos: la danza del guerrero", "Nouveau · Ensemble : la danse du guerrier"),
                 ("3 veces/lado", "3 fois/côté"), ("[JU]" + FLOW[0] + "[/JU]", "[JU]" + FLOW[1] + "[/JU]"), mh=14, a_kind="P")], cols=1),
     '<div class="keep2">',
-    say("Ahora, una postura nueva. Juntamos los pies, ponemos la silla delante. Primero os la enseño; después la hacemos "
-        "juntos.",
-        "Maintenant, une posture nouvelle. On rapproche les pieds, on met la chaise devant. D’abord je vous la montre ; "
-        "ensuite on la fait ensemble."),
-    grid([card2("chair_hamstring", "pyr_p", "P", ("Nuevo · Estiramiento intenso del costado (Parsvottanasana)",
-                                                  "Nouveau · Étirement intense du côté (Parsvottanasana)"),
-                ("3 resp./lado", "3 resp./côté"), ("", ""), mh=15)], cols=1),
-    '</div>',
-    '<div class="keep2">',
     band(7, ("Equilibrio · el bailarín (nuevo)", "Équilibre · le danseur (nouveau)"), "0:40 – 0:44"),
     say("Primero os enseño los tres niveles; cada uno elige el suyo. Después lo hacemos juntos.",
         "D’abord je vous montre les trois niveaux ; chacun choisit le sien. Ensuite on le fait ensemble."),
@@ -1415,7 +1418,7 @@ P_ALL = [
     band(8, ("Sentados, boca abajo, boca arriba · caderas y espalda", "Assis, sur le ventre, sur le dos · hanches et dos"), "0:44 – 0:51"),
     grid([
         card2("chair_hamstring", "mari_f", "F", ("Una pierna larga · estiramiento sentado", "Une jambe longue · étirement assis"), ("4 resp./lado", "4 resp./côté"), ("", "")),
-        card2("c_twist", "mtwist_f", "F", ("Nuevo · Torsión con una rodilla arriba", "Nouveau · Torsion avec un genou levé"), ("3 resp./lado", "3 resp./côté"), ("", "")),
+        card2("c_twist", "seated_twist", "F", ("Torsión sentada (Bharadvajasana adaptada)", "Torsion assise (Bharadvajasana adaptée)"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("chair_cow", "cobra", "F", ("La cobra baja (Bhujangasana)", "Le cobra bas (Bhujangasana)"), ("4 veces", "4 fois"), ("", "")),
         card2("child_chair", "child", "F", ("La postura del niño (Balasana)", "La posture de l’enfant (Balasana)"), ("5 resp.", "5 resp."), ("", "")),
         card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),
