@@ -1201,14 +1201,14 @@ _set("Torsión sentada (Bharadvajasana adaptada)", _steps([
     "Exhalamos: giramos hacia la derecha; primero el abdomen…",
     "…después el pecho y los hombros…",
     "…y la cabeza al final: los ojos miran por encima del hombro derecho.",
-    "En cada inhalación crecemos; en cada exhalación giramos un poquito más, sin forzar. ((3 resp.))",
+    "Al exhalar, mantenemos un giro cómodo, sin buscar ir más lejos. ((3 resp.))",
     "Para salir: primero vuelve la cabeza, después el pecho, después el abdomen. Cambiamos de lado.",
 ], [
     "Les deux fesses bien posées. On inspire : on grandit, le sommet de la tête vers le plafond.",
     "On expire : on tourne vers la droite ; d’abord le ventre…",
     "…puis la poitrine et les épaules…",
     "…et la tête en dernier : les yeux regardent par-dessus l’épaule droite.",
-    "À chaque inspiration on grandit ; à chaque expiration on tourne un tout petit peu plus, sans forcer. ((3 resp.))",
+    "En expirant, on garde une rotation confortable, sans chercher à aller plus loin. ((3 resp.))",
     "Pour sortir : d’abord la tête revient, puis la poitrine, puis le ventre. On change de côté.",
 ], "Cuidado: las manos no tiran; giramos con la espalda, no con los brazos.",
    "Attention : les mains ne tirent pas ; on tourne avec le dos, pas avec les bras."),
@@ -1320,16 +1320,16 @@ _set("La cobra baja (Bhujangasana)", _steps([
     "Tumbados boca abajo, la frente en el suelo, las piernas largas, los empeines en el suelo.",
     "Las manos debajo de los hombros, los codos cerca del cuerpo.",
     "Empujamos suavemente la pelvis y los pies contra el suelo.",
-    "Inhalamos: primero sube la cabeza, después el pecho; los brazos ayudan, pero no empujan. El abdomen se queda en el "
-    "suelo.",
-    "Exhalamos: bajamos despacio, primero el pecho, después la frente. ((4 veces))",
+    "Inhalamos: elevamos suavemente el pecho, con la cabeza siguiendo el movimiento y el cuello largo; los brazos "
+    "ayudan, pero no empujan. El abdomen se queda en el suelo.",
+    "Exhalamos: bajamos despacio. ((4 veces))",
 ], [
     "Allongés sur le ventre, le front au sol, les jambes longues, le dessus des pieds au sol.",
     "Les mains sous les épaules, les coudes près du corps.",
     "On pousse doucement le bassin et les pieds dans le sol.",
-    "On inspire : d’abord la tête monte, puis la poitrine ; les bras aident, mais ne poussent pas. Le ventre reste au "
-    "sol.",
-    "On expire : on redescend doucement, d’abord la poitrine, puis le front. ((4 fois))",
+    "On inspire : on soulève doucement la poitrine, la tête suit le mouvement, le cou long ; les bras aident, mais ne "
+    "poussent pas. Le ventre reste au sol.",
+    "On expire : on redescend doucement. ((4 fois))",
 ], "Cuidado: subimos poco; el cuello largo, miramos al suelo delante; si molesta la espalda baja, más bajo o en esfinge.",
    "Attention : on monte peu ; le cou long, on regarde le sol devant ; si le bas du dos gêne, plus bas ou en sphinx."),
     ("Esta postura fortalece la espalda y abre el pecho: nos ayuda a no encorvarnos y a respirar mejor.",
@@ -1388,13 +1388,13 @@ _set("Rodilla al pecho (Apanasana)", _steps([
     "Tumbados, las dos rodillas dobladas, los pies en el suelo.",
     "Exhalamos: la rodilla derecha viene hacia el pecho; las manos cogen detrás del muslo, no la rodilla.",
     "Los hombros sueltos, la cabeza apoyada.",
-    "En cada exhalación, la rodilla se acerca un poquito. ((3 resp.))",
+    "Acercamos la rodilla solo hasta donde resulte cómodo y respiramos aquí. ((3 resp.))",
     "Para salir: el pie vuelve al suelo. Cambiamos de pierna.",
 ], [
     "Allongés, les deux genoux pliés, les pieds au sol.",
     "On expire : le genou droit vient vers la poitrine ; les mains tiennent derrière la cuisse, pas le genou.",
     "Les épaules relâchées, la tête posée.",
-    "À chaque expiration, le genou se rapproche un tout petit peu. ((3 resp.))",
+    "On rapproche le genou seulement jusqu’où c’est confortable et on respire là. ((3 resp.))",
     "Pour sortir : le pied revient au sol. On change de jambe.",
 ], "Cuidado: no tiramos fuerte; si pellizca delante de la cadera, la rodilla se queda más lejos.",
    "Attention : on ne tire pas fort ; si ça pince devant la hanche, le genou reste plus loin."),
@@ -1469,6 +1469,13 @@ BEN["Pinza sentada (Paschimottanasana adaptada)"] = (
     "et plus facile.")
 FEEL["Pinza sentada (Paschimottanasana adaptada)"] = ("Notamos que tira detrás de los muslos; nada en la espalda baja.",
                                                       "On sent que ça tire derrière les cuisses ; rien dans le bas du dos.")
+
+
+for _n in ['Pinza sentada (Paschimottanasana adaptada)', 'La cobra baja (Bhujangasana)', 'La postura del niño (Balasana)', 'El puente pequeño (Setu Bandhasana)', 'Limpiaparabrisas (Jathara Parivartanasana suave)']:
+    TEXTS["★ " + _n] = TEXTS[_n]
+    for _d in (BEN, FEEL):
+        if _n in _d:
+            _d["★ " + _n] = _d[_n]
 
 
 def _with_text(args, kw):
@@ -1695,18 +1702,21 @@ P_ALL = [
     grid([card3("dancer_c", "dancer_p", "dancer_f", ("Nuevo · El bailarín (Natarajasana adaptado)", "Nouveau · Le danseur (Natarajasana adapté)"),
                 ("3 resp./lado", "3 resp./côté"), ("", ""))], cols=1),
     '</div>',
+    '<div style="break-before:page"></div>',
     part(2, "En la silla o en el suelo · 0:44 – 1:00", "Sur la chaise ou au sol · 0:44 – 1:00"),
     band(8, ("Sentados, boca abajo, boca arriba · caderas y espalda", "Assis, sur le ventre, sur le dos · hanches et dos"), "0:44 – 0:51"),
+    say("**★ = las 5 prioritarias** para estos 7 minutos. Las otras, en reserva, solo si sobra tiempo.",
+        "**★ = les 5 prioritaires** pour ces 7 minutes. Les autres, en réserve, seulement s’il reste du temps."),
     grid([
-        card2("danda_c", "seated_fold", "F", ("Pinza sentada (Paschimottanasana adaptada)", "Pince assise (Paschimottanasana adaptée)"), ("4 resp.", "4 resp."), ("", "")),
+        card2("danda_c", "seated_fold", "F", ("★ Pinza sentada (Paschimottanasana adaptada)", "★ Pince assise (Paschimottanasana adaptée)"), ("4 resp.", "4 resp."), ("", "")),
         card2("c_twist", "seated_twist", "F", ("Torsión sentada (Bharadvajasana adaptada)", "Torsion assise (Bharadvajasana adaptée)"), ("3 resp./lado", "3 resp./côté"), ("", "")),
-        card2("chair_cow", "cobra", "F", ("La cobra baja (Bhujangasana)", "Le cobra bas (Bhujangasana)"), ("4 veces", "4 fois"), ("", "")),
-        card2("child_chair", "child", "F", ("La postura del niño (Balasana)", "La posture de l’enfant (Balasana)"), ("5 resp.", "5 resp."), ("", "")),
+        card2("chair_cow", "cobra", "F", ("★ La cobra baja (Bhujangasana)", "★ Le cobra bas (Bhujangasana)"), ("4 veces", "4 fois"), ("", "")),
+        card2("child_chair", "child", "F", ("★ La postura del niño (Balasana)", "★ La posture de l’enfant (Balasana)"), ("5 resp.", "5 resp."), ("", "")),
         card2("chair_cat", "pelvis_f", "F", ("Balanceo de la pelvis", "Bascule du bassin"), ("6 veces", "6 fois"), ("", "")),
-        card2("chair_sit", "bridge", "F", ("El puente pequeño (Setu Bandhasana)", "Le petit pont (Setu Bandhasana)"), ("4 veces", "4 fois"), ("", "")),
+        card2("chair_sit", "bridge", "F", ("★ El puente pequeño (Setu Bandhasana)", "★ Le petit pont (Setu Bandhasana)"), ("4 veces", "4 fois"), ("", "")),
         card2("chair_knee", "knee1_f", "F", ("Rodilla al pecho (Apanasana)", "Genou poitrine (Apanasana)"), ("3 resp./lado", "3 resp./côté"), ("", "")),
         card2("c_side_R", "banana_f", "F", ("La banana (Bananasana)", "La banane (Bananasana)"), ("4 resp./lado", "4 resp./côté"), ("", "")),
-        card2("chair_sit", "wipers", "F", ("Limpiaparabrisas (Jathara Parivartanasana suave)", "Essuie-glaces (Jathara Parivartanasana douce)"), ("6 veces + 3 resp./lado", "6 fois + 3 resp./côté"), ("", "")),
+        card2("chair_sit", "wipers", "F", ("★ Limpiaparabrisas (Jathara Parivartanasana suave)", "★ Essuie-glaces (Jathara Parivartanasana douce)"), ("6 veces + 3 resp./lado", "6 fois + 3 resp./côté"), ("", "")),
     ], cols=3),
     band(9, ("Relajación · 5 minutos", "Relaxation · 5 minutes"), "0:51 – 0:56"),
     grid([card2("c_relax", "savasana", "F", ("Relajación", "Relaxation"), ("5 min", "5 min"), ("", ""), mh=12)], cols=1),
