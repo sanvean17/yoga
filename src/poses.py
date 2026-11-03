@@ -1669,3 +1669,56 @@ def fish_chair():
 
 
 ALL.update({"mtwist_f": mtwist_floor, "fish_f": fish_floor, "fish_c": fish_chair})
+
+
+def pyr_stand():
+    """Parsvottanasana with the chair: right foot forward, left foot back (two rails), hips facing forward, hands on
+    the chair back, long flat back leaning from the hips, front knee soft."""
+    f = side((0, 80), 24, head=20, face=-20,
+             armN=((44, 86), -1), armF=((42, 86), -1),
+             legN=((22, 4), 1), footN=0, legF=((-26, 4), 1), footF=-30, sideN=R, sideF=L)
+    chair(f, 48, back_left=True)
+    return f
+
+
+def cow_arms_chair(bR=-1, bL=-1):
+    """seated cow-face arms, seen from behind: the right elbow points up, the right hand behind the upper back; the
+    left hand comes up the back from below. The hands do not need to touch."""
+    return chair_back2(arms=(((0, 104), bR), ((-2, 80), bL)), colored=True)
+
+
+def chair_arms(aN, aF):
+    f = side((0, 48), 90, head=90, face=True, armN=aN, armF=aF,
+             legN=('A', 0, -90), legF=('A', 2, -88), footN=0, footF=0, sideN=R, sideF=L)
+    chair(f, -10, back_left=True)
+    return f
+
+
+def knee_ext_chair():
+    """Janu Naman on the chair: hands under the right thigh, the knee bends and straightens (arrow)."""
+    f = side((0, 48), 88, head=88, face=True,
+             armN=((20, 58), 1), armF=((18, 58), 1),
+             legN=('A', 22, 4), footN=80, legF=('A', 2, -88), footF=0, sideN=R, sideF=L,
+             extra=[("arrow", [(52, 44), (60, 64)], -6)])
+    chair(f, -10, back_left=True)
+    return f
+
+
+def knee_ext_floor():
+    """Janu Naman on the floor: seated, hands under the right thigh, the knee bends (heel slides in) and straightens."""
+    return side((0, 10), 88, head=88, face=True,
+                armN=((22, 22), 1), armF=((20, 22), 1),
+                legN=((40, 2), 1), footN=60, legF=('A', -2, -2), footF=80, sideN=R, sideF=L,
+                extra=[("arrow", [(44, 8), (64, 8)], 0)])
+
+
+ALL.update({"pyr_p": pyr_stand, "cowarms_c": cow_arms_chair, "cowarms_c2": lambda: cow_arms_chair(-1, 1), "cowarms_c3": lambda: cow_arms_chair(1, -1), "cowarms_c4": lambda: cow_arms_chair(-1, -1), "kneeext_c": knee_ext_chair, "kneeext_f": knee_ext_floor})
+
+
+def cow_arms_floor():
+    """cow-face arms seated cross-legged, seen from behind."""
+    f, _ = back((0, 15), 90, armR=((0, 67), -1), armL=((-2, 43), -1), colored=True, **_cross_legs())
+    return f
+
+
+ALL.update({"cowarms_f": cow_arms_floor})
